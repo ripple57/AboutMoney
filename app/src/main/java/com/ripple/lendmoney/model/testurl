@@ -1,0 +1,115 @@
+获取验证码
+http://123.56.100.221:8088/inter/appuser/sendCodeForLogin.do?userName=64083928080
+{
+    body: { },
+    des: "成功",
+    state: 0
+}
+
+
+//检查版本
+http://123.56.100.221:8088/inter/index/checkVersion.do?versionNo=120&versionType=android
+{
+body: {
+data: {
+requeUpdate: 0,
+versionNo: ""
+}
+},
+des: "成功",
+state: 0
+}
+
+//登录
+http://123.56.100.221:8088/inter/appuser/appLogin.do?valiCode=123456&lon=0&phoneSysVersion=android4.4.2&uniqueNumber=C4F396135AAE77E2C84F37FC8AFFFC68&location=null&sessionId=9AECB8DB1559E2FF7D29EBEE64409322&phoneSysType=Android&phoneId=67A55B4479DCDED1C9FB29857F0FDB78&userName=18010491010&lat=0&phoneModel=PE-TL00M&userType=0
+////////////////////////////
+{
+body: {
+imgUrl: "http://123.56.100.221:8088/grace_medical_upload/app_user_icon/cf9829b3b3ab4ce2a5cdbe123cc8e27a_small.jpg",
+birthday: "1900-01-01",
+sessionId: "9AECB8DB1559E2FF7D29EBEE64409322",
+userId: "402881ef5d2b676b015d2b7780f70000",
+pushOnOff: 0,
+userName: "18010491010",
+deviceId: "",
+userType: 0
+},
+des: "成功",
+state: 0
+}
+//获取未读消息数量
+ http://123.56.100.221:8088/inter/appmessage/getUnReadNum.do?sessionId=9AECB8DB1559E2FF7D29EBEE64409322
+ {
+ body: {
+ number: "0"
+ },
+ des: "成功",
+ state: 0
+ }
+
+ //获取测试数据
+ http://123.56.100.221:8088/inter/apptestresult/getChartData.do?sessionId=9AECB8DB1559E2FF7D29EBEE64409322&choose=year
+ {
+  body: {
+         data: [
+                {
+                    lowMmHg: 63,
+                    testState: "1",
+                    createTime: "2018-03-22 14:25:46",
+                    highMmHg: 106,
+                    appTestResultId: "fbb8e45d624c3ffe01624c627fda0456",
+                    bpm: 74,
+                    appUserId: "402881ef5d2b676b015d2b7780f70000"
+                }
+            ],
+         choose: "year"
+            },
+  des: "成功",
+  state: 0
+ }
+
+//获取测试的数据列表
+http://123.56.100.221:8088/inter/apptestresult/listTestResul.do?sessionId=9AECB8DB1559E2FF7D29EBEE64409322&pageNumber=1
+ {
+ body: {
+ pageCount: 12,
+ pageCurrent: 1,
+ data: [
+    {
+    lowMmHg: 85,
+    testState: "1",
+    createTime: "2018-12-07 18:01:37",
+    highMmHg: 120,
+    appTestResultId: "fbb8e45d673e6c3d0167881d8f99005b",
+    bpm: 78,
+    appUserId: "402881ef5d2b676b015d2b7780f70000"
+    },
+    {
+    lowMmHg: 85,
+    testState: "1",
+    createTime: "2018-12-07 10:43:32",
+    highMmHg: 120,
+    appTestResultId: "fbb8e45d673e6c3d0167868c78270056",
+    bpm: 78,
+    appUserId: "402881ef5d2b676b015d2b7780f70000"
+    }
+ ],
+ pageNext: 2,
+ rowCount: 120
+ },
+ des: "成功",
+ state: 0
+ }
+
+//获取配置
+http://123.56.100.221:8088/inter/appuser/getApplyCashConfig.do?sessionId=9AECB8DB1559E2FF7D29EBEE64409322
+ {
+ body: {
+ data: {
+ paramOnOff: 1,
+ paramValue: 20
+ }
+ },
+ des: "成功",
+ state: 0
+ }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    android:id="@+id/container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.MainActivity">
+
+    <include layout="@layout/topbar_layout"/>
+    <!--<com.qmuiteam.qmui.widget.QMUIAppBarLayout-->
+        <!--android:id="@+id/topbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--&gt;-->
+
+
+        <!--<com.qmuiteam.qmui.widget.QMUITopBar-->
+            <!--android:id="@+id/qm_topbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/qmui_topbar_height"-->
+            <!--app:qmui_topbar_bg_color="@color/colorAccent"-->
+            <!--/>-->
+    <!--</com.qmuiteam.qmui.widget.QMUIAppBarLayout>-->
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/home_bottom_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/navigation"/>
+
+    <com.qmuiteam.qmui.widget.QMUIViewPager
+        android:id="@+id/home_vp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/green"
+        app:layout_constraintBottom_toTopOf="@id/home_bottom_view"
+        app:layout_constraintTop_toBottomOf="@id/topbar"
+        >
+
+    </com.qmuiteam.qmui.widget.QMUIViewPager>
+</android.support.constraint.ConstraintLayout>
