@@ -30,7 +30,7 @@ public class HomeFragPresent extends BasePresent<HomeFragment> {
         HashMap<String, Object> map = new HashMap<>();
         map.put("versionNo", 120);
         map.put("versionType", "android");
-        HttpUtils.post(context,"checkVersion.do", map, new HttpUtils.NetCallBack() {
+        HttpUtils.getDialog(context,"inter/index/checkVersion.do", map, new HttpUtils.NetCallBack() {
             @Override
             public void onSuccess(String msg) {
                 LogUtils.e(msg);

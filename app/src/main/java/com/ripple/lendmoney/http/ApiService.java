@@ -9,14 +9,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.Flowable;
+import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
+import retrofit2.http.Part;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 
 /**
  * Created by admin on 2018/4/11.
@@ -64,19 +67,23 @@ public interface ApiService {
 //    }
 
     @FormUrlEncoded
-    @POST("inter/index/{url}")
-    Flowable<ResponseBody> post(@Path("url") String url, @FieldMap Map<String, Object> map);
+    @POST
+    Flowable<ResponseBody> post(@Url String url, @FieldMap Map<String, Object> map);
 
-    @GET("inter/index/{url}")
-    Flowable<ResponseBody> get(@Path("url") String url, @QueryMap Map<String, Object> map);
+    @GET
+    Flowable<ResponseBody> get(@Url String url, @QueryMap Map<String, Object> map);
+
+    @Multipart
+    @POST()
+    Flowable<ResponseBody> upload(@Url String url, @FieldMap Map<String, Object> map, @Part() MultipartBody.Part file);
 
 
-//    @GET("inter/index/checkVersion.do")
-//    Flowable<ResponseBody> post(@Path("url") String url,
-//                                @QueryMap Map<String, Object> map);
-//    @GET("inter/{url}")
-//    Flowable<ResponseBody> post(@Path("url") String url,
-//                                @QueryMap Map<String, Object> map);
+//    @FormUrlEncoded
+//    @POST("inter/index/{url}")
+//    Flowable<ResponseBody> post(@Path("url") String url, @FieldMap Map<String, Object> map);
+//
+//    @GET("inter/index/{url}")
+//    Flowable<ResponseBody> get(@Path("url") String url, @QueryMap Map<String, Object> map);
 
     @FormUrlEncoded
     @POST("inter/index/checkVersion.do")

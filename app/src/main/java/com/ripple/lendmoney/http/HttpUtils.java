@@ -14,6 +14,7 @@ import com.trello.rxlifecycle2.LifecycleProvider;
 
 import org.reactivestreams.Publisher;
 
+import java.io.File;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
@@ -31,6 +32,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.ResourceSubscriber;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
 /**
@@ -98,6 +102,71 @@ public class HttpUtils {
         instance.netMethodDialog(context, url, map, callBack, GET);
     }
 
+    // TODO: 2019/2/28  上传文件需要测试
+    public static void upload(Context context, String url, HashMap<String, Object> map, File file, NetCallBack callBack) {
+        HttpUtils instance = getInstance();
+        instance.uploadFile(context, url, map, file, callBack);
+    }
+
+    private void uploadFile(Context context, String url, Map<String, Object> map, File file, final NetCallBack callBack) {
+        final QMUITipDialog tipDialog = new QMUITipDialog.Builder(context)
+                .setTipWord("上传中")
+                .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
+                .create();
+        tipDialog.setCancelable(true);
+
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        // MultipartBody.Part  和后端约定好Key，这里的partName是用image
+        MultipartBody.Part body = MultipartBody.Part.createFormData("upload", file.getName(), requestFile);
+
+
+        getGankService(URLConfig.BASE_URL).upload(url, map, body)
+                .retryWhen(new RetryWithDelay(3, 1000, context))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(((LifecycleProvider) context)
+                        .bindToLifecycle())
+                .subscribe(new ResourceSubscriber<ResponseBody>() {
+                    @Override
+                    protected void onStart() {
+                        super.onStart();
+                        if (tipDialog != null) {
+                            tipDialog.show();
+                        }
+                    }
+
+                    @Override
+                    public void onNext(ResponseBody response) {
+                        if (tipDialog != null) {
+                            tipDialog.dismiss();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        if (tipDialog != null) {
+                            tipDialog.dismiss();
+                        }
+                        LogUtils.e("Rx网络错误" + t.toString());
+                        if (t instanceof SocketTimeoutException) {
+                            ToastUtil.showToast(SOCKETTIMEOUTEXCEPTION);
+                        } else if (t instanceof ConnectException) {
+                            ToastUtil.showToast(CONNECTEXCEPTION);
+                        } else if (t instanceof UnknownHostException) {
+                            ToastUtil.showToast(UNKNOWNHOSTEXCEPTION);
+                        } else {
+                            ToastUtil.showToast("网络数据异常error");
+                        }
+                        callBack.onFailed(t);
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+
+                });
+    }
+
     /**
      * 查询网络
      */
@@ -134,6 +203,7 @@ public class HttpUtils {
 
                     @Override
                     public void onNext(ResponseBody response) {
+                        LogUtils.e("网络请求成功");
                     }
 
                     @Override
