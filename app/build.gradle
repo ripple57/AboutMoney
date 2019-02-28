@@ -1,13 +1,10 @@
+//apply plugin: 'com.antfortune.freeline'
 apply plugin: 'com.android.application'
-
 android {
-//    compileSdkVersion 28
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
     defaultConfig {
         applicationId "com.ripple.lendmoney"
-//        minSdkVersion 19
-//        targetSdkVersion 28
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
@@ -24,15 +21,16 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    //    implementation 'com.android.support:appcompat-v7:28.0.0'
-    //    implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
+
     //    implementation 'com.android.support:support-vector-drawable:28.0.0'
     implementation 'com.android.support:support-v4:26.1.0'
     implementation 'com.android.support:support-annotations:26.1.0'
     testImplementation 'junit:junit:4.12'
-        androidTestImplementation 'com.android.support.test:runner:1.0.2'
-        androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+//    debugCompile 'com.antfortune.freeline:runtime:0.8.8'
     annotationProcessor rootProject.ext.dependencies["butterknife-apt"]
     implementation rootProject.ext.dependencies["avi-loading"]
     //加载样式

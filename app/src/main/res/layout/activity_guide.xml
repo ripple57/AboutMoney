@@ -7,16 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.GuideActivity">
 
+    <include layout="@layout/topbar_layout"/>
+
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="8dp"
         android:text="button4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/button1"
+        />
 
     <Button
         android:id="@+id/button5"
@@ -24,10 +27,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="8dp"
         android:text="button5"
         app:layout_constraintStart_toEndOf="@+id/button1"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/button1"
+        />
 
     <Button
         android:id="@+id/button6"
@@ -35,10 +39,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="8dp"
         android:text="button6"
         app:layout_constraintStart_toEndOf="@+id/button2"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/button1"
+        />
 
     <Button
         android:id="@+id/button1"
@@ -49,7 +54,7 @@
         android:layout_marginTop="8dp"
         android:text="button1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/rl_topbar"/>
 
     <Button
         android:id="@+id/button2"
@@ -58,9 +63,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="button2"
+        android:text="首页"
         app:layout_constraintStart_toEndOf="@+id/button1"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/rl_topbar"/>
 
     <Button
         android:id="@+id/button3"
@@ -69,9 +74,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="button2"
+        android:text="登录"
         app:layout_constraintStart_toEndOf="@+id/button2"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/rl_topbar"/>
 
 
 </android.support.constraint.ConstraintLayout>

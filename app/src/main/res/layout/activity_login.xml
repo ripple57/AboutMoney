@@ -10,7 +10,7 @@
         android:id="@+id/iv_login_topbg"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_below="@id/topbar"
+        android:layout_below="@id/rl_topbar"
         android:scaleType="fitXY"
         android:src="@mipmap/test_login"/>
 

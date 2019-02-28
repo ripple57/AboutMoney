@@ -25,6 +25,7 @@ import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.droidlover.xdroidmvp.router.Router;
 import io.reactivex.functions.Consumer;
 
 public class GuideActivity extends BaseActivity<GuidePresent> {
@@ -49,10 +50,10 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 getCameraPermission();
                 break;
             case R.id.button2:
-
+                Router.newIntent(this).to(MainActivity.class).launch();
                 break;
             case R.id.button3:
-
+                Router.newIntent(this).to(LoginActivity.class).launch();
                 break;
             case R.id.button4:
 
@@ -97,11 +98,6 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
         }
     }
 
-    @Override
-    public void onActivityReenter(int resultCode, Intent data) {
-        super.onActivityReenter(resultCode, data);
-
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -173,6 +169,14 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
 
     @Override
     public void initData(Bundle savedInstanceState) {
+
+    }
+
+    @Override
+    protected void initTopBar() {
+        super.initTopBar();
+        topBar.setTitle("测试");
+        topBar.setBackgroundAlpha(0);
 
     }
 

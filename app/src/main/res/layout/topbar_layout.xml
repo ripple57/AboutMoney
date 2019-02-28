@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.qmuiteam.qmui.widget.QMUIAppBarLayout
-    android:id="@+id/topbar"
+<RelativeLayout
+    android:id="@+id/rl_topbar"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:fitsSystemWindows="true">
+    android:layout_height="wrap_content">
 
 
     <com.qmuiteam.qmui.widget.QMUITopBar
         android:id="@+id/qm_topbar"
         android:layout_width="match_parent"
+        app:qmui_topbar_title_color="@color/white"
+        app:qmui_topbar_left_back_drawable_id="@drawable/back_splash_jump_button"
         android:layout_height="?attr/qmui_topbar_height"
-        app:qmui_topbar_bg_color="@color/blue"/>
-</com.qmuiteam.qmui.widget.QMUIAppBarLayout>
+        app:qmui_topbar_bg_color="@color/qmui_config_color_transparent"/>
+</RelativeLayout>
 
-    <!--<com.qmuiteam.qmui.widget.QMUITopBar-->
-    <!--android:id="@+id/qm_topbar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="?attr/qmui_topbar_height"-->
-    <!--android:fitsSystemWindows="true"-->
-    <!--app:qmui_layout_collapseMode="pin"-->
-    <!--app:qmui_topbar_bg_color="@color/qmui_config_color_transparent"-->
-    <!--app:qmui_topbar_need_separator="true"/>-->
