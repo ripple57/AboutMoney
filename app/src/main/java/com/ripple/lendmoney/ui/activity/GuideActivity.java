@@ -1,12 +1,170 @@
 package com.ripple.lendmoney.ui.activity;
 
+import android.Manifest;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.Button;
 
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
+import com.ripple.lendmoney.http.HttpUtils;
+import com.ripple.lendmoney.present.GuidePresent;
+import com.ripple.lendmoney.utils.BitmapPhotoUtil;
+import com.ripple.lendmoney.utils.LogUtils;
+import com.ripple.lendmoney.utils.ToastUtil;
 
-public class GuideActivity extends BaseActivity {
+import java.io.File;
+import java.util.HashMap;
 
+import butterknife.BindView;
+import butterknife.OnClick;
+import io.reactivex.functions.Consumer;
+
+public class GuideActivity extends BaseActivity<GuidePresent> {
+
+    @BindView(R.id.button4)
+    Button button4;
+    @BindView(R.id.button1)
+    Button button1;
+    @BindView(R.id.button2)
+    Button button2;
+    @BindView(R.id.button3)
+    Button button3;
+    @BindView(R.id.button5)
+    Button button5;
+    @BindView(R.id.button6)
+    Button button6;
+
+    @OnClick({R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.button1:
+                getCameraPermission();
+                break;
+            case R.id.button2:
+
+                break;
+            case R.id.button3:
+
+                break;
+            case R.id.button4:
+
+                break;
+            case R.id.button5:
+
+                break;
+            case R.id.button6:
+
+                break;
+        }
+    }
+
+    private void getCameraPermission() {
+        getRxPermissions()
+                .request(Manifest.permission.CAMERA)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean aBoolean) throws Exception {
+                        if (aBoolean) {
+                            doTakePhoto();
+                        } else {
+                            getCameraPermission();
+                            getvDelegate().toastShort("亲，同意了权限才能更好的使用软件哦");
+                        }
+                    }
+                });
+    }
+
+    private static final File PHOTO_DIR = new File(Environment.getExternalStorageDirectory() + "/DCIM/Camera");
+    private File mCurrentPhotoFile;// 照相机拍照得到的图片
+    private static final int USERICON_DATA = 350;
+
+    protected void doTakePhoto() {
+        try {
+            if (!PHOTO_DIR.exists())
+                PHOTO_DIR.mkdirs();// 创建照片的存储目录
+            mCurrentPhotoFile = new File(PHOTO_DIR, BitmapPhotoUtil.getPhotoFileName());// 给新照的照片文件命名
+            final Intent intent = BitmapPhotoUtil.getTakePickIntent(context, mCurrentPhotoFile);
+            GuideActivity.this.startActivityForResult(intent, USERICON_DATA);
+        } catch (ActivityNotFoundException e) {
+        }
+    }
+
+    @Override
+    public void onActivityReenter(int resultCode, Intent data) {
+        super.onActivityReenter(resultCode, data);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (data != null) {
+            Uri uri = data.getData();
+            if (null == uri) {
+                return;
+            } else {
+                if (uri.toString().contains("MIUI/Gallery/cloud")) {
+                    ToastUtil.showShort(context, "请选择本地相册的图片");
+                    return;
+                }
+            }
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor cursor = context.getContentResolver().query(uri, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            mCurrentPhotoFile = new File(picturePath);
+            cursor.close();
+        }
+
+        Bitmap photo = null;
+        if (mCurrentPhotoFile != null) {
+
+            photo = BitmapPhotoUtil.getSmallBitmap(mCurrentPhotoFile.getPath());// getimage(mCurrentPhotoFile.getPath());//BitmapFactory.decodeFile(picturePath);
+
+        }
+        // int count = photo.getByteCount();
+        if (photo != null) {
+            // GetBitmapPhoto.replaceMyBitmap(photo, mCurrentPhotoFile);
+            // String path = mCurrentPhotoFile.getPath().substring(0,
+            // mCurrentPhotoFile.getPath().lastIndexOf("."));
+            File f = BitmapPhotoUtil.replaceMyBitmap(photo, mCurrentPhotoFile);
+            //System.out.println(f.getPath());
+            if (f != null) {
+                if (requestCode == USERICON_DATA) {
+                    upLoadUserIcon(f);
+                }
+            }
+
+        }
+
+    }
+
+    private void upLoadUserIcon(File file) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("userId","CBD3524CFBBD99AAB549A8809F8AAA2B");
+        map.put("sessionId","CBD3524CFBBD99AAB549A8809F8AAA2B");
+        HttpUtils.upload(context, "inter/appuser/uploadHeadIcon.do", map, file, new HttpUtils.NetCallBack() {
+            @Override
+            public void onSuccess(String msg) {
+                LogUtils.e("上传失败"+msg);
+            }
+
+            @Override
+            public void onFailed(Throwable t) {
+                LogUtils.e("上传失败");
+            }
+        });
+    }
 
     @Override
     public void getNetData() {
@@ -24,7 +182,7 @@ public class GuideActivity extends BaseActivity {
     }
 
     @Override
-    public Object newP() {
-        return null;
+    public GuidePresent newP() {
+        return new GuidePresent();
     }
 }

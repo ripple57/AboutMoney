@@ -114,19 +114,26 @@ public class HttpUtils {
                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
                 .create();
         tipDialog.setCancelable(true);
+        tipDialog.show();
 
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        // MultipartBody.Part  和后端约定好Key，这里的partName是用image
         MultipartBody.Part body = MultipartBody.Part.createFormData("upload", file.getName(), requestFile);
 
 
         getGankService(URLConfig.BASE_URL).upload(url, map, body)
                 .retryWhen(new RetryWithDelay(3, 1000, context))
+                .map(new Function<ResponseBody, String>() { //数据转换
+                    @Override
+                    public String apply(ResponseBody responseBody) throws Exception {
+                        String response = responseBody.string();
+                        return response;
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(((LifecycleProvider) context)
                         .bindToLifecycle())
-                .subscribe(new ResourceSubscriber<ResponseBody>() {
+                .subscribe(new ResourceSubscriber<String>() {
                     @Override
                     protected void onStart() {
                         super.onStart();
@@ -136,7 +143,7 @@ public class HttpUtils {
                     }
 
                     @Override
-                    public void onNext(ResponseBody response) {
+                    public void onNext(String response) {
                         if (tipDialog != null) {
                             tipDialog.dismiss();
                         }

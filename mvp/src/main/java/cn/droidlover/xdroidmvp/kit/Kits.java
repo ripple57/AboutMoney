@@ -301,7 +301,7 @@ public class Kits {
         }
     }
 
-    public static class File {
+    public static class FileUtil {
         public final static String FILE_EXTENSION_SEPARATOR = ".";
 
         /**
@@ -712,7 +712,7 @@ public class Kits {
          * @return true if the necessary directories have been created or the target directory already exists, false one of
          * the directories can not be created.
          * <ul>
-         * <li>if {@link File#getFolderName(String)} return null, return false</li>
+         * <li>if {@link FileUtil#getFolderName(String)} return null, return false</li>
          * <li>if target directory already exists, return true</li>
          * </ul>
          */

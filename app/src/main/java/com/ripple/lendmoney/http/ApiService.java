@@ -60,11 +60,6 @@ public interface ApiService {
     @POST("inter/appuser/sendCodeForLogin.do")
     Flowable<BaseModel> getCaptcha(@Field("userName") String userName);
 
-    //    {
-//        body: { },
-//        des: "成功",
-//        state: 0
-//    }
 
     @FormUrlEncoded
     @POST
@@ -75,15 +70,9 @@ public interface ApiService {
 
     @Multipart
     @POST()
-    Flowable<ResponseBody> upload(@Url String url, @FieldMap Map<String, Object> map, @Part() MultipartBody.Part file);
+    Flowable<ResponseBody> upload(@Url String url, @QueryMap Map<String, Object> map, @Part() MultipartBody.Part file);
 
 
-//    @FormUrlEncoded
-//    @POST("inter/index/{url}")
-//    Flowable<ResponseBody> post(@Path("url") String url, @FieldMap Map<String, Object> map);
-//
-//    @GET("inter/index/{url}")
-//    Flowable<ResponseBody> get(@Path("url") String url, @QueryMap Map<String, Object> map);
 
     @FormUrlEncoded
     @POST("inter/index/checkVersion.do")
