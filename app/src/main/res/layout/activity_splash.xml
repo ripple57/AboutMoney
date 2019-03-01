@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
-            android:visibility="gone"
             android:layout_marginTop="50dp"
             android:background="@drawable/radius_bg_tranwhite"
             android:paddingBottom="2dp"
@@ -24,7 +23,8 @@
             android:paddingTop="2dp"
             android:text="跳过3S"
             android:textColor="@android:color/white"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <RelativeLayout

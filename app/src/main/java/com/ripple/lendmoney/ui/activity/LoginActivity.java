@@ -1,5 +1,6 @@
 package com.ripple.lendmoney.ui.activity;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -38,6 +39,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
     TextView tv_login_agreement;
     private String phoneNum;
     private Disposable mdDisposable;
+
     @Override
     protected String topBarTitle() {
         return "登录";
@@ -50,10 +52,27 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
                 et_login_phone.setText(null);
                 break;
             case R.id.btn_login_getcode:
-                getCode();
+                getRxPermissions()
+                        .request(Manifest.permission.INTERNET)
+                        .subscribe(granted -> {
+                            if (granted) {//同意
+                                getCode();
+                            } else {//拒绝
+                                ToastUtil.showToast("亲，同意了权限才能更好的为您服务哦");
+                            }
+                        });
                 break;
             case R.id.btn_login_login:
-                login();
+                getRxPermissions()
+                        .request(Manifest.permission.READ_PHONE_STATE)
+                        .subscribe(granted -> {
+                            if (granted) {//同意
+                                login();
+                            } else {//拒绝
+                                ToastUtil.showToast("亲，同意了权限才能更好的为您服务哦");
+                            }
+                        });
+
                 break;
             case R.id.tv_login_agreement:
                 toAgreementView();
@@ -68,7 +87,17 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
 
     private void login() {
         String code = et_login_password.getText().toString().trim();
-        getP().login(phoneNum, code);
+        phoneNum = et_login_phone.getText().toString().trim();
+        if (TextUtils.isEmpty(phoneNum)) {
+            ToastUtil.showToast("请输入手机号码");
+        } else if (!phoneNum.matches("^1[34578]\\d{9}$")) {
+            ToastUtil.showToast("请输入正确的手机号");
+        } else if (TextUtils.isEmpty(code) || code.length() != 6) {
+            ToastUtil.showToast("请输入6位验证码");
+        } else {
+            getP().login(phoneNum, code);
+        }
+        setLoginSuccess();
     }
 
     private void getCode() {
@@ -80,11 +109,17 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
             ToastUtil.showToast("请输入正确的手机号");
             return;
         } else {
+            btn_login_getcode.setClickable(false);
             btn_login_getcode.setText("正在发送");
             long tel = Long.parseLong(phoneNum.substring(1)) * 8;
             getP().getCode(phoneNum);
         }
 
+        setSendCodeSuccess();// TODO: test  
+    }
+
+    public void setSendCodeSuccess() {
+        ToastUtil.showToast("验证码已发送!");
         mdDisposable = Flowable.intervalRange(0, 60, 0, 1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(new Consumer<Long>() {
@@ -96,7 +131,8 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
                 .doOnComplete(new Action() {
                     @Override
                     public void run() throws Exception {
-                        btn_login_getcode.setText("重新获取验证码");
+                        btn_login_getcode.setText("获取验证码");
+                        btn_login_getcode.setClickable(true);
                     }
                 })
                 .subscribe();
@@ -135,6 +171,8 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
     }
 
     public void setLoginSuccess() {
+        // TODO: 2019/3/1 保存登录数据
+
 
     }
 }

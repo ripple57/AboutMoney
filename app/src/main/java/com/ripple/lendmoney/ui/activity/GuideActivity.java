@@ -47,7 +47,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button1:
-                getCameraPermission();
+//                getCameraPermission();
                 break;
             case R.id.button2:
                 Router.newIntent(this).to(MainActivity.class).launch();
@@ -67,6 +67,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
         }
     }
 
+    //去拍照上传图片
     private void getCameraPermission() {
         getRxPermissions()
                 .request(Manifest.permission.CAMERA)
@@ -97,7 +98,6 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
         } catch (ActivityNotFoundException e) {
         }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

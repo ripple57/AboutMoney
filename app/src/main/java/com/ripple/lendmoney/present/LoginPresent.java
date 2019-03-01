@@ -3,7 +3,6 @@ package com.ripple.lendmoney.present;
 import com.ripple.lendmoney.base.BasePresent;
 import com.ripple.lendmoney.http.RetrofitManager;
 import com.ripple.lendmoney.http.URLConfig;
-import com.ripple.lendmoney.model.BaseModel;
 import com.ripple.lendmoney.model.LoginBean;
 import com.ripple.lendmoney.ui.activity.LoginActivity;
 
@@ -38,21 +37,21 @@ public class LoginPresent extends BasePresent<LoginActivity> {
     }
 
     public void getCode(String phoneNum) {
-        RetrofitManager.getInstance().getApiService(URLConfig.BASE_URL).getCaptcha(phoneNum)
-                .compose(XApi.<BaseModel>getApiTransformer())
-                .compose(XApi.<BaseModel>getScheduler())
-                .compose(getV().<BaseModel>bindToLifecycle())
-                .subscribe(new ApiSubscriber<BaseModel>() {
-                    @Override
-                    protected void onFail(NetError error) {
-
-                    }
-
-                    @Override
-                    protected void onSuccess(BaseModel baseModel) {
-
-                    }
-                });
+//        RetrofitManager.getInstance().getApiService(URLConfig.BASE_URL).getCaptcha(phoneNum)
+//                .compose(XApi.<BaseModel>getApiTransformer())
+//                .compose(XApi.<BaseModel>getScheduler())
+//                .compose(getV().<BaseModel>bindToLifecycle())
+//                .subscribe(new ApiSubscriber<BaseModel>() {
+//                    @Override
+//                    protected void onFail(NetError error) {
+//
+//                    }
+//
+//                    @Override
+//                    protected void onSuccess(BaseModel baseModel) {
+//
+//                    }
+//                });
 
     }
 }

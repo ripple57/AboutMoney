@@ -1,5 +1,6 @@
 package com.ripple.lendmoney.base;
 
+import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,6 +21,7 @@ import cn.droidlover.xdroidmvp.kit.KnifeKit;
 import cn.droidlover.xdroidmvp.mvp.IPresent;
 import cn.droidlover.xdroidmvp.mvp.XActivity;
 import cn.droidlover.xdroidmvp.net.NetError;
+import cn.droidlover.xdroidmvp.router.Router;
 
 /**
  * Created by admin on 2018/4/24.
@@ -154,6 +156,14 @@ public abstract class BaseActivity<P extends IPresent> extends XActivity<P> {
         if (emptyView != null) {
             emptyView.hide();
         }
+    }
+
+    public void ToActivityFinish(Activity activity, final Class clazz) {
+        Router.newIntent(activity).to(clazz).launch();
+        AppManager.getAppManager().finishActivity();
+    }
+    public void ToActivity(Activity activity, final Class clazz) {
+        Router.newIntent(activity).to(clazz).launch();
     }
 
     @Override
