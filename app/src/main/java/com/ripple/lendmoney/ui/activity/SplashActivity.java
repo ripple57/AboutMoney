@@ -57,6 +57,11 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
     private Disposable mdDisposable;
 
     @Override
+    protected String topBarTitle() {
+        return null;
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

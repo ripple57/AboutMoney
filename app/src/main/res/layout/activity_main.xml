@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.MainActivity">
 
-    <include layout="@layout/topbar_layout"/>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/home_bottom_view"
@@ -28,7 +27,7 @@
         android:layout_height="0dp"
         android:background="@color/green"
         app:layout_constraintBottom_toTopOf="@id/home_bottom_view"
-        app:layout_constraintTop_toBottomOf="@id/rl_topbar"
+        app:layout_constraintTop_toTopOf="parent"
         >
 
     </com.qmuiteam.qmui.widget.QMUIViewPager>

@@ -38,7 +38,10 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
     TextView tv_login_agreement;
     private String phoneNum;
     private Disposable mdDisposable;
-
+    @Override
+    protected String topBarTitle() {
+        return "登录";
+    }
 
     @OnClick({R.id.imgbtn_login_phone_cancle, R.id.btn_login_getcode, R.id.btn_login_login, R.id.tv_login_agreement,})
     public void onClick(View view) {

@@ -31,7 +31,10 @@ public class MainActivity extends BaseActivity {
     private List<Fragment> fragmentList = new ArrayList<>();
 
 
-
+    @Override
+    protected String topBarTitle() {
+        return "首页";
+    }
 
     @Override
     public void initData(Bundle savedInstanceState) {
@@ -103,7 +106,7 @@ public class MainActivity extends BaseActivity {
 
 
     @Override
-    protected boolean isShowBack() {
+    protected boolean topBarIsShowBack() {
         return false;
     }
 

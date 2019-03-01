@@ -147,12 +147,12 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
 
     private void upLoadUserIcon(File file) {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("userId","CBD3524CFBBD99AAB549A8809F8AAA2B");
-        map.put("sessionId","CBD3524CFBBD99AAB549A8809F8AAA2B");
+        map.put("userId", "CBD3524CFBBD99AAB549A8809F8AAA2B");
+        map.put("sessionId", "CBD3524CFBBD99AAB549A8809F8AAA2B");
         HttpUtils.upload(context, "inter/appuser/uploadHeadIcon.do", map, file, new HttpUtils.NetCallBack() {
             @Override
             public void onSuccess(String msg) {
-                LogUtils.e("上传失败"+msg);
+                LogUtils.e("上传失败" + msg);
             }
 
             @Override
@@ -167,17 +167,30 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
 
     }
 
+
     @Override
     public void initData(Bundle savedInstanceState) {
+    }
 
+
+    @Override
+    protected String topBarTitle() {
+        return "测试";
     }
 
     @Override
-    protected void initTopBar() {
-        super.initTopBar();
-        topBar.setTitle("测试");
-        topBar.setBackgroundAlpha(0);
+    protected boolean topBarIsShowBack() {
+        return false;
+    }
 
+    @Override
+    protected boolean topBarIsTransparent() {
+        return false;
+    }
+
+    @Override
+    protected boolean topBarIsShow() {
+        return true;
     }
 
     @Override

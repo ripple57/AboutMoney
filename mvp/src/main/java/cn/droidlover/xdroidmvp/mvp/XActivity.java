@@ -37,7 +37,8 @@ public abstract class XActivity<P extends IPresent> extends RxAppCompatActivity 
 //        QMUIStatusBarHelper.translucent(this);
         QMUIStatusBarHelper.setStatusBarLightMode(this);
         if (getLayoutId() > 0) {
-            setContentView(getLayoutId());
+            setContentView(getBaseLayout());
+            initBaseView();
             initTopBar();
             bindUI(null);
             bindEvent();
@@ -46,7 +47,11 @@ public abstract class XActivity<P extends IPresent> extends RxAppCompatActivity 
 
     }
 
+
+
+    protected abstract int getBaseLayout();
     protected abstract void initTopBar();
+    protected abstract void initBaseView();
 
     @Override
     public void bindUI(View rootView) {
