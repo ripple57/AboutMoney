@@ -19,7 +19,7 @@ import cn.droidlover.xdroidmvp.net.XApi;
 public class LoginPresent extends BasePresent<LoginActivity> {
 
     public void login(String phoneNum, String code) {
-        RetrofitManager.getInstance().getApiService(URLConfig.BASE_MOVIE_URL).login(phoneNum, code)
+        RetrofitManager.getInstance().getApiService(URLConfig.BASE_URL).login(phoneNum, code)
                 .compose(XApi.<LoginBean>getApiTransformer())
                 .compose(XApi.<LoginBean>getScheduler())
                 .compose(getV().<LoginBean>bindToLifecycle())

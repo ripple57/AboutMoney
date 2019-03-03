@@ -1,6 +1,7 @@
 package com.ripple.lendmoney.ui.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -98,15 +99,13 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
     }
 
     private void getLoginPermission() {
-        getRxPermissions().requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        getRxPermissions().request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.READ_PHONE_STATE,
                 Manifest.permission.CAMERA)
-                .subscribe(permission -> {
-                    if (permission.granted) {// 用户已经同意该权限
+                .subscribe(granted -> {
+                    if (granted) {// 用户已经同意该权限
                         hadLogin();
-                    } else if (permission.shouldShowRequestPermissionRationale) {// 用户拒绝了该权限，没有选中『不再询问』（Never ask again）,那么下次再次启动时，还会提示请求权限的对话框
-                        ToastUtil.showToast("亲，同意了权限才能更好的为您服务哦");
                     } else {// 用户拒绝了该权限，并且选中『不再询问』
                         ToastUtil.showToast("为了更好地为您服务,请自行前往权限管理打开相应权限");
                     }
@@ -116,12 +115,11 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
     private void hadLogin() {//读取缓存来判断是否已经登录
         boolean tempLogin = true;
         if (tempLogin) {
-            ToActivity(MainActivity.class);
+            MainActivity.launch(this);
         } else {
-            ToActivity(LoginActivity.class);
-
+            LoginActivity.launch(this);
         }
-//        ToActivity(LoginActivity.class);
+       finish();
     }
 
     private void isFirstEnter() {
@@ -131,13 +129,13 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
             initViewPager();
             SPUtils.getInstance(this).save("isFirstEnter", false);
         } else {
-            ToActivity(MainActivity.class);
+            MainActivity.launch(this);
+            finish();
         }
     }
 
-    private void ToActivity(final Class clazz) {
+    private void ToActivity(Class clazz) {
         Router.newIntent(context).to(clazz).launch();
-        AppManager.getAppManager().finishActivity();
     }
 
     @Override
@@ -265,5 +263,11 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
         if (mdDisposable != null) {
             mdDisposable.dispose();
         }
+    }
+
+    public static void launch(Activity activity) {
+        Router.newIntent(activity)
+                .to(SplashActivity.class)
+                .launch();
     }
 }

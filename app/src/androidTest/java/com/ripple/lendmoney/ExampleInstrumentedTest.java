@@ -5,7 +5,8 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.ripple.lendmoney.http.HttpUtils;
-import com.ripple.lendmoney.utils.LogUtils;
+import com.ripple.lendmoney.http.MyCallBack;
+import com.ripple.lendmoney.http.MyMessage;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,15 +31,10 @@ public class ExampleInstrumentedTest {
         HashMap<String, Object> map = new HashMap<>();
         map.put("versionNo", 120);
         map.put("versionType", "android");
-        HttpUtils.post(context,"checkVersion.do", map, new HttpUtils.NetCallBack() {
+        HttpUtils.post(context, "checkVersion.do", map, new MyCallBack<Void>() {
             @Override
-            public void onSuccess(String msg) {
-                LogUtils.e(msg);
-            }
+            public void onMySuccess(Void bean, MyMessage message) {
 
-            @Override
-            public void onFailed(Throwable t) {
-                LogUtils.e(t.toString());
             }
         });
     }

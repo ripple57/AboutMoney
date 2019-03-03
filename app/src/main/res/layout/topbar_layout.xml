@@ -10,6 +10,7 @@
 
     <com.qmuiteam.qmui.widget.QMUITopBar
         android:id="@+id/qm_topbar"
+
         android:layout_width="match_parent"
         app:qmui_topbar_title_color="@color/white"
         app:qmui_topbar_left_back_drawable_id="@drawable/back_splash_jump_button"

@@ -1,45 +1,50 @@
 package com.ripple.lendmoney.ui.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
 
+import com.qmuiteam.qmui.layout.QMUIButton;
 import com.ripple.lendmoney.R;
+import com.ripple.lendmoney.base.BaseLazyFragment;
 import com.ripple.lendmoney.present.HomeFragPresent;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.ripple.lendmoney.ui.activity.GuideActivity;
+import com.ripple.lendmoney.ui.activity.LoginActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cn.droidlover.xdroidmvp.mvp.XLazyFragment;
 
 /**
  * Created by admin on 2018/4/12.
  */
 
-public class HomeFragment extends XLazyFragment<HomeFragPresent> implements OnRefreshListener {
+public class HomeFragment extends BaseLazyFragment<HomeFragPresent> {
     @BindView(R.id.textView)
     TextView textView;
     @BindView(R.id.textView1)
     TextView textView1;
+    @BindView(R.id.btn_home_frag_lend)
+    QMUIButton btn_home_frag_lend;
 
-    @OnClick({R.id.textView,R.id.textView1})
+    @OnClick({R.id.textView, R.id.textView1,R.id.btn_home_frag_lend})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.textView:
-                getP().test(context);
                 break;
             case R.id.textView1:
-                getP().test1();
+                GuideActivity.launch(context);
+                break;
+            case R.id.btn_home_frag_lend:
+                GuideActivity.launch(context);
                 break;
         }
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        LoginActivity.launch(context);
     }
+
 
     @Override
     public int getLayoutId() {
@@ -51,8 +56,9 @@ public class HomeFragment extends XLazyFragment<HomeFragPresent> implements OnRe
         return new HomeFragPresent();
     }
 
+
     @Override
-    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+    public void getNetData() {
 
     }
 }

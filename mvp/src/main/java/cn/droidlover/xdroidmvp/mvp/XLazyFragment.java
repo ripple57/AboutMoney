@@ -14,8 +14,7 @@ import cn.droidlover.xdroidmvp.kit.KnifeKit;
  * Created by wanglei on 2017/1/26.
  */
 
-public abstract class XLazyFragment<P extends IPresent>
-        extends LazyFragment implements IView<P> {
+public abstract class XLazyFragment<P extends IPresent> extends LazyFragment implements IView<P> {
 
     private VDelegate vDelegate;
     private P p;

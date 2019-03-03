@@ -1,15 +1,17 @@
 package com.ripple.lendmoney.ui.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 
+import com.qmuiteam.qmui.widget.QMUIViewPager;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
+import com.ripple.lendmoney.present.MainPresent;
 import com.ripple.lendmoney.ui.fragment.HomeFragment;
 import com.ripple.lendmoney.ui.fragment.MiddleFragment;
 import com.ripple.lendmoney.ui.fragment.MineFragment;
@@ -21,11 +23,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import cn.droidlover.xdroidmvp.base.XFragmentAdapter;
+import cn.droidlover.xdroidmvp.router.Router;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity<MainPresent> {
 
     @BindView(R.id.home_vp)
-    ViewPager homeVp;
+    QMUIViewPager homeVp;
     @BindView(R.id.home_bottom_view)
     BottomNavigationView homeBottomView;
     private List<Fragment> fragmentList = new ArrayList<>();
@@ -34,6 +37,11 @@ public class MainActivity extends BaseActivity {
     @Override
     protected String topBarTitle() {
         return "首页";
+    }
+
+    @Override
+    protected boolean topBarIsTransparent() {
+        return false;
     }
 
     @Override
@@ -46,24 +54,29 @@ public class MainActivity extends BaseActivity {
     private void initView() {
         BottomNavigationViewHelper.disableShiftMode(homeBottomView);
         homeVp.setOffscreenPageLimit(3);
-        topBar.setTitle("首页");
+        homeVp.setSwipeable(false);
         homeBottomView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.bottom_home:
                         homeVp.setCurrentItem(0);
-                        topBar.setTitle("首页");
+                        setTopBarIsShow(false);
                         break;
 
                     case R.id.bottom_middle:
                         homeVp.setCurrentItem(1);
-                        topBar.setTitle("中间");
+                        setTopBarIsShow(true);
+                        setTopBarIsShowBack(false);
+                        setTopBarTitle("订单");
                         break;
 
                     case R.id.bottom_mine:
                         homeVp.setCurrentItem(2);
-                        topBar.setTitle("我的");
+                        setTopBarIsShow(true);
+                        setTopBarIsShowBack(false);
+                        setTopBarTransparent(true);
+                        setTopBarTitle("我的");
                         break;
 
                 }
@@ -71,42 +84,11 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-
-        homeVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                switch (position) {
-                    case 0:
-                        homeBottomView.setSelectedItemId(R.id.bottom_home);
-                        break;
-
-                    case 1:
-                        homeBottomView.setSelectedItemId(R.id.bottom_middle);
-                        break;
-
-                    case 2:
-                        homeBottomView.setSelectedItemId(R.id.bottom_mine);
-                        break;
-
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
     }
 
 
     @Override
-    protected boolean topBarIsShowBack() {
+    protected boolean topBarIsShow() {
         return false;
     }
 
@@ -120,13 +102,14 @@ public class MainActivity extends BaseActivity {
         XFragmentAdapter xFragmentAdapter = new XFragmentAdapter(getSupportFragmentManager(), fragmentList, null);
         homeVp.setAdapter(xFragmentAdapter);
     }
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
     }
 
     @Override
-    public Object newP() {
+    public MainPresent newP() {
         return null;
     }
 
@@ -146,24 +129,26 @@ public class MainActivity extends BaseActivity {
 
     public void exit() {
         if ((System.currentTimeMillis() - mExitTime) > 2000) {
-            getvDelegate().toastShort("再按一次退出"+getResources().getString(R.string.app_name));
+            getvDelegate().toastShort("再按一次退出");
             mExitTime = System.currentTimeMillis();
         } else {
             AppManager.getAppManager().AppExit(context);
         }
     }
 
-
-
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
     }
+
     @Override
     public void getNetData() {
 
     }
 
-
+    public static void launch(Activity activity) {
+        Router.newIntent(activity)
+                .to(MainActivity.class)
+                .launch();
+    }
 }

@@ -39,8 +39,6 @@ public class MyApp extends Application {
         XDroidConf.devMode(true);
         XDroidConf.IL_ERROR_RES = R.mipmap.img_default;
         XDroidConf.IL_LOADING_RES = R.mipmap.img_default;
-        XDroidConf.ROUTER_ANIM_ENTER = R.anim.slide_left_in;
-        XDroidConf.ROUTER_ANIM_EXIT = R.anim.slide_left_out;
         XDroidConf.LOG = XDroidConf.DEV;
 //        Realm.init(this);//数据库操作
 //        RealmConfiguration config = new RealmConfiguration.Builder().build();

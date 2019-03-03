@@ -39,16 +39,16 @@ public interface ApiService {
     @POST("get-access-token")
     Flowable<TokenBean> getToken(@Field("mobileType") String type,
                                  @Field("mobileId") String mobileID);
-
-
-    @FormUrlEncoded
-    @POST("api")
-    Flowable<ResponseBody> queryData(@Field("accessToken") String token,
-                                     @Field("actionName") String actionName,
-                                     @Field("payload") String payload,
-                                     @Field("timestamp") long timaStamp,
-                                     @Field("sign") String sign,
-                                     @Field("from") String from);
+//
+//
+//    @FormUrlEncoded
+//    @POST("api")
+//    Flowable<ResponseBody> queryData(@Field("accessToken") String token,
+//                                     @Field("actionName") String actionName,
+//                                     @Field("payload") String payload,
+//                                     @Field("timestamp") long timaStamp,
+//                                     @Field("sign") String sign,
+//                                     @Field("from") String from);
 
 
     @FormUrlEncoded

@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="fitXY"
+        android:layout_alignParentTop="true"
         android:src="@mipmap/test_login"/>
 
     <LinearLayout

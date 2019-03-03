@@ -25,7 +25,7 @@ public class MiddleFragment extends XLazyFragment<HomeFragPresent> implements On
 
     @Override
     public int getLayoutId() {
-        return R.layout.frag_home_layout;
+        return R.layout.frag_home_layout_test;
     }
 
     @Override

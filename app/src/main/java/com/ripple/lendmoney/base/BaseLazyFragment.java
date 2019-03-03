@@ -9,10 +9,6 @@ import cn.droidlover.xdroidmvp.mvp.IPresent;
 import cn.droidlover.xdroidmvp.mvp.XLazyFragment;
 import cn.droidlover.xdroidmvp.net.NetError;
 
-/**
- * Created by Administrator on 2018/6/4 0004.
- */
-
 public abstract class BaseLazyFragment<P extends IPresent> extends XLazyFragment<P> {
     protected QMUIEmptyView emptyView;
 
@@ -34,6 +30,10 @@ public abstract class BaseLazyFragment<P extends IPresent> extends XLazyFragment
         }
     }
 
+    public void setTopBarTitle(String title) {
+        BaseActivity activity = (BaseActivity) getActivity();
+        activity.setTopBarTitle(title);
+    }
 
     public void hideLoading() {
         if (emptyView != null) {

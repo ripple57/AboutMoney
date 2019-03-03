@@ -40,7 +40,7 @@ public class RetryForToken implements Function<Flowable<? extends Throwable>, Fl
                 if (throwable instanceof NetError && ((NetError) throwable).getType() == 2) { //判断是否是token过期的错误
                     // 如果上面检测到token过期就会进入到这里
                     // 然后下面的方法就是更新token
-                    return RetrofitManager.getInstance().getApiService(URLConfig.BASE_API_URL).getToken("1", "234234")
+                    return RetrofitManager.getInstance().getApiService(URLConfig.BASE_URL).getToken("1", "234234")
                             .compose(XApi.<TokenBean>getScheduler())
                             .compose(activity == null ? lazyFragment.<TokenBean>bindToLifecycle() : activity.<TokenBean>bindToLifecycle())
                             .doOnNext(new Consumer<TokenBean>() {

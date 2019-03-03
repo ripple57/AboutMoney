@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    android:id="@+id/container"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -25,10 +24,9 @@
         android:id="@+id/home_vp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/green"
+        android:background="@color/bg_gray"
         app:layout_constraintBottom_toTopOf="@id/home_bottom_view"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
     </com.qmuiteam.qmui.widget.QMUIViewPager>
 </android.support.constraint.ConstraintLayout>

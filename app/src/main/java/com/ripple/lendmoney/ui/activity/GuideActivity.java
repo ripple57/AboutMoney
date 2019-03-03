@@ -1,6 +1,7 @@
 package com.ripple.lendmoney.ui.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.Cursor;
@@ -15,6 +16,9 @@ import android.widget.Button;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.http.HttpUtils;
+import com.ripple.lendmoney.http.MyCallBack;
+import com.ripple.lendmoney.http.MyMessage;
+import com.ripple.lendmoney.model.CheckBean;
 import com.ripple.lendmoney.present.GuidePresent;
 import com.ripple.lendmoney.utils.BitmapPhotoUtil;
 import com.ripple.lendmoney.utils.LogUtils;
@@ -22,6 +26,7 @@ import com.ripple.lendmoney.utils.ToastUtil;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -47,7 +52,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button1:
-//                getCameraPermission();
+                testNetMethond();
                 break;
             case R.id.button2:
                 Router.newIntent(this).to(MainActivity.class).launch();
@@ -56,15 +61,38 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 Router.newIntent(this).to(LoginActivity.class).launch();
                 break;
             case R.id.button4:
-
+                LogUtils.e("++++++++++点击了测试网页");
+//                Router.newIntent(this).to(WebActivity.class).putString("url","https//www.baidu.com").putString("title","标题").launch();
+                WebActivity.launch(this, "https://www.baidu.com", "测试网页");
                 break;
             case R.id.button5:
-
+                HttpUtils.postDialog(this, "inter/index/checkVersion.do", null, new MyCallBack<CheckBean>() {
+                    @Override
+                    public void onMySuccess(CheckBean bean, MyMessage message) {
+                        LogUtils.e(bean.toString());
+                    }
+                });
                 break;
             case R.id.button6:
+                HttpUtils.post(this, "inter/index/checkVersion.do", null, new MyCallBack<Map<String,Object>>() {
+                    @Override
+                    public void onMySuccess(Map<String, Object> bean, MyMessage message) {
+                        LogUtils.printMap(bean);
+                    }
 
+                });
                 break;
         }
+    }
+
+    private void testNetMethond() {
+        HttpUtils.post(this, "inter/index/checkVersion.do", null, new MyCallBack<CheckBean>() {
+            @Override
+            public void onMySuccess(CheckBean bean, MyMessage message) {
+                LogUtils.e(bean.toString()+bean.getData().getVersionNo()+bean.getData().getRequeUpdate());
+            }
+        });
+
     }
 
     //去拍照上传图片
@@ -149,15 +177,10 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
         HashMap<String, Object> map = new HashMap<>();
         map.put("userId", "CBD3524CFBBD99AAB549A8809F8AAA2B");
         map.put("sessionId", "CBD3524CFBBD99AAB549A8809F8AAA2B");
-        HttpUtils.upload(context, "inter/appuser/uploadHeadIcon.do", map, file, new HttpUtils.NetCallBack() {
+        HttpUtils.upload(context, "inter/appuser/uploadHeadIcon.do", map, file, new MyCallBack<Void>() {
             @Override
-            public void onSuccess(String msg) {
-                LogUtils.e("上传失败" + msg);
-            }
+            public void onMySuccess(Void bean, MyMessage message) {
 
-            @Override
-            public void onFailed(Throwable t) {
-                LogUtils.e("上传失败");
             }
         });
     }
@@ -201,5 +224,10 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
     @Override
     public GuidePresent newP() {
         return new GuidePresent();
+    }
+    public static void launch(Activity activity) {
+        Router.newIntent(activity)
+                .to(GuideActivity.class)
+                .launch();
     }
 }

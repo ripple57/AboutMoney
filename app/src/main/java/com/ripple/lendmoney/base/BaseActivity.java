@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 
+import com.qmuiteam.qmui.alpha.QMUIAlphaImageButton;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.qmuiteam.qmui.widget.QMUITopBar;
@@ -28,11 +30,12 @@ import cn.droidlover.xdroidmvp.router.Router;
  */
 
 public abstract class BaseActivity<P extends IPresent> extends XActivity<P> {
-    RelativeLayout rl_topbar;
+    protected RelativeLayout rl_topbar;
     protected QMUITopBar topBar;
     QMUIEmptyView emptyView;
     RelativeLayout container;
     protected View rootView;
+    protected QMUIAlphaImageButton topBar_left_back;
 
 
     @Override
@@ -47,7 +50,6 @@ public abstract class BaseActivity<P extends IPresent> extends XActivity<P> {
             AndroidWorkaround.assistActivity(findViewById(android.R.id.content));  //需要在setContentView()方法后面执行
         }
         AppManager.getAppManager().addActivity(this);
-
     }
 
     @Override
@@ -68,46 +70,65 @@ public abstract class BaseActivity<P extends IPresent> extends XActivity<P> {
         container = (RelativeLayout) findViewById(R.id.base_container);
 
         LayoutInflater inflater = LayoutInflater.from(this);
-        rootView = inflater.inflate(getLayoutId(), container, true);
+        rootView = inflater.inflate(getLayoutId(), container, false);
+        container.addView(rootView);
     }
 
     @Override
     protected void initTopBar() {
 
         if (rl_topbar == null || topBar == null) return;
-        if (topBarIsShow()) {
+        QMUIStatusBarHelper.setStatusBarDarkMode(this);//状态栏深底白字
+        topBar_left_back = topBar.addLeftImageButton(R.drawable.ic_keyboard_arrow_left_black_24dp, R.id.qmui_topbar_item_left_back);
+        topBar_left_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        setTopBarIsShow(topBarIsShow());
+    }
+
+    public void setTopBarIsShow(boolean isShow) {
+        if (isShow) {
             topBar.setTitle(topBarTitle());
             rl_topbar.setVisibility(View.VISIBLE);
-            QMUIStatusBarHelper.setStatusBarDarkMode(this);//状态栏深底白字
             topBar.setBackgroundAlpha(0);//透明后跟rltopbar颜色相同
             int statusbarHeight = QMUIStatusBarHelper.getStatusbarHeight(this);//获取状态栏高度
             rl_topbar.setPadding(0, statusbarHeight, 0, 0);//tapbar下移,漏出状态栏,形成沉浸式
-            if (topBarIsTransparent()) {
-                rl_topbar.setBackgroundColor(getResources().getColor(R.color.transparent));
-            } else {
-                rl_topbar.setBackgroundColor(getResources().getColor(R.color.topbar_color));
-            }
-            if (topBarIsShowBack()) {
-                topBar.addLeftImageButton(R.drawable.ic_keyboard_arrow_left_black_24dp, R.id.qmui_topbar_item_left_back).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        AppManager.getAppManager().finishActivity(BaseActivity.this);
-                    }
-                });
-            }
+            setTopBarTransparent(topBarIsTransparent());
+            setTopBarIsShowBack(topBarIsShowBack());
         } else {
             rl_topbar.setVisibility(View.GONE);
         }
-
-
     }
 
     protected abstract String topBarTitle();
 
-    protected void setTopBarTitle(String title) {
+    public void setTopBarTitle(String title) {
         if (topBar != null) {
             topBar.setTitle(title);
         }
+    }
+
+    public void setTopBarTransparent(boolean isTrans) {
+        RelativeLayout.LayoutParams layoutParams =
+                new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        if (isTrans) {
+            rl_topbar.setBackgroundColor(getResources().getColor(R.color.transparent));
+            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        } else {
+            rl_topbar.setBackgroundColor(getResources().getColor(R.color.topbar_blue));
+            layoutParams.addRule(RelativeLayout.BELOW, R.id.rl_topbar);
+        }
+        container.setLayoutParams(layoutParams);
+    }
+
+
+    public void setTopBarIsShowBack(boolean isShowBack) {
+
+        topBar_left_back.setVisibility(isShowBack ? View.VISIBLE : View.GONE);
+
     }
 
     protected boolean topBarIsTransparent() {
@@ -160,17 +181,13 @@ public abstract class BaseActivity<P extends IPresent> extends XActivity<P> {
 
     public void ToActivityFinish(Activity activity, final Class clazz) {
         Router.newIntent(activity).to(clazz).launch();
-        AppManager.getAppManager().finishActivity();
+        activity.finish();
     }
+
     public void ToActivity(Activity activity, final Class clazz) {
         Router.newIntent(activity).to(clazz).launch();
     }
 
-    @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
-    }
 
     public abstract void getNetData();
 

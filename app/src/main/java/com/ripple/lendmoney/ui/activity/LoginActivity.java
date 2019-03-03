@@ -1,6 +1,7 @@
 package com.ripple.lendmoney.ui.activity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -18,6 +19,7 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.droidlover.xdroidmvp.router.Router;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -145,12 +147,8 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        initView();
     }
 
-    private void initView() {
-        topBar.setTitle("登录");
-    }
 
     @Override
     public int getLayoutId() {
@@ -169,11 +167,16 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
             mdDisposable.dispose();
         }
     }
-
+    public static void launch(Activity activity) {
+        Router.newIntent(activity)
+                .to(LoginActivity.class)
+                .launch();
+    }
     public void setLoginSuccess() {
         // TODO: 2019/3/1 保存登录数据
-
-
+        SplashActivity.launch(this);
+        finish();
+//        ToActivityFinish(this,SplashActivity.class);
     }
 }
 

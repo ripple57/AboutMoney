@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.ripple.lendmoney.base.BasePresent;
 import com.ripple.lendmoney.http.HttpUtils;
+import com.ripple.lendmoney.http.MyCallBack;
+import com.ripple.lendmoney.http.MyMessage;
 import com.ripple.lendmoney.http.RetrofitManager;
 import com.ripple.lendmoney.http.URLConfig;
 import com.ripple.lendmoney.model.TestBean;
@@ -11,6 +13,7 @@ import com.ripple.lendmoney.ui.fragment.HomeFragment;
 import com.ripple.lendmoney.utils.LogUtils;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import cn.droidlover.xdroidmvp.net.ApiSubscriber;
 import cn.droidlover.xdroidmvp.net.NetError;
@@ -30,15 +33,10 @@ public class HomeFragPresent extends BasePresent<HomeFragment> {
         HashMap<String, Object> map = new HashMap<>();
         map.put("versionNo", 120);
         map.put("versionType", "android");
-        HttpUtils.getDialog(context,"inter/index/checkVersion.do", map, new HttpUtils.NetCallBack() {
+        HttpUtils.getDialog(context, "inter/index/checkVersion.do", map, new MyCallBack<Map<String,Object>>() {
             @Override
-            public void onSuccess(String msg) {
-                LogUtils.e(msg);
-            }
+            public void onMySuccess(Map<String, Object> bean, MyMessage message) {
 
-            @Override
-            public void onFailed(Throwable t) {
-                LogUtils.e(t.toString());
             }
         });
 
