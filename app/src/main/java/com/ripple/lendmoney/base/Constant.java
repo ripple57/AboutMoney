@@ -10,4 +10,6 @@ public final class Constant {
 
     public static final int REQUEST_SUCCESS = 0;
     public static final int REQUEST_NEED_LOGIN = -106;
+    public static final String PARAM_URL = "url";
+    public static final String PARAM_TITLE = "title";
 }

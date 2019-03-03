@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
+import com.ripple.lendmoney.http.URLConfig;
 import com.ripple.lendmoney.present.LoginPresent;
 import com.ripple.lendmoney.utils.ToastUtil;
 
@@ -41,6 +42,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
     TextView tv_login_agreement;
     private String phoneNum;
     private Disposable mdDisposable;
+    private boolean need_back;
 
     @Override
     protected String topBarTitle() {
@@ -85,6 +87,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
 
     private void toAgreementView() {
         // TODO: 2019/2/25 跳转服务协议页面
+        WebActivity.launch(this,  URLConfig.REGISTAGREEMENT, "注册服务协议");
     }
 
     private void login() {
@@ -147,6 +150,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        need_back = getIntent().getBooleanExtra("need_back", false);
     }
 
 
@@ -167,16 +171,22 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
             mdDisposable.dispose();
         }
     }
-    public static void launch(Activity activity) {
+
+    public static void launch(Activity activity, boolean needBack) {
         Router.newIntent(activity)
+                .putBoolean("need_back", needBack)
                 .to(LoginActivity.class)
                 .launch();
     }
+
     public void setLoginSuccess() {
         // TODO: 2019/3/1 保存登录数据
-        SplashActivity.launch(this);
-        finish();
-//        ToActivityFinish(this,SplashActivity.class);
+        if (need_back) {
+            finish();
+        } else {
+            MainActivity.launch(this);
+            finish();
+        }
     }
 }
 

@@ -77,7 +77,10 @@ public class Router {
         getBundleData().putInt(key, value);
         return this;
     }
-
+    public Router putBoolean(@Nullable String key, boolean value) {
+        getBundleData().putBoolean(key, value);
+        return this;
+    }
     public Router putString(@Nullable String key, String value) {
         getBundleData().putString(key, value);
         return this;

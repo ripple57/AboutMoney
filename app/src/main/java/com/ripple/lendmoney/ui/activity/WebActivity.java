@@ -1,18 +1,22 @@
 package com.ripple.lendmoney.ui.activity;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
+import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.present.WebPresent;
 
 import butterknife.BindView;
@@ -35,15 +39,12 @@ public class WebActivity extends BaseActivity<WebPresent> {
     String title;
     String url;
 
-    public static final String PARAM_URL = "url";
-    public static final String PARAM_TITLE = "title";
-
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        url = getIntent().getStringExtra(PARAM_URL);
-        title = getIntent().getStringExtra(PARAM_TITLE);
-
+        url = getIntent().getStringExtra(Constant.PARAM_URL);
+        title = getIntent().getStringExtra(Constant.PARAM_TITLE);
+        setTopBarTitle(title);
         initContentLayout();
         initRefreshLayout();
         initWebView();
@@ -69,29 +70,41 @@ public class WebActivity extends BaseActivity<WebPresent> {
     }
 
     private void initWebView() {
-        webView.setWebChromeClient(new WebChromeClient() {
+        webView.setWebViewClient(new WebViewClient() {
             @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
-                if (newProgress == 100) {
-                    swipeRefreshLayout.setRefreshing(false);
-                    if (contentLayout != null)
-                        contentLayout.showContent();
-                    if (webView != null)
-                        url = webView.getUrl();
-                } else {
-                    if (contentLayout != null)
-                        contentLayout.showLoading();
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                if (contentLayout != null)
+                    contentLayout.showLoading();
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                swipeRefreshLayout.setRefreshing(false);
+                if (contentLayout != null) {
+                    contentLayout.showContent();
+                    setTopBarTitle(view.getTitle());
                 }
             }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError
+                    error) {
+                super.onReceivedError(view, request, error);
+                if (contentLayout != null)
+                    contentLayout.showError();
+            }
         });
-        webView.setWebViewClient(new WebViewClient());
-        webView.getSettings().setBuiltInZoomControls(true);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setDomStorageEnabled(true);
-        webView.getSettings().setDatabaseEnabled(true);
-        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        webView.getSettings().setAppCacheEnabled(true);
+        webView.setWebChromeClient(new WebChromeClient());
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setDomStorageEnabled(true);
+        settings.setDatabaseEnabled(true);
+        settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        settings.setAppCacheEnabled(true);
+        settings.setSupportZoom(true);
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);
 
         webView.loadUrl(url);
     }
@@ -150,8 +163,8 @@ public class WebActivity extends BaseActivity<WebPresent> {
     public static void launch(Activity activity, String url, String title) {
         Router.newIntent(activity)
                 .to(WebActivity.class)
-                .putString(PARAM_URL, url)
-                .putString(PARAM_TITLE, title)
+                .putString(Constant.PARAM_URL, url)
+                .putString(Constant.PARAM_TITLE, title)
                 .launch();
     }
 

@@ -117,7 +117,7 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
         if (tempLogin) {
             MainActivity.launch(this);
         } else {
-            LoginActivity.launch(this);
+            LoginActivity.launch(this,false);
         }
        finish();
     }

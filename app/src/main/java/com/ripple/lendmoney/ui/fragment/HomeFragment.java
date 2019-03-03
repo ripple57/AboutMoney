@@ -9,7 +9,6 @@ import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseLazyFragment;
 import com.ripple.lendmoney.present.HomeFragPresent;
 import com.ripple.lendmoney.ui.activity.GuideActivity;
-import com.ripple.lendmoney.ui.activity.LoginActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -42,7 +41,6 @@ public class HomeFragment extends BaseLazyFragment<HomeFragPresent> {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        LoginActivity.launch(context);
     }
 
 

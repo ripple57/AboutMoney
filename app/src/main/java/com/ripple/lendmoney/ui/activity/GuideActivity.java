@@ -63,7 +63,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
             case R.id.button4:
                 LogUtils.e("++++++++++点击了测试网页");
 //                Router.newIntent(this).to(WebActivity.class).putString("url","https//www.baidu.com").putString("title","标题").launch();
-                WebActivity.launch(this, "https://www.baidu.com", "测试网页");
+                WebActivity.launch(this, "https://www.baidu.com", "正在加载...");
                 break;
             case R.id.button5:
                 HttpUtils.postDialog(this, "inter/index/checkVersion.do", null, new MyCallBack<CheckBean>() {
@@ -74,7 +74,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 });
                 break;
             case R.id.button6:
-                HttpUtils.post(this, "inter/index/checkVersion.do", null, new MyCallBack<Map<String,Object>>() {
+                HttpUtils.post(this, "inter/index/checkVersion.do", null, new MyCallBack<Map<String, Object>>() {
                     @Override
                     public void onMySuccess(Map<String, Object> bean, MyMessage message) {
                         LogUtils.printMap(bean);
@@ -86,10 +86,10 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
     }
 
     private void testNetMethond() {
-        HttpUtils.post(this, "inter/index/checkVersion.do", null, new MyCallBack<CheckBean>() {
+        HttpUtils.post(this, "inter/appmessage/getUnReadNum.do", null, new MyCallBack<Void>() {
             @Override
-            public void onMySuccess(CheckBean bean, MyMessage message) {
-                LogUtils.e(bean.toString()+bean.getData().getVersionNo()+bean.getData().getRequeUpdate());
+            public void onMySuccess(Void bean, MyMessage message) {
+                LogUtils.e(message.toString());
             }
         });
 
@@ -225,6 +225,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
     public GuidePresent newP() {
         return new GuidePresent();
     }
+
     public static void launch(Activity activity) {
         Router.newIntent(activity)
                 .to(GuideActivity.class)
