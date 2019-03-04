@@ -25,7 +25,7 @@ public class MineFragment   extends XLazyFragment<HomeFragPresent> implements On
 
     @Override
     public int getLayoutId() {
-        return R.layout.frag_home_layout;
+        return R.layout.frag_mine_layout;
     }
 
     @Override

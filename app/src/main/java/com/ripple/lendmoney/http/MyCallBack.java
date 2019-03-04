@@ -8,6 +8,8 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+import cn.droidlover.xdroidmvp.net.NetError;
+
 public abstract class MyCallBack<ResultType> implements HttpUtils.NetCallBack {
     @Override
     public void onSuccess(MyMessage message) {
@@ -26,7 +28,7 @@ public abstract class MyCallBack<ResultType> implements HttpUtils.NetCallBack {
     }
 
     @Override
-    public void onFailed(Throwable ex) {//没有连接上服务器
+    public void onFailed(NetError error) {//没有连接上服务器
     }
 
     @Override

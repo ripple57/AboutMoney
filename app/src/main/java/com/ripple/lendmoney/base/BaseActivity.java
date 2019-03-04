@@ -32,8 +32,8 @@ import cn.droidlover.xdroidmvp.router.Router;
 public abstract class BaseActivity<P extends IPresent> extends XActivity<P> {
     protected RelativeLayout rl_topbar;
     protected QMUITopBar topBar;
-    QMUIEmptyView emptyView;
-    RelativeLayout container;
+    protected QMUIEmptyView emptyView;
+    protected RelativeLayout container;
     protected View rootView;
     protected QMUIAlphaImageButton topBar_left_back;
 

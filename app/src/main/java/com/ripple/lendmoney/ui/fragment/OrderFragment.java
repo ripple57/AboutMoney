@@ -16,7 +16,7 @@ import cn.droidlover.xdroidmvp.mvp.XLazyFragment;
  * 项目: AboutMoney
  * 作用: 
  *****************************************************/
-public class MiddleFragment extends XLazyFragment<HomeFragPresent> implements OnRefreshListener {
+public class OrderFragment extends XLazyFragment<HomeFragPresent> implements OnRefreshListener {
 
     @Override
     public void initData(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class MiddleFragment extends XLazyFragment<HomeFragPresent> implements On
 
     @Override
     public int getLayoutId() {
-        return R.layout.frag_home_layout_test;
+        return R.layout.frag_order_layout;
     }
 
     @Override

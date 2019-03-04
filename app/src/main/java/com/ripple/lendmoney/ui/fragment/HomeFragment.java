@@ -2,13 +2,14 @@ package com.ripple.lendmoney.ui.fragment;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qmuiteam.qmui.layout.QMUIButton;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseLazyFragment;
 import com.ripple.lendmoney.present.HomeFragPresent;
-import com.ripple.lendmoney.ui.activity.GuideActivity;
+import com.ripple.lendmoney.ui.activity.FaceRecognitionActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -18,25 +19,32 @@ import butterknife.OnClick;
  */
 
 public class HomeFragment extends BaseLazyFragment<HomeFragPresent> {
-    @BindView(R.id.textView)
-    TextView textView;
-    @BindView(R.id.textView1)
-    TextView textView1;
-    @BindView(R.id.btn_home_frag_lend)
-    QMUIButton btn_home_frag_lend;
+    @BindView(R.id.iv_homefrag_topbanner)
+    ImageView ivTopbanner;
+    @BindView(R.id.tv_homefrag_username)
+    TextView tvUsername;
+    @BindView(R.id.tv_homefrag_day)
+    TextView tvDay;
+    @BindView(R.id.tv_homefrag_scroll)
+    TextView tvScroll;
+    @BindView(R.id.btn_homefrag_lend)
+    QMUIButton btnLend;
+    @BindView(R.id.tv_item_walletMoney)
+    TextView tvWalletMoney;
+    @BindView(R.id.tv_item_remainMoney)
+    TextView tvRemainMoney;
 
-    @OnClick({R.id.textView, R.id.textView1,R.id.btn_home_frag_lend})
-    public void onClick(View view) {
+
+    @OnClick({R.id.iv_homefrag_topbanner, R.id.btn_homefrag_lend})
+    public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.textView:
+            case R.id.iv_homefrag_topbanner:
                 break;
-            case R.id.textView1:
-                GuideActivity.launch(context);
-                break;
-            case R.id.btn_home_frag_lend:
-                GuideActivity.launch(context);
+            case R.id.btn_homefrag_lend:
+                FaceRecognitionActivity.launch(context);
                 break;
         }
+
     }
 
     @Override
@@ -59,4 +67,6 @@ public class HomeFragment extends BaseLazyFragment<HomeFragPresent> {
     public void getNetData() {
 
     }
+
+
 }

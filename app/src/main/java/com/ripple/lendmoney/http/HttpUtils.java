@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import cn.droidlover.xdroidmvp.kit.Kits;
+import cn.droidlover.xdroidmvp.net.NetError;
 import cn.droidlover.xdroidmvp.net.XApi;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -39,9 +40,7 @@ import okhttp3.ResponseBody;
 
 public class HttpUtils {
 
-    private static final String SOCKETTIMEOUTEXCEPTION = "网络连接超时，请稍后重试";
-    private static final String CONNECTEXCEPTION = "服务器忙，请稍后重试";
-    private static final String UNKNOWNHOSTEXCEPTION = "网络异常，请检查您的网络状态";
+
     private static final int GET = 0;
     private static final int POST = 1;
 
@@ -161,7 +160,7 @@ public class HttpUtils {
                         MyMessage message = new MyMessage(string);//封装json数据为实例对象
                         if (message.getState() == Constant.REQUEST_NEED_LOGIN) {//网络请求成功
                             if (context instanceof Activity) {
-                                LoginActivity.launch((Activity) context,true);
+                                LoginActivity.launch((Activity) context, true);
                             }
                         } else {
                             callBack.onSuccess(message);
@@ -173,17 +172,22 @@ public class HttpUtils {
                         if (tipDialog != null) {
                             tipDialog.dismiss();
                         }
+                        NetError error = null;
                         LogUtils.e("Rx网络错误" + t.toString());
                         if (t instanceof SocketTimeoutException) {
-                            ToastUtil.showToast(SOCKETTIMEOUTEXCEPTION);
+                            ToastUtil.showToast(Constant.SOCKETTIMEOUTEXCEPTION);
+                            error = new NetError(Constant.SOCKETTIMEOUTEXCEPTION);
                         } else if (t instanceof ConnectException) {
-                            ToastUtil.showToast(CONNECTEXCEPTION);
+                            ToastUtil.showToast(Constant.CONNECTEXCEPTION);
+                            error = new NetError(Constant.CONNECTEXCEPTION);
                         } else if (t instanceof UnknownHostException) {
-                            ToastUtil.showToast(UNKNOWNHOSTEXCEPTION);
+                            ToastUtil.showToast(Constant.UNKNOWNHOSTEXCEPTION);
+                            error = new NetError(Constant.UNKNOWNHOSTEXCEPTION);
                         } else {
-                            ToastUtil.showToast("网络数据异常");
+                            ToastUtil.showToast(Constant.OTHEREXCEPTION);
+                            error = new NetError(Constant.OTHEREXCEPTION);
                         }
-                        callBack.onFailed(t);
+                        callBack.onFailed(error);
                     }
 
                     @Override
@@ -234,7 +238,7 @@ public class HttpUtils {
                         MyMessage message = new MyMessage(string);//封装json数据为实例对象
                         if (message.getState() == Constant.REQUEST_NEED_LOGIN) {//网络请求成功
                             if (context instanceof Activity) {
-                                LoginActivity.launch((Activity) context,true);
+                                LoginActivity.launch((Activity) context, true);
                             }
                         } else {
                             callBack.onSuccess(message);
@@ -243,17 +247,22 @@ public class HttpUtils {
 
                     @Override
                     public void onError(Throwable t) {
+                        NetError error = null;
                         LogUtils.e("Rx网络错误" + t.toString());
                         if (t instanceof SocketTimeoutException) {
-                            ToastUtil.showToast(SOCKETTIMEOUTEXCEPTION);
+                            ToastUtil.showToast(Constant.SOCKETTIMEOUTEXCEPTION);
+                            error = new NetError(Constant.SOCKETTIMEOUTEXCEPTION);
                         } else if (t instanceof ConnectException) {
-                            ToastUtil.showToast(CONNECTEXCEPTION);
+                            ToastUtil.showToast(Constant.CONNECTEXCEPTION);
+                            error = new NetError(Constant.CONNECTEXCEPTION);
                         } else if (t instanceof UnknownHostException) {
-                            ToastUtil.showToast(UNKNOWNHOSTEXCEPTION);
+                            ToastUtil.showToast(Constant.UNKNOWNHOSTEXCEPTION);
+                            error = new NetError(Constant.UNKNOWNHOSTEXCEPTION);
                         } else {
-                            ToastUtil.showToast("网络数据异常");
+                            ToastUtil.showToast(Constant.OTHEREXCEPTION);
+                            error = new NetError(Constant.OTHEREXCEPTION);
                         }
-                        callBack.onFailed(t);
+                        callBack.onFailed(error);
                     }
 
                     @Override
@@ -317,7 +326,7 @@ public class HttpUtils {
                         MyMessage message = new MyMessage(string);//封装json数据为实例对象
                         if (message.getState() == Constant.REQUEST_NEED_LOGIN) {//网络请求成功
                             if (context instanceof Activity) {
-                                LoginActivity.launch((Activity) context,true);
+                                LoginActivity.launch((Activity) context, true);
                             }
                         } else {
                             callBack.onSuccess(message);
@@ -329,17 +338,22 @@ public class HttpUtils {
                         if (tipDialog != null) {
                             tipDialog.dismiss();
                         }
+                        NetError error = null;
                         LogUtils.e("Rx网络错误" + t.toString());
                         if (t instanceof SocketTimeoutException) {
-                            ToastUtil.showToast(SOCKETTIMEOUTEXCEPTION);
+                            ToastUtil.showToast(Constant.SOCKETTIMEOUTEXCEPTION);
+                            error = new NetError(Constant.SOCKETTIMEOUTEXCEPTION);
                         } else if (t instanceof ConnectException) {
-                            ToastUtil.showToast(CONNECTEXCEPTION);
+                            ToastUtil.showToast(Constant.CONNECTEXCEPTION);
+                            error = new NetError(Constant.CONNECTEXCEPTION);
                         } else if (t instanceof UnknownHostException) {
-                            ToastUtil.showToast(UNKNOWNHOSTEXCEPTION);
+                            ToastUtil.showToast(Constant.UNKNOWNHOSTEXCEPTION);
+                            error = new NetError(Constant.UNKNOWNHOSTEXCEPTION);
                         } else {
-                            ToastUtil.showToast("网络数据异常");
+                            ToastUtil.showToast(Constant.OTHEREXCEPTION);
+                            error = new NetError(Constant.OTHEREXCEPTION);
                         }
-                        callBack.onFailed(t);
+                        callBack.onFailed(error);
                     }
 
                     @Override
@@ -355,7 +369,7 @@ public class HttpUtils {
     public interface NetCallBack {
         void onSuccess(MyMessage message);
 
-        void onFailed(Throwable t);
+        void onFailed(NetError error);
 
         void onComplete();
     }
@@ -452,7 +466,7 @@ public class HttpUtils {
 //                    public void onError(Throwable t) {
 //                        LogUtils.e("网络错误RX", t.toString());
 //                        if (t instanceof SocketTimeoutException) {
-//                            ToastUtil.showToast(SOCKETTIMEOUTEXCEPTION);
+//                            ToastUtil.showToast(NetError.SOCKETTIMEOUTEXCEPTION);
 //                        } else if (t instanceof ConnectException) {
 //                            ToastUtil.showToast(CONNECTEXCEPTION);
 //                        } else if (t instanceof UnknownHostException) {
@@ -550,7 +564,7 @@ public class HttpUtils {
 //                        }
 //                        LogUtils.e("网络错误RX", t.toString());
 //                        if (t instanceof SocketTimeoutException) {
-//                            ToastUtil.showToast(SOCKETTIMEOUTEXCEPTION);
+//                            ToastUtil.showToast(NetError.SOCKETTIMEOUTEXCEPTION);
 //                        } else if (t instanceof ConnectException) {
 //                            ToastUtil.showToast(CONNECTEXCEPTION);
 //                        } else if (t instanceof UnknownHostException) {

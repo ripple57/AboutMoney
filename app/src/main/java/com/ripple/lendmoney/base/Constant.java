@@ -12,4 +12,8 @@ public final class Constant {
     public static final int REQUEST_NEED_LOGIN = -106;
     public static final String PARAM_URL = "url";
     public static final String PARAM_TITLE = "title";
+    public static final String SOCKETTIMEOUTEXCEPTION = "网络连接超时，请稍后重试";
+    public static final String CONNECTEXCEPTION = "服务器忙，请稍后重试";
+    public static final String UNKNOWNHOSTEXCEPTION = "网络异常，请检查您的网络状态";
+    public static final String OTHEREXCEPTION = "网络数据";
 }

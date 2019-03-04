@@ -13,7 +13,7 @@ import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.present.MainPresent;
 import com.ripple.lendmoney.ui.fragment.HomeFragment;
-import com.ripple.lendmoney.ui.fragment.MiddleFragment;
+import com.ripple.lendmoney.ui.fragment.OrderFragment;
 import com.ripple.lendmoney.ui.fragment.MineFragment;
 import com.ripple.lendmoney.utils.AppManager;
 import com.ripple.lendmoney.utils.BottomNavigationViewHelper;
@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity<MainPresent> {
 
     private void setHomeVpAdapter() {
         HomeFragment homeFragment = new HomeFragment();
-        MiddleFragment mddleFragment = new MiddleFragment();
+        OrderFragment mddleFragment = new OrderFragment();
         MineFragment mineFragment = new MineFragment();
         fragmentList.add(homeFragment);
         fragmentList.add(mddleFragment);

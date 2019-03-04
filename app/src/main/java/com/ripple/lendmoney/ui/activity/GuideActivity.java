@@ -18,7 +18,6 @@ import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.http.HttpUtils;
 import com.ripple.lendmoney.http.MyCallBack;
 import com.ripple.lendmoney.http.MyMessage;
-import com.ripple.lendmoney.model.CheckBean;
 import com.ripple.lendmoney.present.GuidePresent;
 import com.ripple.lendmoney.utils.BitmapPhotoUtil;
 import com.ripple.lendmoney.utils.LogUtils;
@@ -26,7 +25,6 @@ import com.ripple.lendmoney.utils.ToastUtil;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -35,20 +33,35 @@ import io.reactivex.functions.Consumer;
 
 public class GuideActivity extends BaseActivity<GuidePresent> {
 
-    @BindView(R.id.button4)
-    Button button4;
+
     @BindView(R.id.button1)
     Button button1;
     @BindView(R.id.button2)
     Button button2;
     @BindView(R.id.button3)
     Button button3;
+    @BindView(R.id.button4)
+    Button button4;
     @BindView(R.id.button5)
     Button button5;
     @BindView(R.id.button6)
     Button button6;
+    @BindView(R.id.button7)
+    Button button7;
+    @BindView(R.id.button8)
+    Button button8;
+    @BindView(R.id.button9)
+    Button button9;
+    @BindView(R.id.button10)
+    Button button10;
+    @BindView(R.id.button11)
+    Button button11;
+    @BindView(R.id.button12)
+    Button button12;
 
-    @OnClick({R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6})
+
+    @OnClick({R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6
+            , R.id.button7, R.id.button8, R.id.button9, R.id.button10, R.id.button11, R.id.button12})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button1:
@@ -66,21 +79,20 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 WebActivity.launch(this, "https://www.baidu.com", "正在加载...");
                 break;
             case R.id.button5:
-                HttpUtils.postDialog(this, "inter/index/checkVersion.do", null, new MyCallBack<CheckBean>() {
-                    @Override
-                    public void onMySuccess(CheckBean bean, MyMessage message) {
-                        LogUtils.e(bean.toString());
-                    }
-                });
                 break;
             case R.id.button6:
-                HttpUtils.post(this, "inter/index/checkVersion.do", null, new MyCallBack<Map<String, Object>>() {
-                    @Override
-                    public void onMySuccess(Map<String, Object> bean, MyMessage message) {
-                        LogUtils.printMap(bean);
-                    }
-
-                });
+                break;
+            case R.id.button7:
+                break;
+            case R.id.button8:
+                break;
+            case R.id.button9:
+                break;
+            case R.id.button10:
+                break;
+            case R.id.button11:
+                break;
+            case R.id.button12:
                 break;
         }
     }
@@ -90,6 +102,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
             @Override
             public void onMySuccess(Void bean, MyMessage message) {
                 LogUtils.e(message.toString());
+                ToastUtil.showToast(message.toString());
             }
         });
 

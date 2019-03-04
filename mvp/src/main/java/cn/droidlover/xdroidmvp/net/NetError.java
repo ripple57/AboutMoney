@@ -25,6 +25,10 @@ public class NetError extends Exception {
         this.type = type;
     }
 
+    public NetError(String error) {
+        super(error);
+    }
+
     @Override
     public String getMessage() {
         if (exception != null) return exception.getMessage();
