@@ -7,7 +7,7 @@
         android:title="@string/title_home"/>
 
     <item
-        android:id="@+id/bottom_middle"
+        android:id="@+id/bottom_order"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_dashboard"/>
 

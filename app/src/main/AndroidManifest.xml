@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="com.ripple.lendmoney"
           xmlns:android="http://schemas.android.com/apk/res/android">
-
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -21,6 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="adjustPan|adjustResize">
+        <activity android:name=".ui.activity.AuthenticateActivity">
+        </activity>
         <activity
             android:name=".ui.activity.LoginActivity"
             android:label="@string/title_activity_login">

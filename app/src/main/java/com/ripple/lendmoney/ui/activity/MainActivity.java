@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity<MainPresent> {
                         setTopBarIsShow(false);
                         break;
 
-                    case R.id.bottom_middle:
+                    case R.id.bottom_order:
                         homeVp.setCurrentItem(1);
                         setTopBarIsShow(true);
                         setTopBarIsShowBack(false);
@@ -136,10 +136,6 @@ public class MainActivity extends BaseActivity<MainPresent> {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 
     @Override
     public void getNetData() {

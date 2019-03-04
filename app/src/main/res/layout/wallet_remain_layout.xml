@@ -11,9 +11,11 @@
             android:id="@+id/v_item_h"
             android:layout_width="1dp"
             android:layout_height="50dp"
-            android:background="@color/light_gray"
+            android:background="@color/divline_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -44,7 +46,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/tv_item_wallet"
                 android:layout_below="@id/tv_item_wallet"
-                android:text="0元"/>
+                android:text="0元"
+                android:textColor="@color/text_orange"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -76,7 +79,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/tv_item_remain"
                 android:layout_below="@id/tv_item_remain"
-                android:text="0元"/>
+                android:text="0元"
+                android:textColor="@color/text_orange"/>
         </RelativeLayout>
     </android.support.constraint.ConstraintLayout>
 

@@ -15,6 +15,7 @@ import android.widget.Button;
 
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
+import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.http.HttpUtils;
 import com.ripple.lendmoney.http.MyCallBack;
 import com.ripple.lendmoney.http.MyMessage;
@@ -79,10 +80,13 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 WebActivity.launch(this, "https://www.baidu.com", "正在加载...");
                 break;
             case R.id.button5:
+                FaceRecognitionActivity.launch(this);
                 break;
             case R.id.button6:
+                AuthenticateActivity.launch(this);
                 break;
             case R.id.button7:
+                AuthenticateActivity.launch(this, Constant.TYPE_CREDITFRAG);
                 break;
             case R.id.button8:
                 break;

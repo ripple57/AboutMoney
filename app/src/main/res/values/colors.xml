@@ -4,20 +4,30 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
 
     <color name="colorGray">#B0B0B0</color>
     <color name="buttoncolor">#4768F3</color>
-    <color name="black">#000000</color>
     <color name="green">#11EE96</color>
-    <color name="blue">#4768F3</color>
     <color name="red">#A20C0C</color>
-    <color name="white">#ffffff</color>
-    <color name="transparent">#00ffffff</color>
     <color name="light_gray">#D3D6DB</color>
-    <color name="hint_gray">#c2c2c2</color>
-    <color name="gray">#666666</color>
 
+
+
+    <color name="text_orange">#f87201</color>
+    <color name="text_blue">#4768F3</color>
+    <color name="text_black">#333333</color>
+    <color name="gray">#666666</color>
+    <color name="text_gray">#999999</color>
+    <color name="text_hint">#bbbbbb</color>
+    <color name="border_gray">#c2c2c2</color>
     <color name="bg_gray">#f5f5f5</color>
+    <color name="divline_gray">#eeeeee</color>
+    <color name="bg_button">#4768F3</color>
+    <color name="blue">#4768F3</color>
+
     <color name="black_overlay">#66000000</color>
     <color name="topbar_blue">#4768F3</color>
 </resources>

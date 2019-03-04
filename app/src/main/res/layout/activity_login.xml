@@ -8,8 +8,8 @@
         android:id="@+id/iv_login_topbg"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="fitXY"
         android:layout_alignParentTop="true"
+        android:scaleType="fitXY"
         android:src="@mipmap/test_login"/>
 
     <LinearLayout
@@ -46,7 +46,7 @@
                 android:layout_alignParentRight="true"
                 android:background="@color/transparent"
                 android:paddingLeft="10dp"
-                android:src="@drawable/ic_home_black_24dp"/>
+                android:src="@drawable/ic_cancel_green"/>
 
             <EditText
                 android:id="@+id/et_login_phone"
@@ -57,13 +57,14 @@
                 android:background="@null"
                 android:hint="请输入手机号"
                 android:inputType="phone"
-                android:maxLength="11"/>
+                android:maxLength="11"
+                android:textColorHint="@color/text_hint"/>
         </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/hint_gray"/>
+            android:background="@color/border_gray"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -90,7 +91,8 @@
                 android:background="@color/transparent"
                 android:minHeight="0dp"
                 android:padding="0dp"
-                android:text="获取验证码"/>
+                android:text="获取验证码"
+                android:textColor="@color/text_blue"/>
 
             <EditText
                 android:id="@+id/et_login_password"
@@ -101,7 +103,8 @@
                 android:background="@null"
                 android:hint="请输入验证码"
                 android:inputType="number"
-                android:maxLength="6"/>
+                android:maxLength="6"
+                android:textColor="@color/text_gray"/>
         </RelativeLayout>
     </LinearLayout>
 
