@@ -79,7 +79,7 @@ public abstract class BaseActivity<P extends IPresent> extends XActivity<P> {
 
         if (rl_topbar == null || topBar == null) return;
         QMUIStatusBarHelper.setStatusBarDarkMode(this);//状态栏深底白字
-        topBar_left_back = topBar.addLeftImageButton(R.drawable.ic_keyboard_arrow_left_black_24dp, R.id.qmui_topbar_item_left_back);
+        topBar_left_back = topBar.addLeftImageButton(R.drawable.ic_arrow_left_white, R.id.qmui_topbar_item_left_back);
         topBar_left_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

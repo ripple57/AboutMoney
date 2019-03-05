@@ -6,19 +6,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/empty_loading_layout"/>
+    <!--<include layout="@layout/empty_loading_layout"/>-->
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refresh_home"
+        android:id="@+id/refresh_order"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_home_list"
+            android:id="@+id/rv_order_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:descendantFocusability="blocksDescendants"></android.support.v7.widget.RecyclerView>
+            android:descendantFocusability="blocksDescendants">
+        </android.support.v7.widget.RecyclerView>
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>
