@@ -53,6 +53,7 @@ public class AuthenticateActivity extends BaseActivity {
     }
 
     private void initAuthenticateViewPager() {
+        authenticateViewPager.setOffscreenPageLimit(5);
         if (GlobleParms.AuthenticateCanNext) {
             fragmentList.add(new IdCardFragment());
             fragmentList.add(new ContactsFragment());

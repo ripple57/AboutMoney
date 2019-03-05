@@ -1,5 +1,7 @@
 package com.ripple.lendmoney.ui.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -7,12 +9,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.ripple.lendmoney.R;
-import com.ripple.lendmoney.present.HomeFragPresent;
+import com.ripple.lendmoney.present.MinePresent;
+import com.ripple.lendmoney.ui.activity.SuggestActivity;
 import com.ripple.lendmoney.utils.ToastUtil;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.mvp.XLazyFragment;
@@ -23,7 +29,7 @@ import cn.droidlover.xdroidmvp.mvp.XLazyFragment;
  * 项目: AboutMoney
  * 作用: 
  *****************************************************/
-public class MineFragment extends XLazyFragment<HomeFragPresent> implements OnRefreshListener {
+public class MineFragment extends XLazyFragment<MinePresent> implements OnRefreshListener {
 
     @BindView(R.id.iv_minefrag_headIcon)
     QMUIRadiusImageView ivMinefragHeadIcon;
@@ -44,6 +50,9 @@ public class MineFragment extends XLazyFragment<HomeFragPresent> implements OnRe
     @BindView(R.id.ll_minefrag_quit)
     LinearLayout llMinefragQuit;
 
+    @BindString(R.string.service_phone)
+    String service_phone;
+
     @Override
     public void initData(Bundle savedInstanceState) {
 
@@ -55,8 +64,8 @@ public class MineFragment extends XLazyFragment<HomeFragPresent> implements OnRe
     }
 
     @Override
-    public HomeFragPresent newP() {
-        return new HomeFragPresent();
+    public MinePresent newP() {
+        return new MinePresent();
     }
 
     @Override
@@ -76,17 +85,73 @@ public class MineFragment extends XLazyFragment<HomeFragPresent> implements OnRe
                 ToastUtil.showToast("点击了我的资料");
                 break;
             case R.id.ll_minefrag_suggest:
-                ToastUtil.showToast("点击了建议反馈");
+                SuggestActivity.launch(context);
                 break;
             case R.id.ll_minefrag_aboutUs:
                 ToastUtil.showToast("点击了关于我们");
+                new QMUIDialog.MessageDialogBuilder(context)
+                        .setTitle("公司简介")
+                        .setMessage("测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试")
+                        .addAction("知道了", new QMUIDialogAction.ActionListener() {
+                            @Override
+                            public void onClick(QMUIDialog dialog, int index) {
+                                dialog.dismiss();
+                            }
+                        }).show();
                 break;
             case R.id.ll_minefrag_contactUs:
-                ToastUtil.showToast("点击了客服服务");
+                new QMUIDialog.MessageDialogBuilder(context)
+                        .setTitle("联系客服")
+                        .setMessage("拨打电话给" + service_phone)
+                        .addAction("取消", new QMUIDialogAction.ActionListener() {
+                            @Override
+                            public void onClick(QMUIDialog dialog, int index) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .addAction("打电话", new QMUIDialogAction.ActionListener() {
+                            @Override
+                            public void onClick(QMUIDialog dialog, int index) {
+                                callPhone(service_phone);
+                                dialog.dismiss();
+                            }
+                        }).show();
+
+
                 break;
             case R.id.ll_minefrag_quit:
-                ToastUtil.showToast("点击了退出登录");
+                new QMUIDialog.MessageDialogBuilder(context).setMessage("您确定要退出吗?")
+                        .addAction("取消", new QMUIDialogAction.ActionListener() {
+                            @Override
+                            public void onClick(QMUIDialog dialog, int index) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .addAction("确定", new QMUIDialogAction.ActionListener() {
+                            @Override
+                            public void onClick(QMUIDialog dialog, int index) {
+                                dialog.dismiss();
+                                getP().userExit();
+                            }
+                        }).show();
                 break;
         }
+    }
+
+
+    /**
+     * 拨打电话（跳转到拨号界面，用户手动点击拨打）
+     *
+     * @param phoneNum 电话号码
+     */
+    public void callPhone(String phoneNum) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Uri data = Uri.parse("tel:" + phoneNum);
+        intent.setData(data);
+        startActivity(intent);
+    }
+
+    public void exitSuccess() {
+        ToastUtil.showToast("用户已经退出了!");
     }
 }

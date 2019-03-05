@@ -4,6 +4,9 @@
     <string name="title_dashboard">订单</string>
     <string name="title_notifications">我的</string>
 
+    <string name="service_phone">400-333-100</string>
+
+
     <string name="title_activity_splash">SplashActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
@@ -20,4 +23,5 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
 </resources>

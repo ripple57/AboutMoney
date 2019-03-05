@@ -321,16 +321,16 @@ public class LogUtils {
                 String value = map.get(key).toString();
                 sb.append("\n第" + (i++) + "个key:" + key + ", value:" + value);
             }
-            i(sb.toString());
+            e(sb.toString());
         } catch (Exception e) {
-            i("Map打印出错了!!");
+            e("Map打印出错了!!");
             e.printStackTrace();
         }
     }
 
     public static void printList(List list) {
         if (list == null) {
-            i("list 集合为空!!!");
+            e("list 集合为空!!!");
             return;
         }
         StringBuilder sb = new StringBuilder();
@@ -339,9 +339,9 @@ public class LogUtils {
             for (int i = 0; i < list.size(); i++) {
                 sb.append(list.get(i).toString() + "\n");
             }
-            i(sb.toString());
+            e(sb.toString());
         } catch (Exception e) {
-            i("list 打印出错了");
+            e("list 打印出错了");
             e.printStackTrace();
         }
 

@@ -9,6 +9,8 @@
         <item name="colorButtonNormal">@color/bg_button</item>
         <item name="android:textColor">@color/text_black</item>
         <item name="android:editTextColor">@color/text_black</item>
+        <item name="editTextStyle">@style/MyEditTextStyle</item>
+
         <item name="qmui_round_btn_border_color">@color/blue</item>
         <item name="qmui_round_btn_text_color">@color/white</item>
         <item name="qmui_topbar_height">45dp</item>
@@ -110,18 +112,11 @@
         <item name="qmui_dialog_menu_container_padding_bottom_when_action_exist">24dp</item>
     </style>
 
-    <!--<style name="FullscreenTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
-    <!--<item name="android:windowActionModeOverlay">true</item>-->
-    <!--<item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>-->
-    <!--<item name="android:windowActionBarOverlay">true</item>-->
-    <!--<item name="android:windowBackground">@null</item>-->
-    <!--<item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>-->
-    <!--<item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>-->
-    <!--</style>-->
 
-    <!--<style name="FullscreenActionBarStyle" parent="android:Widget.Holo.ActionBar">-->
-    <!--<item name="android:background">@color/black_overlay</item>-->
-    <!--</style>-->
-
-    <style name="textStyleWhite18">fe</style>
+    <style name="MyEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+        <item name="android:background">@null</item>
+        <item name="android:textCursorDrawable">@drawable/edit_cursor</item>
+    </style>
 </resources>
