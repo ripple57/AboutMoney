@@ -91,7 +91,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 AuthenticateActivity.launch(this);
                 break;
             case R.id.button7:
-                AuthenticateActivity.launch(this, Constant.TYPE_CREDITFRAG);
+                AuthenticateActivity.launch(this, Constant.TYPE_IDCARDFRAG);
                 break;
             case R.id.button8:
                 

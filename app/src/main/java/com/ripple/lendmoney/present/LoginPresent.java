@@ -34,6 +34,7 @@ public class LoginPresent extends BasePresent<LoginActivity> {
                         getV().loginSuccess();
                     }
                 });
+        getV().loginSuccess();
     }
 
     public void getCode(String phoneNum) {

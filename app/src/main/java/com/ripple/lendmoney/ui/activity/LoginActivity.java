@@ -86,7 +86,6 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
     }
 
     private void toAgreementView() {
-        // TODO: 2019/2/25 跳转服务协议页面
         WebActivity.launch(this,  URLConfig.REGISTAGREEMENT, "注册服务协议");
     }
 
@@ -178,7 +177,6 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
     }
 
     public void loginSuccess() {
-        // TODO: 2019/3/1 保存登录数据
         if (need_back) {
             finish();
         } else {

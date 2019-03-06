@@ -13,7 +13,6 @@ import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.base.GlobleParms;
 import com.ripple.lendmoney.present.IdCardFragPresent;
 import com.ripple.lendmoney.ui.activity.AuthenticateActivity;
-import com.ripple.lendmoney.utils.LogUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
 
 import butterknife.BindView;
@@ -74,22 +73,22 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
             case R.id.iv_idcardFrag_idcard_back:
                 break;
             case R.id.btn_idcardFrag_commit:
-                if (GlobleParms.AuthenticateCanNext) {
-                    LogUtils.e(getActivity().toString()+"context"+context.toString());
-                    ((AuthenticateActivity)getActivity()).selectFragment(Constant.TYPE_FAMILYFRAG);
-
+                String idCardNo = etIdcardFragIdcard.getText().toString().trim();
+                String realName = etIdcardFragName.getText().toString().trim();
+                String reg = "(^[1-9]\\d{5}(18|19|20)\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$)|(^[1-9]\\d{5}\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}$)";
+                if (TextUtils.isEmpty(realName)) {
+                    ToastUtil.showToast("请输入您的真实姓名");
+                } else if (TextUtils.isEmpty(idCardNo)) {
+                    ToastUtil.showToast("请输入您的身份证号");
+                } else if (!idCardNo.matches(reg)) {
+                    ToastUtil.showToast("请输入正确的身份证号码");
                 } else {
-                    String idCardNo = etIdcardFragIdcard.getText().toString().trim();
-                    String realName = etIdcardFragName.getText().toString().trim();
-//                    String reg = "^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$)|(^[1-9]\\d{5}\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{2}$";
-                    if (TextUtils.isEmpty(realName)) {
-                        ToastUtil.showToast("请输入您的真实姓名");
-                    } else if (TextUtils.isEmpty(idCardNo)) {
-                        ToastUtil.showToast("请输入您的身份证号");
-                    } else if (!idCardNo.matches("")) {
-                        ToastUtil.showToast("请输入正确的身份证号码");
+                    getP().uploadIdCardInfo(realName, idCardNo);
+
+                    if (GlobleParms.AuthenticateCanNext) {
+                        ((AuthenticateActivity) context).selectFragment(Constant.TYPE_FAMILYFRAG);
                     } else {
-                        getP().uploadIdCardInfo(realName, idCardNo);
+
                     }
                 }
                 break;
