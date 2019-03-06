@@ -9,7 +9,7 @@ import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.base.GlobleParms;
-import com.ripple.lendmoney.ui.fragment.AddressBookFragment;
+import com.ripple.lendmoney.ui.fragment.FamilyFragment;
 import com.ripple.lendmoney.ui.fragment.BankCardFragment;
 import com.ripple.lendmoney.ui.fragment.ContactsFragment;
 import com.ripple.lendmoney.ui.fragment.CreditFragment;
@@ -55,18 +55,18 @@ public class AuthenticateActivity extends BaseActivity {
     private void initAuthenticateViewPager() {
         authenticateViewPager.setOffscreenPageLimit(5);
         if (GlobleParms.AuthenticateCanNext) {
-            fragmentList.add(new IdCardFragment());
-            fragmentList.add(new ContactsFragment());
-            fragmentList.add(new BankCardFragment());
-            fragmentList.add(new CreditFragment());
-            fragmentList.add(new AddressBookFragment());
+            fragmentList.add(new IdCardFragment());//身份证
+            fragmentList.add(new FamilyFragment());//紧急联系人
+            fragmentList.add(new BankCardFragment());//银行卡
+            fragmentList.add(new CreditFragment());//芝麻信用
+            fragmentList.add(new ContactsFragment());//通讯录
         } else {
             switch (fragmentType) {
                 case Constant.TYPE_IDCARDFRAG:
                     fragmentList.add(new IdCardFragment());
                     break;
-                case Constant.TYPE_CONTACTSFRAG:
-                    fragmentList.add(new ContactsFragment());
+                case Constant.TYPE_FAMILYFRAG:
+                    fragmentList.add(new FamilyFragment());
                     break;
                 case Constant.TYPE_BANKCARDFRAG:
                     fragmentList.add(new BankCardFragment());
@@ -74,8 +74,8 @@ public class AuthenticateActivity extends BaseActivity {
                 case Constant.TYPE_CREDITFRAG:
                     fragmentList.add(new CreditFragment());
                     break;
-                case Constant.TYPE_ADDRESSBOOKFRAG:
-                    fragmentList.add(new AddressBookFragment());
+                case Constant.TYPE_CONTACTSFRAG:
+                    fragmentList.add(new ContactsFragment());
                     break;
             }
         }
@@ -93,6 +93,10 @@ public class AuthenticateActivity extends BaseActivity {
     @Override
     public Object newP() {
         return null;
+    }
+
+    public void selectFragment(int fragmentType) {
+        authenticateViewPager.setCurrentItem(fragmentType);
     }
 
     /**

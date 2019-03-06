@@ -102,7 +102,6 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
         } else {
             getP().login(phoneNum, code);
         }
-        setLoginSuccess();
     }
 
     private void getCode() {
@@ -120,10 +119,9 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
             getP().getCode(phoneNum);
         }
 
-        setSendCodeSuccess();// TODO: test  
     }
 
-    public void setSendCodeSuccess() {
+    public void sendCodeSuccess() {
         ToastUtil.showToast("验证码已发送!");
         mdDisposable = Flowable.intervalRange(0, 60, 0, 1, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -179,7 +177,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
                 .launch();
     }
 
-    public void setLoginSuccess() {
+    public void loginSuccess() {
         // TODO: 2019/3/1 保存登录数据
         if (need_back) {
             finish();

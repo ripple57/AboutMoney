@@ -4,15 +4,15 @@ import java.io.Serializable;
 import java.util.List;
 
 public class ContactsBean implements Serializable {
-    private String name;
+    private String phoneName;
     private List<String> phoneNmus;
 
-    public String getName() {
-        return name;
+    public String getPhoneName() {
+        return phoneName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPhoneName(String phoneName) {
+        this.phoneName = phoneName;
     }
 
     public List<String> getPhoneNmus() {
@@ -27,14 +27,14 @@ public class ContactsBean implements Serializable {
     }
 
     public ContactsBean(String name, List<String> phoneNmus) {
-        this.name = name;
+        this.phoneName = name;
         this.phoneNmus = phoneNmus;
     }
 
     @Override
     public String toString() {
         return "ContactsBean{" +
-                "name='" + name + '\'' +
+                "name='" + phoneName + '\'' +
                 ", phoneNmus=" + phoneNmus +
                 '}';
     }

@@ -31,12 +31,13 @@ public class LoginPresent extends BasePresent<LoginActivity> {
 
                     @Override
                     protected void onSuccess(LoginBean loginBean) {
-                        getV().setLoginSuccess();
+                        getV().loginSuccess();
                     }
                 });
     }
 
     public void getCode(String phoneNum) {
+        getV().sendCodeSuccess();
 //        RetrofitManager.getInstance().getApiService(URLConfig.BASE_URL).getCaptcha(phoneNum)
 //                .compose(XApi.<BaseModel>getApiTransformer())
 //                .compose(XApi.<BaseModel>getScheduler())

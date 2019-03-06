@@ -1,7 +1,7 @@
 package com.ripple.lendmoney.present;
 
 import com.ripple.lendmoney.base.BasePresent;
-import com.ripple.lendmoney.ui.fragment.AddressBookFragment;
+import com.ripple.lendmoney.ui.fragment.FamilyFragment;
 
 /*****************************************************
  * 作者: HuangShaobo on 2019/3/4 23:28.
@@ -9,5 +9,5 @@ import com.ripple.lendmoney.ui.fragment.AddressBookFragment;
  * 项目: AboutMoney
  * 作用: 
  *****************************************************/
-public class AddressBookFragPresent extends BasePresent<AddressBookFragment> {
+public class FamilyFragPresent extends BasePresent<FamilyFragment> {
 }

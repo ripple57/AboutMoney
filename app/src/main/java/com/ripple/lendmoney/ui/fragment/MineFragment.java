@@ -13,6 +13,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.present.MinePresent;
+import com.ripple.lendmoney.ui.activity.MyInfoActivity;
 import com.ripple.lendmoney.ui.activity.SuggestActivity;
 import com.ripple.lendmoney.utils.ToastUtil;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -82,7 +83,7 @@ public class MineFragment extends XLazyFragment<MinePresent> implements OnRefres
                 ToastUtil.showToast("点击了头像");
                 break;
             case R.id.ll_minefrag_myInfo:
-                ToastUtil.showToast("点击了我的资料");
+                MyInfoActivity.launch(context);
                 break;
             case R.id.ll_minefrag_suggest:
                 SuggestActivity.launch(context);

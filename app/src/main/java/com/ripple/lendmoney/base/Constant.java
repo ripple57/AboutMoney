@@ -18,8 +18,8 @@ public final class Constant {
     public static final String OTHEREXCEPTION = "网络数据";
     public static final String PARAM_FRAGMENTTYPE = "fragmentType";
     public static final int TYPE_IDCARDFRAG = 0;
-    public static final int TYPE_CONTACTSFRAG = 1;
+    public static final int TYPE_FAMILYFRAG = 1;
     public static final int TYPE_BANKCARDFRAG = 2;
     public static final int TYPE_CREDITFRAG = 3;
-    public static final int TYPE_ADDRESSBOOKFRAG = 4;
+    public static final int TYPE_CONTACTSFRAG = 4;
 }

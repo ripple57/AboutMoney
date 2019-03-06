@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 
+import com.alibaba.fastjson.JSONArray;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.base.Constant;
@@ -93,6 +94,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 AuthenticateActivity.launch(this, Constant.TYPE_CREDITFRAG);
                 break;
             case R.id.button8:
+                
                 break;
             case R.id.button9:
                 break;
@@ -113,7 +115,9 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                     @Override
                     public void accept(Boolean aBoolean) throws Exception {
                         if (aBoolean) {
-                            getContacts();
+                            List<ContactsBean> contacts = getContacts();
+                            String jsonString = JSONArray.toJSONString(contacts);
+                            LogUtils.e(jsonString);
                         } else {
                             getvDelegate().toastShort("亲，同意了权限才能更好的使用软件哦");
                         }

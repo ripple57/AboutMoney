@@ -10,4 +10,7 @@ import com.ripple.lendmoney.ui.fragment.IdCardFragment;
  * 作用: 
  *****************************************************/
 public class IdCardFragPresent extends BasePresent<IdCardFragment> {
+    public void uploadIdCardInfo(String realName, String idCardNo) {
+        getV().uploadSuccess();
+    }
 }

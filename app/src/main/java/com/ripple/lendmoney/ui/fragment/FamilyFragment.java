@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseLazyFragment;
-import com.ripple.lendmoney.present.AddressBookFragPresent;
+import com.ripple.lendmoney.present.FamilyFragPresent;
 
 /*****************************************************
  * 作者: HuangShaobo on 2019/3/4 23:28.
@@ -12,7 +12,7 @@ import com.ripple.lendmoney.present.AddressBookFragPresent;
  * 项目: AboutMoney
  * 作用: 
  *****************************************************/
-public class AddressBookFragment extends BaseLazyFragment<AddressBookFragPresent> {
+public class FamilyFragment extends BaseLazyFragment<FamilyFragPresent> {
     @Override
     public void getNetData() {
 
@@ -29,7 +29,7 @@ public class AddressBookFragment extends BaseLazyFragment<AddressBookFragPresent
     }
 
     @Override
-    public AddressBookFragPresent newP() {
+    public FamilyFragPresent newP() {
         return null;
     }
 }

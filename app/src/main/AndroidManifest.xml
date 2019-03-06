@@ -75,6 +75,8 @@
         </activity>
         <activity android:name=".ui.activity.SuggestActivity">
         </activity>
+        <activity android:name=".ui.activity.MyInfoActivity">
+        </activity>
     </application>
 
 </manifest>

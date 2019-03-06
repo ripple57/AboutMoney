@@ -68,7 +68,7 @@ public class MainActivity extends BaseActivity<MainPresent> {
                         homeVp.setCurrentItem(1);
                         setTopBarIsShow(true);
                         setTopBarIsShowBack(false);
-                        setTopBarTitle("订单");
+                        setTopBarTitle("订单列表");
                         break;
 
                     case R.id.bottom_mine:
