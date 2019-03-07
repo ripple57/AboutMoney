@@ -59,6 +59,7 @@
                 android:text="测试"/>
 
         </com.qmuiteam.qmui.layout.QMUIRelativeLayout>
+
         <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
             android:id="@+id/QMUIRoundButton"
             android:layout_width="match_parent"
@@ -74,6 +75,7 @@
             android:textColor="@color/white"
             app:qmui_backgroundColor="@color/blue"
             app:qmui_radius="5dp"/>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"

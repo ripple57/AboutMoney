@@ -10,4 +10,12 @@ import com.ripple.lendmoney.ui.fragment.CreditFragment;
  * 作用: 
  *****************************************************/
 public class CreditFragPresent extends BasePresent<CreditFragment> {
+    public void uploadAlipayInfo() {
+        getV().hasAlipayInfo = true;
+
+    }
+
+    public void uploadCreditScore() {
+        getV().hasCreditScore = true;
+    }
 }

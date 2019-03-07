@@ -10,4 +10,7 @@ import com.ripple.lendmoney.ui.fragment.ContactsFragment;
  * 作用: 
  *****************************************************/
 public class ContactsFragPresent extends BasePresent<ContactsFragment> {
+    public void uploadContacts(String jsonString) {
+        getV().uploadSuccess();
+    }
 }

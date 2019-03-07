@@ -11,5 +11,5 @@
         android:layout_gravity="center"
         android:visibility="visible"
         app:indicator="LineScale"
-        app:indicator_color="@color/blue" />
+        app:indicator_color="@color/blue"/>
 </FrameLayout>

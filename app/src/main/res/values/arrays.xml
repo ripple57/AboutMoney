@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="directRelations">
+        <item>父母</item>
+
+        <item>兄弟</item>
+
+        <item>姐妹</item>
+
+    </string-array>
+    <string-array name="emergencynRelations">
+        <item>朋友</item>
+
+        <item>室友</item>
+
+        <item>同学</item>
+
+    </string-array>
+</resources>

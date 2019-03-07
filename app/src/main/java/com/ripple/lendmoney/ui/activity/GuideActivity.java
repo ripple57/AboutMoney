@@ -91,7 +91,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 AuthenticateActivity.launch(this);
                 break;
             case R.id.button7:
-                AuthenticateActivity.launch(this, Constant.TYPE_IDCARDFRAG);
+                AuthenticateActivity.launch(this, Constant.TYPE_FAMILYFRAG);
                 break;
             case R.id.button8:
                 
@@ -107,61 +107,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
         }
     }
 
-    //去获取通讯录列表
-    private void toGetContacts() {
-        getRxPermissions()
-                .request(Manifest.permission.READ_CONTACTS)
-                .subscribe(new Consumer<Boolean>() {
-                    @Override
-                    public void accept(Boolean aBoolean) throws Exception {
-                        if (aBoolean) {
-                            List<ContactsBean> contacts = getContacts();
-                            String jsonString = JSONArray.toJSONString(contacts);
-                            LogUtils.e(jsonString);
-                        } else {
-                            getvDelegate().toastShort("亲，同意了权限才能更好的使用软件哦");
-                        }
-                    }
-                });
-    }
 
-    //获取通讯录列表
-    private List<ContactsBean> getContacts() {
-        ArrayList<ContactsBean> arrayList = new ArrayList<>();
-
-        //联系人的Uri，也就是content://com.android.contacts/contacts
-        Uri uri = ContactsContract.Contacts.CONTENT_URI;
-        //指定获取_id和display_name两列数据，display_name即为姓名
-        String[] projection = new String[]{ContactsContract.Contacts._ID, ContactsContract.Contacts.DISPLAY_NAME};
-        //根据Uri查询相应的ContentProvider，cursor为获取到的数据集
-        Cursor cursor = this.getContentResolver().query(uri, projection, null, null, null);
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                Long id = cursor.getLong(0);
-                //获取姓名
-                String name = cursor.getString(1);
-                //指定获取NUMBER这一列数据
-                String[] phoneProjection = new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER};
-
-                //根据联系人的ID获取此人的电话号码
-                Cursor phonesCusor = this.getContentResolver().query(
-                        ContactsContract.CommonDataKinds.Phone.CONTENT_URI, phoneProjection,
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + id,
-                        null, null);
-
-                //因为每个联系人可能有多个电话号码，所以需要遍历
-                ArrayList<String> nums = new ArrayList<String>();
-                if (phonesCusor != null && phonesCusor.moveToFirst()) {
-                    do {
-                        String num = phonesCusor.getString(0);
-                        nums.add(num);
-                    } while (phonesCusor.moveToNext());
-                }
-                arrayList.add(new ContactsBean(name, nums));
-            } while (cursor.moveToNext());
-        }
-        return arrayList;
-    }
 
     private void testNetMethond() {
         HttpUtils.post(this, "inter/appmessage/getUnReadNum.do", null, new MyCallBack<Void>() {

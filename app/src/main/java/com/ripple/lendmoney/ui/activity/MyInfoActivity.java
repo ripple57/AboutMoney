@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
+import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.present.MyInfoPresent;
 
 import butterknife.BindColor;
@@ -76,14 +77,19 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_myinfoact_idcard:
+                AuthenticateActivity.launch(this, Constant.TYPE_IDCARDFRAG);
                 break;
             case R.id.ll_myinfoact_family:
+                AuthenticateActivity.launch(this, Constant.TYPE_FAMILYFRAG);
                 break;
             case R.id.ll_myinfoact_bankcard:
+                AuthenticateActivity.launch(this, Constant.TYPE_BANKCARDFRAG);
                 break;
             case R.id.ll_myinfoact_credit:
+                AuthenticateActivity.launch(this, Constant.TYPE_CREDITFRAG);
                 break;
             case R.id.ll_myinfoact_contacts:
+                AuthenticateActivity.launch(this, Constant.TYPE_CONTACTSFRAG);
                 break;
         }
     }

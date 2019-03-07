@@ -17,9 +17,13 @@ public final class Constant {
     public static final String UNKNOWNHOSTEXCEPTION = "网络异常，请检查您的网络状态";
     public static final String OTHEREXCEPTION = "网络数据";
     public static final String PARAM_FRAGMENTTYPE = "fragmentType";
+    public static final String REG_IDCARD = "(^[1-9]\\d{5}(18|19|20)\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$)|(^[1-9]\\d{5}\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}$)";
+    public static final String REG_PHONE = "^1[34578]\\d{9}$";
     public static final int TYPE_IDCARDFRAG = 0;
     public static final int TYPE_FAMILYFRAG = 1;
     public static final int TYPE_BANKCARDFRAG = 2;
     public static final int TYPE_CREDITFRAG = 3;
     public static final int TYPE_CONTACTSFRAG = 4;
+    public static final Integer TYPE_DIRECT_RELATIVES = 0;
+    public static final Integer TYPE_EMERGENCY_CONTACT = 1;
 }

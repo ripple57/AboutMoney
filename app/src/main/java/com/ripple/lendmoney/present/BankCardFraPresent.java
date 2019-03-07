@@ -3,6 +3,8 @@ package com.ripple.lendmoney.present;
 import com.ripple.lendmoney.base.BasePresent;
 import com.ripple.lendmoney.ui.fragment.BankCardFragment;
 
+import java.util.HashMap;
+
 /*****************************************************
  * 作者: HuangShaobo on 2019/3/4 23:26.
  * 微信: ripple57  e-mail: 247421018@qq.com
@@ -10,4 +12,7 @@ import com.ripple.lendmoney.ui.fragment.BankCardFragment;
  * 作用: 
  *****************************************************/
 public class BankCardFraPresent extends BasePresent<BankCardFragment> {
+    public void uploadBankCardInfo(HashMap<String, String> map) {
+        getV().uploadSuccess();
+    }
 }

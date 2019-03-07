@@ -61,7 +61,7 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
 
     @Override
     public IdCardFragPresent newP() {
-        return null;
+        return new IdCardFragPresent();
     }
 
 
@@ -75,21 +75,16 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
             case R.id.btn_idcardFrag_commit:
                 String idCardNo = etIdcardFragIdcard.getText().toString().trim();
                 String realName = etIdcardFragName.getText().toString().trim();
-                String reg = "(^[1-9]\\d{5}(18|19|20)\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$)|(^[1-9]\\d{5}\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}$)";
                 if (TextUtils.isEmpty(realName)) {
                     ToastUtil.showToast("请输入您的真实姓名");
                 } else if (TextUtils.isEmpty(idCardNo)) {
                     ToastUtil.showToast("请输入您的身份证号");
-                } else if (!idCardNo.matches(reg)) {
+                } else if (!idCardNo.matches(Constant.REG_IDCARD)) {
                     ToastUtil.showToast("请输入正确的身份证号码");
                 } else {
                     getP().uploadIdCardInfo(realName, idCardNo);
 
-                    if (GlobleParms.AuthenticateCanNext) {
-                        ((AuthenticateActivity) context).selectFragment(Constant.TYPE_FAMILYFRAG);
-                    } else {
 
-                    }
                 }
                 break;
         }
@@ -97,5 +92,10 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
 
     public void uploadSuccess() {
         ToastUtil.showToast("上传成功");
+        if (GlobleParms.AuthenticateCanNext) {
+            ((AuthenticateActivity) context).selectFragment(Constant.TYPE_FAMILYFRAG);
+        } else {
+            context.finish();
+        }
     }
 }

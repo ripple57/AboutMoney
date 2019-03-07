@@ -113,7 +113,6 @@ public class AuthenticateActivity extends BaseActivity {
 
     /**
      * 已认证过,进来修改认证信息
-     *
      * @param activity
      * @param fragmentType
      */

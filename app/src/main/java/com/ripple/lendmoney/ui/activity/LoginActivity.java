@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
+import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.http.URLConfig;
 import com.ripple.lendmoney.present.LoginPresent;
 import com.ripple.lendmoney.utils.ToastUtil;
@@ -86,7 +87,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
     }
 
     private void toAgreementView() {
-        WebActivity.launch(this,  URLConfig.REGISTAGREEMENT, "注册服务协议");
+        WebActivity.launch(this, URLConfig.REGISTAGREEMENT, "注册服务协议");
     }
 
     private void login() {
@@ -94,7 +95,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
         phoneNum = et_login_phone.getText().toString().trim();
         if (TextUtils.isEmpty(phoneNum)) {
             ToastUtil.showToast("请输入手机号码");
-        } else if (!phoneNum.matches("^1[34578]\\d{9}$")) {
+        } else if (!phoneNum.matches(Constant.REG_PHONE)) {
             ToastUtil.showToast("请输入正确的手机号");
         } else if (TextUtils.isEmpty(code) || code.length() != 6) {
             ToastUtil.showToast("请输入6位验证码");

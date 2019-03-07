@@ -3,18 +3,22 @@ package com.ripple.lendmoney.ui.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.qmuiteam.qmui.widget.QMUIViewPager;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.present.MainPresent;
 import com.ripple.lendmoney.ui.fragment.HomeFragment;
-import com.ripple.lendmoney.ui.fragment.OrderFragment;
 import com.ripple.lendmoney.ui.fragment.MineFragment;
+import com.ripple.lendmoney.ui.fragment.OrderFragment;
 import com.ripple.lendmoney.utils.AppManager;
 import com.ripple.lendmoney.utils.BottomNavigationViewHelper;
 
@@ -32,6 +36,7 @@ public class MainActivity extends BaseActivity<MainPresent> {
     @BindView(R.id.home_bottom_view)
     BottomNavigationView homeBottomView;
     private List<Fragment> fragmentList = new ArrayList<>();
+    private View point;//是否有订单的指示点
 
 
     @Override
@@ -52,6 +57,18 @@ public class MainActivity extends BaseActivity<MainPresent> {
 
 
     private void initView() {
+
+        //获取整个的NavigationView
+        BottomNavigationMenuView menuView = (BottomNavigationMenuView) homeBottomView.getChildAt(0);
+        //这里就是获取所添加的每一个Tab(或者叫menu)，
+        BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(1);
+        //加载我们的角标View，新创建的一个布局
+        View badge = LayoutInflater.from(this).inflate(R.layout.menu_badge, menuView, false);
+        //添加到Tab上
+        itemView.addView(badge);
+        point = badge.findViewById(R.id.iv_bottom_point);
+
+
         BottomNavigationViewHelper.disableShiftMode(homeBottomView);
         homeVp.setOffscreenPageLimit(3);
         homeVp.setSwipeable(false);

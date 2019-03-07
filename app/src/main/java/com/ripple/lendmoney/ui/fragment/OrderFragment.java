@@ -9,6 +9,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.adapter.OrderListAdapter;
+import com.ripple.lendmoney.base.BaseLazyFragment;
 import com.ripple.lendmoney.model.OrderListBean;
 import com.ripple.lendmoney.present.OrderFragPresent;
 import com.ripple.lendmoney.utils.ToastUtil;
@@ -19,7 +20,6 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import cn.droidlover.xdroidmvp.mvp.XLazyFragment;
 
 /*****************************************************
  * 作者: HuangShaobo on 2019/2/24 16:38.
@@ -27,7 +27,7 @@ import cn.droidlover.xdroidmvp.mvp.XLazyFragment;
  * 项目: AboutMoney
  * 作用: 
  *****************************************************/
-public class OrderFragment extends XLazyFragment<OrderFragPresent> {
+public class OrderFragment extends BaseLazyFragment<OrderFragPresent> {
 
     @BindView(R.id.rv_order_list)
     RecyclerView rvOrderList;
@@ -41,7 +41,7 @@ public class OrderFragment extends XLazyFragment<OrderFragPresent> {
     public void initData(Bundle savedInstanceState) {
         initView();
         initListener();
-        getP().getOrderList(pageNum);
+        getNetData();
     }
 
     private void initListener() {
@@ -56,7 +56,7 @@ public class OrderFragment extends XLazyFragment<OrderFragPresent> {
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 ToastUtil.showToast("刷新");
                 pageNum = 1;
-                getP().getOrderList(pageNum);
+                getNetData();
 
             }
         });
@@ -103,5 +103,10 @@ public class OrderFragment extends XLazyFragment<OrderFragPresent> {
         }
         orderlist.addAll(list);
         orderListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void getNetData() {
+        getP().getOrderList(pageNum);
     }
 }

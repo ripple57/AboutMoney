@@ -8,7 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorButtonNormal">@color/bg_button</item>
         <item name="android:textColor">@color/text_black</item>
-        <item name="android:editTextColor">@color/text_black</item>
         <item name="editTextStyle">@style/MyEditTextStyle</item>
 
         <item name="qmui_round_btn_border_color">@color/blue</item>

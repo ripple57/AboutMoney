@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_contactsFrag_head"
+        android:layout_width="0dp"
+        android:layout_height="156dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/test_head"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.qmuiteam.qmui.widget.QMUIObservableScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/bg_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_contactsFrag_head"
+        app:layout_constraintVertical_weight="1">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_contacts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_gray"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_notice_blue"/>
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/iv1"
+                    android:text="为了给您提供最优质的服务,我们需要获取您的通讯录权限"
+                    android:textColor="@color/text_blue"/>
+
+                <TextView
+                    android:id="@+id/tv_contactsFrag_contactState"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv1"
+                    android:layout_marginLeft="5dp"
+                    android:text=""
+                    android:visibility="gone"/>
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/iv2"
+                android:layout_width="4dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/bg_orange"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rl_contacts"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="第一步： 设置 — 应用"
+                app:layout_constraintBottom_toBottomOf="@id/iv2"
+                app:layout_constraintLeft_toRightOf="@id/iv2"
+                app:layout_constraintTop_toTopOf="@+id/iv2"/>
+
+            <ImageView
+                android:id="@+id/iv3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv2"/>
+
+            <View
+                android:id="@+id/v_divline"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/divline_gray"
+                app:layout_constraintTop_toBottomOf="@id/iv3"/>
+
+            <ImageView
+                android:id="@+id/iv4"
+                android:layout_width="4dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/bg_orange"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/v_divline"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="第一步： 权限管理 — 打开通讯录访问权限"
+                app:layout_constraintBottom_toBottomOf="@id/iv4"
+                app:layout_constraintLeft_toRightOf="@id/iv4"
+                app:layout_constraintTop_toTopOf="@+id/iv4"/>
+
+            <ImageView
+                android:id="@+id/iv5"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv4"/>
+
+            <Button
+                android:id="@+id/btn_contactsFrag_commit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:text="下一步"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv5"/>
+        </android.support.constraint.ConstraintLayout>
+    </com.qmuiteam.qmui.widget.QMUIObservableScrollView>
+</android.support.constraint.ConstraintLayout>
