@@ -78,6 +78,7 @@
                 app:layout_constraintTop_toBottomOf="@id/rl_contacts"/>
 
             <TextView
+                android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -115,6 +116,7 @@
                 app:layout_constraintTop_toBottomOf="@id/v_divline"/>
 
             <TextView
+                android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -146,6 +148,13 @@
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv5"/>
+
+            <android.support.constraint.Group
+                android:id="@+id/group_contacts_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="iv2,textView7,iv3,v_divline,iv4,textView8,iv5"/>
         </android.support.constraint.ConstraintLayout>
     </com.qmuiteam.qmui.widget.QMUIObservableScrollView>
 </android.support.constraint.ConstraintLayout>

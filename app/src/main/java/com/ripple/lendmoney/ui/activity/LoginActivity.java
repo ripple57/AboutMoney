@@ -87,7 +87,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
     }
 
     private void toAgreementView() {
-        WebActivity.launch(this, URLConfig.REGISTAGREEMENT, "注册服务协议");
+        WebActivity.launch(this, URLConfig.REGIST_AGREEMENT, "注册服务协议");
     }
 
     private void login() {

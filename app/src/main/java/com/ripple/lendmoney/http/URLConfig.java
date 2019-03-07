@@ -8,5 +8,7 @@ public class URLConfig {
     public static final String BASE_URL = "http://123.56.100.221:8088";
 
 
-    public static final String REGISTAGREEMENT = BASE_URL + "/h5/share/userprotocal.do";
+    public static final String REGIST_AGREEMENT = BASE_URL + "/h5/share/userprotocal.do";
+    public static final String LEND_AGREEMENT = BASE_URL + "/h5/share/userprotocal.do";
 }
+
