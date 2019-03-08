@@ -71,7 +71,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button1:
-                testNetMethond();
+               SplashActivity.launch(this);
                 break;
             case R.id.button2:
                 Router.newIntent(this).to(MainActivity.class).launch();

@@ -23,6 +23,8 @@ import com.ripple.lendmoney.ui.fragment.OrderFragment;
 import com.ripple.lendmoney.utils.AppManager;
 import com.ripple.lendmoney.utils.BottomNavigationViewHelper;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -163,6 +165,10 @@ public class MainActivity extends BaseActivity<MainPresent> {
 
     }
 
+    @Subscribe
+    public void event(OrderEvent event) {
+        point.setVisibility(View.VISIBLE);
+    }
 
     @Override
     public void bindEvent() {

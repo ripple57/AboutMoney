@@ -28,6 +28,8 @@
     <color name="divline_gray">#eeeeee</color>
     <color name="bg_button">#4768F3</color>
     <color name="bg_orange">#ef653a</color>
+    <color name="bg_splash">#2651f5</color>
+
     <color name="blue">#4768F3</color>
 
     <color name="black_overlay">#66000000</color>

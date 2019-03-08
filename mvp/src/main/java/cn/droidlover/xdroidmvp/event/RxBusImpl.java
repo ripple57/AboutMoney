@@ -45,6 +45,7 @@ public class RxBusImpl implements IBus {
         return bus.ofType(eventType).onBackpressureBuffer();
     }
 
+
     private static class Holder {
         private static final RxBusImpl instance = new RxBusImpl();
     }
