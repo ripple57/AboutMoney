@@ -15,6 +15,7 @@ import android.view.View;
 import com.qmuiteam.qmui.widget.QMUIViewPager;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
+import com.ripple.lendmoney.event.OrderEvent;
 import com.ripple.lendmoney.present.MainPresent;
 import com.ripple.lendmoney.ui.fragment.HomeFragment;
 import com.ripple.lendmoney.ui.fragment.MineFragment;
@@ -27,7 +28,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import cn.droidlover.xdroidmvp.base.XFragmentAdapter;
+import cn.droidlover.xdroidmvp.event.BusProvider;
 import cn.droidlover.xdroidmvp.router.Router;
+import io.reactivex.functions.Consumer;
 
 public class MainActivity extends BaseActivity<MainPresent> {
 
@@ -83,6 +86,7 @@ public class MainActivity extends BaseActivity<MainPresent> {
 
                     case R.id.bottom_order:
                         homeVp.setCurrentItem(1);
+                        point.setVisibility(View.GONE);
                         setTopBarIsShow(true);
                         setTopBarIsShowBack(false);
                         setTopBarTitle("订单列表");
@@ -157,6 +161,22 @@ public class MainActivity extends BaseActivity<MainPresent> {
     @Override
     public void getNetData() {
 
+    }
+
+
+    @Override
+    public void bindEvent() {
+        BusProvider.getBus().toFlowable(OrderEvent.class).subscribe(new Consumer<OrderEvent>() {
+            @Override
+            public void accept(OrderEvent event) throws Exception {
+                point.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    @Override
+    public boolean useEventBus() {
+        return true;
     }
 
     public static void launch(Activity activity) {

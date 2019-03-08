@@ -3,6 +3,7 @@ package com.ripple.lendmoney.ui.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -46,6 +47,8 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
     int text_red;
     @BindColor(R.color.text_hint)
     int text_hint;
+    @BindView(R.id.btn_myinfoact_commit)
+    Button btnMyinfoactCommit;
 
     @Override
     protected String topBarTitle() {
@@ -73,7 +76,8 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
     }
 
 
-    @OnClick({R.id.ll_myinfoact_idcard, R.id.ll_myinfoact_family, R.id.ll_myinfoact_bankcard, R.id.ll_myinfoact_credit, R.id.ll_myinfoact_contacts})
+    @OnClick({R.id.ll_myinfoact_idcard, R.id.ll_myinfoact_family, R.id.ll_myinfoact_bankcard, R.id.ll_myinfoact_credit,
+            R.id.ll_myinfoact_contacts,R.id.btn_myinfoact_commit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_myinfoact_idcard:
@@ -90,6 +94,8 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
                 break;
             case R.id.ll_myinfoact_contacts:
                 AuthenticateActivity.launch(this, Constant.TYPE_CONTACTSFRAG);
+                break;
+            case R.id.btn_myinfoact_commit:
                 break;
         }
     }
@@ -109,4 +115,6 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
                 .to(MyInfoActivity.class)
                 .launch();
     }
+
+
 }

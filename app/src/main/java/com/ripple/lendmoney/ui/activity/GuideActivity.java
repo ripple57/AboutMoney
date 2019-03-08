@@ -9,31 +9,31 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 
-import com.alibaba.fastjson.JSONArray;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.base.Constant;
+import com.ripple.lendmoney.event.OrderEvent;
 import com.ripple.lendmoney.http.HttpUtils;
 import com.ripple.lendmoney.http.MyCallBack;
 import com.ripple.lendmoney.http.MyMessage;
-import com.ripple.lendmoney.model.ContactsBean;
 import com.ripple.lendmoney.present.GuidePresent;
 import com.ripple.lendmoney.utils.BitmapPhotoUtil;
 import com.ripple.lendmoney.utils.LogUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.droidlover.xdroidmvp.event.BusFactory;
+import cn.droidlover.xdroidmvp.event.BusProvider;
 import cn.droidlover.xdroidmvp.router.Router;
 import io.reactivex.functions.Consumer;
 
@@ -94,9 +94,10 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 AuthenticateActivity.launch(this, Constant.TYPE_FAMILYFRAG);
                 break;
             case R.id.button8:
-                
+                BusProvider.getBus().post(new OrderEvent());
                 break;
             case R.id.button9:
+                BusFactory.getBus().post(new OrderEvent());
                 break;
             case R.id.button10:
                 break;
@@ -106,7 +107,6 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 break;
         }
     }
-
 
 
     private void testNetMethond() {
@@ -252,8 +252,31 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
     }
 
     public static void launch(Activity activity) {
+
         Router.newIntent(activity)
                 .to(GuideActivity.class)
                 .launch();
+    }
+
+    @Override
+    public boolean useEventBus() {
+        return true;
+    }
+
+    @Subscribe
+    public void event(OrderEvent event) {
+        LogUtils.e("OrderEvent.tag" + event.getTag());
+    }
+
+    @Override
+    public void bindEvent() {
+        BusProvider.getBus().toFlowable(OrderEvent.class).subscribe(new Consumer<OrderEvent>() {
+            @Override
+            public void accept(OrderEvent event) throws Exception {
+                LogUtils.e("这是哪里---------------------");
+
+
+            }
+        });
     }
 }
