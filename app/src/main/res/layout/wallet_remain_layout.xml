@@ -10,7 +10,7 @@
         <View
             android:id="@+id/v_item_h"
             android:layout_width="1dp"
-            android:layout_height="50dp"
+            android:layout_height="36dp"
             android:background="@color/divline_gray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -20,25 +20,27 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/v_item_h"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/v_item_h">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/iv_item_wallet"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/home_qianbao"/>
 
             <TextView
                 android:id="@+id/tv_item_wallet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/iv_item_wallet"
-                android:text="钱包"/>
+                android:text="钱包"
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tv_item_walletMoney"
@@ -46,32 +48,36 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/tv_item_wallet"
                 android:layout_below="@id/tv_item_wallet"
+                android:layout_marginTop="3dp"
                 android:text="0元"
-                android:textColor="@color/text_orange"/>
+                android:textColor="@color/text_orange"
+                android:textSize="15sp"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/v_item_h"
-            app:layout_constraintTop_toTopOf="@id/v_item_h">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/iv_item_remain"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/home_daihuan"/>
 
             <TextView
                 android:id="@+id/tv_item_remain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/iv_item_remain"
-                android:text="待还"/>
+                android:text="待还"
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tv_item_remainMoney"
@@ -79,8 +85,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@id/tv_item_remain"
                 android:layout_below="@id/tv_item_remain"
+                android:layout_marginTop="3dp"
                 android:text="0元"
-                android:textColor="@color/text_orange"/>
+                android:textColor="@color/text_orange"
+                android:textSize="15sp"/>
         </RelativeLayout>
     </android.support.constraint.ConstraintLayout>
 

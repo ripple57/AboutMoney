@@ -19,14 +19,18 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:windowSoftInputMode="adjustResize">
+        android:windowSoftInputMode="stateHidden|adjustResize">
+        <activity android:name=".ui.activity.AssessActivity">
+        </activity>
         <activity android:name=".ui.activity.MakeIOUActivity">
         </activity>
         <activity
             android:name=".ui.activity.AuthenticateActivity"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
-        <activity android:name=".ui.activity.LoginActivity">
+        <activity
+            android:name=".ui.activity.LoginActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity android:name=".ui.activity.WebActivity">
         </activity>

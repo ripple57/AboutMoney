@@ -3,16 +3,15 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="QMUI.Compat">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryDark">@color/transparent</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/blue</item>
         <item name="colorButtonNormal">@color/bg_button</item>
         <item name="android:textColor">@color/text_black</item>
         <item name="editTextStyle">@style/MyEditTextStyle</item>
 
         <item name="qmui_round_btn_border_color">@color/blue</item>
         <item name="qmui_round_btn_text_color">@color/white</item>
-        <item name="qmui_topbar_height">45dp</item>
 
         <item name="android:windowActionModeOverlay">true</item>
         <item name="windowActionBar">false</item>
@@ -117,5 +116,16 @@
         <item name="android:textColorHint">@color/text_hint</item>
         <item name="android:background">@null</item>
         <item name="android:textCursorDrawable">@drawable/edit_cursor</item>
+    </style>
+
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/button_bule_selector</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginEnd">38dp</item>
+        <item name="android:layout_marginStart">38dp</item>
     </style>
 </resources>

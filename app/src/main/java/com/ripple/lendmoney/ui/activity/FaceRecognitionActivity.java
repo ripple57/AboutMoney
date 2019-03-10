@@ -2,8 +2,8 @@ package com.ripple.lendmoney.ui.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Button;
 
-import com.qmuiteam.qmui.layout.QMUIButton;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.present.FaceRecognitionPresent;
@@ -16,7 +16,7 @@ public class FaceRecognitionActivity extends BaseActivity<FaceRecognitionPresent
 
 
     @BindView(R.id.btn_facefrag_startRecognition)
-    QMUIButton btnStartRecognition;
+    Button btnStartRecognition;
 
     public static void launch(Activity context) {
         Router.newIntent(context).to(FaceRecognitionActivity.class).launch();

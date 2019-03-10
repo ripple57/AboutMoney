@@ -12,15 +12,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="8dp"
-        android:paddingTop="5dp">
+        android:paddingBottom="12dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="12dp">
 
         <ImageView
             android:id="@+id/iv"
-            android:layout_width="8dp"
-            android:layout_height="8dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
             android:layout_centerVertical="true"
             android:src="@mipmap/ic_must_red"/>
 
@@ -32,7 +32,8 @@
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/iv"
             android:text="直系亲属"
-            android:textColor="@color/text_orange"/>
+            android:textColor="@color/text_orange"
+            android:textSize="15sp"/>
     </RelativeLayout>
 
     <include layout="@layout/divline_h"/>
@@ -41,16 +42,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="8dp"
-        android:paddingTop="5dp">
+        android:paddingBottom="12dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="10dp"
+        android:paddingTop="12dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="与本人关系"/>
+            android:text="与本人关系"
+            android:textSize="15sp"/>
 
         <ImageView
             android:id="@+id/iv1"
@@ -66,7 +68,9 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/iv1"
-            android:text="请选择"/>
+            android:text="请选择"
+            android:textColor="@color/text_hint"
+            android:textSize="15sp"/>
     </RelativeLayout>
 
     <include layout="@layout/divline_h"/>
@@ -75,17 +79,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="8dp"
-        android:paddingTop="5dp">
+        android:paddingBottom="12dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="12dp">
 
         <TextView
             android:id="@+id/tv_familyItem_relation_show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="亲属姓名"/>
+            android:text="亲属姓名"
+            android:textSize="15sp"/>
 
 
         <EditText
@@ -94,9 +99,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:gravity="right"
             android:hint="请输入姓名"
-            android:maxLength="11"
-            android:singleLine="true"/>
+            android:maxLength="18"
+            android:singleLine="true"
+            android:textSize="15sp"/>
     </RelativeLayout>
 
     <include layout="@layout/divline_h"/>
@@ -105,24 +112,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="8dp"
-        android:paddingTop="5dp">
+        android:paddingBottom="12dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="12dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="联系电话"/>
+            android:text="联系电话"
+            android:textSize="15sp"/>
 
         <ImageView
             android:id="@+id/iv2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="21dp"
+            android:layout_height="24dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_cancel_gray"/>
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/lianxiren_dianhua"/>
 
         <EditText
             android:id="@+id/et_familyItem_phone"
@@ -133,6 +142,6 @@
             android:hint="请输入"
             android:inputType="phone"
             android:maxLength="11"
-            android:singleLine="true"/>
+            android:textSize="15sp"/>
     </RelativeLayout>
 </LinearLayout>

@@ -79,7 +79,10 @@ public abstract class BaseActivity<P extends IPresent> extends XActivity<P> {
 
         if (rl_topbar == null || topBar == null) return;
         QMUIStatusBarHelper.setStatusBarDarkMode(this);//状态栏深底白字
-        topBar_left_back = topBar.addLeftImageButton(R.drawable.ic_arrow_left_white, R.id.qmui_topbar_item_left_back);
+        topBar_left_back = topBar.addLeftImageButton(R.drawable.topbar_back, R.id.qmui_topbar_item_left_back);//添加左侧返回按钮
+        RelativeLayout.LayoutParams layoutParams = topBar.generateTopBarImageButtonLayoutParams();
+        layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        topBar_left_back.setLayoutParams(layoutParams);//topbar垂直居中
         topBar_left_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +96,7 @@ public abstract class BaseActivity<P extends IPresent> extends XActivity<P> {
         if (isShow) {
             topBar.setTitle(topBarTitle());
             rl_topbar.setVisibility(View.VISIBLE);
-            topBar.setBackgroundAlpha(0);//透明后跟rltopbar颜色相同
+            topBar.setBackgroundAlpha(30);//透明后跟rltopbar颜色相同
             int statusbarHeight = QMUIStatusBarHelper.getStatusbarHeight(this);//获取状态栏高度
             rl_topbar.setPadding(0, statusbarHeight, 0, 0);//tapbar下移,漏出状态栏,形成沉浸式
             setTopBarTransparent(topBarIsTransparent());

@@ -10,23 +10,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv_homefrag_topbanner"
+        <com.youth.banner.Banner
+            android:id="@+id/topbanner_homefrag"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/test_login"/>
+            android:layout_height="168dp"
+            android:background="@drawable/home_banner"/>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="-15dp"
-            app:cardCornerRadius="5dp"
-            app:contentPadding="15dp">
+            android:layout_height="143dp"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="13dp"
+            android:layout_marginTop="-13dp"
+            app:cardCornerRadius="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -37,68 +36,188 @@
                     android:id="@+id/tv_homefrag_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="30dp"
-                    android:text="Hi,欢迎回来"/>
+                    android:layout_marginLeft="47dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Hi,欢迎回来"
+                    android:textSize="15sp"/>
 
                 <TextView
                     android:id="@+id/tv_homefrag_day"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="30dp"
-                    android:text="这是您使用借条的第0天"/>
+                    android:layout_marginLeft="47dp"
+                    android:layout_marginTop="10dp"
+                    android:text="这是您使用借条的第0天"
+                    android:textColor="@color/text_gray"/>
 
                 <include
-                    layout="@layout/wallet_remain_layout"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_homefrag_day"/>
+                    layout="@layout/wallet_remain_layout"/>
 
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
-
-        <TextView
-            android:id="@+id/tv_homefrag_scroll"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/qmui_icon_checkbox_checked"
-            android:text="可以滚动的文字"/>
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@drawable/home_laba"/>
+
+            <TextView
+                android:id="@+id/tv_homefrag_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:singleLine="true"
+                android:text="可以滚动的文字"
+                android:textColor="#ababab"
+                android:textSize="11sp"/>
+        </LinearLayout>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="-3dp"
-            android:layout_marginRight="-3dp"
-            app:contentPadding="15dp">
+            android:layout_marginLeft="-5dp"
+            android:layout_marginRight="-5dp"
+            >
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:paddingBottom="20dp">
 
                 <TextView
                     android:id="@+id/tv_show"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="仅需三步\t轻松借款"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"/>
-
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:src="@mipmap/img_default"
+                    android:text="仅需三步   轻松借款"
+                    android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_show"/>
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_show"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_show">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/home_yi"/>
+
+                    <View
+                        android:layout_width="72dp"
+                        android:layout_height="1dp"
+                        android:layout_margin="7dp"
+                        android:background="@color/blue"/>
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/home_er"/>
+
+                    <View
+                        android:layout_width="72dp"
+                        android:layout_height="1dp"
+                        android:layout_margin="7dp"
+                        android:background="@color/blue"/>
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/home_san"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintStart_toStartOf="@id/ll_show"
+                    app:layout_constraintTop_toBottomOf="@id/ll_show">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/home_xinyongrenzheng"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="信用认证"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="49dp"
+                        android:layout_marginRight="63dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/home_dajietiao"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="打借条"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/home_tixian"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="提现"
+                            android:textSize="14sp"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
             </android.support.constraint.ConstraintLayout>
 
         </android.support.v7.widget.CardView>
@@ -106,13 +225,9 @@
 
         <com.qmuiteam.qmui.layout.QMUIButton
             android:id="@+id/btn_homefrag_lend"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginEnd="38dp"
-            android:layout_marginStart="38dp"
-            android:layout_marginTop="18dp"
-            android:gravity="center"
+            style="@style/ButtonStyle"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="53dp"
             android:text="打借条"/>
 
 

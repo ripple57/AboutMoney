@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/iv_assessAct_banner"
+                android:layout_width="match_parent"
+                android:layout_height="242dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/zhinengpinggu_banner"/>
+
+            <include layout="@layout/divbg_h_10"/>
+
+            <ImageView
+                android:id="@+id/iv_assessAct_checkAgreement"
+                android:layout_width="335dp"
+                android:layout_height="96dp"
+                android:layout_margin="20dp"
+                android:src="@drawable/zhinengpinggu_hetong"/>
+
+            <include layout="@layout/divbg_h_10"/>
+
+            <ImageView
+                android:layout_width="317dp"
+                android:layout_height="35dp"
+                android:layout_margin="20dp"
+                android:src="@drawable/zhinengpinggu_chengnuo"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/dajietiao_gouxuan"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="点击申请借款即代表已阅读且同意"
+                    android:textColor="@color/text_gray"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_assessAct_agreement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="《评估服务协议》"
+                    android:textColor="@color/text_blue"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="认证费用介绍"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_assessAct_feeIntroduce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:textColor="@color/text_gray"
+                android:textSize="12sp"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/divline_h"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="49dp">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_assessAct_applyLend"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="现价:  "
+            android:textColor="@color/text_gray"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/tv3"
+            app:layout_constraintEnd_toStartOf="@+id/tv2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥"
+            android:textColor="@color/text_red"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv1"
+            app:layout_constraintEnd_toStartOf="@+id/tv_assessAct_nowPrice"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv1"/>
+
+        <TextView
+            android:id="@+id/tv_assessAct_nowPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="79"
+            android:textColor="@color/text_red"
+            android:textSize="20sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv2"
+            app:layout_constraintEnd_toStartOf="@+id/btn_assessAct_applyLend"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv2"/>
+
+        <TextView
+            android:id="@id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="原价:  "
+            android:textColor="@color/text_gray"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv1"
+            app:layout_constraintTop_toBottomOf="@id/tv1"/>
+
+        <TextView
+            android:id="@id/tv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥"
+            android:textColor="@color/text_gray"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv3"
+            app:layout_constraintStart_toEndOf="@+id/tv3"/>
+
+        <TextView
+            android:id="@+id/tv_assessAct_prePrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="120"
+            android:textColor="@color/text_gray"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/tv4"
+            app:layout_constraintStart_toEndOf="@+id/tv4"/>
+
+        <Button
+            android:id="@+id/btn_assessAct_applyLend"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/zhinengpinggu_beijing"
+            android:gravity="center"
+            android:text="申请借款"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+</LinearLayout>

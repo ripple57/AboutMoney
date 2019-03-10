@@ -4,33 +4,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:paddingBottom="10dp"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
     android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="20dp">
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp"/>
+        app:layout_constraintGuide_begin="27dp"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="202dp"/>
+        app:layout_constraintGuide_percent="0.46666667"/>
 
     <TextView
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="13dp"
         android:text="订单详情"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -38,8 +39,10 @@
         android:id="@+id/tv_order_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
+        android:layout_marginEnd="20dp"
         android:text="取消订单"
+        android:textColor="@color/text_gray"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv1"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -47,9 +50,9 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="27dp"
+        android:layout_marginTop="13dp"
         android:background="@color/divline_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -60,8 +63,10 @@
         android:id="@+id/tv2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:text="借款人："
+        android:textColor="@color/gray"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/view"/>
 
@@ -72,6 +77,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="借款期限："
+        android:textColor="@color/gray"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv2"/>
 
@@ -81,6 +88,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="借款额度："
+        android:textColor="@color/gray"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv3"/>
 
@@ -90,6 +99,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="订单编号："
+        android:textColor="@color/gray"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv4"/>
 
@@ -98,6 +109,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="张某某"
+        android:textColor="@color/gray"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv2"
         app:layout_constraintStart_toEndOf="@+id/tv2"/>
 
@@ -106,6 +119,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="30天"
+        android:textColor="@color/gray"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv3"
         app:layout_constraintStart_toEndOf="@+id/tv3"/>
 
@@ -114,6 +129,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="30000"
+        android:textColor="@color/gray"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv4"
         app:layout_constraintStart_toEndOf="@+id/tv4"/>
 
@@ -122,6 +139,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="14445262652245"
+        android:textColor="@color/gray"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv5"
         app:layout_constraintStart_toEndOf="@+id/tv5"/>
 
@@ -129,8 +148,10 @@
         android:id="@+id/tv6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:text="出借人："
+        android:textColor="@color/gray"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toBottomOf="@+id/view"/>
 
@@ -141,6 +162,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="还款日期："
+        android:textColor="@color/gray"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toBottomOf="@+id/tv2"/>
 
@@ -150,6 +173,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="借款利息："
+        android:textColor="@color/gray"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/guideline1"
         app:layout_constraintTop_toBottomOf="@+id/tv3"/>
 
@@ -159,6 +184,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="李某某"
+        android:textColor="@color/gray"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv6"
         app:layout_constraintStart_toEndOf="@+id/tv6"/>
 
@@ -166,7 +193,9 @@
         android:id="@+id/tv_order_repay_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2019-2-28"
+        android:text="2019-12-28"
+        android:textColor="@color/gray"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv7"
         app:layout_constraintStart_toEndOf="@+id/tv7"/>
 
@@ -175,6 +204,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="25.65元"
+        android:textColor="@color/gray"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/tv8"
         app:layout_constraintStart_toEndOf="@+id/tv8"/>
 
@@ -185,6 +216,7 @@
         android:layout_marginTop="25dp"
         android:text="信用认证通过"
         android:textColor="@color/text_green"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tv5"/>
 
@@ -195,20 +227,10 @@
         android:layout_marginRight="25dp"
         android:text="放款中"
         android:textColor="@color/text_green"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/tv9"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-
-    <Button
-        android:id="@+id/btn_order_authenticate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="25dp"
-        android:layout_marginTop="15dp"
-        android:text="去认证"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv5"/>
 
     <TextView
         android:id="@+id/tv11"
@@ -216,9 +238,28 @@
         android:layout_height="wrap_content"
         android:text="信用认证未通过"
         android:textColor="@color/text_red"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_order_authenticate"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@+id/btn_order_authenticate"/>
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv9"
+        app:layout_constraintStart_toStartOf="@+id/guideline"/>
+
+    <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+        android:id="@+id/btn_order_authenticate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:minHeight="0dp"
+        android:paddingBottom="2dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="2dp"
+        android:text="去认证"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:qmui_backgroundColor="@color/bg_orange"
+        app:qmui_borderWidth="0dp"
+        app:qmui_radius="5dp"/>
 
     <android.support.constraint.Group
         android:id="@+id/group_state_pass"

@@ -1,5 +1,6 @@
 package com.ripple.lendmoney.ui.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,7 @@ import com.ripple.lendmoney.present.MakeIOUPresent;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.droidlover.xdroidmvp.router.Router;
 
 public class MakeIOUActivity extends BaseActivity<MakeIOUPresent> {
 
@@ -87,5 +89,11 @@ public class MakeIOUActivity extends BaseActivity<MakeIOUPresent> {
                 finish();
                 break;
         }
+    }
+
+    public static void launch(Activity activity) {
+        Router.newIntent(activity)
+                .to(MakeIOUActivity.class)
+                .launch();
     }
 }

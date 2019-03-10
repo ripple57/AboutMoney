@@ -36,6 +36,7 @@ dependencies {
 
     annotationProcessor rootProject.ext.dependencies["butterknife-apt"]
     implementation rootProject.ext.dependencies["avi-loading"]
+    implementation 'com.youth.banner:banner:1.4.10'  //最新版本
     //加载样式
     implementation 'me.jessyan:autosize:1.1.2'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.44'

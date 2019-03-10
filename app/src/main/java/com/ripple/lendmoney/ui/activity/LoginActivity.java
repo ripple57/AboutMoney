@@ -50,6 +50,11 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
         return "登录";
     }
 
+    @Override
+    protected boolean topBarIsTransparent() {
+        return true;
+    }
+
     @OnClick({R.id.imgbtn_login_phone_cancle, R.id.btn_login_getcode, R.id.btn_login_login, R.id.tv_login_agreement,})
     public void onClick(View view) {
         switch (view.getId()) {

@@ -123,7 +123,12 @@ public class FamilyFragment extends BaseLazyFragment<FamilyFragPresent> {
         etEmergencyName = (EditText) emergencyContactView.findViewById(R.id.et_familyItem_name);
         etEmergencyPhone = (EditText) emergencyContactView.findViewById(R.id.et_familyItem_phone);
         familyFragAdapter.addHeaderView(emergencyContactView);
-
+        View view = View.inflate(context, R.layout.item_family_list_layout, null);
+        familyFragAdapter.addHeaderView(view);
+        View view1 = View.inflate(context, R.layout.item_family_list_layout, null);
+        familyFragAdapter.addHeaderView(view1);
+        View view2 = View.inflate(context, R.layout.item_family_list_layout, null);
+        familyFragAdapter.addHeaderView(view2);
     }
 
 

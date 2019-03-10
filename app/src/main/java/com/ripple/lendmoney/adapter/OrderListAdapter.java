@@ -27,8 +27,8 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListBean, BaseViewHo
     @Override
     protected void convert(BaseViewHolder helper, OrderListBean item) {
         helper.setText(R.id.tv_order_borrower, "迪肯").setText(R.id.tv_order_lender, "波波")
-                .setText(R.id.tv_order_interest, "52.22").setText(R.id.tv_order_limit, "50000元")
-                .setText(R.id.tv_order_orderNo, "1521155212").setText(R.id.tv_order_repay_date, "2019-5-21")
+                .setText(R.id.tv_order_interest, "52.22元").setText(R.id.tv_order_limit, "50000元")
+                .setText(R.id.tv_order_orderNo, "152115521286536326").setText(R.id.tv_order_repay_date, "2019-12-28")
                 .setText(R.id.tv_order_term, "50天")
                 .addOnClickListener(R.id.tv_order_cancel).addOnClickListener(R.id.btn_order_authenticate);
 

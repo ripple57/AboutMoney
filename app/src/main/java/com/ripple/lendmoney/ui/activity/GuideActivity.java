@@ -100,8 +100,10 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 BusFactory.getBus().post(new OrderEvent());
                 break;
             case R.id.button10:
+                MakeIOUActivity.launch(this);
                 break;
             case R.id.button11:
+                AssessActivity.launch(this);
                 break;
             case R.id.button12:
                 break;

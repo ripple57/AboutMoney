@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#4768F3</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimaryDark">#666666</color>
+    <color name="colorAccent">#4768F3</color>
 
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
@@ -11,25 +11,38 @@
     <color name="colorGray">#B0B0B0</color>
     <color name="buttoncolor">#4768F3</color>
     <color name="green">#11EE96</color>
-    <color name="red">#A20C0C</color>
+    <color name="red">#FFFFFF</color>
     <color name="light_gray">#D3D6DB</color>
 
-
+    <!--RGB(222,43,42)-->
     <color name="text_red">#de2b2a</color>
+    <!--RGB(248,114,1)-->
     <color name="text_orange">#f87201</color>
+    <!--RGB(0,212,195)-->
     <color name="text_green">#00d4c3</color>
+    <!--RGB(71,104,243)-->
     <color name="text_blue">#4768F3</color>
+    <!--rgb(51,51,51)-->
     <color name="text_black">#333333</color>
+    <!--RGB(102,102,102)-->
     <color name="gray">#666666</color>
+    <!--RGB(153,153,153)-->
     <color name="text_gray">#999999</color>
+    <!--RGB(187,187,187)-->
     <color name="text_hint">#bbbbbb</color>
+    <!--(194,194,194)-->
     <color name="border_gray">#c2c2c2</color>
+    <!--RGB(245,245,245)-->
     <color name="bg_gray">#f5f5f5</color>
+    <!--RGB(238,238,238)-->
     <color name="divline_gray">#eeeeee</color>
+    <!--RGB(71,104,243)-->
     <color name="bg_button">#4768F3</color>
+    <!--RGB(239,101,58)-->
     <color name="bg_orange">#ef653a</color>
+    <!--RGB(38,81,245)-->
     <color name="bg_splash">#2651f5</color>
-
+    <!--RGB(71,104,243)-->
     <color name="blue">#4768F3</color>
 
     <color name="black_overlay">#66000000</color>

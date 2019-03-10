@@ -14,7 +14,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="206dp"
             android:background="@color/light_gray"/>
 
         <LinearLayout
@@ -26,26 +26,35 @@
 
             <com.qmuiteam.qmui.widget.QMUIRadiusImageView
                 android:id="@+id/iv_minefrag_headIcon"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="80dp"/>
+                android:layout_width="78dp"
+                android:layout_height="78dp"
+                android:layout_marginTop="70dp"
+                android:src="@drawable/mine_touxiang"/>
 
             <TextView
                 android:id="@+id/tv_minefrag_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="5dp"
                 android:text="188****8888"
                 android:textColor="@color/white"/>
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_height="80dp"
                 app:cardCornerRadius="5dp"
-                app:contentPadding="20dp">
+                app:contentPadding="5dp">
 
-                <include layout="@layout/wallet_remain_layout"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+
+                    <include
+                        layout="@layout/wallet_remain_layout"/>
+                </RelativeLayout>
+
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -53,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 app:cardCornerRadius="5dp"
-                app:contentPadding="5dp">
+                app:contentPadding="3dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -66,23 +75,23 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="5dp"
-                        android:paddingTop="10dp">
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="2dp"
+                        android:paddingTop="8dp">
 
                         <ImageView
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:src="@mipmap/ic_launcher"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/mine_ziliao"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="7dp"
                             android:layout_marginRight="10dp"
                             android:text="我的资料"
-                            android:textSize="20dp"/>
+                            android:textSize="15sp"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -94,7 +103,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_arrow_right_gray"/>
+                            android:src="@drawable/item_next"/>
                     </LinearLayout>
 
                     <include layout="@layout/divline_h"/>
@@ -105,24 +114,24 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="5dp"
-                        android:paddingTop="10dp">
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="2dp"
+                        android:paddingTop="8dp">
 
                         <ImageView
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:src="@mipmap/ic_launcher"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/mine_yijianfankui"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="7dp"
 
                             android:layout_marginRight="10dp"
                             android:text="意见反馈"
-                            android:textSize="20dp"/>
+                            android:textSize="15sp"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -134,7 +143,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_arrow_right_gray"/>
+                            android:src="@drawable/item_next"/>
                     </LinearLayout>
 
                     <include layout="@layout/divline_h"/>
@@ -145,24 +154,24 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="5dp"
-                        android:paddingTop="10dp">
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="2dp"
+                        android:paddingTop="8dp">
 
                         <ImageView
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:src="@mipmap/ic_launcher"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/mine_women"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="7dp"
 
                             android:layout_marginRight="10dp"
                             android:text="关于我们"
-                            android:textSize="20dp"/>
+                            android:textSize="15sp"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -174,7 +183,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_arrow_right_gray"/>
+                            android:src="@drawable/item_next"/>
                     </LinearLayout>
 
                     <include layout="@layout/divline_h"/>
@@ -185,36 +194,38 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="5dp"
-                        android:paddingTop="10dp">
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="2dp"
+                        android:paddingTop="8dp">
 
                         <ImageView
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:src="@mipmap/ic_launcher"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/mine_kefu"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="7dp"
                             android:layout_marginRight="10dp"
                             android:text="客服服务"
-                            android:textSize="20dp"/>
+                            android:textSize="15sp"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginRight="5dp"
                             android:layout_weight="1"
                             android:gravity="right"
+                            android:text="@string/service_phone"
                             android:textColor="@color/gray"
-                            android:text="@string/service_phone"/>
+                            android:textSize="15sp"/>
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_arrow_right_gray"/>
+                            android:src="@drawable/item_next"/>
                     </LinearLayout>
 
                     <include layout="@layout/divline_h"/>
@@ -225,23 +236,23 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingBottom="10dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="5dp"
-                        android:paddingTop="10dp">
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="2dp"
+                        android:paddingTop="8dp">
 
                         <ImageView
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:src="@mipmap/ic_launcher"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/mine_tuichu"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="7dp"
                             android:layout_marginRight="10dp"
                             android:text="退出登录"
-                            android:textSize="20dp"/>
+                            android:textSize="15sp"/>
 
                         <TextView
                             android:layout_width="0dp"
@@ -253,7 +264,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ic_arrow_right_gray"/>
+                            android:src="@drawable/item_next"/>
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>

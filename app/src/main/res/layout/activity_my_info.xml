@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/bg_gray"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_gray">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,13 +17,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:background="@color/white"
-            android:padding="20dp">
+            >
 
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@color/gray"/>
+                android:background="@drawable/wodezilian_jindutiao"
+                android:scaleType="centerCrop"/>
 
             <TextView
                 android:id="@+id/tv_myinfoact_comple"
@@ -44,37 +45,39 @@
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="5dp"
-            android:paddingTop="10dp">
+            android:paddingBottom="8dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="2dp"
+            android:paddingTop="8dp">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/wodeziliao_shenfenrenzheng"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="7dp"
                 android:layout_marginRight="10dp"
                 android:text="身份认证"
-                android:textSize="20dp"/>
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tv_myinfoact_idcard_state"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text="已认证"
-                android:textColor="@color/text_hint"/>
+                android:textColor="@color/text_hint"
+                android:textSize="15sp"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_arrow_right_gray"/>
+                android:src="@drawable/item_next"/>
         </LinearLayout>
 
         <include layout="@layout/divline_h"/>
@@ -86,38 +89,39 @@
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="5dp"
-            android:paddingTop="10dp">
+            android:paddingBottom="8dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="2dp"
+            android:paddingTop="8dp">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/wodeziliao_lianxiren"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-
+                android:layout_marginLeft="7dp"
                 android:layout_marginRight="10dp"
                 android:text="紧急联系人"
-                android:textSize="20dp"/>
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tv_myinfoact_family_state"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text="已认证"
-                android:textColor="@color/text_hint"/>
+                android:textColor="@color/text_hint"
+                android:textSize="15sp"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_arrow_right_gray"/>
+                android:src="@drawable/item_next"/>
         </LinearLayout>
 
         <include layout="@layout/divline_h"/>
@@ -129,38 +133,39 @@
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="5dp"
-            android:paddingTop="10dp">
+            android:paddingBottom="8dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="2dp"
+            android:paddingTop="8dp">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/wodeziliao_yinhangka"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-
+                android:layout_marginLeft="7dp"
                 android:layout_marginRight="10dp"
                 android:text="绑定银行卡"
-                android:textSize="20dp"/>
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tv_myinfoact_bankcard_state"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text="已认证"
-                android:textColor="@color/text_hint"/>
+                android:textColor="@color/text_hint"
+                android:textSize="15sp"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_arrow_right_gray"/>
+                android:src="@drawable/item_next"/>
         </LinearLayout>
 
         <include layout="@layout/divline_h"/>
@@ -172,37 +177,39 @@
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="5dp"
-            android:paddingTop="10dp">
+            android:paddingBottom="8dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="2dp"
+            android:paddingTop="8dp">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/wodeziliao_zhimaxinyong"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="7dp"
                 android:layout_marginRight="10dp"
                 android:text="芝麻信用"
-                android:textSize="20dp"/>
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tv_myinfoact_credit_state"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text="已认证"
-                android:textColor="@color/text_hint"/>
+                android:textColor="@color/text_hint"
+                android:textSize="15sp"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_arrow_right_gray"/>
+                android:src="@drawable/item_next"/>
         </LinearLayout>
 
         <include layout="@layout/divline_h"/>
@@ -214,64 +221,68 @@
             android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="5dp"
-            android:paddingTop="10dp">
+            android:paddingBottom="8dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="2dp"
+            android:paddingTop="8dp">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/wodeziliao_tongxunlu"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="7dp"
                 android:layout_marginRight="10dp"
                 android:text="通讯录认证"
-                android:textSize="20dp"/>
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tv_myinfoact_contacts_state"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="right"
                 android:text="未认证"
-                android:textColor="@color/text_red"/>
+                android:textColor="@color/text_red"
+                android:textSize="15sp"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_arrow_right_gray"/>
+                android:src="@drawable/item_next"/>
         </LinearLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+        <com.qmuiteam.qmui.layout.QMUIButton
             android:id="@+id/btn_myinfoact_commit"
-            android:layout_marginTop="30dp"
+            style="@style/ButtonStyle"
+            android:layout_marginTop="20dp"
             android:text="提交评估"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp">
+            android:gravity="center_horizontal"
+            android:padding="12dp">
 
             <ImageView
                 android:id="@+id/iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_notice_blue"/>
+                android:layout_width="13dp"
+                android:layout_marginTop="2dp"
+                android:layout_height="13dp"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/text_notice"/>
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/iv"
                 android:text="请如实填写信息,虚假信息会直接影响您的借款申请;\n部分信息提交认证后将不能进行修改;"
-                android:textColor="@color/blue"/>
+                android:textColor="@color/blue"
+                android:textSize="12sp"/>
         </RelativeLayout>
     </LinearLayout>
 
