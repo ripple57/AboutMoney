@@ -11,6 +11,7 @@
         android:id="@+id/iv_banKCardFrag_head"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:visibility="gone"
         android:scaleType="centerCrop"
         android:src="@drawable/bangding_banner"/>
 

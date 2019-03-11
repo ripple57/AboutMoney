@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.qmuiteam.qmui.alpha.QMUIAlphaImageButton;
@@ -96,7 +97,7 @@ public abstract class BaseActivity<P extends IPresent> extends XActivity<P> {
         if (isShow) {
             topBar.setTitle(topBarTitle());
             rl_topbar.setVisibility(View.VISIBLE);
-            topBar.setBackgroundAlpha(30);//透明后跟rltopbar颜色相同
+            topBar.setBackgroundAlpha(0);//透明后跟rltopbar颜色相同
             int statusbarHeight = QMUIStatusBarHelper.getStatusbarHeight(this);//获取状态栏高度
             rl_topbar.setPadding(0, statusbarHeight, 0, 0);//tapbar下移,漏出状态栏,形成沉浸式
             setTopBarTransparent(topBarIsTransparent());
@@ -132,6 +133,25 @@ public abstract class BaseActivity<P extends IPresent> extends XActivity<P> {
 
         topBar_left_back.setVisibility(isShowBack ? View.VISIBLE : View.GONE);
 
+    }
+
+    public void addRightText(String string) {
+        Button rightButton = topBar.addRightTextButton(string, -1);
+        rightButton.setTextColor(getResources().getColor(R.color.white));
+        RelativeLayout.LayoutParams layoutParams = topBar.generateTopBarTextButtonLayoutParams();
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        rightButton.setLayoutParams(layoutParams);//topbar垂直居中
+        rightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clickRightText();
+            }
+        });
+
+    }
+
+    public void clickRightText() {
     }
 
     protected boolean topBarIsTransparent() {

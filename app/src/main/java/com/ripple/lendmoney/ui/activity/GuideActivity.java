@@ -25,8 +25,6 @@ import com.ripple.lendmoney.utils.BitmapPhotoUtil;
 import com.ripple.lendmoney.utils.LogUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
 
-import org.greenrobot.eventbus.Subscribe;
-
 import java.io.File;
 import java.util.HashMap;
 
@@ -71,7 +69,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button1:
-               SplashActivity.launch(this);
+                SplashActivity.launch(this);
                 break;
             case R.id.button2:
                 Router.newIntent(this).to(MainActivity.class).launch();
@@ -106,6 +104,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 AssessActivity.launch(this);
                 break;
             case R.id.button12:
+                AuthenticateInfoActivity.launch(this);
                 break;
         }
     }
@@ -260,25 +259,5 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 .launch();
     }
 
-    @Override
-    public boolean useEventBus() {
-        return true;
-    }
 
-    @Subscribe
-    public void event(OrderEvent event) {
-        LogUtils.e("OrderEvent.tag" + event.getTag());
-    }
-
-    @Override
-    public void bindEvent() {
-        BusProvider.getBus().toFlowable(OrderEvent.class).subscribe(new Consumer<OrderEvent>() {
-            @Override
-            public void accept(OrderEvent event) throws Exception {
-                LogUtils.e("这是哪里---------------------");
-
-
-            }
-        });
-    }
 }

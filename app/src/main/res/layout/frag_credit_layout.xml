@@ -12,6 +12,7 @@
         android:layout_height="150dp"
         android:scaleType="centerCrop"
         android:src="@drawable/zhimaxinyong_banner"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

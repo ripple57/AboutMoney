@@ -3,16 +3,18 @@ package com.ripple.lendmoney.ui.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.widget.ImageView;
 
 import com.qmuiteam.qmui.widget.QMUIViewPager;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.base.GlobleParms;
-import com.ripple.lendmoney.ui.fragment.FamilyFragment;
 import com.ripple.lendmoney.ui.fragment.BankCardFragment;
 import com.ripple.lendmoney.ui.fragment.ContactsFragment;
 import com.ripple.lendmoney.ui.fragment.CreditFragment;
+import com.ripple.lendmoney.ui.fragment.FamilyFragment;
 import com.ripple.lendmoney.ui.fragment.IdCardFragment;
 
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ import cn.droidlover.xdroidmvp.router.Router;
 public class AuthenticateActivity extends BaseActivity {
 
 
+    @BindView(R.id.iv_authenInfoAct_head)
+    ImageView ivAuthenInfoActHead;
     @BindView(R.id.vp_authenticateActivity)
     QMUIViewPager authenticateViewPager;
     private List<Fragment> fragmentList = new ArrayList<>();
@@ -50,6 +54,29 @@ public class AuthenticateActivity extends BaseActivity {
         fragmentType = getIntent().getIntExtra(Constant.PARAM_FRAGMENTTYPE, 0);
 
         initAuthenticateViewPager();
+        authenticateViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case Constant.TYPE_IDCARDFRAG:
+                        ivAuthenInfoActHead.setImageResource(R.drawable.shenfenrenzheng_banner);
+                        break;
+                    case Constant.TYPE_FAMILYFRAG:
+                        ivAuthenInfoActHead.setImageResource(R.drawable.lianxiren_banner);
+                        break;
+                    case Constant.TYPE_BANKCARDFRAG:
+                        ivAuthenInfoActHead.setImageResource(R.drawable.bangding_banner);
+                        break;
+                    case Constant.TYPE_CREDITFRAG:
+                        ivAuthenInfoActHead.setImageResource(R.drawable.zhimaxinyong_banner);
+                        break;
+                    case Constant.TYPE_CONTACTSFRAG:
+                        ivAuthenInfoActHead.setImageResource(R.drawable.tongxunlu_banner);
+                        break;
+                }
+
+            }
+        });
     }
 
     private void initAuthenticateViewPager() {
@@ -113,6 +140,7 @@ public class AuthenticateActivity extends BaseActivity {
 
     /**
      * 已认证过,进来修改认证信息
+     *
      * @param activity
      * @param fragmentType
      */

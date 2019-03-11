@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitStart"
-            android:src="@mipmap/splash_bg"/>
+            android:src="@drawable/splash_bg"/>
 
         <TextView
             android:id="@+id/tv_splash_second"

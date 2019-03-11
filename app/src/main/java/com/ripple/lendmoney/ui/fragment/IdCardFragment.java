@@ -27,8 +27,8 @@ import butterknife.OnClick;
 public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
 
 
-    @BindView(R.id.iv_idcardFrag_head)
-    ImageView ivIdcardFragHead;
+//    @BindView(R.id.iv_idcardFrag_head)
+//    ImageView ivIdcardFragHead;
     @BindView(R.id.iv_idcardFrag_idcard_front)
     ImageView ivIdcardFragIdcardFront;
     @BindView(R.id.iv_idcardFrag_idcard_back)

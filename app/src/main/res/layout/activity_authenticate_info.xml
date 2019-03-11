@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <include layout="@layout/divbg_h_10"/>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp">
+
+            <View
+                android:id="@+id/v_shenfen"
+                android:layout_width="2dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/bg_orange"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_shenfen_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="身份认证"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/v_shenfen"
+                app:layout_constraintStart_toEndOf="@id/v_shenfen"/>
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_idEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="编辑"
+                android:textColor="@color/text_gray"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_shenfen_1"/>
+
+            <TextView
+                android:id="@+id/tv_shenfen_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="真实姓名："
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/tv_shenfen_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_shenfen_1"/>
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_idName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="张某某"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/tv_shenfen_2"
+                app:layout_constraintStart_toEndOf="@id/tv_shenfen_2"/>
+
+            <TextView
+                android:id="@+id/tv_shenfen_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="身份证号："
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/tv_shenfen_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_shenfen_2"/>
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_idNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="140535199811122254"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/tv_shenfen_3"
+                app:layout_constraintStart_toEndOf="@id/tv_shenfen_3"/>
+
+            <TextView
+                android:id="@+id/tv_shenfen_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="身份证照片"
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/tv_shenfen_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_shenfen_3"/>
+
+            <ImageView
+                android:id="@+id/iv_authenInfoAct_idFront"
+                android:layout_width="127dp"
+                android:layout_height="81dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/renzhengxinxi_icon_zhengmian"
+                app:layout_constraintEnd_toStartOf="@id/iv_authenInfoAct_idBack"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_shenfen_4"/>
+
+            <ImageView
+                android:id="@+id/iv_authenInfoAct_idBack"
+                android:layout_width="127dp"
+                android:layout_height="81dp"
+                android:src="@drawable/renzhengxinxi_icon_fanmian"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_authenInfoAct_idFront"
+                app:layout_constraintTop_toTopOf="@id/iv_authenInfoAct_idFront"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <include
+            layout="@layout/divbg_h_10"/>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp">
+
+            <View
+                android:id="@+id/v_lianxiren"
+                android:layout_width="2dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/bg_orange"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_lianxiren_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="紧急联系人"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/v_lianxiren"
+                app:layout_constraintStart_toEndOf="@id/v_lianxiren"
+              />
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_familyEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="编辑"
+                android:textColor="@color/text_gray"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_lianxiren_1"/>
+
+            <TextView
+                android:id="@+id/tv_lianxiren_0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="* 直系亲属"
+                android:textColor="@color/text_orange"
+                app:layout_constraintStart_toStartOf="@id/tv_lianxiren_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_lianxiren_1"/>
+
+            <TextView
+                android:id="@+id/tv_lianxiren_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="与本人关系："
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/tv_lianxiren_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_lianxiren_0"/>
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_familyDirect_relation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="父子"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/tv_lianxiren_2"
+                app:layout_constraintStart_toEndOf="@id/tv_lianxiren_2"/>
+
+            <TextView
+                android:id="@+id/tv_lianxiren_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="亲属姓名："
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/tv_lianxiren_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_lianxiren_2"/>
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_familyDirect_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="张三"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/tv_lianxiren_3"
+                app:layout_constraintStart_toEndOf="@id/tv_lianxiren_3"/>
+
+            <TextView
+                android:id="@+id/tv_lianxiren_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="联系电话："
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/tv_lianxiren_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_lianxiren_3"/>
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_familyDirect_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="13000000000"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/tv_lianxiren_4"
+                app:layout_constraintStart_toEndOf="@id/tv_lianxiren_4"/>
+
+            <View
+                android:id="@+id/v_shenfen_div"
+                layout="@layout/divline_h"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/divline_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_lianxiren_4"/>
+
+            <TextView
+                android:id="@+id/tv_lianxiren_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="* 紧急联系人"
+                android:textColor="@color/text_orange"
+                app:layout_constraintStart_toStartOf="@id/tv_lianxiren_1"
+                app:layout_constraintTop_toBottomOf="@id/v_shenfen_div"/>
+
+            <TextView
+                android:id="@+id/tv_lianxiren_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="与本人关系："
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/tv_lianxiren_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_lianxiren_5"/>
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_familyContact_relation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="父子"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/tv_lianxiren_6"
+                app:layout_constraintStart_toEndOf="@id/tv_lianxiren_6"/>
+
+            <TextView
+                android:id="@+id/tv_lianxiren_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="联系人姓名："
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/tv_lianxiren_6"
+                app:layout_constraintTop_toBottomOf="@id/tv_lianxiren_6"/>
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_familyContact_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="张三"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/tv_lianxiren_7"
+                app:layout_constraintStart_toEndOf="@id/tv_lianxiren_7"/>
+
+            <TextView
+                android:id="@+id/tv_lianxiren_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="联系电话："
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/tv_lianxiren_7"
+                app:layout_constraintTop_toBottomOf="@id/tv_lianxiren_7"/>
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_familyContact_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="13000000000"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/tv_lianxiren_8"
+                app:layout_constraintStart_toEndOf="@id/tv_lianxiren_8"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <include layout="@layout/divbg_h_10"/>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp">
+
+            <View
+                android:id="@+id/v_bank"
+                android:layout_width="2dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/bg_orange"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_bank_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="绑定银行卡"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/v_bank"
+                app:layout_constraintStart_toEndOf="@id/v_bank"
+               />
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_bankEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="编辑"
+                android:textColor="@color/text_gray"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_bank_1"/>
+
+            <TextView
+                android:id="@+id/tv_bank_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="银行卡号："
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/tv_bank_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_bank_1"/>
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_bankNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15646311351313543"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/tv_bank_2"
+                app:layout_constraintStart_toEndOf="@id/tv_bank_2"/>
+
+            <TextView
+                android:id="@+id/tv_bank_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="开户行："
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/tv_bank_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_bank_2"/>
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_bankAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="北京"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/tv_bank_3"
+                app:layout_constraintStart_toEndOf="@id/tv_bank_3"/>
+
+            <TextView
+                android:id="@+id/tv_bank_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="预留手机："
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/tv_bank_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_bank_3"/>
+
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_bankPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="18888888888"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/tv_bank_4"
+                app:layout_constraintStart_toEndOf="@id/tv_bank_4"/>
+        </android.support.constraint.ConstraintLayout>
+
+        <include
+            layout="@layout/divbg_h_10"/>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp">
+
+            <View
+                android:id="@+id/v_credit"
+                android:layout_width="2dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/bg_orange"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_credit_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="芝麻信用"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/v_credit"
+                app:layout_constraintStart_toEndOf="@id/v_credit"
+               />
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_creditEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="编辑"
+                android:textColor="@color/text_gray"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_credit_1"/>
+
+            <TextView
+                android:id="@+id/tv_credit_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="芝麻信用分信息截图"
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/tv_credit_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_credit_1"/>
+
+
+            <ImageView
+                android:id="@+id/iv_authenInfoAct_creditFront"
+                android:layout_width="128dp"
+                android:layout_height="205dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/renzhengxinxi_icon_gerenxinxi"
+                app:layout_constraintEnd_toStartOf="@id/iv_authenInfoAct_creditBack"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_credit_2"/>
+
+            <ImageView
+                android:id="@+id/iv_authenInfoAct_creditBack"
+                android:layout_width="128dp"
+                android:layout_height="205dp"
+                android:src="@drawable/renzhengxinxi_icon_zhimaxinyong"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_authenInfoAct_creditFront"
+                app:layout_constraintTop_toTopOf="@id/iv_authenInfoAct_creditFront"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <include layout="@layout/divbg_h_10"/>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp">
+
+            <View
+                android:id="@+id/v_contact"
+                android:layout_width="2dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/bg_orange"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:id="@+id/tv_contact_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="通讯录认证"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/v_contact"
+                app:layout_constraintStart_toEndOf="@id/v_contact"
+               />
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_contactEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="编辑"
+                android:textColor="@color/text_gray"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_contact_1"/>
+
+            <TextView
+                android:id="@+id/tv_contact_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="通讯录访问权限："
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="@id/tv_contact_1"
+                app:layout_constraintTop_toBottomOf="@id/tv_contact_1"/>
+
+            <TextView
+                android:id="@+id/tv_authenInfoAct_contactState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已获取"
+                android:textColor="@color/gray"
+                app:layout_constraintBottom_toBottomOf="@id/tv_contact_2"
+                app:layout_constraintStart_toEndOf="@id/tv_contact_2"/>
+        </android.support.constraint.ConstraintLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_gray">
+
+            <Button
+                android:id="@+id/btn_authenInfoAct_commit"
+                style="@style/ButtonStyle"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp"
+                android:text="提交信息"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

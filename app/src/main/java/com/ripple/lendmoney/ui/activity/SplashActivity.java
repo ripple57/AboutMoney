@@ -164,18 +164,18 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
         mViews = new ArrayList<View>();
         ImageView view1 = new ImageView(this);
         view1.setScaleType(ImageView.ScaleType.FIT_XY);
-        view1.setImageResource(R.mipmap.splash_bg);
+        view1.setImageResource(R.drawable.splash_bg);
 
         ImageView view2 = new ImageView(this);
-        view2.setImageResource(R.mipmap.splash_bg);
+        view2.setImageResource(R.drawable.splash_bg);
         view2.setScaleType(ImageView.ScaleType.FIT_XY);
 
         ImageView view3 = new ImageView(this);
-        view3.setImageResource(R.mipmap.splash_bg);
+        view3.setImageResource(R.drawable.splash_bg);
         view3.setScaleType(ImageView.ScaleType.FIT_XY);
 
         ImageView view4 = new ImageView(this);
-        view4.setImageResource(R.mipmap.splash_bg);
+        view4.setImageResource(R.drawable.splash_bg);
         view4.setScaleType(ImageView.ScaleType.FIT_XY);
 
         mViews.add(view1);

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Button10"
+        android:text="打借条"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button7"/>
 
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Button11"
+        android:text="智能评估"
         app:layout_constraintStart_toEndOf="@+id/button10"
         app:layout_constraintTop_toTopOf="@+id/button10"/>
 
@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="104dp"
-        android:text="Button12"
+        android:text="认证信息"
         app:layout_constraintStart_toEndOf="@+id/button10"
         app:layout_constraintTop_toTopOf="@+id/button10"/>
 
@@ -129,7 +129,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Button9"
+        android:text="产生新订单"
         app:layout_constraintStart_toEndOf="@+id/button8"
         app:layout_constraintTop_toTopOf="@+id/button8"/>
 

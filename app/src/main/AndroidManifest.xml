@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest package="com.ripple.lendmoney"
           xmlns:android="http://schemas.android.com/apk/res/android">
+
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -20,9 +21,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateHidden|adjustResize">
-        <activity android:name=".ui.activity.AssessActivity">
+        <activity
+            android:name=".ui.activity.AssessActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
-        <activity android:name=".ui.activity.MakeIOUActivity">
+        <activity
+            android:name=".ui.activity.MakeIOUActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity
             android:name=".ui.activity.AuthenticateActivity"
@@ -32,18 +37,23 @@
             android:name=".ui.activity.LoginActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
-        <activity android:name=".ui.activity.WebActivity">
+        <activity
+            android:name=".ui.activity.WebActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity android:name=".ui.activity.GuideActivity">
+
+        </activity>
+        <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.SplashActivity">
-        </activity>
-        <activity android:name=".ui.activity.MainActivity">
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:launchMode="singleTask">
         </activity>
 
         <provider
@@ -65,9 +75,15 @@
 
         <activity android:name=".ui.activity.FaceRecognitionActivity">
         </activity>
-        <activity android:name=".ui.activity.SuggestActivity">
+        <activity
+            android:name=".ui.activity.SuggestActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity android:name=".ui.activity.MyInfoActivity">
+        </activity>
+        <activity
+            android:name=".ui.activity.AuthenticateInfoActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
     </application>
 

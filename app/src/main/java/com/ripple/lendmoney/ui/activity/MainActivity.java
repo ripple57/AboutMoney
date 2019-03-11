@@ -22,17 +22,17 @@ import com.ripple.lendmoney.ui.fragment.MineFragment;
 import com.ripple.lendmoney.ui.fragment.OrderFragment;
 import com.ripple.lendmoney.utils.AppManager;
 import com.ripple.lendmoney.utils.BottomNavigationViewHelper;
+import com.ripple.lendmoney.utils.LogUtils;
 
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import cn.droidlover.xdroidmvp.base.XFragmentAdapter;
-import cn.droidlover.xdroidmvp.event.BusProvider;
 import cn.droidlover.xdroidmvp.router.Router;
-import io.reactivex.functions.Consumer;
 
 public class MainActivity extends BaseActivity<MainPresent> {
 
@@ -62,6 +62,8 @@ public class MainActivity extends BaseActivity<MainPresent> {
 
 
     private void initView() {
+        homeVp.setOffscreenPageLimit(3);
+        homeVp.setSwipeable(false);
 
         //获取整个的NavigationView
         BottomNavigationMenuView menuView = (BottomNavigationMenuView) homeBottomView.getChildAt(0);
@@ -72,11 +74,8 @@ public class MainActivity extends BaseActivity<MainPresent> {
         //添加到Tab上
         itemView.addView(badge);
         point = badge.findViewById(R.id.iv_bottom_point);
-
-
+//        homeBottomView.setItemIconTintList(null);
         BottomNavigationViewHelper.disableShiftMode(homeBottomView);
-        homeVp.setOffscreenPageLimit(3);
-        homeVp.setSwipeable(false);
         homeBottomView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -92,6 +91,7 @@ public class MainActivity extends BaseActivity<MainPresent> {
                         setTopBarIsShow(true);
                         setTopBarIsShowBack(false);
                         setTopBarTitle("订单列表");
+                        addRightText("测试");
                         break;
 
                     case R.id.bottom_mine:
@@ -109,6 +109,10 @@ public class MainActivity extends BaseActivity<MainPresent> {
 
     }
 
+    @Override
+    public void clickRightText() {
+        GuideActivity.launch(this);
+    }
 
     @Override
     protected boolean topBarIsShow() {
@@ -165,20 +169,13 @@ public class MainActivity extends BaseActivity<MainPresent> {
 
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void event(OrderEvent event) {
         point.setVisibility(View.VISIBLE);
+        LogUtils.e("收到订单事件");
+
     }
 
-    @Override
-    public void bindEvent() {
-        BusProvider.getBus().toFlowable(OrderEvent.class).subscribe(new Consumer<OrderEvent>() {
-            @Override
-            public void accept(OrderEvent event) throws Exception {
-                point.setVisibility(View.VISIBLE);
-            }
-        });
-    }
 
     @Override
     public boolean useEventBus() {
