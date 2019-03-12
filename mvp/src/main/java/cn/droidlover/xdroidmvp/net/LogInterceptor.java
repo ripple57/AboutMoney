@@ -35,7 +35,7 @@ public class LogInterceptor implements Interceptor {
             String url = request.url().toString();
             Headers headers = request.headers();
 
-            XLog.e(TAG, "url : " + url);
+            XLog.e(TAG, "url : " + url+"?"+bodyToString(request));
             XLog.d(TAG, "method : " + request.method());
             if (headers != null && headers.size() > 0) {
                 XLog.d(TAG, "headers : " + headers.toString());
@@ -45,7 +45,8 @@ public class LogInterceptor implements Interceptor {
                 MediaType mediaType = requestBody.contentType();
                 if (mediaType != null) {
                     if (isText(mediaType)) {
-                        XLog.d(TAG, "params : " + bodyToString(request));
+                        String bodyToString = bodyToString(request);
+                        XLog.d(TAG, "网络请求:   " +url+"?"+ bodyToString);
                     } else {
                         XLog.d(TAG, "params : " + " maybe [file part] , too large too print , ignored!");
                     }

@@ -54,21 +54,27 @@ public class XLog {
             XPrinter.println(logLevel, TextUtils.isEmpty(tag) ? TAG_ROOT : tag, formatMsg);
         }
     }
+    private static void msgd(int logLevel, String tag, String format) {
+        if (LOG) {
+            String formatMsg = LogFormat.formatBorder(new String[]{format});
+            XPrinter.println(logLevel, TextUtils.isEmpty(tag) ? TAG_ROOT : tag, formatMsg);
+        }
+    }
 
     public static void d(String msg, Object... args) {
         msg(Log.DEBUG, null, msg, args);
     }
 
-    public static void d(String tag, String msg, Object... args) {
-        msg(Log.DEBUG, tag, msg, args);
+    public static void d(String tag, String msg) {
+        msgd(Log.DEBUG, tag, msg);
     }
 
     public static void e(String msg, Object... args) {
-        msg(Log.ERROR, null, msg, args);
+        msg(Log.ERROR, null, msg);
     }
 
     public static void e(String tag, String msg, Object... args) {
-        msg(Log.ERROR, tag, msg, args);
+        msgd(Log.ERROR, tag, msg);
     }
 
 }

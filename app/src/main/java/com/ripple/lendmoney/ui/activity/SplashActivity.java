@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
+import com.ripple.lendmoney.base.Constant;
+import com.ripple.lendmoney.base.GlobleParms;
 import com.ripple.lendmoney.present.SplashPresent;
 import com.ripple.lendmoney.utils.AppManager;
 import com.ripple.lendmoney.utils.SPUtils;
@@ -101,25 +104,25 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
     private void getLoginPermission() {
         getRxPermissions().request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.READ_PHONE_STATE,
-                Manifest.permission.CAMERA)
+                Manifest.permission.READ_PHONE_STATE)
                 .subscribe(granted -> {
                     if (granted) {// 用户已经同意该权限
                         hadLogin();
                     } else {// 用户拒绝了该权限，并且选中『不再询问』
                         ToastUtil.showToast("为了更好地为您服务,请自行前往权限管理打开相应权限");
+                        getLoginPermission();
                     }
                 });
     }
 
     private void hadLogin() {//读取缓存来判断是否已经登录
-        boolean tempLogin = true;
-        if (tempLogin) {
-            MainActivity.launch(this);
+        GlobleParms.sessionId = SPUtils.getInstance(this).getValue(Constant.SESSIONID, "");
+        if (TextUtils.isEmpty(GlobleParms.sessionId)) {
+            LoginActivity.launch(this, false);
         } else {
-            LoginActivity.launch(this,false);
+            MainActivity.launch(this);
         }
-       finish();
+        finish();
     }
 
     private void isFirstEnter() {

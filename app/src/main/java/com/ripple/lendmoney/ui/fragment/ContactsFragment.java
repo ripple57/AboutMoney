@@ -87,7 +87,7 @@ public class ContactsFragment extends BaseLazyFragment<ContactsFragPresent> {
                         if (aBoolean) {
                             List<ContactsBean> contacts = getContacts();
                             String jsonString = JSONArray.toJSONString(contacts);
-                            getP().uploadContacts(jsonString);
+                            getP().uploadContacts(context,jsonString);
                         } else {
                             getvDelegate().toastShort("亲，同意了权限才能更好的使用软件哦");
                         }

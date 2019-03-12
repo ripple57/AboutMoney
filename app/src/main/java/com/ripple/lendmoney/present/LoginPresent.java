@@ -1,14 +1,19 @@
 package com.ripple.lendmoney.present;
 
-import com.ripple.lendmoney.base.BasePresent;
-import com.ripple.lendmoney.http.RetrofitManager;
-import com.ripple.lendmoney.http.URLConfig;
-import com.ripple.lendmoney.model.LoginBean;
-import com.ripple.lendmoney.ui.activity.LoginActivity;
+import android.content.Context;
 
-import cn.droidlover.xdroidmvp.net.ApiSubscriber;
+import com.ripple.lendmoney.base.BasePresent;
+import com.ripple.lendmoney.http.HttpUtils;
+import com.ripple.lendmoney.http.MyCallBack;
+import com.ripple.lendmoney.http.MyMessage;
+import com.ripple.lendmoney.http.URLConfig;
+import com.ripple.lendmoney.model.UserBean;
+import com.ripple.lendmoney.ui.activity.LoginActivity;
+import com.ripple.lendmoney.utils.PhoneInfoUtil;
+
+import java.util.HashMap;
+
 import cn.droidlover.xdroidmvp.net.NetError;
-import cn.droidlover.xdroidmvp.net.XApi;
 
 /*****************************************************
  * 作者: HuangShaobo on 2019/2/25 20:26.
@@ -18,42 +23,41 @@ import cn.droidlover.xdroidmvp.net.XApi;
  *****************************************************/
 public class LoginPresent extends BasePresent<LoginActivity> {
 
-    public void login(String phoneNum, String code) {
-        RetrofitManager.getInstance().getApiService(URLConfig.BASE_URL).login(phoneNum, code)
-                .compose(XApi.<LoginBean>getApiTransformer())
-                .compose(XApi.<LoginBean>getScheduler())
-                .compose(getV().<LoginBean>bindToLifecycle())
-                .subscribe(new ApiSubscriber<LoginBean>() {
-                    @Override
-                    protected void onFail(NetError error) {
-                        getV().setRetryView(error);
-                    }
-
-                    @Override
-                    protected void onSuccess(LoginBean loginBean) {
-                        getV().loginSuccess();
-                    }
-                });
-        getV().loginSuccess();
+    public void login(Context context, String phoneNum, String code, String lat, String lon) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("userName", phoneNum);
+        map.put("valiCode", code);
+        map.put("lon", lon);
+        map.put("lat", lat);
+        map.put("location", "");
+        map.put("sessionId", PhoneInfoUtil.getSessionId(context, phoneNum));
+        HttpUtils.post(context, URLConfig.appLogin, map, new MyCallBack<UserBean>() {
+            @Override
+            public void onMySuccess(UserBean bean, MyMessage message) {
+                getV().loginSuccess(bean);
+            }
+        });
     }
 
-    public void getCode(String phoneNum) {
-        getV().sendCodeSuccess();
-//        RetrofitManager.getInstance().getApiService(URLConfig.BASE_URL).getCaptcha(phoneNum)
-//                .compose(XApi.<BaseModel>getApiTransformer())
-//                .compose(XApi.<BaseModel>getScheduler())
-//                .compose(getV().<BaseModel>bindToLifecycle())
-//                .subscribe(new ApiSubscriber<BaseModel>() {
-//                    @Override
-//                    protected void onFail(NetError error) {
-//
-//                    }
-//
-//                    @Override
-//                    protected void onSuccess(BaseModel baseModel) {
-//
-//                    }
-//                });
+    public void getCode(Context context, String phoneNum) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("userName", phoneNum);
+        HttpUtils.post(context, URLConfig.sendCodeForLogin, map, new MyCallBack<Void>() {
+            @Override
+            public void onMySuccess(Void bean, MyMessage message) {
+                getV().sendCodeSuccess();
+            }
 
+            @Override
+            public void onMyFailure(MyMessage message) {
+                super.onMyFailure(message);
+                getV().sendCodeFailed();
+            }
+
+            @Override
+            public void onError(NetError error) {
+                getV().sendCodeFailed();
+            }
+        });
     }
 }

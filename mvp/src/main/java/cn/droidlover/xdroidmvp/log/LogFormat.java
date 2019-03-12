@@ -161,7 +161,7 @@ public class LogFormat {
                 borderedMsgBuilder.append(XPrinter.lineSeparator);
             }
             String line = lines[i];
-            borderedMsgBuilder.append(VERTICAL_BORDER_CHAR).append(line);
+            borderedMsgBuilder.append("").append(line);
         }
         return borderedMsgBuilder.toString();
     }

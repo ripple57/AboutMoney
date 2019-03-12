@@ -2,6 +2,7 @@ package com.ripple.lendmoney.ui.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.location.Location;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -13,8 +14,12 @@ import android.widget.TextView;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.base.Constant;
+import com.ripple.lendmoney.base.GlobleParms;
 import com.ripple.lendmoney.http.URLConfig;
+import com.ripple.lendmoney.model.UserBean;
 import com.ripple.lendmoney.present.LoginPresent;
+import com.ripple.lendmoney.utils.GPSUtils;
+import com.ripple.lendmoney.utils.SPUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
 
 import java.util.concurrent.TimeUnit;
@@ -44,6 +49,8 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
     private String phoneNum;
     private Disposable mdDisposable;
     private boolean need_back;
+    private String lat = "";
+    private String lon = "";
 
     @Override
     protected String topBarTitle() {
@@ -74,7 +81,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
                 break;
             case R.id.btn_login_login:
                 getRxPermissions()
-                        .request(Manifest.permission.READ_PHONE_STATE)
+                        .request(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_WIFI_STATE)
                         .subscribe(granted -> {
                             if (granted) {//同意
                                 login();
@@ -105,7 +112,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
         } else if (TextUtils.isEmpty(code) || code.length() != 6) {
             ToastUtil.showToast("请输入6位验证码");
         } else {
-            getP().login(phoneNum, code);
+            getP().login(this, phoneNum, code, lat, lon);
         }
     }
 
@@ -114,14 +121,14 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
         if (TextUtils.isEmpty(phoneNum)) {
             ToastUtil.showToast("请输入手机号码");
             return;
-        } else if (!phoneNum.matches("^1[34578]\\d{9}$")) {
+        } else if (!phoneNum.matches(Constant.REG_PHONE)) {
             ToastUtil.showToast("请输入正确的手机号");
             return;
         } else {
             btn_login_getcode.setClickable(false);
             btn_login_getcode.setText("正在发送");
             long tel = Long.parseLong(phoneNum.substring(1)) * 8;
-            getP().getCode(phoneNum);
+            getP().getCode(this, tel + "");
         }
 
     }
@@ -154,6 +161,26 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
     @Override
     public void initData(Bundle savedInstanceState) {
         need_back = getIntent().getBooleanExtra("need_back", false);
+        getRxPermissions()
+                .request(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
+                .subscribe(granted -> {
+                    if (granted) {//同意
+                        GPSUtils.getInstance(this).getLngAndLat(new GPSUtils.OnLocationResultListener() {
+                            @Override
+                            public void onLocationResult(Location location) {
+
+                            }
+
+                            @Override
+                            public void OnLocationChange(Location location) {
+                                lat = location.getLatitude() + "";
+                                lon = location.getLongitude() + "";
+                            }
+                        });
+                    } else {//拒绝
+                        ToastUtil.showToast("亲，同意了权限才能更好的为您服务哦");
+                    }
+                });
     }
 
 
@@ -173,6 +200,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
         if (mdDisposable != null) {
             mdDisposable.dispose();
         }
+        GPSUtils.getInstance(this).removeListener();
     }
 
     public static void launch(Activity activity, boolean needBack) {
@@ -182,13 +210,21 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
                 .launch();
     }
 
-    public void loginSuccess() {
+    public void loginSuccess(UserBean bean) {
+        GlobleParms.sessionId = bean.getSessionId();
+        GlobleParms.userName = bean.getUserName();
+        SPUtils.getInstance(this).save(Constant.SESSIONID, GlobleParms.sessionId);
         if (need_back) {
             finish();
         } else {
             MainActivity.launch(this);
             finish();
         }
+    }
+
+    public void sendCodeFailed() {
+        btn_login_getcode.setText("获取验证码");
+        btn_login_getcode.setClickable(true);
     }
 }
 

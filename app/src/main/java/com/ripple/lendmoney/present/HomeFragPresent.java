@@ -1,6 +1,6 @@
 package com.ripple.lendmoney.present;
 
-import android.content.Context;
+import android.app.Activity;
 
 import com.ripple.lendmoney.base.BasePresent;
 import com.ripple.lendmoney.http.HttpUtils;
@@ -8,12 +8,12 @@ import com.ripple.lendmoney.http.MyCallBack;
 import com.ripple.lendmoney.http.MyMessage;
 import com.ripple.lendmoney.http.RetrofitManager;
 import com.ripple.lendmoney.http.URLConfig;
+import com.ripple.lendmoney.model.IndexBean;
 import com.ripple.lendmoney.model.TestBean;
 import com.ripple.lendmoney.ui.fragment.HomeFragment;
 import com.ripple.lendmoney.utils.LogUtils;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import cn.droidlover.xdroidmvp.net.ApiSubscriber;
 import cn.droidlover.xdroidmvp.net.NetError;
@@ -26,22 +26,6 @@ import cn.droidlover.xdroidmvp.net.XApi;
  * 作用: 
  *****************************************************/
 public class HomeFragPresent extends BasePresent<HomeFragment> {
-
-
-    public void test(Context context) {
-
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("versionNo", 120);
-        map.put("versionType", "android");
-        HttpUtils.getDialog(context, "inter/index/checkVersion.do", map, new MyCallBack<Map<String,Object>>() {
-            @Override
-            public void onMySuccess(Map<String, Object> bean, MyMessage message) {
-
-            }
-        });
-
-    }
-
 
     public void test1() {
         HashMap<String, Object> map = new HashMap<>();
@@ -63,5 +47,14 @@ public class HomeFragPresent extends BasePresent<HomeFragment> {
                         //                        getV().refreshHome.finishRefresh();
                     }
                 });
+    }
+
+    public void getHomeData(Activity context) {
+        HttpUtils.post(context, URLConfig.index, null, new MyCallBack<IndexBean>() {
+            @Override
+            public void onMySuccess(IndexBean bean, MyMessage message) {
+                getV().setHomeData(bean);
+            }
+        });
     }
 }

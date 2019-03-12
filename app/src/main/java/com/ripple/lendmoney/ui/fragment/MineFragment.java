@@ -12,9 +12,14 @@ import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.ripple.lendmoney.R;
+import com.ripple.lendmoney.base.Constant;
+import com.ripple.lendmoney.base.GlobleParms;
 import com.ripple.lendmoney.present.MinePresent;
+import com.ripple.lendmoney.ui.activity.LoginActivity;
 import com.ripple.lendmoney.ui.activity.MyInfoActivity;
 import com.ripple.lendmoney.ui.activity.SuggestActivity;
+import com.ripple.lendmoney.utils.AppManager;
+import com.ripple.lendmoney.utils.SPUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -132,6 +137,8 @@ public class MineFragment extends XLazyFragment<MinePresent> implements OnRefres
                             @Override
                             public void onClick(QMUIDialog dialog, int index) {
                                 dialog.dismiss();
+                                SPUtils.getInstance(context).remove(Constant.SESSIONID);
+                                GlobleParms.sessionId = "";
                                 getP().userExit();
                             }
                         }).show();
@@ -154,5 +161,7 @@ public class MineFragment extends XLazyFragment<MinePresent> implements OnRefres
 
     public void exitSuccess() {
         ToastUtil.showToast("用户已经退出了!");
+        LoginActivity.launch(context,false);
+        AppManager.getAppManager().finishAllActivity();
     }
 }

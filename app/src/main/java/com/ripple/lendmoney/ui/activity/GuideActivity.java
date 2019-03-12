@@ -20,13 +20,17 @@ import com.ripple.lendmoney.event.OrderEvent;
 import com.ripple.lendmoney.http.HttpUtils;
 import com.ripple.lendmoney.http.MyCallBack;
 import com.ripple.lendmoney.http.MyMessage;
+import com.ripple.lendmoney.http.URLConfig;
 import com.ripple.lendmoney.present.GuidePresent;
 import com.ripple.lendmoney.utils.BitmapPhotoUtil;
 import com.ripple.lendmoney.utils.LogUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -62,6 +66,8 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
     Button button11;
     @BindView(R.id.button12)
     Button button12;
+    private Uri videoUri;
+    private int TAKE_VIDEO;
 
 
     @OnClick({R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6
@@ -69,13 +75,13 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button1:
-                SplashActivity.launch(this);
+                doPickPhotoFromGallery();
                 break;
             case R.id.button2:
-                Router.newIntent(this).to(MainActivity.class).launch();
+                doTakePhoto();
                 break;
             case R.id.button3:
-                Router.newIntent(this).to(LoginActivity.class).launch();
+                upLoadPictures(files);
                 break;
             case R.id.button4:
                 LogUtils.e("++++++++++点击了测试网页");
@@ -107,6 +113,12 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 AuthenticateInfoActivity.launch(this);
                 break;
         }
+    }
+
+    private void doPickPhotoFromGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        this.startActivityForResult(intent, USERICON_DATA);
+
     }
 
 
@@ -153,6 +165,35 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
         }
     }
 
+    /**
+     * 录像
+     *
+     * @param v
+     */
+    public void takeVideo(View v) {
+        // 创建File对象，用于存储录像,getExternalFilesDir()表示保存到SD卡
+        File videoFile = new File(getExternalFilesDir(null), "video.3gp");
+
+        try {
+            // 如果存在同名文件则进行删除，再创建新的文件
+            if (videoFile.exists()) {
+                videoFile.delete();
+            }
+            videoFile.createNewFile();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        // 保存录像存储的路径
+        videoUri = Uri.fromFile(videoFile);
+        Intent intent = new Intent("android.media.action.VIDEO_CAPTURE");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, videoUri);
+
+        // TAKE_VIDEO请求码
+        startActivityForResult(intent, TAKE_VIDEO);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -191,7 +232,8 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
             //System.out.println(f.getPath());
             if (f != null) {
                 if (requestCode == USERICON_DATA) {
-                    upLoadUserIcon(f);
+//                    upLoadUserIcon(f);
+                    files.add(f);
                 }
             }
 
@@ -199,14 +241,28 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
 
     }
 
-    private void upLoadUserIcon(File file) {
+    private List<File> files = new ArrayList<>();
+
+    private void upLoadPictures(List<File> files) {
         HashMap<String, Object> map = new HashMap<>();
-        map.put("userId", "CBD3524CFBBD99AAB549A8809F8AAA2B");
-        map.put("sessionId", "CBD3524CFBBD99AAB549A8809F8AAA2B");
-        HttpUtils.upload(context, "inter/appuser/uploadHeadIcon.do", map, file, new MyCallBack<Void>() {
+        map.put("realName", "波波");
+        map.put("idNumber", "140825199802215555");
+        HttpUtils.upload(context, URLConfig.addIDCard, map, files, new MyCallBack<Void>() {
             @Override
             public void onMySuccess(Void bean, MyMessage message) {
+                LogUtils.e("--------------------------------------");
+            }
+        });
+    }
 
+    private void upLoadUserIcon(File file) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("realName", "波波");
+        map.put("idNumber", "140825199802215555");
+        HttpUtils.upload(context, URLConfig.addIDCard, map, file, new MyCallBack<Void>() {
+            @Override
+            public void onMySuccess(Void bean, MyMessage message) {
+                LogUtils.e("--------------------------------------");
             }
         });
     }

@@ -7,6 +7,8 @@ import android.widget.TextView;
 import com.qmuiteam.qmui.layout.QMUIButton;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseLazyFragment;
+import com.ripple.lendmoney.base.GlobleParms;
+import com.ripple.lendmoney.model.IndexBean;
 import com.ripple.lendmoney.present.HomeFragPresent;
 import com.ripple.lendmoney.ui.activity.FaceRecognitionActivity;
 import com.youth.banner.Banner;
@@ -48,6 +50,7 @@ public class HomeFragment extends BaseLazyFragment<HomeFragPresent> {
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        getNetData();
     }
 
 
@@ -64,8 +67,13 @@ public class HomeFragment extends BaseLazyFragment<HomeFragPresent> {
 
     @Override
     public void getNetData() {
-
+        getP().getHomeData(context);
     }
 
 
+    public void setHomeData(IndexBean bean) {
+        tvUsername.setText(String.format("Hi,欢迎回来%s",GlobleParms.userName));
+        tvDay.setText(String.format("这是您使用借条的第%d天",bean.getDay()));
+        tvScroll.setText(bean.getNotify().get(0));
+    }
 }

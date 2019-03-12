@@ -54,12 +54,13 @@ public class SuggestActivity extends BaseActivity<SuggestPresent> {
         if (TextUtils.isEmpty(suggest)) {
             ToastUtil.showToast("请填写您的问题或意见后,再进行提交!");
         } else {
-            getP().commitSuggest(suggest);
+            getP().commitSuggest(this, suggest);
         }
     }
 
     public void commitSuccess() {
         ToastUtil.showToast("对于您所提交的问题,我们将尽快进行处理!");
+        finish();
     }
 
     public static void launch(Activity activity) {

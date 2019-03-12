@@ -19,8 +19,10 @@ public abstract class MyCallBack<ResultType> implements HttpUtils.NetCallBack {
             ParameterizedType p = (ParameterizedType) type;
             if (p.getActualTypeArguments()[0].toString().contains(Map.class.getName())) {
                 onMySuccess((ResultType) JSON.parseObject(message.getData(), p.getActualTypeArguments()[0]), message);
-            } else {
-                onMySuccess((ResultType) JSON.parseObject(message.getBody(), p.getActualTypeArguments()[0]), message);
+            } else if (p.getActualTypeArguments()[0].toString().contains(Void.class.getName())) {
+                onMySuccess(null, message);
+            }else {
+                onMySuccess((ResultType) JSON.parseObject(message.getData(), p.getActualTypeArguments()[0]), message);
             }
         } else {//服务器连接成功但获取数据失败
             onMyFailure(message);
@@ -28,7 +30,7 @@ public abstract class MyCallBack<ResultType> implements HttpUtils.NetCallBack {
     }
 
     @Override
-    public void onFailed(NetError error) {//没有连接上服务器
+    public void onError(NetError error) {//没有连接上服务器
     }
 
     @Override
