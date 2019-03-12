@@ -4,15 +4,18 @@
     <item
         android:id="@+id/bottom_home"
         android:icon="@drawable/bottom_home_selector"
+        android:enabled="true"
         android:title="@string/title_home"/>
 
     <item
         android:id="@+id/bottom_order"
         android:icon="@drawable/bottom_order_nor"
+        android:enabled="true"
         android:title="@string/title_dashboard"/>
 
     <item
         android:id="@+id/bottom_mine"
+        android:enabled="true"
         android:icon="@drawable/bottom_mine_nor"
         android:title="@string/title_notifications"/>
 
