@@ -361,6 +361,7 @@ public class HttpUtils {
                             error = new NetError(Constant.SOCKETTIMEOUTEXCEPTION);
                         } else if (t instanceof ConnectException) {
                             ToastUtil.showToast(Constant.CONNECTEXCEPTION);
+                            LogUtils.e(" ToastUtil.showToast(Constant.CONNECTEXCEPTION);");
                             error = new NetError(Constant.CONNECTEXCEPTION);
                         } else if (t instanceof UnknownHostException) {
                             ToastUtil.showToast(Constant.UNKNOWNHOSTEXCEPTION);

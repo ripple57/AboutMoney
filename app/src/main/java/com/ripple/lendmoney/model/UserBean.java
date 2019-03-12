@@ -4,7 +4,7 @@ public class UserBean {
 
     /**
      * pushOnOff : 0
-     * userName : 4004040
+     * userName : 11114004040
      * sessionId :
      * userId : 402881ef696fe54601696fecab0a0000
      */
@@ -24,6 +24,9 @@ public class UserBean {
 
     public String getUserName() {
         return userName;
+    }
+    public String getAnonymity() {
+        return userName.replace(userName.substring(3,7),"****");
     }
 
     public void setUserName(String userName) {

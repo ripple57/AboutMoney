@@ -24,7 +24,6 @@ public final class Constant {
     public static final int TYPE_BANKCARDFRAG = 2;
     public static final int TYPE_CREDITFRAG = 3;
     public static final int TYPE_CONTACTSFRAG = 4;
-    public static final Integer TYPE_DIRECT_RELATIVES = 0;
-    public static final Integer TYPE_EMERGENCY_CONTACT = 1;
     public static final String SESSIONID = "sessionId";
+    public static final String USERNAME = "userName";
 }

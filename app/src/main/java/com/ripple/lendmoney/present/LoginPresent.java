@@ -37,6 +37,8 @@ public class LoginPresent extends BasePresent<LoginActivity> {
                 getV().loginSuccess(bean);
             }
         });
+
+        getV().loginSuccessTest();
     }
 
     public void getCode(Context context, String phoneNum) {

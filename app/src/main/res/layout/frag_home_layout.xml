@@ -73,10 +73,10 @@
                 android:layout_height="14dp"
                 android:src="@drawable/home_laba"/>
 
-            <TextView
+            <cc.ibooker.ztextviewlib.AutoVerticalScrollTextView
                 android:id="@+id/tv_homefrag_scroll"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:singleLine="true"
                 android:text="可以滚动的文字"

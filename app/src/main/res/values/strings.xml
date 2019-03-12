@@ -23,9 +23,9 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email        completions."
     </string>
     <string name="servifce_phone">dddd</string>
-    <string name="renzhengfeiyong_introduce">1.该费用用于更新信用报告，支付给第三方数据公司，一次认证有效期为79元/月，只有认证后才可以正常要求借款。\n
-    2.认证后，1个月内用户可获得20次免费打借条，当需要认证时，可直接抵用认证次数，无需在付费，让您更快借到钱\n
-    3.平台用户认证后保证电子借条的真实有效，并且帮助出借人风控，降低风险，对借款人的信用记录也可提升借款成功率。</string>
+    <string name="renzhengfeiyong_introduce">1. 该费用用于更新信用报告，支付给第三方数据公司，一次认证有效期为79元/月，只有认证后才可以正常要求借款。\n
+    2. 认证后，1个月内用户可获得20次免费打借条，当需要认证时，可直接抵用认证次数，无需在付费，让您更快借到钱\n
+    3. 平台用户认证后保证电子借条的真实有效，并且帮助出借人风控，降低风险，对借款人的信用记录也可提升借款成功率。</string>
 
 
 </resources>

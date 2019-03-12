@@ -214,6 +214,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
         GlobleParms.sessionId = bean.getSessionId();
         GlobleParms.userName = bean.getUserName();
         SPUtils.getInstance(this).save(Constant.SESSIONID, GlobleParms.sessionId);
+        SPUtils.getInstance(this).save(Constant.USERNAME, GlobleParms.userName);
         if (need_back) {
             finish();
         } else {
@@ -225,6 +226,17 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
     public void sendCodeFailed() {
         btn_login_getcode.setText("获取验证码");
         btn_login_getcode.setClickable(true);
+    }
+
+    public void loginSuccessTest() {
+        GlobleParms.sessionId = "CBD3524CFBBD99AAB549A8809F8AAA2B";
+        SPUtils.getInstance(this).save(Constant.SESSIONID, GlobleParms.sessionId);
+        if (need_back) {
+            finish();
+        } else {
+            MainActivity.launch(this);
+            finish();
+        }
     }
 }
 

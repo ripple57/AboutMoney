@@ -1,6 +1,6 @@
 package com.ripple.lendmoney.model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class IndexBean {
 
@@ -10,7 +10,7 @@ public class IndexBean {
      */
 
     private int day;
-    private List<String> notify;
+    private ArrayList<CharSequence> notify;
 
     public int getDay() {
         return day;
@@ -20,11 +20,11 @@ public class IndexBean {
         this.day = day;
     }
 
-    public List<String> getNotify() {
+    public ArrayList<CharSequence> getNotify() {
         return notify;
     }
 
-    public void setNotify(List<String> notify) {
+    public void setNotify(ArrayList<CharSequence> notify) {
         this.notify = notify;
     }
 }

@@ -15,6 +15,8 @@ import com.youth.banner.Banner;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cc.ibooker.ztextviewlib.AutoVerticalScrollTextView;
+import cc.ibooker.ztextviewlib.AutoVerticalScrollTextViewUtil;
 
 /**
  * Created by admin on 2018/4/12.
@@ -28,13 +30,14 @@ public class HomeFragment extends BaseLazyFragment<HomeFragPresent> {
     @BindView(R.id.tv_homefrag_day)
     TextView tvDay;
     @BindView(R.id.tv_homefrag_scroll)
-    TextView tvScroll;
+    AutoVerticalScrollTextView tvScroll;
     @BindView(R.id.btn_homefrag_lend)
     QMUIButton btnLend;
     @BindView(R.id.tv_item_walletMoney)
     TextView tvWalletMoney;
     @BindView(R.id.tv_item_remainMoney)
     TextView tvRemainMoney;
+    private AutoVerticalScrollTextViewUtil aUtil;
 
 
     @OnClick({R.id.btn_homefrag_lend})
@@ -51,6 +54,7 @@ public class HomeFragment extends BaseLazyFragment<HomeFragPresent> {
     @Override
     public void initData(Bundle savedInstanceState) {
         getNetData();
+
     }
 
 
@@ -72,8 +76,11 @@ public class HomeFragment extends BaseLazyFragment<HomeFragPresent> {
 
 
     public void setHomeData(IndexBean bean) {
-        tvUsername.setText(String.format("Hi,欢迎回来%s",GlobleParms.userName));
-        tvDay.setText(String.format("这是您使用借条的第%d天",bean.getDay()));
-        tvScroll.setText(bean.getNotify().get(0));
+        tvUsername.setText(String.format("Hi,欢迎回来%s", GlobleParms.userName.replace(GlobleParms.userName.substring(3,7),"****")));
+        tvDay.setText(String.format("这是您使用借条的第%d天", bean.getDay()));
+        // 初始化
+        aUtil = new AutoVerticalScrollTextViewUtil(tvScroll, bean.getNotify());
+        aUtil.setDuration(5000)// 设置上下滚动事件间隔
+                .start();
     }
 }
