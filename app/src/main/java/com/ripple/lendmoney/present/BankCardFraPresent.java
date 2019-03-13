@@ -1,6 +1,12 @@
 package com.ripple.lendmoney.present;
 
+import android.app.Activity;
+
 import com.ripple.lendmoney.base.BasePresent;
+import com.ripple.lendmoney.http.HttpUtils;
+import com.ripple.lendmoney.http.MyCallBack;
+import com.ripple.lendmoney.http.MyMessage;
+import com.ripple.lendmoney.http.URLConfig;
 import com.ripple.lendmoney.ui.fragment.BankCardFragment;
 
 import java.util.HashMap;
@@ -12,7 +18,17 @@ import java.util.HashMap;
  * 作用: 
  *****************************************************/
 public class BankCardFraPresent extends BasePresent<BankCardFragment> {
-    public void uploadBankCardInfo(HashMap<String, String> map) {
-        getV().uploadSuccess();
+
+    public void uploadBankCardInfo(Activity context, String bankNo, String bank, String bankPhone) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("bankCardNumber", bankNo);
+        map.put("openingBank", bank);
+        map.put("reservePhone", bankPhone);
+        HttpUtils.post(context, URLConfig.addBankCard, map, new MyCallBack<Void>() {
+            @Override
+            public void onMySuccess(Void bean, MyMessage message) {
+                getV().uploadSuccess();
+            }
+        });
     }
 }

@@ -5,12 +5,12 @@ package com.ripple.lendmoney.http;
  * Created by Administrator on 2016-06-16.
  */
 public class URLConfig {
-    //    public static final String BASE_URL = "http://123.56.100.221:8088";//e患者说服务器
-    public static final String BASE_URL = "http://192.168.1.111:8080/";//e患者说服务器
+    //    public static final String BASE_URL = "http://123.56.100.221:8088/";//e患者说服务器
+    public static final String BASE_URL = "http://192.168.1.111:8080/";//测试服务器
 
 
-    public static final String REGIST_AGREEMENT = BASE_URL + "/h5/share/userprotocal.do";
-    public static final String LEND_AGREEMENT = BASE_URL + "/h5/share/userprotocal.do";
+    public static final String REGIST_AGREEMENT = BASE_URL + "/h5/loginProtocol.do";
+    public static final String LEND_AGREEMENT = BASE_URL + "/h5/IOUProtocol.do";
 
 
     //    userName	手机号   有简单的加密，和血压计一样，好像是去掉第一位*8给我的
@@ -26,6 +26,8 @@ public class URLConfig {
 
     //sessionId
     public static final String sessionLogin = "/inter/appuser/sessionLogin.do";//session登录 这个好像是自动登录用的
+    //sessionId  userId
+    public static final String appUserExit = "/inter/appuser/appUserExit.do";//退出
 
 
     //    sessionId

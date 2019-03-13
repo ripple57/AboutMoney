@@ -2,6 +2,7 @@ package com.ripple.lendmoney.ui.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,8 +10,8 @@ import android.widget.TextView;
 
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
-import com.ripple.lendmoney.http.URLConfig;
 import com.ripple.lendmoney.present.MakeIOUPresent;
+import com.ripple.lendmoney.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -83,10 +84,23 @@ public class MakeIOUActivity extends BaseActivity<MakeIOUPresent> {
             case R.id.tv_makeIou_repayDays:
                 break;
             case R.id.tv_makeIou_lendAgreement:
-                WebActivity.launch(this, URLConfig.LEND_AGREEMENT, "借款协议");
                 break;
             case R.id.btn_makeIou_makeIou:
-                finish();
+                String borrower = tvMakeIouBorrower.getText().toString().trim();// borrower 借款人
+                String lender = tvMakeIouLender.getText().toString().trim();//lender 出借人
+                String loanAmount = etMakeIouLendNum.getText().toString().trim();//loanAmount 借款金额
+                String loanRate = tvMakeIouInterest.getText().toString().trim();//loanRate 借款利率
+                String repaymentMethod = tvMakeIouRepayMethod.getText().toString().trim();//repaymentMethod 还款方式
+                String loanDate = tvMakeIouRepayDays.getText().toString().trim();//loanDate 借款天数
+                if (TextUtils.isEmpty(loanAmount)) {
+                    ToastUtil.showToast("请填写借款金额");
+                } else if (TextUtils.isEmpty(repaymentMethod)) {
+                    ToastUtil.showToast("请选择还款方式");
+                } else if (TextUtils.isEmpty(loanDate)) {
+                    ToastUtil.showToast("请选择借款天数");
+                } else {
+                    getP().makeIou(this, borrower, lender, loanAmount, loanRate, repaymentMethod, loanDate);
+                }
                 break;
         }
     }
@@ -95,5 +109,10 @@ public class MakeIOUActivity extends BaseActivity<MakeIOUPresent> {
         Router.newIntent(activity)
                 .to(MakeIOUActivity.class)
                 .launch();
+    }
+
+    public void makeIouSuccess() {
+        ToastUtil.showToast("借钱成功");
+
     }
 }

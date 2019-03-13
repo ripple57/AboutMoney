@@ -140,7 +140,7 @@ public class AssessActivity extends BaseActivity<AssessPresent> {
                 ToastUtil.showToast("申请借款");
                 break;
             case R.id.tv_assessAct_agreement:
-                WebActivity.launch(this, URLConfig.REGIST_AGREEMENT, "评估服务协议");
+                WebActivity.launch(this, URLConfig.LEND_AGREEMENT, "借款协议");
                 break;
             case R.id.btn_assessAct_applyLend:
                 ToastUtil.showToast("申请借款");

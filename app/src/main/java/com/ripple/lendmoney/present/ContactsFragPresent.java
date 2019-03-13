@@ -25,9 +25,8 @@ public class ContactsFragPresent extends BasePresent<ContactsFragment> {
 
             @Override
             public void onMySuccess(Void bean, MyMessage message) {
-
+                getV().uploadSuccess();
             }
         });
-        getV().uploadSuccess();
     }
 }

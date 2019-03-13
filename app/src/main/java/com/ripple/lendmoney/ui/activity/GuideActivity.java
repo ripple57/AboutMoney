@@ -27,7 +27,9 @@ import com.ripple.lendmoney.utils.LogUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,7 +77,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button1:
-                doPickPhotoFromGallery();
+                upLoadVideo();
                 break;
             case R.id.button2:
                 doTakePhoto();
@@ -113,6 +115,56 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 AuthenticateInfoActivity.launch(this);
                 break;
         }
+    }
+
+    /**
+     * 将asset文件写入缓存
+     */
+    private boolean copyAssetAndWrite(String fileName) {
+        try {
+            File cacheDir = getCacheDir();
+            if (!cacheDir.exists()) {
+                cacheDir.mkdirs();
+            }
+            File outFile = new File(cacheDir, fileName);
+            if (!outFile.exists()) {
+                boolean res = outFile.createNewFile();
+                if (!res) {
+                    return false;
+                }
+            } else {
+                if (outFile.length() > 10) {//表示已经写入一次
+                    return true;
+                }
+            }
+            InputStream is = getAssets().open(fileName);
+            FileOutputStream fos = new FileOutputStream(outFile);
+            byte[] buffer = new byte[1024];
+            int byteCount;
+            while ((byteCount = is.read(buffer)) != -1) {
+                fos.write(buffer, 0, byteCount);
+            }
+            fos.flush();
+            is.close();
+            fos.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    private void upLoadVideo() {
+        copyAssetAndWrite("test.mp4");
+        File dataFile = new File(getCacheDir(), "test.mp4");
+        HttpUtils.upload(this, URLConfig.addFaceVideo, null, dataFile, new MyCallBack<Void>() {
+            @Override
+            public void onMySuccess(Void bean, MyMessage message) {
+                LogUtils.e("上传成功了");
+            }
+        });
+
     }
 
     private void doPickPhotoFromGallery() {
@@ -219,20 +271,12 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
 
         Bitmap photo = null;
         if (mCurrentPhotoFile != null) {
-
-            photo = BitmapPhotoUtil.getSmallBitmap(mCurrentPhotoFile.getPath());// getimage(mCurrentPhotoFile.getPath());//BitmapFactory.decodeFile(picturePath);
-
+            photo = BitmapPhotoUtil.getSmallBitmap(mCurrentPhotoFile.getPath());
         }
-        // int count = photo.getByteCount();
         if (photo != null) {
-            // GetBitmapPhoto.replaceMyBitmap(photo, mCurrentPhotoFile);
-            // String path = mCurrentPhotoFile.getPath().substring(0,
-            // mCurrentPhotoFile.getPath().lastIndexOf("."));
             File f = BitmapPhotoUtil.replaceMyBitmap(photo, mCurrentPhotoFile);
-            //System.out.println(f.getPath());
             if (f != null) {
                 if (requestCode == USERICON_DATA) {
-//                    upLoadUserIcon(f);
                     files.add(f);
                 }
             }

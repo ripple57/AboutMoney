@@ -99,7 +99,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
     }
 
     private void toAgreementView() {
-        WebActivity.launch(this, URLConfig.REGIST_AGREEMENT, "注册服务协议");
+        WebActivity.launch(this, URLConfig.REGIST_AGREEMENT, "用户注册协议");
     }
 
     private void login() {
@@ -213,8 +213,10 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
     public void loginSuccess(UserBean bean) {
         GlobleParms.sessionId = bean.getSessionId();
         GlobleParms.userName = bean.getUserName();
+        GlobleParms.userId = bean.getUserId();
         SPUtils.getInstance(this).save(Constant.SESSIONID, GlobleParms.sessionId);
         SPUtils.getInstance(this).save(Constant.USERNAME, GlobleParms.userName);
+        SPUtils.getInstance(this).save(Constant.USERID, GlobleParms.userId);
         if (need_back) {
             finish();
         } else {
@@ -228,15 +230,15 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
         btn_login_getcode.setClickable(true);
     }
 
-    public void loginSuccessTest() {
-        GlobleParms.sessionId = "CBD3524CFBBD99AAB549A8809F8AAA2B";
-        SPUtils.getInstance(this).save(Constant.SESSIONID, GlobleParms.sessionId);
-        if (need_back) {
-            finish();
-        } else {
-            MainActivity.launch(this);
-            finish();
-        }
-    }
+//    public void loginSuccessTest() {
+//        GlobleParms.sessionId = "CBD3524CFBBD99AAB549A8809F8AAA2B";
+//        SPUtils.getInstance(this).save(Constant.SESSIONID, GlobleParms.sessionId);
+//        if (need_back) {
+//            finish();
+//        } else {
+//            MainActivity.launch(this);
+//            finish();
+//        }
+//    }
 }
 

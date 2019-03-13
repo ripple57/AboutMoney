@@ -1,7 +1,15 @@
 package com.ripple.lendmoney.present;
 
+import android.app.Activity;
+
 import com.ripple.lendmoney.base.BasePresent;
+import com.ripple.lendmoney.http.HttpUtils;
+import com.ripple.lendmoney.http.MyCallBack;
+import com.ripple.lendmoney.http.MyMessage;
+import com.ripple.lendmoney.http.URLConfig;
 import com.ripple.lendmoney.ui.activity.MakeIOUActivity;
+
+import java.util.HashMap;
 
 /*****************************************************
  * 作者: HuangShaobo on 2019/3/8 0:03.
@@ -10,4 +18,25 @@ import com.ripple.lendmoney.ui.activity.MakeIOUActivity;
  * 作用: 
  *****************************************************/
 public class MakeIOUPresent extends BasePresent<MakeIOUActivity> {
+    public void makeIou(Activity activity, String borrower, String lender, String loanAmount, String loanRate, String repaymentMethod, String loanDate) {
+//        borrower 借款人
+//    lender 出借人
+//    loanAmount 借款金额
+//    loanRate 借款利率
+//    repaymentMethod 还款方式
+//    loanDate 借款天数
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("borrower", borrower);
+        map.put("lender", lender);
+        map.put("loanAmount", loanAmount);
+        map.put("loanRate", loanRate);
+        map.put("repaymentMethod", repaymentMethod);
+        map.put("loanDate", loanDate);
+        HttpUtils.post(activity, URLConfig.addIOUInfo, map, new MyCallBack<Void>() {
+            @Override
+            public void onMySuccess(Void bean, MyMessage message) {
+                getV().makeIouSuccess();
+            }
+        });
+    }
 }

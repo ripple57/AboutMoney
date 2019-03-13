@@ -124,11 +124,7 @@ public class BitmapPhotoUtil {
      * @return
      */
     public static File replaceMyBitmap(Bitmap mBitmap, File mCurrentPhotoFile) {
-        // String path = mCurrentPhotoFile.getPath().substring(0,
-        // mCurrentPhotoFile.getPath().lastIndexOf("."));
         File f = new File(Environment.getExternalStorageDirectory() + "/DCIM/Camera" + getPhotoFileName());
-        //System.out.println("replaceMyBitmap" + f.getPath());
-        // File f = new File(mCurrentPhotoFile.getPath() + "tmp");
 
         try {
             f.createNewFile();

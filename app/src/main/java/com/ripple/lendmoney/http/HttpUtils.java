@@ -19,6 +19,7 @@ import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -120,15 +121,19 @@ public class HttpUtils {
         getInstance().netMethodDialog(context, url, map, callBack, GET);
     }
 
-    // TODO: 2019/2/28  上传文件需要测试
     public static void upload(Context context, String url, HashMap<String, Object> map, File file, NetCallBack callBack) {
-        if (map == null) {
-            map = new HashMap<>();
+        List<File> list = new ArrayList<>();
+        list.add(file);
+        upload(context, url, map, list, callBack);
+    }
+
+    public static void upload(Context context, String url, HashMap<String, Object> map, HashMap<Object, File> fileMap, NetCallBack callBack) {
+        Collection<File> values = fileMap.values();
+        List<File> list = new ArrayList<>();
+        for (File file : values) {
+            list.add(file);
         }
-        if (!TextUtils.isEmpty(GlobleParms.sessionId)) {
-            map.put("sessionId", GlobleParms.sessionId);
-        }
-        getInstance().uploadFile(context, url, map, file, callBack);
+        upload(context, url, map, list, callBack);
     }
 
     public static void upload(Context context, String url, HashMap<String, Object> map, List<File> list, NetCallBack callBack) {
@@ -155,90 +160,11 @@ public class HttpUtils {
 
         for (File file : list) {
             RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-            MultipartBody.Part body = MultipartBody.Part.createFormData("upload"+file.getName(), file.getName(), requestFile);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("upload" + file.getName(), file.getName(), requestFile);
             parts.add(body);
         }
 
         getGankService(URLConfig.BASE_URL).upload2(url, map, parts)
-                .retryWhen(new RetryWithDelay(3, 1000, context))
-                .map(new Function<ResponseBody, String>() { //数据转换
-                    @Override
-                    public String apply(ResponseBody responseBody) throws Exception {
-                        String response = responseBody.string();
-                        return response;
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(((LifecycleProvider) context)
-                        .bindToLifecycle())
-                .subscribe(new ResourceSubscriber<String>() {
-                    @Override
-                    protected void onStart() {
-                        super.onStart();
-                        if (tipDialog != null) {
-                            tipDialog.show();
-                        }
-                    }
-
-                    @Override
-                    public void onNext(String string) {
-                        if (tipDialog != null) {
-                            tipDialog.dismiss();
-                        }
-                        MyMessage message = new MyMessage(string);//封装json数据为实例对象
-                        if (message.getState() == Constant.REQUEST_NEED_LOGIN) {//网络请求成功
-                            if (context instanceof Activity) {
-                                LoginActivity.launch((Activity) context, true);
-                            }
-                        } else {
-                            callBack.onSuccess(message);
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-                        if (tipDialog != null) {
-                            tipDialog.dismiss();
-                        }
-                        NetError error = null;
-                        LogUtils.e("Rx网络错误" + t.toString());
-                        if (t instanceof SocketTimeoutException) {
-                            ToastUtil.showToast(Constant.SOCKETTIMEOUTEXCEPTION);
-                            error = new NetError(Constant.SOCKETTIMEOUTEXCEPTION);
-                        } else if (t instanceof ConnectException) {
-                            ToastUtil.showToast(Constant.CONNECTEXCEPTION);
-                            error = new NetError(Constant.CONNECTEXCEPTION);
-                        } else if (t instanceof UnknownHostException) {
-                            ToastUtil.showToast(Constant.UNKNOWNHOSTEXCEPTION);
-                            error = new NetError(Constant.UNKNOWNHOSTEXCEPTION);
-                        } else {
-                            ToastUtil.showToast(Constant.OTHEREXCEPTION);
-                            error = new NetError(Constant.OTHEREXCEPTION);
-                        }
-                        callBack.onError(error);
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        callBack.onComplete();
-                    }
-
-                });
-    }
-
-    private void uploadFile(Context context, String url, Map<String, Object> map, File file, final NetCallBack callBack) {
-        final QMUITipDialog tipDialog = new QMUITipDialog.Builder(context)
-                .setTipWord("上传中")
-                .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
-                .create();
-        tipDialog.setCancelable(true);
-        tipDialog.show();
-
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("upload", file.getName(), requestFile);
-
-        getGankService(URLConfig.BASE_URL).upload(url, map, body)
                 .retryWhen(new RetryWithDelay(3, 1000, context))
                 .map(new Function<ResponseBody, String>() { //数据转换
                     @Override

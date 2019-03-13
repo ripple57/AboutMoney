@@ -10,7 +10,7 @@ public class IndexBean {
      */
 
     private int day;
-    private ArrayList<CharSequence> notify;
+    private ArrayList<String> notify;
 
     public int getDay() {
         return day;
@@ -20,11 +20,18 @@ public class IndexBean {
         this.day = day;
     }
 
-    public ArrayList<CharSequence> getNotify() {
+    public ArrayList<String> getNotify() {
         return notify;
     }
 
-    public void setNotify(ArrayList<CharSequence> notify) {
+    public void setNotify(ArrayList<String> notify) {
         this.notify = notify;
+    }
+    public ArrayList<CharSequence> getNotifyData() {
+        ArrayList<CharSequence> list = new ArrayList<>();
+        for (String s : notify) {
+            list.add(s);
+        }
+        return list;
     }
 }

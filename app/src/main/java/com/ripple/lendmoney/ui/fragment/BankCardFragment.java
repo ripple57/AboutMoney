@@ -10,14 +10,14 @@ import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseLazyFragment;
 import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.base.GlobleParms;
+import com.ripple.lendmoney.event.RefreshMyInfoEvent;
 import com.ripple.lendmoney.present.BankCardFraPresent;
 import com.ripple.lendmoney.ui.activity.AuthenticateActivity;
 import com.ripple.lendmoney.utils.ToastUtil;
 
-import java.util.HashMap;
-
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.droidlover.xdroidmvp.event.BusFactory;
 
 /*****************************************************
  * 作者: HuangShaobo on 2019/3/4 23:25.
@@ -74,15 +74,12 @@ public class BankCardFragment extends BaseLazyFragment<BankCardFraPresent> {
         } else if (!bankPhone.matches(Constant.REG_PHONE)) {
             ToastUtil.showToast("请填写正确的手机号");
         } else {
-            HashMap<String, String> map = new HashMap<>();
-            map.put("bankNo", bankNo);
-            map.put("bank", bank);
-            map.put("bankPhone", bankPhone);
-            getP().uploadBankCardInfo(map);
+            getP().uploadBankCardInfo(context,bankNo,bank,bankPhone);
         }
     }
 
     public void uploadSuccess() {
+        BusFactory.getBus().post(new RefreshMyInfoEvent());
         ToastUtil.showToast("上传成功");
         if (GlobleParms.AuthenticateCanNext) {
             ((AuthenticateActivity) context).selectFragment(Constant.TYPE_CREDITFRAG);

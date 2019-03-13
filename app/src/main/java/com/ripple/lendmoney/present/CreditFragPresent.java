@@ -1,7 +1,16 @@
 package com.ripple.lendmoney.present;
 
+import android.app.Activity;
+
 import com.ripple.lendmoney.base.BasePresent;
+import com.ripple.lendmoney.http.HttpUtils;
+import com.ripple.lendmoney.http.MyCallBack;
+import com.ripple.lendmoney.http.MyMessage;
+import com.ripple.lendmoney.http.URLConfig;
 import com.ripple.lendmoney.ui.fragment.CreditFragment;
+
+import java.io.File;
+import java.util.HashMap;
 
 /*****************************************************
  * 作者: HuangShaobo on 2019/3/4 23:27.
@@ -10,12 +19,13 @@ import com.ripple.lendmoney.ui.fragment.CreditFragment;
  * 作用: 
  *****************************************************/
 public class CreditFragPresent extends BasePresent<CreditFragment> {
-    public void uploadAlipayInfo() {
-        getV().hasAlipayInfo = true;
 
-    }
-
-    public void uploadCreditScore() {
-        getV().hasCreditScore = true;
+    public void uploadCreditInfo(Activity context, HashMap<Object, File> filesMap) {
+        HttpUtils.upload(context, URLConfig.addAlipayCreditImg, null, filesMap, new MyCallBack<Void>() {
+            @Override
+            public void onMySuccess(Void bean, MyMessage message) {
+                getV().uploadSuccess();
+            }
+        });
     }
 }

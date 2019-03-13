@@ -14,15 +14,15 @@ import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseLazyFragment;
 import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.base.GlobleParms;
+import com.ripple.lendmoney.event.RefreshMyInfoEvent;
 import com.ripple.lendmoney.present.FamilyFragPresent;
 import com.ripple.lendmoney.ui.activity.AuthenticateActivity;
 import com.ripple.lendmoney.utils.ToastUtil;
 
-import java.util.HashMap;
-
 import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.droidlover.xdroidmvp.event.BusFactory;
 
 /*****************************************************
  * 作者: HuangShaobo on 2019/3/4 23:28.
@@ -83,14 +83,6 @@ public class FamilyFragment extends BaseLazyFragment<FamilyFragPresent> {
     }
 
 
-    public void uploadSuccess() {
-        ToastUtil.showToast("上传成功");
-        if (GlobleParms.AuthenticateCanNext) {
-            ((AuthenticateActivity) context).selectFragment(Constant.TYPE_BANKCARDFRAG);
-        } else {
-            context.finish();
-        }
-    }
 
 
     @OnClick({R.id.iv_familyFrag_direRelation, R.id.tv_familyFrag_direRelation, R.id.iv_familyFrag_contactRelation, R.id.tv_familyFrag_contactRelation, R.id.btn_familyFrag_commit})
@@ -130,16 +122,19 @@ public class FamilyFragment extends BaseLazyFragment<FamilyFragPresent> {
                 } else if (!directPhone.matches(Constant.REG_PHONE) || !emergencyPhone.matches(Constant.REG_PHONE)) {
                     ToastUtil.showToast("请填写正确的手机号");
                 } else {
-                    HashMap<String, String> map = new HashMap<>();
-                    map.put("directRelation", directRelation);
-                    map.put("directName", directName);
-                    map.put("directPhone", directPhone);
-                    map.put("emergencyRelation", emergencyRelation);
-                    map.put("emergencyName", emergencyName);
-                    map.put("emergencyPhone", emergencyPhone);
-                    getP().uploadFamilyInfo(map);
+
+                    getP().uploadFamilyInfo(context,directRelation,directName,directPhone,emergencyRelation,emergencyName,emergencyPhone);
                 }
                 break;
+        }
+    }
+    public void uploadSuccess() {
+        BusFactory.getBus().post(new RefreshMyInfoEvent());
+        ToastUtil.showToast("上传成功");
+        if (GlobleParms.AuthenticateCanNext) {
+            ((AuthenticateActivity) context).selectFragment(Constant.TYPE_BANKCARDFRAG);
+        } else {
+            context.finish();
         }
     }
 }

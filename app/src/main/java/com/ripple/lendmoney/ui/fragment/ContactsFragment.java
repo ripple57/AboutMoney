@@ -15,6 +15,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseLazyFragment;
 import com.ripple.lendmoney.base.GlobleParms;
+import com.ripple.lendmoney.event.RefreshMyInfoEvent;
 import com.ripple.lendmoney.model.ContactsBean;
 import com.ripple.lendmoney.present.ContactsFragPresent;
 import com.ripple.lendmoney.ui.activity.MyInfoActivity;
@@ -25,6 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.droidlover.xdroidmvp.event.BusFactory;
 import io.reactivex.functions.Consumer;
 
 /*****************************************************
@@ -40,6 +42,7 @@ public class ContactsFragment extends BaseLazyFragment<ContactsFragPresent> {
     TextView tvContactsFragContactState;
     @BindView(R.id.btn_contactsFrag_commit)
     Button btnContactsFragCommit;
+    private String contactsJson;
 
     @Override
     public void getNetData() {
@@ -75,6 +78,7 @@ public class ContactsFragment extends BaseLazyFragment<ContactsFragPresent> {
 
     @OnClick(R.id.btn_contactsFrag_commit)
     public void onViewClicked() {
+        getP().uploadContacts(context, contactsJson);
     }
 
     //去获取通讯录列表
@@ -86,8 +90,8 @@ public class ContactsFragment extends BaseLazyFragment<ContactsFragPresent> {
                     public void accept(Boolean aBoolean) throws Exception {
                         if (aBoolean) {
                             List<ContactsBean> contacts = getContacts();
-                            String jsonString = JSONArray.toJSONString(contacts);
-                            getP().uploadContacts(context,jsonString);
+                            contactsJson = JSONArray.toJSONString(contacts);
+
                         } else {
                             getvDelegate().toastShort("亲，同意了权限才能更好的使用软件哦");
                         }
@@ -134,6 +138,7 @@ public class ContactsFragment extends BaseLazyFragment<ContactsFragPresent> {
     }
 
     public void uploadSuccess() {
+        BusFactory.getBus().post(new RefreshMyInfoEvent());
         ToastUtil.showToast("上传成功");
         if (GlobleParms.AuthenticateCanNext) {
             MyInfoActivity.launch(context);

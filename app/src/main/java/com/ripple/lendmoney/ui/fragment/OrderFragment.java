@@ -41,7 +41,7 @@ public class OrderFragment extends BaseLazyFragment<OrderFragPresent> {
     public void initData(Bundle savedInstanceState) {
         initView();
         initListener();
-        getNetData();
+//        getNetData();
     }
 
     private void initListener() {
@@ -49,7 +49,7 @@ public class OrderFragment extends BaseLazyFragment<OrderFragPresent> {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 ToastUtil.showToast("加载更多");
-                getP().getOrderList(pageNum++);
+                getP().getOrderList(context, pageNum++);
             }
 
             @Override
@@ -81,7 +81,6 @@ public class OrderFragment extends BaseLazyFragment<OrderFragPresent> {
         orderListAdapter = new OrderListAdapter(R.layout.item_order_list_layout, orderlist);
         rvOrderList.setAdapter(orderListAdapter);
 
-
     }
 
     @Override
@@ -107,6 +106,6 @@ public class OrderFragment extends BaseLazyFragment<OrderFragPresent> {
 
     @Override
     public void getNetData() {
-        getP().getOrderList(pageNum);
+        getP().getOrderList(context, pageNum);
     }
 }

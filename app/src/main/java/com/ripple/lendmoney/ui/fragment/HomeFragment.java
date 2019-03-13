@@ -11,12 +11,12 @@ import com.ripple.lendmoney.base.GlobleParms;
 import com.ripple.lendmoney.model.IndexBean;
 import com.ripple.lendmoney.present.HomeFragPresent;
 import com.ripple.lendmoney.ui.activity.FaceRecognitionActivity;
+import com.ripple.lendmoney.widget.AutoVerticalScrollTextView;
+import com.ripple.lendmoney.widget.AutoVerticalScrollTextViewUtil;
 import com.youth.banner.Banner;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cc.ibooker.ztextviewlib.AutoVerticalScrollTextView;
-import cc.ibooker.ztextviewlib.AutoVerticalScrollTextViewUtil;
 
 /**
  * Created by admin on 2018/4/12.
@@ -75,8 +75,9 @@ public class HomeFragment extends BaseLazyFragment<HomeFragPresent> {
     }
 
 
-    public void setHomeData(IndexBean bean) {
-        tvUsername.setText(String.format("Hi,欢迎回来%s", GlobleParms.userName.replace(GlobleParms.userName.substring(3,7),"****")));
+    public void setHomeData(IndexBean bean) {//18010491010
+        String anonymity = GlobleParms.userName.substring(0, 3) + "****" + GlobleParms.userName.substring(7);
+        tvUsername.setText(String.format("Hi,欢迎回来%s", anonymity));
         tvDay.setText(String.format("这是您使用借条的第%d天", bean.getDay()));
         // 初始化
         aUtil = new AutoVerticalScrollTextViewUtil(tvScroll, bean.getNotify());

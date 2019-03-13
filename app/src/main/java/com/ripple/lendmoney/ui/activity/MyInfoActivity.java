@@ -10,7 +10,11 @@ import android.widget.TextView;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.base.Constant;
+import com.ripple.lendmoney.event.RefreshMyInfoEvent;
+import com.ripple.lendmoney.model.AuthenticateInfoBean;
 import com.ripple.lendmoney.present.MyInfoPresent;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindColor;
 import butterknife.BindView;
@@ -42,6 +46,7 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
     LinearLayout llMyinfoactContacts;
     @BindView(R.id.tv_myinfoact_comple)
     TextView tvMyinfoactComple;
+    private int infoDegree;
 
     @BindColor(R.color.text_red)
     int text_red;
@@ -57,12 +62,13 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
 
     @Override
     public void getNetData() {
-
+        infoDegree = 0;
+        getP().getUserInfo(this);
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        getNetData();
     }
 
     @Override
@@ -77,7 +83,7 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
 
 
     @OnClick({R.id.ll_myinfoact_idcard, R.id.ll_myinfoact_family, R.id.ll_myinfoact_bankcard, R.id.ll_myinfoact_credit,
-            R.id.ll_myinfoact_contacts,R.id.btn_myinfoact_commit})
+            R.id.ll_myinfoact_contacts, R.id.btn_myinfoact_commit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_myinfoact_idcard:
@@ -96,14 +102,16 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
                 AuthenticateActivity.launch(this, Constant.TYPE_CONTACTSFRAG);
                 break;
             case R.id.btn_myinfoact_commit:
+                AssessActivity.launch(this);
                 break;
         }
     }
 
-    public void setAuthenState(TextView tv, boolean hasAuthen) {
+    public void setItemAuthenState(TextView tv, boolean hasAuthen) {
         if (hasAuthen) {
             tv.setText("已认证");
             tv.setTextColor(text_hint);
+            infoDegree++;
         } else {
             tv.setText("未认证");
             tv.setTextColor(text_red);
@@ -117,4 +125,22 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
     }
 
 
+    public void setAuthenState(AuthenticateInfoBean bean) {
+        setItemAuthenState(tvMyinfoactIdcardState, bean.getIdCardState());
+        setItemAuthenState(tvMyinfoactFamilyState, bean.getFamilyState());
+        setItemAuthenState(tvMyinfoactBankcardState, bean.getBankState());
+        setItemAuthenState(tvMyinfoactCreditState, bean.getCreditState());
+        setItemAuthenState(tvMyinfoactContactsState, bean.getContactsState());
+        tvMyinfoactComple.setText(infoDegree * 20 + "%");
+    }
+
+    @Override
+    public boolean useEventBus() {
+        return true;
+    }
+
+    @Subscribe
+    public void refreshView(RefreshMyInfoEvent event) {
+        getNetData();
+    }
 }

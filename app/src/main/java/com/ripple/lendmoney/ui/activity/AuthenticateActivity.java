@@ -1,8 +1,10 @@
 package com.ripple.lendmoney.ui.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
 
@@ -33,6 +35,8 @@ public class AuthenticateActivity extends BaseActivity {
     QMUIViewPager authenticateViewPager;
     private List<Fragment> fragmentList = new ArrayList<>();
     private int fragmentType;
+    private FragmentManager fragmentManager;
+    private IdCardFragment idCardFragment;
 
     @Override
     protected String topBarTitle() {
@@ -82,7 +86,8 @@ public class AuthenticateActivity extends BaseActivity {
     private void initAuthenticateViewPager() {
         authenticateViewPager.setOffscreenPageLimit(5);
         if (GlobleParms.AuthenticateCanNext) {
-            fragmentList.add(new IdCardFragment());//身份证
+            idCardFragment = new IdCardFragment();
+            fragmentList.add(idCardFragment);//身份证
             fragmentList.add(new FamilyFragment());//紧急联系人
             fragmentList.add(new BankCardFragment());//银行卡
             fragmentList.add(new CreditFragment());//芝麻信用
@@ -106,11 +111,16 @@ public class AuthenticateActivity extends BaseActivity {
                     break;
             }
         }
-        XFragmentAdapter xFragmentAdapter = new XFragmentAdapter(getSupportFragmentManager(), fragmentList, null);
+        fragmentManager = getSupportFragmentManager();
+        XFragmentAdapter xFragmentAdapter = new XFragmentAdapter(fragmentManager, fragmentList, null);
         authenticateViewPager.setAdapter(xFragmentAdapter);
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     public int getLayoutId() {

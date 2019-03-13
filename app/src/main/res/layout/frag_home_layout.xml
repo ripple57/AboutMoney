@@ -73,7 +73,7 @@
                 android:layout_height="14dp"
                 android:src="@drawable/home_laba"/>
 
-            <cc.ibooker.ztextviewlib.AutoVerticalScrollTextView
+            <com.ripple.lendmoney.widget.AutoVerticalScrollTextView
                 android:id="@+id/tv_homefrag_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

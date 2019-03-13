@@ -137,9 +137,7 @@ public class MineFragment extends XLazyFragment<MinePresent> implements OnRefres
                             @Override
                             public void onClick(QMUIDialog dialog, int index) {
                                 dialog.dismiss();
-                                SPUtils.getInstance(context).remove(Constant.SESSIONID);
-                                GlobleParms.sessionId = "";
-                                getP().userExit();
+                                getP().userExit(context,GlobleParms.userId);
                             }
                         }).show();
                 break;
@@ -160,6 +158,12 @@ public class MineFragment extends XLazyFragment<MinePresent> implements OnRefres
     }
 
     public void exitSuccess() {
+        SPUtils.getInstance(context).remove(Constant.SESSIONID);
+        SPUtils.getInstance(context).remove(Constant.USERID);
+        SPUtils.getInstance(context).remove(Constant.USERNAME);
+        GlobleParms.sessionId = "";
+        GlobleParms.userId = "";
+        GlobleParms.userName = "";
         ToastUtil.showToast("用户已经退出了!");
         LoginActivity.launch(context,false);
         AppManager.getAppManager().finishAllActivity();

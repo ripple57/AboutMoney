@@ -22,7 +22,7 @@ public abstract class MyCallBack<ResultType> implements HttpUtils.NetCallBack {
             } else if (p.getActualTypeArguments()[0].toString().contains(Void.class.getName())) {
                 onMySuccess(null, message);
             }else {
-                onMySuccess((ResultType) JSON.parseObject(message.getData(), p.getActualTypeArguments()[0]), message);
+                onMySuccess((ResultType) JSON.parseObject(message.getBody(), p.getActualTypeArguments()[0]), message);
             }
         } else {//服务器连接成功但获取数据失败
             onMyFailure(message);

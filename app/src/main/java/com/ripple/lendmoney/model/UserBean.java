@@ -26,7 +26,7 @@ public class UserBean {
         return userName;
     }
     public String getAnonymity() {
-        return userName.replace(userName.substring(3,7),"****");
+        return  userName.substring(0, 3) + "****" + userName.substring(7);
     }
 
     public void setUserName(String userName) {
