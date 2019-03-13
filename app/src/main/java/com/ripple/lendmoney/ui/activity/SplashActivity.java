@@ -116,6 +116,10 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
     }
 
     private void hadLogin() {//读取缓存来判断是否已经登录
+        if (GlobleParms.debug) {
+            MainActivity.launch(this);
+            return;
+        }
         GlobleParms.sessionId = SPUtils.getInstance(this).getValue(Constant.SESSIONID, "");
         GlobleParms.userName = SPUtils.getInstance(this).getValue(Constant.USERNAME, "");
         GlobleParms.userId = SPUtils.getInstance(this).getValue(Constant.USERID, "");

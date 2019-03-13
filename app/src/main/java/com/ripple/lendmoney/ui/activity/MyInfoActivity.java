@@ -78,7 +78,7 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
 
     @Override
     public MyInfoPresent newP() {
-        return null;
+        return new MyInfoPresent();
     }
 
 

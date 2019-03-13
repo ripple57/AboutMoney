@@ -57,7 +57,6 @@ public class AppManager {
      * 结束指定的Activity
      */
     public void finishActivity(Activity activity) {
-        LogUtils.d("结束当前activity============"+activity);
         if (activity != null) {
             activityStack.remove(activity);
             activity.finish();
