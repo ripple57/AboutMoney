@@ -68,7 +68,6 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
                     break;
                 case END_RECORDE:
                     mMediaRecorder.stopRecord();
-
                     break;
             }
         }

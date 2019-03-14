@@ -104,6 +104,8 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
     private void getLoginPermission() {
         getRxPermissions().request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA,
+                Manifest.permission.RECORD_AUDIO,
                 Manifest.permission.READ_PHONE_STATE)
                 .subscribe(granted -> {
                     if (granted) {// 用户已经同意该权限
