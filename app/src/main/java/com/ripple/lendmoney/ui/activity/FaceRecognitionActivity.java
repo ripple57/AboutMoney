@@ -50,6 +50,7 @@ public class FaceRecognitionActivity extends BaseActivity<FaceRecognitionPresent
 
     @OnClick(R.id.btn_facefrag_startRecognition)
     public void onViewClicked() {
-        AuthenticateActivity.launch(this);
+        RecordeVideoActivity.launch(this);
+//        AuthenticateActivity.launch(this);
     }
 }

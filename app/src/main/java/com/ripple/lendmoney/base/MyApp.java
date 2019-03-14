@@ -31,19 +31,31 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
+        GlobleParms.debug = true;
+        GlobleParms.familyTest = false;
+
+
+
+
+
+
+
+
+
+
         AutoSizeConfig.getInstance().getUnitsManager()
                 .setSupportDP(true)
                 .setSupportSP(true);
         registerProvider();
 //                LeakCanary.install(this);//检查内心泄露
-        XDroidConf.devMode(true);
+        XDroidConf.devMode(GlobleParms.debug);
+        XDroidConf.LOG = GlobleParms.debug;
         XDroidConf.IL_ERROR_RES = R.mipmap.img_default;
         XDroidConf.IL_LOADING_RES = R.mipmap.img_default;
-        XDroidConf.LOG = XDroidConf.DEV;
 //        Realm.init(this);//数据库操作
 //        RealmConfiguration config = new RealmConfiguration.Builder().build();
 //        Realm.setDefaultConfiguration(config);
-        if (XDroidConf.DEV) {
+        if (GlobleParms.debug) {
 
         } else {
             CrashHandler.getInstance().init(this);

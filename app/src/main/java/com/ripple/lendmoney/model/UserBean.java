@@ -2,50 +2,59 @@ package com.ripple.lendmoney.model;
 
 public class UserBean {
 
+
     /**
-     * pushOnOff : 0
-     * userName : 11114004040
-     * sessionId :
-     * userId : 402881ef696fe54601696fecab0a0000
+     * data : {"userName":"18000000000","sessionId":"4E8F9F3D088E968EC1FDF093FE3785DB","userId":"402881ef6975e089016975f3bf270000"}
      */
 
-    private int pushOnOff;
-    private String userName;
-    private String sessionId;
-    private String userId;
+    private DataBean data;
 
-    public int getPushOnOff() {
-        return pushOnOff;
+
+    public DataBean getData() {
+        return data;
     }
 
-    public void setPushOnOff(int pushOnOff) {
-        this.pushOnOff = pushOnOff;
+    public void setData(DataBean data) {
+        this.data = data;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-    public String getAnonymity() {
-        return  userName.substring(0, 3) + "****" + userName.substring(7);
-    }
+    public static class DataBean {
+        /**
+         * userName : 18000000000
+         * sessionId : 4E8F9F3D088E968EC1FDF093FE3785DB
+         * userId : 402881ef6975e089016975f3bf270000
+         */
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+        private String userName;
+        private String sessionId;
+        private String userId;
 
-    public String getSessionId() {
-        return sessionId;
-    }
+        public String getUserName() {
+            return userName;
+        }
 
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-    }
+        public void setUserName(String userName) {
+            this.userName = userName;
+        }
 
-    public String getUserId() {
-        return userId;
-    }
+        public String getSessionId() {
+            return sessionId;
+        }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+        public void setSessionId(String sessionId) {
+            this.sessionId = sessionId;
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public void setUserId(String userId) {
+            this.userId = userId;
+        }
+        public String getAnonymity() {
+            return  userName.substring(0, 3) + "****" + userName.substring(7);
+        }
+
     }
 }

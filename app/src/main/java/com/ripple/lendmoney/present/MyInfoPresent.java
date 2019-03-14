@@ -15,7 +15,7 @@ public class MyInfoPresent extends BasePresent<MyInfoActivity> {
         HttpUtils.post(activity, URLConfig.getCustomerInfo, null, new MyCallBack<AuthenticateInfoBean>() {
             @Override
             public void onMySuccess(AuthenticateInfoBean bean, MyMessage message) {
-                getV().setAuthenState(bean);
+                getV().setAuthenState(bean.getData());
 
             }
         });

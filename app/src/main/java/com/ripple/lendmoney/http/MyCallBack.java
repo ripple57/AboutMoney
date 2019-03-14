@@ -2,6 +2,7 @@ package com.ripple.lendmoney.http;
 
 import com.alibaba.fastjson.JSON;
 import com.ripple.lendmoney.base.Constant;
+import com.ripple.lendmoney.utils.LogUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
 
 import java.lang.reflect.ParameterizedType;
@@ -21,6 +22,7 @@ public abstract class MyCallBack<ResultType> implements HttpUtils.NetCallBack {
                 onMySuccess((ResultType) JSON.parseObject(message.getData(), p.getActualTypeArguments()[0]), message);
             } else if (p.getActualTypeArguments()[0].toString().contains(Void.class.getName())) {
                 onMySuccess(null, message);
+                LogUtils.e("json类型为Void");
             }else {
                 onMySuccess((ResultType) JSON.parseObject(message.getBody(), p.getActualTypeArguments()[0]), message);
             }

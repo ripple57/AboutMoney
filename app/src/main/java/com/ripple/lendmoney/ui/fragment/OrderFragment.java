@@ -18,6 +18,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -34,14 +35,14 @@ public class OrderFragment extends BaseLazyFragment<OrderFragPresent> {
     @BindView(R.id.refresh_order)
     SmartRefreshLayout refreshOrder;
     private OrderListAdapter orderListAdapter;
-    ArrayList<OrderListBean> orderlist = new ArrayList<>();
+    ArrayList<OrderListBean.DataBean> orderlist = new ArrayList<>();
     private int pageNum = 1;
 
     @Override
     public void initData(Bundle savedInstanceState) {
         initView();
         initListener();
-//        getNetData();
+        getNetData();
     }
 
     private void initListener() {
@@ -94,7 +95,7 @@ public class OrderFragment extends BaseLazyFragment<OrderFragPresent> {
     }
 
 
-    public void setOrderData(ArrayList<OrderListBean> list) {
+    public void setOrderData(List<OrderListBean.DataBean> list) {
         refreshOrder.finishLoadMore();
         refreshOrder.finishRefresh();
         if (pageNum == 1) {

@@ -17,15 +17,15 @@ import cn.droidlover.xdroidmvp.kit.Kits;
  * 项目: AboutMoney
  * 作用: 
  *****************************************************/
-public class OrderListAdapter extends BaseQuickAdapter<OrderListBean, BaseViewHolder> {
+public class OrderListAdapter extends BaseQuickAdapter<OrderListBean.DataBean, BaseViewHolder> {
 
 
-    public OrderListAdapter(int layoutResId, @Nullable List<OrderListBean> data) {
+    public OrderListAdapter(int layoutResId, @Nullable List<OrderListBean.DataBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, OrderListBean item) {
+    protected void convert(BaseViewHolder helper, OrderListBean.DataBean item) {
         helper.setText(R.id.tv_order_borrower, "迪肯").setText(R.id.tv_order_lender, "波波")
                 .setText(R.id.tv_order_interest, "52.22元").setText(R.id.tv_order_limit, "50000元")
                 .setText(R.id.tv_order_orderNo, "152115521286536326").setText(R.id.tv_order_repay_date, "2019-12-28")

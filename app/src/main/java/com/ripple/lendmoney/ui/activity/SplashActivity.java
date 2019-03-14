@@ -116,7 +116,7 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
     }
 
     private void hadLogin() {//读取缓存来判断是否已经登录
-        if (GlobleParms.debug) {
+        if (GlobleParms.familyTest) {
             MainActivity.launch(this);
             return;
         }

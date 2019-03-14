@@ -53,7 +53,7 @@ public class HomeFragPresent extends BasePresent<HomeFragment> {
         HttpUtils.post(context, URLConfig.index, null, new MyCallBack<IndexBean>() {
             @Override
             public void onMySuccess(IndexBean bean, MyMessage message) {
-                getV().setHomeData(bean);
+                getV().setHomeData(bean.getData());
             }
         });
     }

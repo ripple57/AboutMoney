@@ -125,7 +125,7 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
     }
 
 
-    public void setAuthenState(AuthenticateInfoBean bean) {
+    public void setAuthenState(AuthenticateInfoBean.DataBean bean) {
         setItemAuthenState(tvMyinfoactIdcardState, bean.getIdCardState());
         setItemAuthenState(tvMyinfoactFamilyState, bean.getFamilyState());
         setItemAuthenState(tvMyinfoactBankcardState, bean.getBankState());

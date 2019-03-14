@@ -12,5 +12,6 @@ public class GlobleParms {
     public static String userName;
     public static String userId;
     public static boolean debug = true;
+    public static boolean familyTest = false;
 //    public static String sessionId = "CBD3524CFBBD99AAB549A8809F8AAA2B";//sessionId=CBD3524CFBBD99AAB549A8809F8AAA2B
 }

@@ -1,7 +1,6 @@
 package com.ripple.lendmoney.http;
 
 import com.ripple.lendmoney.model.BaseModel;
-import com.ripple.lendmoney.model.LoginBean;
 import com.ripple.lendmoney.model.TestBean;
 import com.ripple.lendmoney.model.TokenBean;
 
@@ -54,10 +53,10 @@ public interface ApiService {
 //                                     @Field("from") String from);
 
 
-    @FormUrlEncoded
-    @POST("login")
-    Flowable<LoginBean> login(@Field("phoneNum") String phoneNum,
-                              @Field("code") String code);
+//    @FormUrlEncoded
+//    @POST("login")
+//    Flowable<LoginBean> login(@Field("phoneNum") String phoneNum,
+//                              @Field("code") String code);
 
     @FormUrlEncoded
     @POST("inter/appuser/sendCodeForLogin.do")

@@ -210,7 +210,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
                 .launch();
     }
 
-    public void loginSuccess(UserBean bean) {
+    public void loginSuccess(UserBean.DataBean bean) {
         GlobleParms.sessionId = bean.getSessionId();
         GlobleParms.userName = bean.getUserName();
         GlobleParms.userId = bean.getUserId();

@@ -34,7 +34,7 @@ public class LoginPresent extends BasePresent<LoginActivity> {
         HttpUtils.post(context, URLConfig.appLogin, map, new MyCallBack<UserBean>() {
             @Override
             public void onMySuccess(UserBean bean, MyMessage message) {
-                getV().loginSuccess(bean);
+                getV().loginSuccess(bean.getData());
             }
         });
 

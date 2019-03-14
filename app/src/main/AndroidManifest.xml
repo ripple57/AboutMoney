@@ -44,7 +44,6 @@
             android:windowSoftInputMode="stateHidden|adjustResize">
         </activity>
         <activity android:name=".ui.activity.GuideActivity">
-
         </activity>
         <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
@@ -86,6 +85,8 @@
         <activity
             android:name=".ui.activity.AuthenticateInfoActivity"
             android:windowSoftInputMode="stateHidden|adjustResize">
+        </activity>
+        <activity android:name=".ui.activity.RecordeVideoActivity">
         </activity>
     </application>
 

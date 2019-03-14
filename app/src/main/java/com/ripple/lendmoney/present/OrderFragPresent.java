@@ -35,7 +35,7 @@ public class OrderFragPresent extends BasePresent<OrderFragment> {
         HttpUtils.post(context, URLConfig.getIOUInfoList, map, new MyCallBack<OrderListBean>() {
             @Override
             public void onMySuccess(OrderListBean bean, MyMessage message) {
-//                getV().setOrderData(orderlist);
+                getV().setOrderData(bean.getData());
             }
         });
     }
