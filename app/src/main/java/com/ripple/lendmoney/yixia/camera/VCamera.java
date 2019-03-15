@@ -3,6 +3,7 @@ package com.ripple.lendmoney.yixia.camera;
 import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 
+import com.ripple.lendmoney.utils.LogUtils;
 import com.ripple.lendmoney.yixia.camera.util.DeviceUtils;
 import com.ripple.lendmoney.yixia.camera.util.Log;
 import com.ripple.lendmoney.yixia.videoeditor.adapter.UtilityAdapter;
@@ -36,7 +37,8 @@ public class VCamera {
 
 		mAppVersionName = getVerName(context);
 		mAppVersionCode = getVerCode(context);
-
+		LogUtils.e(String.format("versionName=%s&versionCode=%d&sdkVersion=%s&android=%s&device=%s",
+				mAppVersionName, mAppVersionCode, VCAMERA_SDK_VERSION, DeviceUtils.getReleaseVersion(), DeviceUtils.getDeviceModel()));
 		//初始化底层库
 		UtilityAdapter.FFmpegInit(context, String.format("versionName=%s&versionCode=%d&sdkVersion=%s&android=%s&device=%s",
 				mAppVersionName, mAppVersionCode, VCAMERA_SDK_VERSION, DeviceUtils.getReleaseVersion(), DeviceUtils.getDeviceModel()));

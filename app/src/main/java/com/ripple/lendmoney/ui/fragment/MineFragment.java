@@ -3,7 +3,6 @@ package com.ripple.lendmoney.ui.fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,8 +20,6 @@ import com.ripple.lendmoney.ui.activity.SuggestActivity;
 import com.ripple.lendmoney.utils.AppManager;
 import com.ripple.lendmoney.utils.SPUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -35,7 +32,7 @@ import cn.droidlover.xdroidmvp.mvp.XLazyFragment;
  * 项目: AboutMoney
  * 作用: 
  *****************************************************/
-public class MineFragment extends XLazyFragment<MinePresent> implements OnRefreshListener {
+public class MineFragment extends XLazyFragment<MinePresent> {
 
     @BindView(R.id.iv_minefrag_headIcon)
     QMUIRadiusImageView ivMinefragHeadIcon;
@@ -61,6 +58,11 @@ public class MineFragment extends XLazyFragment<MinePresent> implements OnRefres
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        initView();
+    }
+
+    private void initView() {
+        tvMinefragUsername.setText(GlobleParms.anonymity);
 
     }
 
@@ -74,10 +76,6 @@ public class MineFragment extends XLazyFragment<MinePresent> implements OnRefres
         return new MinePresent();
     }
 
-    @Override
-    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
-    }
 
 
     @OnClick({R.id.iv_minefrag_headIcon, R.id.ll_minefrag_myInfo, R.id.ll_minefrag_suggest, R.id.ll_minefrag_aboutUs,
@@ -94,7 +92,6 @@ public class MineFragment extends XLazyFragment<MinePresent> implements OnRefres
                 SuggestActivity.launch(context);
                 break;
             case R.id.ll_minefrag_aboutUs:
-                ToastUtil.showToast("点击了关于我们");
                 new QMUIDialog.MessageDialogBuilder(context)
                         .setTitle("公司简介")
                         .setMessage("测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试")

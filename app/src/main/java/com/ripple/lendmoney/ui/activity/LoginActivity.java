@@ -213,6 +213,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
     public void loginSuccess(UserBean.DataBean bean) {
         GlobleParms.sessionId = bean.getSessionId();
         GlobleParms.userName = bean.getUserName();
+        GlobleParms.anonymity = GlobleParms.userName.substring(0, 3) + "****" + GlobleParms.userName.substring(7);
         GlobleParms.userId = bean.getUserId();
         SPUtils.getInstance(this).save(Constant.SESSIONID, GlobleParms.sessionId);
         SPUtils.getInstance(this).save(Constant.USERNAME, GlobleParms.userName);

@@ -76,8 +76,7 @@ public class HomeFragment extends BaseLazyFragment<HomeFragPresent> {
 
 
     public void setHomeData(IndexBean.DataBean bean) {//18010491010
-        String anonymity = GlobleParms.userName.substring(0, 3) + "****" + GlobleParms.userName.substring(7);
-        tvUsername.setText(String.format("Hi,欢迎回来%s", anonymity));
+        tvUsername.setText(String.format("Hi,欢迎回来%s", GlobleParms.anonymity));
         tvDay.setText(String.format("这是您使用借条的第%d天", bean.getDay()));
         // 初始化
         aUtil = new AutoVerticalScrollTextViewUtil(tvScroll, bean.getNotify());

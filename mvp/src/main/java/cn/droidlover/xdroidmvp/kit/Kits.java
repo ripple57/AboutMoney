@@ -24,9 +24,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -851,6 +853,23 @@ public class Kits {
         private static SimpleDateFormat hm = new SimpleDateFormat("HH:mm", Locale.getDefault());
         private static SimpleDateFormat mdhm = new SimpleDateFormat("MM月dd日 HH:mm", Locale.getDefault());
         private static SimpleDateFormat mdhmLink = new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault());
+
+        /**
+         * @param time    必须格式 createTime : 2019-03-13 17:21:42
+         * @param addDays
+         * @return
+         */
+        public static String dayComputer(String time, int addDays) {
+            String resultTime = "";
+            try {
+                java.util.Date date = ymdhms.parse(time);
+                java.util.Date date1 = new java.util.Date(date.getTime() + addDays * 24 * 60 * 60 * 1000L);
+                resultTime = ymd.format(date1);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return resultTime;
+        }
 
         /**
          * 年月日[2015-07-28]

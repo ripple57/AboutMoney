@@ -2,15 +2,12 @@ package com.ripple.lendmoney.ui.activity;
 
 import android.Manifest;
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -67,14 +64,13 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
         return null;
     }
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }
-    }
-
+    //    @Override
+//    protected void onCreate(@Nullable Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        }
+//    }
     @Override
     public void getNetData() {
 
@@ -123,11 +119,13 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
             return;
         }
         GlobleParms.sessionId = SPUtils.getInstance(this).getValue(Constant.SESSIONID, "");
-        GlobleParms.userName = SPUtils.getInstance(this).getValue(Constant.USERNAME, "");
-        GlobleParms.userId = SPUtils.getInstance(this).getValue(Constant.USERID, "");
+
         if (TextUtils.isEmpty(GlobleParms.sessionId)) {
             LoginActivity.launch(this, false);
         } else {
+            GlobleParms.userName = SPUtils.getInstance(this).getValue(Constant.USERNAME, "");
+            GlobleParms.anonymity = GlobleParms.userName.substring(0, 3) + "****" + GlobleParms.userName.substring(7);
+            GlobleParms.userId = SPUtils.getInstance(this).getValue(Constant.USERID, "");
             MainActivity.launch(this);
         }
         finish();

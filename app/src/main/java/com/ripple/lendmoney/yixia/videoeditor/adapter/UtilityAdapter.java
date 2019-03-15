@@ -5,9 +5,12 @@ import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.util.Log;
 
+import com.ripple.lendmoney.utils.LogUtils;
+
 public class UtilityAdapter {
 	static {
 		System.loadLibrary("utility");
+		LogUtils.e("初始化加载了so文件+++++++++++++++++++++++++");
 	}
 
 	/** 初始化底层库 */

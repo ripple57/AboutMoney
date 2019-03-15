@@ -46,6 +46,28 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 11:
+//                    //合成视频的handler
+//                    int progress = UtilityAdapter.FilterParserAction("", UtilityAdapter.PARSERACTION_PROGRESS);
+//                    if (dialogTextView != null) dialogTextView.setText("视频编译中 " + progress + "%");
+//                    if (progress == 100) {
+//                        syntVideo();
+//                    } else if (progress == -1) {
+//                        closeProgressDialog();
+//                        Toast.makeText(getApplicationContext(), "视频合成失败", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        sendEmptyMessageDelayed(1, 20);
+//                    }
+                    break;
+                case 12:
+                    closeProgressDialog();
+                    syntVideo();
+                    break;
+                case START_RECORDE:
+                    mMediaRecorder.startRecord();
+                    handler.sendEmptyMessageDelayed(END_RECORDE, 10000);
+                    break;
+                case END_RECORDE:
+                    mMediaRecorder.stopRecord();
                     //合成视频的handler
                     int progress = UtilityAdapter.FilterParserAction("", UtilityAdapter.PARSERACTION_PROGRESS);
                     if (dialogTextView != null) dialogTextView.setText("视频编译中 " + progress + "%");
@@ -58,17 +80,6 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
                         sendEmptyMessageDelayed(1, 20);
                     }
                     break;
-                case 12:
-                    closeProgressDialog();
-                    syntVideo();
-                    break;
-                case START_RECORDE:
-                    mMediaRecorder.startRecord();
-                    handler.sendEmptyMessageDelayed(END_RECORDE, 10000);
-                    break;
-                case END_RECORDE:
-                    mMediaRecorder.stopRecord();
-                    break;
             }
         }
     };
@@ -77,6 +88,11 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
     @Override
     protected String topBarTitle() {
         return "人脸验证";
+    }
+
+    @Override
+    protected boolean topBarIsShow() {
+        return false;
     }
 
     @Override
@@ -107,7 +123,7 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
     }
 
     private void initVCamera() {
-        video_path = "/sdcard/WeiXinRecordedDemo/";
+        video_path = "/sdcard/WeiXin/";
         video_path += String.valueOf(System.currentTimeMillis());
         //设置视频缓存路径
         VCamera.setVideoCachePath(video_path);

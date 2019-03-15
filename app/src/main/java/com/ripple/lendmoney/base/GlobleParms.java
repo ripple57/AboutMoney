@@ -10,6 +10,7 @@ public class GlobleParms {
     public static boolean AuthenticateCanNext = true;
     public static String sessionId = "";//sessionId=CBD3524CFBBD99AAB549A8809F8AAA2B
     public static String userName;
+    public static String anonymity;
     public static String userId;
     public static boolean debug = true;
     public static boolean familyTest = false;

@@ -26,13 +26,17 @@ public class OrderListAdapter extends BaseQuickAdapter<OrderListBean.DataBean, B
 
     @Override
     protected void convert(BaseViewHolder helper, OrderListBean.DataBean item) {
-        helper.setText(R.id.tv_order_borrower, "迪肯").setText(R.id.tv_order_lender, "波波")
-                .setText(R.id.tv_order_interest, "52.22元").setText(R.id.tv_order_limit, "50000元")
-                .setText(R.id.tv_order_orderNo, "152115521286536326").setText(R.id.tv_order_repay_date, "2019-12-28")
-                .setText(R.id.tv_order_term, "50天")
-                .addOnClickListener(R.id.tv_order_cancel).addOnClickListener(R.id.btn_order_authenticate);
+        helper.setText(R.id.tv_order_borrower, item.getBorrower())
+                .setText(R.id.tv_order_lender, item.getLender())
+                .setText(R.id.tv_order_interest, item.getLoanDate() + "元")
+                .setText(R.id.tv_order_limit, item.getLoanAmount() + "元")
+                .setText(R.id.tv_order_orderNo, item.getOrderId())
+                .setText(R.id.tv_order_repay_date, Kits.Date.dayComputer(item.getCreateTime(), item.getLoanDate()))
+                .setText(R.id.tv_order_term, item.getLoanDate() + "天")
+                .addOnClickListener(R.id.tv_order_cancel)
+                .addOnClickListener(R.id.btn_order_authenticate);
 
-        int random = Kits.Random.getRandom(2);
-        helper.setVisible(R.id.group_state_pass, random == 0).setVisible(R.id.group_state_nopass, random != 0);
+        helper.setVisible(R.id.group_state_pass, item.getPayState() != -1)
+                .setVisible(R.id.group_state_nopass, item.getPayState() == -1);
     }
 }

@@ -16,13 +16,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@color/white"
-            >
+            android:background="@color/white">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="237dp"
+                android:layout_height="210dp"
                 android:layout_centerInParent="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
                 android:background="@drawable/wodezilian_jindutiao"
                 android:scaleType="centerCrop"/>
 
@@ -34,7 +35,8 @@
                 android:text="50%"
                 android:textColor="@color/bg_orange"
                 android:textSize="30dp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:visibility="gone"/>
 
         </RelativeLayout>
 
@@ -271,9 +273,9 @@
             <ImageView
                 android:id="@+id/iv"
                 android:layout_width="13dp"
-                android:layout_marginTop="2dp"
                 android:layout_height="13dp"
                 android:layout_marginRight="5dp"
+                android:layout_marginTop="2dp"
                 android:src="@drawable/text_notice"/>
 
             <TextView

@@ -46,6 +46,8 @@ public class OrderFragment extends BaseLazyFragment<OrderFragPresent> {
     }
 
     private void initListener() {
+        refreshOrder.setEnableLoadMore(false);
+        refreshOrder.setEnableRefresh(false);
         refreshOrder.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
@@ -67,7 +69,10 @@ public class OrderFragment extends BaseLazyFragment<OrderFragPresent> {
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()) {
                     case R.id.tv_order_cancel:
-                        ToastUtil.showToast("点击了第" + position + "个位置的取消订单按钮;");
+                        orderlist.remove(position);
+                        orderListAdapter.notifyDataSetChanged();
+                        ToastUtil.showToast("订单已删除");
+
                         break;
                     case R.id.btn_order_authenticate:
                         ToastUtil.showToast("点击了第" + position + "个位置的去认证按钮;");
