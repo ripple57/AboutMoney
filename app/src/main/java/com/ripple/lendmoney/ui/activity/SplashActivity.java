@@ -119,14 +119,16 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
             return;
         }
         GlobleParms.sessionId = SPUtils.getInstance(this).getValue(Constant.SESSIONID, "");
+        GlobleParms.userName = SPUtils.getInstance(this).getValue(Constant.USERNAME, "");
 
         if (TextUtils.isEmpty(GlobleParms.sessionId)) {
             LoginActivity.launch(this, false);
-        } else {
-            GlobleParms.userName = SPUtils.getInstance(this).getValue(Constant.USERNAME, "");
+        } else if (!TextUtils.isEmpty(GlobleParms.userName)) {
             GlobleParms.anonymity = GlobleParms.userName.substring(0, 3) + "****" + GlobleParms.userName.substring(7);
             GlobleParms.userId = SPUtils.getInstance(this).getValue(Constant.USERID, "");
             MainActivity.launch(this);
+        } else {
+            SPUtils.getInstance(this).remove(Constant.SESSIONID);
         }
         finish();
     }

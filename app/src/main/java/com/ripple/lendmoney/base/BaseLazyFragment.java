@@ -2,20 +2,20 @@ package com.ripple.lendmoney.base;
 
 import android.view.View;
 
-import com.qmuiteam.qmui.widget.QMUIEmptyView;
 import com.ripple.lendmoney.R;
+import com.ripple.lendmoney.widget.ErrorView;
 
 import cn.droidlover.xdroidmvp.mvp.IPresent;
 import cn.droidlover.xdroidmvp.mvp.XLazyFragment;
 import cn.droidlover.xdroidmvp.net.NetError;
 
 public abstract class BaseLazyFragment<P extends IPresent> extends XLazyFragment<P> {
-    protected QMUIEmptyView emptyView;
+    protected ErrorView emptyView;
 
     @Override
     public void bindUI(View rootView) {
         super.bindUI(rootView);
-        emptyView = (QMUIEmptyView) rootView.findViewById(R.id.empty_loading_layout);
+        emptyView = (ErrorView) rootView.findViewById(R.id.empty_loading_layout);
     }
 
     public void setRetryView(NetError error) {

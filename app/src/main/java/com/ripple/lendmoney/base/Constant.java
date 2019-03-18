@@ -13,7 +13,7 @@ public final class Constant {
     public static final String PARAM_URL = "url";
     public static final String PARAM_TITLE = "title";
     public static final String SOCKETTIMEOUTEXCEPTION = "网络连接超时，请稍后重试";
-    public static final String CONNECTEXCEPTION = "网络连接异常,请稍后再试";
+    public static final String CONNECTEXCEPTION = "跟服务器连接异常,请稍后再试";
     public static final String UNKNOWNHOSTEXCEPTION = "网络异常，请检查您的网络状态";
     public static final String OTHEREXCEPTION = "出现未知错误";
     public static final String PARAM_FRAGMENTTYPE = "fragmentType";

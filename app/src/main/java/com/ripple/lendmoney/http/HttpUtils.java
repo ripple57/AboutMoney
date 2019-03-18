@@ -178,7 +178,7 @@ public class HttpUtils {
             params.put(key, RequestBody.create(MediaType.parse("text/plain"), value));
         }
         getGankService(URLConfig.BASE_URL).upload(url, params, parts)
-                .retryWhen(new RetryWithDelay(3, 1000, context))
+                .retryWhen(new RetryWithDelay(1, 1000, context))
                 .map(new Function<ResponseBody, String>() { //数据转换
                     @Override
                     public String apply(ResponseBody responseBody) throws Exception {
@@ -261,7 +261,7 @@ public class HttpUtils {
                 flowable = getGankService(URLConfig.BASE_URL).post(url, map);
                 break;
         }
-        flowable.retryWhen(new RetryWithDelay(3, 1000, context))
+        flowable.retryWhen(new RetryWithDelay(1, 1000, context))
                 .map(new Function<ResponseBody, String>() { //数据转换
                     @Override
                     public String apply(ResponseBody responseBody) throws Exception {
@@ -343,7 +343,7 @@ public class HttpUtils {
                 flowable = getGankService(URLConfig.BASE_URL).post(url, map);
                 break;
         }
-        flowable.retryWhen(new RetryWithDelay(3, 1000, context))
+        flowable.retryWhen(new RetryWithDelay(1, 1000, context))
                 .map(new Function<ResponseBody, String>() { //数据转换
                     @Override
                     public String apply(ResponseBody responseBody) throws Exception {
@@ -689,7 +689,6 @@ public class HttpUtils {
                     });
         }
     }
-    /***************新网络通信模式，主要用于电影模块****************************************************/
 
 
 }

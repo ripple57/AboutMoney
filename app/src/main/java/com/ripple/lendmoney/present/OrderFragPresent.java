@@ -12,6 +12,8 @@ import com.ripple.lendmoney.ui.fragment.OrderFragment;
 
 import java.util.HashMap;
 
+import cn.droidlover.xdroidmvp.net.NetError;
+
 /*****************************************************
  * 作者: HuangShaobo on 2019/3/5 21:55.
  * 微信: ripple57  e-mail: 247421018@qq.com
@@ -21,21 +23,20 @@ import java.util.HashMap;
 public class OrderFragPresent extends BasePresent<OrderFragment> {
 
     public void getOrderList(Activity context, int pageNum) {
-//        ArrayList<OrderListBean> orderlist = new ArrayList<>();
-//        orderlist.add(new OrderListBean());
-//        orderlist.add(new OrderListBean());
-//        orderlist.add(new OrderListBean());
-//        orderlist.add(new OrderListBean());
-//        orderlist.add(new OrderListBean());
-//        orderlist.add(new OrderListBean());
-//        orderlist.add(new OrderListBean());
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("pageNum", pageNum);
         HttpUtils.post(context, URLConfig.getIOUInfoList, map, new MyCallBack<OrderListBean>() {
             @Override
             public void onMySuccess(OrderListBean bean, MyMessage message) {
+                getV().hideLoading();
                 getV().setOrderData(bean.getData());
+            }
+
+            @Override
+            public void onError(NetError error) {
+                super.onError(error);
+                getV().setRetryView(error);
             }
         });
     }

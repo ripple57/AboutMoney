@@ -2,9 +2,9 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.qmuiteam.qmui.widget.QMUIEmptyView
+    <com.ripple.lendmoney.widget.ErrorView
         android:id="@+id/empty_loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:qmui_show_loading="true"></com.qmuiteam.qmui.widget.QMUIEmptyView>
+        app:qmui_show_loading="true"></com.ripple.lendmoney.widget.ErrorView>
 </merge>
