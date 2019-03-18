@@ -10,6 +10,7 @@ import com.ripple.lendmoney.http.URLConfig;
 import com.ripple.lendmoney.ui.activity.MakeIOUActivity;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /*****************************************************
  * 作者: HuangShaobo on 2019/3/8 0:03.
@@ -32,11 +33,13 @@ public class MakeIOUPresent extends BasePresent<MakeIOUActivity> {
         map.put("loanRate", loanRate);
         map.put("repaymentMethod", repaymentMethod);
         map.put("loanDate", loanDate);
-        HttpUtils.post(activity, URLConfig.addIOUInfo, map, new MyCallBack<Void>() {
+        HttpUtils.post(activity, URLConfig.addIOUInfo, map, new MyCallBack<Map<String,String>>() {
             @Override
-            public void onMySuccess(Void bean, MyMessage message) {
-                getV().makeIouSuccess();
+            public void onMySuccess(Map<String, String> bean, MyMessage message) {
+                String iouid = bean.get("IOUID");
+                getV().makeIouSuccess(iouid);
             }
+
         });
     }
 }

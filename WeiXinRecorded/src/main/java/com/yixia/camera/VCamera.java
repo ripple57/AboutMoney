@@ -36,8 +36,7 @@ public class VCamera {
 
 		mAppVersionName = getVerName(context);
 		mAppVersionCode = getVerCode(context);
-		Log.e("Ripple",String.format("versionName=%s&versionCode=%d&sdkVersion=%s&android=%s&device=%s",
-				mAppVersionName, mAppVersionCode, VCAMERA_SDK_VERSION, DeviceUtils.getReleaseVersion(), DeviceUtils.getDeviceModel()));
+
 		//初始化底层库
 		UtilityAdapter.FFmpegInit(context, String.format("versionName=%s&versionCode=%d&sdkVersion=%s&android=%s&device=%s",
 				mAppVersionName, mAppVersionCode, VCAMERA_SDK_VERSION, DeviceUtils.getReleaseVersion(), DeviceUtils.getDeviceModel()));

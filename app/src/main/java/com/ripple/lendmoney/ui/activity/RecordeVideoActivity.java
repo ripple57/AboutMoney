@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import android.view.SurfaceView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -18,13 +17,14 @@ import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.present.RecordeVideoPresent;
 import com.ripple.lendmoney.utils.LogUtils;
-import com.ripple.lendmoney.yixia.camera.MediaRecorderNative;
-import com.ripple.lendmoney.yixia.camera.VCamera;
-import com.ripple.lendmoney.yixia.camera.model.MediaObject;
-import com.ripple.lendmoney.yixia.videoeditor.adapter.UtilityAdapter;
+import com.yixia.camera.MediaRecorderNative;
+import com.yixia.camera.VCamera;
+import com.yixia.camera.model.MediaObject;
+import com.yixia.videoeditor.adapter.UtilityAdapter;
+import com.zhaoshuang.weixinrecorded.FocusSurfaceView;
+import com.zhaoshuang.weixinrecorded.SDKUtil;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +34,12 @@ import cn.droidlover.xdroidmvp.router.Router;
 public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
     private static final int START_RECORDE = 0;
     private static final int END_RECORDE = 1;
+    private static final int EYE = 2;
+    private static final int MOUTH = 3;
+    private static final int HEAD = 4;
+    private static final int UPLOAD_VIDEO = 5;
     @BindView(R.id.sv_ffmpeg)
-    SurfaceView sv_ffmpeg;
+    FocusSurfaceView sv_ffmpeg;
 
 
     private MediaRecorderNative mMediaRecorder;
@@ -45,44 +49,43 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
-                case 11:
-//                    //合成视频的handler
-//                    int progress = UtilityAdapter.FilterParserAction("", UtilityAdapter.PARSERACTION_PROGRESS);
-//                    if (dialogTextView != null) dialogTextView.setText("视频编译中 " + progress + "%");
-//                    if (progress == 100) {
-//                        syntVideo();
-//                    } else if (progress == -1) {
-//                        closeProgressDialog();
-//                        Toast.makeText(getApplicationContext(), "视频合成失败", Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        sendEmptyMessageDelayed(1, 20);
-//                    }
-                    break;
-                case 12:
-                    closeProgressDialog();
-                    syntVideo();
-                    break;
                 case START_RECORDE:
                     mMediaRecorder.startRecord();
                     handler.sendEmptyMessageDelayed(END_RECORDE, 10000);
                     break;
+                case EYE:
+                    mMediaRecorder.startRecord();
+                    Toast.makeText(getApplicationContext(), "请眨眼", Toast.LENGTH_SHORT).show();
+                    handler.sendEmptyMessageDelayed(MOUTH, 3000);
+                    break;
+                case MOUTH:
+                    Toast.makeText(getApplicationContext(), "请张嘴", Toast.LENGTH_SHORT).show();
+                    handler.sendEmptyMessageDelayed(HEAD, 3000);
+                    break;
+                case HEAD:
+                    Toast.makeText(getApplicationContext(), "请摇头", Toast.LENGTH_SHORT).show();
+                    handler.sendEmptyMessageDelayed(END_RECORDE, 3000);
+                    break;
                 case END_RECORDE:
                     mMediaRecorder.stopRecord();
-                    //合成视频的handler
+                    AuthenticateActivity.launch(RecordeVideoActivity.this);
+                    handler.sendEmptyMessageDelayed(UPLOAD_VIDEO, 3000);
+                    break;
+                case UPLOAD_VIDEO:
                     int progress = UtilityAdapter.FilterParserAction("", UtilityAdapter.PARSERACTION_PROGRESS);
-                    if (dialogTextView != null) dialogTextView.setText("视频编译中 " + progress + "%");
                     if (progress == 100) {
                         syntVideo();
                     } else if (progress == -1) {
-                        closeProgressDialog();
-                        Toast.makeText(getApplicationContext(), "视频合成失败", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "视频保存失败", Toast.LENGTH_SHORT).show();
                     } else {
-                        sendEmptyMessageDelayed(1, 20);
+                        sendEmptyMessageDelayed(UPLOAD_VIDEO, 50);
                     }
                     break;
             }
         }
     };
+
+
     private String video_path;
 
     @Override
@@ -104,12 +107,12 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
     public void initData(Bundle savedInstanceState) {
         initVCamera();
         initMediaRecorder();
-        handler.sendEmptyMessageDelayed(START_RECORDE, 2000);
+        handler.sendEmptyMessageDelayed(EYE, 2000);
     }
 
     private void initMediaRecorder() {
         mMediaRecorder = new MediaRecorderNative();
-        mMediaRecorder.switchCamera(1);//设置前置摄像头;
+        mMediaRecorder.switchCamera();//设置前置摄像头;
         String key = String.valueOf(System.currentTimeMillis());
         //设置缓存文件夹
         mMediaObject = mMediaRecorder.setOutputDirectory(key, VCamera.getVideoCachePath());
@@ -171,37 +174,40 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
         new AsyncTask<Void, Void, String>() {
             @Override
             protected void onPreExecute() {
-                if (dialogTextView != null) dialogTextView.setText("视频合成中");
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                long time = System.currentTimeMillis();
-                String format = formatter.format(time);
-                LogUtils.e("开始合成当前时间===" + time + "+格式化后+" + format);
+//                if (dialogTextView != null) dialogTextView.setText("视频合成中");
+//                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                long time = System.currentTimeMillis();
+//                String format = formatter.format(time);
+//                Log.e("Ripple57", "开始合成当前时间===" + time + "+格式化后+" + format);
             }
 
             @Override
             protected String doInBackground(Void... params) {
-
-                List<String> pathList = new ArrayList<>();
-                for (int x = 0; x < mMediaObject.getMediaParts().size(); x++) {
-                    MediaObject.MediaPart mediaPart = mMediaObject.getMediaParts().get(x);
-
-                    String mp4Path = video_path + "/" + x + ".mp4";
-                    List<String> list = new ArrayList<>();
-                    list.add(mediaPart.mediaPath);
-                    ts2Mp4(list, mp4Path);
-                    pathList.add(mp4Path);
-                }
-
-                List<String> tsList = new ArrayList<>();
-                for (int x = 0; x < pathList.size(); x++) {
-                    String path = pathList.get(x);
-                    String ts = video_path + "/" + x + ".ts";
-                    mp4ToTs(path, ts);
-                    tsList.add(ts);
-                }
-
-                String output = video_path + "/finish.mp4";
-                boolean flag = ts2Mp4(tsList, output);
+                String output = SDKUtil.VIDEO_PATH + "/finish.mp4";
+                MediaObject.MediaPart mediaPart = mMediaObject.getMediaParts().get(0);
+                List<String> list = new ArrayList<>();
+                list.add(mediaPart.mediaPath);
+                boolean flag = ts2Mp4(list, output);
+//                List<String> pathList = new ArrayList<>();
+//                for (int x = 0; x < mMediaObject.getMediaParts().size(); x++) {
+//                    MediaObject.MediaPart mediaPart = mMediaObject.getMediaParts().get(x);
+//                    String mp4Path = SDKUtil.VIDEO_PATH + "/" + x + ".mp4";
+//                    List<String> list = new ArrayList<>();
+//                    list.add(mediaPart.mediaPath);
+//                    ts2Mp4(list, mp4Path);
+//                    pathList.add(mp4Path);
+//                }
+//
+//                List<String> tsList = new ArrayList<>();
+//                for (int x = 0; x < pathList.size(); x++) {
+//                    String path = pathList.get(x);
+//                    String ts = SDKUtil.VIDEO_PATH + "/" + x + ".ts";
+//                    mp4ToTs(path, ts);
+//                    tsList.add(ts);
+//                }
+//
+//                String output = SDKUtil.VIDEO_PATH + "/finish.mp4";
+//                boolean flag = ts2Mp4(tsList, output);
                 if (!flag) output = "";
 //                deleteDirRoom(new File(SDKUtil.VIDEO_PATH), output);
                 return output;
@@ -209,16 +215,15 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
 
             @Override
             protected void onPostExecute(String result) {
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                long time = System.currentTimeMillis();
-                String format = formatter.format(time);
-                LogUtils.e("合成结束当前时间===" + time + "+格式化后+" + format);
-                closeProgressDialog();
+//                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                long time = System.currentTimeMillis();
+//                String format = formatter.format(time);
+//                Log.e("Ripple57", "合成结束当前时间===" + time + "+格式化后+" + format);
+//                closeProgressDialog();
                 if (!TextUtils.isEmpty(result)) {
-                    LogUtils.e(result);
-                    Toast.makeText(getApplicationContext(), "视频合成成功" + result, Toast.LENGTH_SHORT).show();
+                    getP().upLoadVideo(RecordeVideoActivity.this, result);
                 } else {
-                    Toast.makeText(getApplicationContext(), "视频合成失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "视频识别失败", Toast.LENGTH_SHORT).show();
                 }
             }
         }.execute();
@@ -312,5 +317,9 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
 
     public static void launch(Activity activity) {
         Router.newIntent(activity).to(RecordeVideoActivity.class).launch();
+    }
+
+    public void uploadVideoSuccess() {
+        LogUtils.e("视频上传成功!");
     }
 }

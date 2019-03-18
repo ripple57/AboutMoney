@@ -124,7 +124,13 @@ public class HttpUtils {
     public static void upload(Context context, String url, HashMap<String, Object> map, File file, NetCallBack callBack) {
         List<File> list = new ArrayList<>();
         list.add(file);
-        upload(context, url, map, list, callBack);
+        upload(context, url, map, list, callBack, true);
+    }
+
+    public static void uploadWithoutDialog(Context context, String url, HashMap<String, Object> map, File file, NetCallBack callBack) {
+        List<File> list = new ArrayList<>();
+        list.add(file);
+        upload(context, url, map, list, callBack, false);
     }
 
     public static void upload(Context context, String url, HashMap<String, Object> map, HashMap<Object, File> fileMap, NetCallBack callBack) {
@@ -133,26 +139,28 @@ public class HttpUtils {
         for (File file : values) {
             list.add(file);
         }
-        upload(context, url, map, list, callBack);
+        upload(context, url, map, list, callBack, true);
     }
 
-    public static void upload(Context context, String url, HashMap<String, Object> map, List<File> list, NetCallBack callBack) {
+    public static void upload(Context context, String url, HashMap<String, Object> map, List<File> list, NetCallBack callBack, boolean withDialog) {
         if (map == null) {
             map = new HashMap<>();
         }
         if (!TextUtils.isEmpty(GlobleParms.sessionId)) {
             map.put("sessionId", GlobleParms.sessionId);
         }
-        getInstance().uploadFiles(context, url, map, list, callBack);
+        getInstance().uploadFiles(context, url, map, list, callBack, withDialog);
     }
 
-    private void uploadFiles(Context context, String url, HashMap<String, Object> map, List<File> list, NetCallBack callBack) {
+    private void uploadFiles(Context context, String url, HashMap<String, Object> map, List<File> list, NetCallBack callBack, boolean withDialog) {
         final QMUITipDialog tipDialog = new QMUITipDialog.Builder(context)
                 .setTipWord("上传中")
                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
                 .create();
         tipDialog.setCancelable(true);
-        tipDialog.show();
+        if (withDialog) {
+            tipDialog.show();
+        }
 
 
         List<MultipartBody.Part> parts = new ArrayList<>(list.size());
@@ -163,8 +171,13 @@ public class HttpUtils {
             MultipartBody.Part body = MultipartBody.Part.createFormData("upload" + file.getName(), file.getName(), requestFile);
             parts.add(body);
         }
-
-        getGankService(URLConfig.BASE_URL).upload2(url, map, parts)
+        Map<String, RequestBody> params = new HashMap<>();
+        //以下参数是伪代码，参数需要换成自己服务器支持的
+        for (String key : map.keySet()) {//keySet获取map集合key的集合  然后在遍历key即可
+            String value = map.get(key).toString();//
+            params.put(key, RequestBody.create(MediaType.parse("text/plain"), value));
+        }
+        getGankService(URLConfig.BASE_URL).upload(url, params, parts)
                 .retryWhen(new RetryWithDelay(3, 1000, context))
                 .map(new Function<ResponseBody, String>() { //数据转换
                     @Override

@@ -6,7 +6,8 @@ package com.ripple.lendmoney.http;
  */
 public class URLConfig {
     //    public static final String BASE_URL = "http://123.56.100.221:8088/";//e患者说服务器
-    public static final String BASE_URL = "http://192.168.1.111:8080/";//测试服务器
+    public static final String BASE_URL = "http://192.168.1.111/";//测试服务器
+//    public static final String BASE_URL = "http://alongshow.6655.la/";//测试服务器
 
 
     public static final String REGIST_AGREEMENT = BASE_URL + "/h5/loginProtocol.do";

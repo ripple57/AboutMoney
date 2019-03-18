@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.http.URLConfig;
@@ -22,6 +23,7 @@ import cn.droidlover.xdroidmvp.router.Router;
 
 public class AssessActivity extends BaseActivity<AssessPresent> {
 
+    private static final String IOUID = "iouId";
     @BindView(R.id.iv_assessAct_banner)
     ImageView ivAssessActBanner;
     @BindView(R.id.iv_assessAct_checkAgreement)
@@ -38,9 +40,10 @@ public class AssessActivity extends BaseActivity<AssessPresent> {
     Button btnAssessActApplyLend;
     @BindString(R.string.renzhengfeiyong_introduce)
     String introduce;
+    private String iouID;
 
-    public static void launch(Activity activity) {
-        Router.newIntent(activity).to(AssessActivity.class).launch();
+    public static void launch(Activity activity, String iouId) {
+        Router.newIntent(activity).putString(IOUID, iouId).to(AssessActivity.class).launch();
     }
 
     @Override
@@ -60,14 +63,10 @@ public class AssessActivity extends BaseActivity<AssessPresent> {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-//        SpannableString spannableString = new SpannableString(introduce);
-//        //0 第一行缩进像素 , SizeUtils.dp2px(15)非第一行缩进像素
-//        LeadingMarginSpan.Standard what = new LeadingMarginSpan.Standard(0, Kits.Dimens.dpToPxInt(context, 20));
-//        spannableString.setSpan(what, 0, spannableString.length(), SpannableString.SPAN_INCLUSIVE_INCLUSIVE);
-//        tvAssessActFeeIntroduce.setText(introduce);
-//        autoSplitText(tvAssessActFeeIntroduce,"1.");
-        tvAssessActFeeIntroduce.setText(autoSplitText(tvAssessActFeeIntroduce,"1."));
+        iouID = getIntent().getStringExtra(IOUID);
+        tvAssessActFeeIntroduce.setText(introduce);
     }
+
     private String autoSplitText(final TextView tv, final String indent) {
         final String rawText = tv.getText().toString(); //原始文本
         final Paint tvPaint = tv.getPaint(); //paint，包含字体等信息
@@ -86,7 +85,7 @@ public class AssessActivity extends BaseActivity<AssessPresent> {
         }
 
         //将原始文本按行拆分
-        String [] rawTextLines = rawText.replaceAll("\r", "").split("\n");
+        String[] rawTextLines = rawText.replaceAll("\r", "").split("\n");
         StringBuilder sbNewText = new StringBuilder();
         for (String rawTextLine : rawTextLines) {
             if (tvPaint.measureText(rawTextLine) <= tvWidth) {
@@ -122,6 +121,7 @@ public class AssessActivity extends BaseActivity<AssessPresent> {
 
         return sbNewText.toString();
     }
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_assess;
@@ -138,14 +138,40 @@ public class AssessActivity extends BaseActivity<AssessPresent> {
         switch (view.getId()) {
             case R.id.iv_assessAct_checkAgreement:
                 ToastUtil.showToast("申请借款");
+                WebActivity.launch(this, URLConfig.LEND_AGREEMENT+"?IOUID="+iouID, "借条合同");
                 break;
             case R.id.tv_assessAct_agreement:
-                WebActivity.launch(this, URLConfig.LEND_AGREEMENT, "借款协议");
                 break;
             case R.id.btn_assessAct_applyLend:
-                ToastUtil.showToast("申请借款");
+                showSimpleBottomSheetGrid();
                 break;
         }
+    }
+
+    private void showSimpleBottomSheetGrid() {
+        final int TAG_WECHAT = 0;
+        final int TAG_ALIPAY = 1;
+        QMUIBottomSheet.BottomGridSheetBuilder builder = new QMUIBottomSheet.BottomGridSheetBuilder(this);
+        builder.addItem(R.drawable.wechat, "微信支付", TAG_WECHAT, QMUIBottomSheet.BottomGridSheetBuilder.FIRST_LINE)
+                .addItem(R.drawable.alipay, "支付宝支付", TAG_ALIPAY, QMUIBottomSheet.BottomGridSheetBuilder.FIRST_LINE)
+                .setOnSheetItemClickListener(new QMUIBottomSheet.BottomGridSheetBuilder.OnSheetItemClickListener() {
+                    @Override
+                    public void onClick(QMUIBottomSheet dialog, View itemView) {
+                        dialog.dismiss();
+                        int tag = (int) itemView.getTag();
+                        switch (tag) {
+                            case TAG_WECHAT:
+                                ToastUtil.showToast("选择了微信支付");
+                                break;
+                            case TAG_ALIPAY:
+                                ToastUtil.showToast("选择了支付宝支付");
+                                break;
+
+                        }
+                    }
+                }).build().show();
+
+
     }
 
 }

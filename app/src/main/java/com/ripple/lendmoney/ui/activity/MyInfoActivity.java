@@ -62,12 +62,12 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
 
     @Override
     public void getNetData() {
-        infoDegree = 0;
         getP().getUserInfo(this);
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        infoDegree = 0;
         getNetData();
     }
 
@@ -102,7 +102,7 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
                 AuthenticateActivity.launch(this, Constant.TYPE_CONTACTSFRAG);
                 break;
             case R.id.btn_myinfoact_commit:
-                AssessActivity.launch(this);
+                MakeIOUActivity.launch(this);
                 break;
         }
     }

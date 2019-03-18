@@ -111,8 +111,8 @@ public class MakeIOUActivity extends BaseActivity<MakeIOUPresent> {
                 .launch();
     }
 
-    public void makeIouSuccess() {
-        ToastUtil.showToast("借钱成功");
+    public void makeIouSuccess(String iouid) {
+        AssessActivity.launch(this,iouid);
 
     }
 }

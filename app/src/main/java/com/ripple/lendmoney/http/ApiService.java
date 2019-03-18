@@ -72,7 +72,9 @@ public interface ApiService {
 
     @Multipart
     @POST()
-    Flowable<ResponseBody> upload(@Url String url, @QueryMap Map<String, Object> map, @Part() MultipartBody.Part file);
+    Flowable<ResponseBody> upload(@Url String url, @PartMap Map<String, RequestBody> map, @Part() List<MultipartBody.Part> parts);
+
+
 
     @Multipart
     @POST()
@@ -81,11 +83,12 @@ public interface ApiService {
 
     @Multipart
     @POST()
-    Flowable<ResponseBody> upload2(@Url String url, @QueryMap Map<String, Object> map, @Part() List<MultipartBody.Part> parts);
+    Flowable<ResponseBody> upload2(@Url String url, @QueryMap Map<String, Object> map, @Part() MultipartBody.Part file);
+
+
     @Multipart
     @POST()
     Flowable<ResponseBody> upload3(@Url String url, @FieldMap Map<String, Object> map, @Part() MultipartBody.Part file);
-
 
 
     @FormUrlEncoded

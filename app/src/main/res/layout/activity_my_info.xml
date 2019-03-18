@@ -22,21 +22,24 @@
                 android:layout_width="237dp"
                 android:layout_height="210dp"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="15dp"
+                android:id="@+id/iv_wanchengdu"
                 android:layout_marginBottom="15dp"
-                android:background="@drawable/wodezilian_jindutiao"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/wodezilian_wanchengdu"
                 android:scaleType="centerCrop"/>
 
             <TextView
                 android:id="@+id/tv_myinfoact_comple"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="50%"
-                android:textColor="@color/bg_orange"
-                android:textSize="30dp"
+                android:text="0%"
+                android:layout_centerHorizontal="true"
+                android:layout_alignTop="@id/iv_wanchengdu"
+                android:layout_marginTop="55dp"
+                android:textColor="#FFBA01"
+                android:textSize="30sp"
                 android:textStyle="bold"
-                android:visibility="gone"/>
+                android:visibility="visible"/>
 
         </RelativeLayout>
 

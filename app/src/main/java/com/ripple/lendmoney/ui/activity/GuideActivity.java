@@ -109,7 +109,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 MakeIOUActivity.launch(this);
                 break;
             case R.id.button11:
-                AssessActivity.launch(this);
+                AssessActivity.launch(this,"");
                 break;
             case R.id.button12:
                 AuthenticateInfoActivity.launch(this);
@@ -296,7 +296,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
             public void onMySuccess(Void bean, MyMessage message) {
                 LogUtils.e("--------------------------------------");
             }
-        });
+        },true);
     }
 
     private void upLoadUserIcon(File file) {
