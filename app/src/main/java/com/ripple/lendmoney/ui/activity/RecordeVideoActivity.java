@@ -22,7 +22,6 @@ import com.yixia.camera.VCamera;
 import com.yixia.camera.model.MediaObject;
 import com.yixia.videoeditor.adapter.UtilityAdapter;
 import com.zhaoshuang.weixinrecorded.FocusSurfaceView;
-import com.zhaoshuang.weixinrecorded.SDKUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -69,6 +68,7 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
                 case END_RECORDE:
                     mMediaRecorder.stopRecord();
                     AuthenticateActivity.launch(RecordeVideoActivity.this);
+
                     handler.sendEmptyMessageDelayed(UPLOAD_VIDEO, 3000);
                     break;
                 case UPLOAD_VIDEO:
@@ -127,7 +127,6 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
 
     private void initVCamera() {
         video_path = "/sdcard/WeiXin/";
-        video_path += String.valueOf(System.currentTimeMillis());
         //设置视频缓存路径
         VCamera.setVideoCachePath(video_path);
         // log输出,ffmpeg输出到logcat
@@ -165,6 +164,22 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
         }
     }
 
+    /* 删除文件夹下所有文件, 只保留一个
+     *
+     * @param fileName 保留的文件名称
+     */
+    public static void deleteDir(File dir) {
+
+        if (dir.exists() && dir.isDirectory()) {
+            File[] files = dir.listFiles();
+            for (File f : files) {
+                deleteDir(f);
+            }
+        } else if (dir.exists()) {
+            dir.delete();
+        }
+    }
+
     /**
      * 合成视频
      */
@@ -183,7 +198,7 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
 
             @Override
             protected String doInBackground(Void... params) {
-                String output = SDKUtil.VIDEO_PATH + "/finish.mp4";
+                String output = video_path + "finish.mp4";
                 MediaObject.MediaPart mediaPart = mMediaObject.getMediaParts().get(0);
                 List<String> list = new ArrayList<>();
                 list.add(mediaPart.mediaPath);
@@ -321,5 +336,7 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
 
     public void uploadVideoSuccess() {
         LogUtils.e("视频上传成功!");
+        deleteDir(new File(video_path));
+        finish();
     }
 }

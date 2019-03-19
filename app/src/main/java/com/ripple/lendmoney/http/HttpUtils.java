@@ -194,14 +194,14 @@ public class HttpUtils {
                     @Override
                     protected void onStart() {
                         super.onStart();
-                        if (tipDialog != null) {
+                        if (tipDialog != null&&withDialog) {
                             tipDialog.show();
                         }
                     }
 
                     @Override
                     public void onNext(String string) {
-                        if (tipDialog != null) {
+                        if (tipDialog != null&&withDialog) {
                             tipDialog.dismiss();
                         }
                         MyMessage message = new MyMessage(string);//封装json数据为实例对象
@@ -216,7 +216,7 @@ public class HttpUtils {
 
                     @Override
                     public void onError(Throwable t) {
-                        if (tipDialog != null) {
+                        if (tipDialog != null&&withDialog) {
                             tipDialog.dismiss();
                         }
                         NetError error = null;

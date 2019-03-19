@@ -11,6 +11,8 @@ import com.ripple.lendmoney.ui.activity.RecordeVideoActivity;
 
 import java.io.File;
 
+import cn.droidlover.xdroidmvp.net.NetError;
+
 public class RecordeVideoPresent extends BasePresent<RecordeVideoActivity> {
     public void upLoadVideo(Activity activity, String result) {
         File file = new File(result);
@@ -23,6 +25,12 @@ public class RecordeVideoPresent extends BasePresent<RecordeVideoActivity> {
             public void onMySuccess(Void bean, MyMessage message) {
                 getV().uploadVideoSuccess();
             }
+
+            @Override
+            public void onError(NetError error) {
+                super.onError(error);
+            }
+
         });
 
     }

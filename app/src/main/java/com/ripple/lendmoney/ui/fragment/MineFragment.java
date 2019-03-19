@@ -83,7 +83,6 @@ public class MineFragment extends XLazyFragment<MinePresent> {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_minefrag_headIcon:
-                ToastUtil.showToast("点击了头像");
                 break;
             case R.id.ll_minefrag_myInfo:
                 MyInfoActivity.launch(context);
