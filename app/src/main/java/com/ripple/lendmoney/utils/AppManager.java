@@ -35,7 +35,7 @@ public class AppManager {
      */
     public void addActivity(Activity activity) {
         activityStack.add(activity);
-        LogUtils.e("添加任务栈"+activity+"==================数量: "+activityStack.size());
+        LogUtils.e("栈添加任务:"+activity.getLocalClassName()+"++++++++++数量: "+activityStack.size());
     }
 
     /**
@@ -60,7 +60,7 @@ public class AppManager {
         if (activity != null) {
             activityStack.remove(activity);
             activity.finish();
-            LogUtils.e("结束当前activity内部============"+activity+"任务栈数量"+activityStack.size());
+            LogUtils.e("栈移除任务:"+activity.getLocalClassName()+"----------数量:"+activityStack.size());
             activity = null;
         }
     }

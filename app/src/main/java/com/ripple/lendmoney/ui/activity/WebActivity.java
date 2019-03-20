@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
@@ -18,10 +17,10 @@ import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.present.WebPresent;
+import com.ripple.lendmoney.utils.LogUtils;
 
 import butterknife.BindView;
 import cn.droidlover.xdroidmvp.router.Router;
-import cn.droidlover.xstatecontroller.XStateController;
 
 /**
  * Created by wanglei on 2016/12/31.
@@ -33,8 +32,6 @@ public class WebActivity extends BaseActivity<WebPresent> {
     WebView webView;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
-    @BindView(R.id.contentLayout)
-    XStateController contentLayout;
 
     String title;
     String url;
@@ -45,14 +42,10 @@ public class WebActivity extends BaseActivity<WebPresent> {
         url = getIntent().getStringExtra(Constant.PARAM_URL);
         title = getIntent().getStringExtra(Constant.PARAM_TITLE);
         setTopBarTitle(title);
-        initContentLayout();
         initRefreshLayout();
         initWebView();
     }
 
-    private void initContentLayout() {
-        contentLayout.loadingView(View.inflate(context, R.layout.view_loading, null));
-    }
 
     private void initRefreshLayout() {
         swipeRefreshLayout.setColorSchemeResources(
@@ -64,6 +57,7 @@ public class WebActivity extends BaseActivity<WebPresent> {
             @Override
             public void onRefresh() {
                 webView.loadUrl(url);
+                LogUtils.e("加载的网页地址:  "+url);
             }
         });
 
@@ -74,26 +68,21 @@ public class WebActivity extends BaseActivity<WebPresent> {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                if (contentLayout != null)
-                    contentLayout.showLoading();
             }
 
             @Override
-            public void onPageFinished(WebView view, String url) {
+            public void onPageFinished(WebView view, String url1) {
                 super.onPageFinished(view, url);
                 swipeRefreshLayout.setRefreshing(false);
-                if (contentLayout != null) {
-                    contentLayout.showContent();
-                    setTopBarTitle(view.getTitle());
-                }
+                setTopBarTitle(view.getTitle());
+                if (webView != null)
+                    url = webView.getUrl();
             }
 
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError
                     error) {
                 super.onReceivedError(view, request, error);
-                if (contentLayout != null)
-                    contentLayout.showError();
             }
         });
         webView.setWebChromeClient(new WebChromeClient());

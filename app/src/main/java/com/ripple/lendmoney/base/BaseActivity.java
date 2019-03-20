@@ -44,13 +44,18 @@ public abstract class BaseActivity<P extends IPresent> extends XActivity<P> {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            AndroidBug5497Workaround.assistActivity(this);//To solve the conflict of the status bar and soft keyboard
         }
+        setSoftInputMode();
+
+        AppManager.getAppManager().addActivity(this);
+    }
+
+    public void setSoftInputMode() {
+        AndroidBug5497Workaround.assistActivity(this);//To solve the conflict of the status bar and soft keyboard
         //解决华为虚拟按键被遮挡的问题=>在util自定义了AndroidWorkaround类
         if (AndroidWorkaround.checkDeviceHasNavigationBar(this)) { //适配华为手机虚拟键遮挡tab的问题
             AndroidWorkaround.assistActivity(findViewById(android.R.id.content));  //需要在setContentView()方法后面执行
         }
-        AppManager.getAppManager().addActivity(this);
     }
 
     @Override

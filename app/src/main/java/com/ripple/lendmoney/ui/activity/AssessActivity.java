@@ -16,7 +16,6 @@ import com.ripple.lendmoney.http.URLConfig;
 import com.ripple.lendmoney.present.AssessPresent;
 import com.ripple.lendmoney.utils.ToastUtil;
 
-import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.router.Router;
@@ -30,16 +29,12 @@ public class AssessActivity extends BaseActivity<AssessPresent> {
     ImageView ivAssessActCheckAgreement;
     @BindView(R.id.tv_assessAct_agreement)
     TextView tvAssessActAgreement;
-    @BindView(R.id.tv_assessAct_feeIntroduce)
-    TextView tvAssessActFeeIntroduce;
     @BindView(R.id.tv_assessAct_nowPrice)
     TextView tvAssessActNowPrice;
     @BindView(R.id.tv_assessAct_prePrice)
     TextView tvAssessActPrePrice;
     @BindView(R.id.btn_assessAct_applyLend)
     Button btnAssessActApplyLend;
-    @BindString(R.string.renzhengfeiyong_introduce)
-    String introduce;
     private String iouID;
 
     public static void launch(Activity activity, String iouId) {
@@ -64,7 +59,7 @@ public class AssessActivity extends BaseActivity<AssessPresent> {
     @Override
     public void initData(Bundle savedInstanceState) {
         iouID = getIntent().getStringExtra(IOUID);
-        tvAssessActFeeIntroduce.setText(introduce);
+//        tvAssessActFeeIntroduce.setText(introduce);
     }
 
     private String autoSplitText(final TextView tv, final String indent) {

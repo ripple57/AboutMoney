@@ -1,31 +1,14 @@
 <resources>
-    <string name="app_name">AboutMoney</string>
+    <string name="app_name">借条版</string>
     <string name="title_home">首页</string>
     <string name="title_dashboard">订单</string>
     <string name="title_notifications">我的</string>
 
     <string name="service_phone">400-333-100</string>
 
-
-    <string name="title_activity_splash">SplashActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_activity_login">Sign in</string>
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email        completions."
-    </string>
-    <string name="servifce_phone">dddd</string>
-    <string name="renzhengfeiyong_introduce">1. 该费用用于更新信用报告，支付给第三方数据公司，一次认证有效期为79元/月，只有认证后才可以正常要求借款。\n
-    2. 认证后，1个月内用户可获得20次免费打借条，当需要认证时，可直接抵用认证次数，无需在付费，让您更快借到钱\n
-    3. 平台用户认证后保证电子借条的真实有效，并且帮助出借人风控，降低风险，对借款人的信用记录也可提升借款成功率。</string>
+    <string name="renzhengfeiyong_introduce1">该费用用于更新信用报告，支付给第三方数据公司，一次认证有效期为79元/月，只有认证后才可以正常要求借款。</string>
+    <string name="renzhengfeiyong_introduce2">认证后，1个月内用户可获得20次免费打借条，当需要认证时，可直接抵用认证次数，无需在付费，让您更快借到钱。</string>
+    <string name="renzhengfeiyong_introduce3">平台用户认证后保证电子借条的真实有效，并且帮助出借人风控，降低风险，对借款人的信用记录也可提升借款成功率。</string>
 
 
 </resources>

@@ -44,6 +44,11 @@ public class AuthenticateActivity extends BaseActivity {
     }
 
     @Override
+    public void setSoftInputMode() {
+
+    }
+
+    @Override
     protected boolean topBarIsTransparent() {
         return true;
     }

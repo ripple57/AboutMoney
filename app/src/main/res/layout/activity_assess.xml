@@ -82,17 +82,76 @@
                 android:text="认证费用介绍"
                 android:textSize="15sp"/>
 
-            <TextView
-                android:id="@+id/tv_assessAct_feeIntroduce"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:gravity="left"
-                android:text="@string/renzhengfeiyong_introduce"
-                android:textColor="@color/text_gray"
-                android:textSize="12sp"/>
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:id="@+id/tv_No1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="1."
+                    android:textColor="@color/text_gray"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_assessAct_feeIntroduce1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv_No1"
+                    android:gravity="left"
+                    android:text="@string/renzhengfeiyong_introduce1"
+                    android:textColor="@color/text_gray"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_No2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_assessAct_feeIntroduce1"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="2."
+                    android:textColor="@color/text_gray"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_assessAct_feeIntroduce2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/tv_No2"
+                    android:layout_toRightOf="@id/tv_No2"
+                    android:gravity="left"
+                    android:text="@string/renzhengfeiyong_introduce2"
+                    android:textColor="@color/text_gray"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_No3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_assessAct_feeIntroduce2"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:text="3."
+                    android:textColor="@color/text_gray"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_assessAct_feeIntroduce3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/tv_No3"
+                    android:layout_toRightOf="@id/tv_No3"
+                    android:gravity="left"
+                    android:text="@string/renzhengfeiyong_introduce3"
+                    android:textColor="@color/text_gray"
+                    android:textSize="12sp"/>
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

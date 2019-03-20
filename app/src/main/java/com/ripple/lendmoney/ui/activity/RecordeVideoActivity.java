@@ -69,7 +69,7 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
                     mMediaRecorder.stopRecord();
                     AuthenticateActivity.launch(RecordeVideoActivity.this);
 
-                    handler.sendEmptyMessageDelayed(UPLOAD_VIDEO, 3000);
+                    handler.sendEmptyMessage(UPLOAD_VIDEO );
                     break;
                 case UPLOAD_VIDEO:
                     int progress = UtilityAdapter.FilterParserAction("", UtilityAdapter.PARSERACTION_PROGRESS);
@@ -78,7 +78,7 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
                     } else if (progress == -1) {
                         Toast.makeText(getApplicationContext(), "视频保存失败", Toast.LENGTH_SHORT).show();
                     } else {
-                        sendEmptyMessageDelayed(UPLOAD_VIDEO, 50);
+                        sendEmptyMessageDelayed(UPLOAD_VIDEO, 500);
                     }
                     break;
             }
@@ -107,7 +107,7 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
     public void initData(Bundle savedInstanceState) {
         initVCamera();
         initMediaRecorder();
-        handler.sendEmptyMessageDelayed(EYE, 2000);
+
     }
 
     private void initMediaRecorder() {
@@ -289,13 +289,18 @@ public class RecordeVideoActivity extends BaseActivity<RecordeVideoPresent> {
     @Override
     protected void onResume() {
         super.onResume();
+        handler.sendEmptyMessageDelayed(EYE, 2000);
         mMediaRecorder.startPreview();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mMediaRecorder.stopPreview();
+        handler.removeMessages(EYE);
+        handler.removeMessages(MOUTH);
+        handler.removeMessages(HEAD);
+        handler.removeMessages(END_RECORDE);
+     mMediaRecorder.stopPreview();
     }
 
     @Override

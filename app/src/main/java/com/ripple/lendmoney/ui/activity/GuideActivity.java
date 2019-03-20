@@ -77,7 +77,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button1:
-                upLoadVideo();
+                WebActivity.launch(this, "https://www.baidu.com", "用户注册协议");
                 break;
             case R.id.button2:
                 doTakePhoto();
@@ -86,9 +86,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 upLoadPictures(files);
                 break;
             case R.id.button4:
-                LogUtils.e("++++++++++点击了测试网页");
-//                Router.newIntent(this).to(WebActivity.class).putString("url","https//www.baidu.com").putString("title","标题").launch();
-                WebActivity.launch(this, "https://www.baidu.com", "正在加载...");
+                WebActivity.launch(this, URLConfig.REGIST_AGREEMENT, "用户注册协议");
                 break;
             case R.id.button5:
                 FaceRecognitionActivity.launch(this);

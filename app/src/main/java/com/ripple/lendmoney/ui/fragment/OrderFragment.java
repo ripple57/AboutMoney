@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ripple.lendmoney.R;
@@ -30,6 +31,8 @@ import butterknife.BindView;
  *****************************************************/
 public class OrderFragment extends BaseLazyFragment<OrderFragPresent> {
 
+    @BindView(R.id.no_data_layout)
+    RelativeLayout no_data_layout;
     @BindView(R.id.rv_order_list)
     RecyclerView rvOrderList;
     @BindView(R.id.refresh_order)
@@ -113,5 +116,9 @@ public class OrderFragment extends BaseLazyFragment<OrderFragPresent> {
     @Override
     public void getNetData() {
         getP().getOrderList(context, pageNum);
+    }
+
+    public void setNoDateView(boolean nodate) {
+        no_data_layout.setVisibility(nodate ? View.VISIBLE : View.GONE);
     }
 }

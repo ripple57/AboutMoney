@@ -35,14 +35,6 @@ public class MyApp extends Application {
         GlobleParms.familyTest = false;
 
 
-
-
-
-
-
-
-
-
         AutoSizeConfig.getInstance().getUnitsManager()
                 .setSupportDP(true)
                 .setSupportSP(true);
@@ -58,8 +50,8 @@ public class MyApp extends Application {
         if (GlobleParms.debug) {
 
         } else {
-            CrashHandler.getInstance().init(this);
         }
+        CrashHandler.getInstance().init(this);
 
     }
 

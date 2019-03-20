@@ -8,6 +8,7 @@
 
     <include layout="@layout/empty_loading_layout"/>
 
+    <include layout="@layout/no_data_layout"/>
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refresh_order"
         android:layout_width="match_parent"
