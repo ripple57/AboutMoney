@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 
 import com.ripple.lendmoney.R;
-import com.ripple.lendmoney.utils.CrashHandler;
 
 import cn.droidlover.xdroidmvp.XDroidConf;
 import cn.droidlover.xdroidmvp.net.NetError;
@@ -51,7 +50,6 @@ public class MyApp extends Application {
 
         } else {
         }
-        CrashHandler.getInstance().init(this);
 
     }
 

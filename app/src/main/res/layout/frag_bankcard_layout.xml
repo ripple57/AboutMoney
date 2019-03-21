@@ -11,9 +11,9 @@
         android:id="@+id/iv_banKCardFrag_head"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:visibility="gone"
         android:scaleType="centerCrop"
-        android:src="@drawable/bangding_banner"/>
+        android:src="@drawable/bangding_banner"
+        android:visibility="gone"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -60,7 +60,6 @@
                     android:inputType="number"
                     android:maxLength="19"
                     android:singleLine="true"
-                    android:text="66666666666"
                     android:textSize="15sp"/>
             </RelativeLayout>
 
@@ -93,7 +92,6 @@
                     android:gravity="right"
                     android:hint="请输入开户行"
                     android:singleLine="true"
-                    android:text="北京银行"
                     android:textSize="15sp"/>
             </RelativeLayout>
 
@@ -128,7 +126,6 @@
                     android:inputType="phone"
                     android:maxLength="11"
                     android:singleLine="true"
-                    android:text="18000000000"
                     android:textSize="15sp"/>
             </RelativeLayout>
 

@@ -107,6 +107,9 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
         phoneNum = et_login_phone.getText().toString().trim();
         if (TextUtils.isEmpty(phoneNum)) {
             ToastUtil.showToast("请输入手机号码");
+            if (GlobleParms.debug) {
+                getP().login(this, "18000000000", "123456", lat, lon);
+            }
         } else if (!phoneNum.matches(Constant.REG_PHONE)) {
             ToastUtil.showToast("请输入正确的手机号");
         } else if (TextUtils.isEmpty(code) || code.length() != 6) {
@@ -231,15 +234,5 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
         btn_login_getcode.setClickable(true);
     }
 
-//    public void loginSuccessTest() {
-//        GlobleParms.sessionId = "CBD3524CFBBD99AAB549A8809F8AAA2B";
-//        SPUtils.getInstance(this).save(Constant.SESSIONID, GlobleParms.sessionId);
-//        if (need_back) {
-//            finish();
-//        } else {
-//            MainActivity.launch(this);
-//            finish();
-//        }
-//    }
 }
 

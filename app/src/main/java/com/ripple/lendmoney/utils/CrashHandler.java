@@ -5,9 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
-import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,7 +21,7 @@ import java.util.Map;
 
 public class CrashHandler implements Thread.UncaughtExceptionHandler {
 
-    public static final String TAG = "CrashHandler";
+    public static final String TAG = "Ripple";
 
     // 系统默认的UncaughtException处理类
     private Thread.UncaughtExceptionHandler mDefaultHandler;
@@ -73,6 +71,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 Log.e(TAG, "error : ", e);
             }
             // 退出程序
+            AppManager.getAppManager().finishAllActivity();
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(1);
         }
@@ -88,15 +87,13 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         if (ex == null) {
             return false;
         }
-        // 使用Toast来显示异常信息
-        new Thread() {
-            @Override
-            public void run() {
-                Looper.prepare();
-                Toast.makeText(mContext, "很抱歉,程序出现异常即将退出.", Toast.LENGTH_LONG).show();
-                Looper.loop();
-            }
-        }.start();
+//        // 使用Toast来显示异常信息
+//        new Thread() {
+//            @Override
+//            public void run() {
+//                Toast.makeText(mContext, "很抱歉,程序出现异常即将退出!", Toast.LENGTH_LONG).show();
+//            }
+//        }.start();
         // 收集设备参数信息
         collectDeviceInfo(mContext);
         // 保存日志文件
@@ -160,6 +157,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         printWriter.close();
         String result = writer.toString();
         sb.append(result);
+        Log.e(TAG, sb.toString());
         try {
             String time = formatter.format(new Date());
             String fileName = time + ".txt";

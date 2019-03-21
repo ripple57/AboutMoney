@@ -1,5 +1,6 @@
 package com.ripple.lendmoney.ui.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -7,6 +8,7 @@ import android.widget.Button;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.present.FaceRecognitionPresent;
+import com.ripple.lendmoney.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -50,7 +52,15 @@ public class FaceRecognitionActivity extends BaseActivity<FaceRecognitionPresent
 
     @OnClick(R.id.btn_facefrag_startRecognition)
     public void onViewClicked() {
-        RecordeVideoActivity.launch(this);
+        getRxPermissions().request(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO)
+                .subscribe(granted -> {
+                    if (granted) {//同意
+                        RecordeVideoActivity.launch(this);
+                    } else {//拒绝
+                        ToastUtil.showToast("亲，同意了权限才能更好的为您服务哦");
+                    }
+                });
+//        ToastUtil.showToast("人脸视频录制未完成,直接跳");
 //        AuthenticateActivity.launch(this);
     }
 }

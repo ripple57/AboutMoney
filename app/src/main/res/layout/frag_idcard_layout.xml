@@ -296,7 +296,6 @@
                     android:maxLength="18"
                     android:padding="5dp"
                     android:singleLine="true"
-                    android:text="142354198901010000"
                     android:textSize="12sp"/>
 
 
