@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.SystemClock;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
@@ -853,6 +854,10 @@ public class Kits {
         private static SimpleDateFormat hm = new SimpleDateFormat("HH:mm", Locale.getDefault());
         private static SimpleDateFormat mdhm = new SimpleDateFormat("MM月dd日 HH:mm", Locale.getDefault());
         private static SimpleDateFormat mdhmLink = new SimpleDateFormat("MM-dd HH:mm", Locale.getDefault());
+
+        public static String getCurrentTime() {
+            return ymdhms.format(new java.util.Date());
+        }
 
         /**
          * @param time    必须格式 createTime : 2019-03-13 17:21:42

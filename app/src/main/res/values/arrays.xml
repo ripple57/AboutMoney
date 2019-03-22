@@ -2,18 +2,41 @@
 <resources>
     <string-array name="directRelations">
         <item>父母</item>
-
+        <item>子女</item>
+        <item>配偶</item>
         <item>兄弟</item>
-
         <item>姐妹</item>
 
     </string-array>
     <string-array name="emergencynRelations">
+        <item>父母</item>
+        <item>子女</item>
+        <item>配偶</item>
+        <item>兄弟</item>
+        <item>姐妹</item>
         <item>朋友</item>
-
-        <item>室友</item>
-
-        <item>同学</item>
-
+        <item>同事</item>
+    </string-array>
+    <string-array name="lendDays">
+        <item>7天</item>
+        <item>15天</item>
+        <item>30天</item>
+    </string-array>
+    <string-array name="lendInterests">
+        <item>10%</item>
+        <item>11%</item>
+        <item>12%</item>
+        <item>13%</item>
+        <item>14%</item>
+        <item>15%</item>
+        <item>16%</item>
+        <item>17%</item>
+        <item>18%</item>
+        <item>19%</item>
+        <item>20%</item>
+        <item>21%</item>
+        <item>22%</item>
+        <item>23%</item>
+        <item>24%</item>
     </string-array>
 </resources>

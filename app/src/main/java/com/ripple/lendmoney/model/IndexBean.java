@@ -25,6 +25,7 @@ public class IndexBean {
          */
 
         private int day;
+        private float price;
         private ArrayList<String> notify;
 
         public int getDay() {
@@ -33,10 +34,18 @@ public class IndexBean {
 
         public void setDay(int day) {
             this.day = day;
-      }
+        }
 
         public ArrayList<String> getNotify() {
             return notify;
+        }
+
+        public float getPrice() {
+            return price;
+        }
+
+        public void setPrice(float price) {
+            this.price = price;
         }
 
         public void setNotify(ArrayList<String> notify) {

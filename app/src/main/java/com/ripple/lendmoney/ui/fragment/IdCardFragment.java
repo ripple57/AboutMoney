@@ -19,6 +19,7 @@ import com.ripple.lendmoney.present.IdCardFragPresent;
 import com.ripple.lendmoney.ui.activity.AuthenticateActivity;
 import com.ripple.lendmoney.utils.BitmapPhotoUtil;
 import com.ripple.lendmoney.utils.LogUtils;
+import com.ripple.lendmoney.utils.SPUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
 
 import java.io.File;
@@ -47,6 +48,8 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
     EditText etIdcardFragIdcard;
     @BindView(R.id.et_idcardFrag_name)
     EditText etIdcardFragName;
+    @BindView(R.id.et_idcardFrag_wechat)
+    EditText etIdcardFragWeChat;
     @BindView(R.id.btn_idcardFrag_commit)
     Button btnIdcardFragCommit;
     private File mCurrentPhotoFile;// 照相机拍照得到的图片
@@ -101,16 +104,19 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
             case R.id.btn_idcardFrag_commit:
                 String idCardNo = etIdcardFragIdcard.getText().toString().trim();
                 String realName = etIdcardFragName.getText().toString().trim();
+                String wechatNumber = etIdcardFragWeChat.getText().toString().trim();
                 if (TextUtils.isEmpty(realName)) {
                     ToastUtil.showToast("请输入您的真实姓名");
                 } else if (TextUtils.isEmpty(idCardNo)) {
                     ToastUtil.showToast("请输入您的身份证号");
+                } else if (TextUtils.isEmpty(wechatNumber)) {
+                    ToastUtil.showToast("请输入您的微信账号");
                 } else if (!idCardNo.matches(Constant.REG_IDCARD)) {
                     ToastUtil.showToast("请输入正确的身份证号码");
                 } else if (fileMap.size() != 2) {
                     ToastUtil.showToast("请拍摄身份证的正反面照片");
-                }else {
-                    getP().uploadIdCardInfo(context,realName, idCardNo,fileMap);
+                } else {
+                    getP().uploadIdCardInfo(context, realName, idCardNo,wechatNumber, fileMap);
                 }
                 break;
         }
@@ -147,10 +153,12 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
     public void uploadSuccess() {
         ToastUtil.showToast("上传成功");
         BusFactory.getBus().post(new RefreshMyInfoEvent());
+        SPUtils.getInstance(context).save(Constant.REALNAME,etIdcardFragName.getText().toString().trim());
         if (GlobleParms.AuthenticateCanNext) {
             ((AuthenticateActivity) context).selectFragment(Constant.TYPE_FAMILYFRAG);
         } else {
             context.finish();
         }
+
     }
 }

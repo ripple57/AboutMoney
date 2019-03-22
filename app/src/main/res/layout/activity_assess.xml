@@ -176,7 +176,7 @@
             android:text="现价:  "
             android:textColor="@color/text_gray"
             android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@id/tv3"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tv2"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -207,36 +207,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tv2"/>
 
-        <TextView
-            android:id="@id/tv3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="原价:  "
-            android:textColor="@color/text_gray"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tv1"
-            app:layout_constraintTop_toBottomOf="@id/tv1"/>
-
-        <TextView
-            android:id="@id/tv4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="¥"
-            android:textColor="@color/text_gray"
-            android:textSize="12sp"
-            app:layout_constraintBaseline_toBaselineOf="@id/tv3"
-            app:layout_constraintStart_toEndOf="@+id/tv3"/>
-
-        <TextView
-            android:id="@+id/tv_assessAct_prePrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="120"
-            android:textColor="@color/text_gray"
-            android:textSize="12sp"
-            app:layout_constraintBaseline_toBaselineOf="@id/tv4"
-            app:layout_constraintStart_toEndOf="@+id/tv4"/>
 
         <Button
             android:id="@+id/btn_assessAct_applyLend"

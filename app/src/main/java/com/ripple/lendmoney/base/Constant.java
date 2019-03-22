@@ -27,4 +27,6 @@ public final class Constant {
     public static final String SESSIONID = "sessionId";
     public static final String USERNAME = "userName";
     public static final String USERID = "userId";
+    public static final String PRICE = "price";
+    public static final String REALNAME = "realName";
 }

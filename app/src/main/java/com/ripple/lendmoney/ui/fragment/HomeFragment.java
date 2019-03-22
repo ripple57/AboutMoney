@@ -7,10 +7,12 @@ import android.widget.TextView;
 import com.qmuiteam.qmui.layout.QMUIButton;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseLazyFragment;
+import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.base.GlobleParms;
 import com.ripple.lendmoney.model.IndexBean;
 import com.ripple.lendmoney.present.HomeFragPresent;
 import com.ripple.lendmoney.ui.activity.FaceRecognitionActivity;
+import com.ripple.lendmoney.utils.SPUtils;
 import com.ripple.lendmoney.widget.AutoVerticalScrollTextView;
 import com.ripple.lendmoney.widget.AutoVerticalScrollTextViewUtil;
 import com.youth.banner.Banner;
@@ -78,6 +80,7 @@ public class HomeFragment extends BaseLazyFragment<HomeFragPresent> {
     public void setHomeData(IndexBean.DataBean bean) {//18010491010
         tvUsername.setText(String.format("Hi,欢迎回来%s", GlobleParms.anonymity));
         tvDay.setText(String.format("这是您使用借条的第%d天", bean.getDay()));
+        SPUtils.getInstance(context).save(Constant.PRICE, bean.getPrice());
         // 初始化
         aUtil = new AutoVerticalScrollTextViewUtil(tvScroll, bean.getNotify());
         aUtil.setDuration(5000)// 设置上下滚动事件间隔

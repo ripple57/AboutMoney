@@ -85,7 +85,7 @@
                 android:gravity="right"
                 android:singleLine="true"
                 android:text="张某某"
-                android:textColor="@color/text_hint"
+                android:textColor="@color/text_black"
                 android:textSize="15sp"/>
         </RelativeLayout>
 
@@ -107,17 +107,17 @@
                 android:text="出借人"
                 android:textSize="15sp"/>
 
-            <TextView
-                android:id="@+id/tv_makeIou_lender"
+            <EditText
+                android:id="@+id/et_makeIou_lender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
                 android:gravity="right"
+                android:hint="请输入出借人姓名"
+                android:minWidth="40dp"
                 android:singleLine="true"
-                android:text="张某某"
-                android:textColor="@color/text_hint"
                 android:textSize="15sp"/>
         </RelativeLayout>
 
@@ -141,7 +141,7 @@
 
 
             <ImageView
-                android:id="@+id/iv1"
+                android:id="@+id/iv_makeIou_delete"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_alignParentRight="true"
@@ -154,12 +154,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/iv1"
+                android:layout_toLeftOf="@id/iv_makeIou_delete"
+                android:gravity="right"
+                android:hint="10000"
                 android:inputType="number"
-                android:maxLength="8"
+                android:maxLength="6"
+                android:minWidth="30dp"
                 android:singleLine="true"
-                android:text="10000"
-                android:textColor="@color/text_hint"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+                android:layout_toLeftOf="@id/et_makeIou_lendNum"
+                android:text="¥"
                 android:textSize="15sp"/>
         </RelativeLayout>
 
@@ -171,7 +180,7 @@
             android:gravity="center_vertical"
             android:paddingBottom="12dp"
             android:paddingLeft="15dp"
-            android:paddingRight="10dp"
+            android:paddingRight="15dp"
             android:paddingTop="12dp">
 
             <TextView
@@ -188,16 +197,17 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/item_next"/>
+                android:src="@drawable/item_next"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tv_makeIou_repayMethod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/iv2"
+                android:layout_marginRight="5dp"
                 android:text="到期还本付息"
-                android:textColor="@color/text_hint"
                 android:textSize="15sp"/>
         </RelativeLayout>
 
@@ -216,11 +226,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="还款日期"
+                android:text="借款天数"
                 android:textSize="15sp"/>
 
             <ImageView
-                android:id="@+id/iv3"
+                android:id="@+id/iv_makeIou_lendDays"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -228,12 +238,12 @@
                 android:src="@drawable/item_next"/>
 
             <TextView
-                android:id="@+id/tv_makeIou_repayDays"
+                android:id="@+id/tv_makeIou_lendDays"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/iv3"
-                android:text="30"
+                android:layout_toLeftOf="@id/iv_makeIou_lendDays"
+                android:text="7-30天"
                 android:textColor="@color/text_hint"
                 android:textSize="15sp"/>
         </RelativeLayout>
@@ -266,7 +276,7 @@
 
 
             <ImageView
-                android:id="@+id/iv4"
+                android:id="@+id/iv_makeIou_interest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -278,8 +288,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/iv4"
-                android:text="15"
+                android:layout_toLeftOf="@id/iv_makeIou_interest"
+                android:text="10%-24%"
                 android:textColor="@color/text_hint"
                 android:textSize="15sp"/>
         </RelativeLayout>
@@ -323,7 +333,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tv2"
-                        android:text="借款金额 10000 - 手续费 0"
+                        android:text="借款金额 0 - 手续费 0"
                         android:textColor="@color/white"
                         android:textSize="11sp"/>
 
@@ -334,7 +344,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="¥10000"
+                        android:text="¥ 0"
                         android:textColor="@color/white"
                         android:textSize="15sp"/>
                 </RelativeLayout>
@@ -360,7 +370,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tv3"
-                        android:text="本金 10000 + 利息 46.6"
+                        android:text="本金 0 + 利息 0"
                         android:textColor="@color/white"
                         android:textSize="11sp"/>
 
@@ -371,7 +381,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:text="¥10016.3"
+                        android:text="¥ 0"
                         android:textColor="@color/white"
                         android:textSize="15sp"/>
                 </RelativeLayout>
@@ -397,7 +407,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tv4"
-                        android:text="2019-02-30"
+                        android:text="2019-01-01"
                         android:textColor="@color/white"
                         android:textSize="15sp"/>
 
@@ -408,7 +418,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_below="@id/tv4"
-                        android:text="¥10000"
+                        android:text="¥ 0"
                         android:textColor="@color/white"
                         android:textSize="15sp"/>
                 </RelativeLayout>

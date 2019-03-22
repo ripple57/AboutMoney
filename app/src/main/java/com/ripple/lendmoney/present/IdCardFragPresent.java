@@ -19,10 +19,11 @@ import java.util.HashMap;
  * 作用: 
  *****************************************************/
 public class IdCardFragPresent extends BasePresent<IdCardFragment> {
-    public void uploadIdCardInfo(Activity context, String realName, String idCardNo, HashMap<Object, File> fileMap) {
+    public void uploadIdCardInfo(Activity context, String realName, String idCardNo, String wechatNumber, HashMap<Object, File> fileMap) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("realName", realName);
         map.put("idNumber", idCardNo);
+        map.put("wechatNumber", wechatNumber);
         HttpUtils.upload(context, URLConfig.addIDCard, map, fileMap, new MyCallBack<Void>() {
             @Override
             public void onMySuccess(Void bean, MyMessage message) {

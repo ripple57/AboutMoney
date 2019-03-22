@@ -20,6 +20,7 @@ import com.ripple.lendmoney.ui.activity.AuthenticateActivity;
 import com.ripple.lendmoney.utils.ToastUtil;
 
 import butterknife.BindArray;
+import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.event.BusFactory;
@@ -55,6 +56,8 @@ public class FamilyFragment extends BaseLazyFragment<FamilyFragPresent> {
     EditText etFamilyFragContactName;
     @BindView(R.id.et_familyFrag_contactPhone)
     EditText etFamilyFragContactPhone;
+    @BindColor(R.color.text_black)
+    int text_black;
 
     @Override
     public void getNetData() {
@@ -83,8 +86,6 @@ public class FamilyFragment extends BaseLazyFragment<FamilyFragPresent> {
     }
 
 
-
-
     @OnClick({R.id.iv_familyFrag_direRelation, R.id.tv_familyFrag_direRelation, R.id.iv_familyFrag_contactRelation, R.id.tv_familyFrag_contactRelation, R.id.btn_familyFrag_commit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -94,6 +95,7 @@ public class FamilyFragment extends BaseLazyFragment<FamilyFragPresent> {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         tvFamilyFragDireRelation.setText(directRelations[i]);
+                        tvFamilyFragDireRelation.setTextColor(text_black);
                         dialogInterface.dismiss();
                     }
                 }).show();
@@ -104,6 +106,7 @@ public class FamilyFragment extends BaseLazyFragment<FamilyFragPresent> {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         tvFamilyFragContactRelation.setText(emergencynRelations[i]);
+                        tvFamilyFragContactRelation.setTextColor(text_black);
                         dialogInterface.dismiss();
                     }
                 }).show();
@@ -123,11 +126,12 @@ public class FamilyFragment extends BaseLazyFragment<FamilyFragPresent> {
                     ToastUtil.showToast("请填写正确的手机号");
                 } else {
 
-                    getP().uploadFamilyInfo(context,directRelation,directName,directPhone,emergencyRelation,emergencyName,emergencyPhone);
+                    getP().uploadFamilyInfo(context, directRelation, directName, directPhone, emergencyRelation, emergencyName, emergencyPhone);
                 }
                 break;
         }
     }
+
     public void uploadSuccess() {
         BusFactory.getBus().post(new RefreshMyInfoEvent());
         ToastUtil.showToast("上传成功");

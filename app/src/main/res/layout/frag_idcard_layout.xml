@@ -300,7 +300,43 @@
 
 
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_wechat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                app:layout_constraintTop_toBottomOf="@id/ll_idcard">
 
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@mipmap/ic_must_red"/>
+
+                <TextView
+                    android:id="@+id/tv22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="微信账号"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:id="@+id/et_idcardFrag_wechat"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rec_stroke_bord_2"
+                    android:hint="请输入您的微信号"
+                    android:padding="5dp"
+                    android:singleLine="true"
+                    android:textSize="12sp"/>
+
+
+            </LinearLayout>
             <Button
                 android:id="@+id/btn_idcardFrag_commit"
                 style="@style/ButtonStyle"
@@ -309,7 +345,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_idcard"/>
+                app:layout_constraintTop_toBottomOf="@id/ll_wechat"/>
         </android.support.constraint.ConstraintLayout>
     </com.qmuiteam.qmui.widget.QMUIObservableScrollView>
 

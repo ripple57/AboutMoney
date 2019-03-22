@@ -10,6 +10,8 @@ import cn.droidlover.xdroidmvp.net.NetError;
 import cn.droidlover.xdroidmvp.net.NetProvider;
 import cn.droidlover.xdroidmvp.net.RequestHandler;
 import cn.droidlover.xdroidmvp.net.XApi;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import me.jessyan.autosize.AutoSizeConfig;
 import okhttp3.CookieJar;
 import okhttp3.Interceptor;
@@ -43,9 +45,9 @@ public class MyApp extends Application {
         XDroidConf.LOG = GlobleParms.debug;
         XDroidConf.IL_ERROR_RES = R.mipmap.img_default;
         XDroidConf.IL_LOADING_RES = R.mipmap.img_default;
-//        Realm.init(this);//数据库操作
-//        RealmConfiguration config = new RealmConfiguration.Builder().build();
-//        Realm.setDefaultConfiguration(config);
+        Realm.init(this);//数据库操作
+        RealmConfiguration config = new RealmConfiguration.Builder().build();
+        Realm.setDefaultConfiguration(config);
         if (GlobleParms.debug) {
 
         } else {

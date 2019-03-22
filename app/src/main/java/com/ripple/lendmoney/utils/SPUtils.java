@@ -54,6 +54,9 @@ public class SPUtils {
             sp.edit().putInt(key, (Integer) value).commit();
         } else if (value instanceof Boolean) {
             sp.edit().putBoolean(key, (Boolean) value).commit();
+        } else if (value instanceof Float) {
+            sp.edit().putFloat(key, (Float) value).commit();
+
         }
     }
 
@@ -67,6 +70,9 @@ public class SPUtils {
             t = (T) value;
         } else if (defaultValue instanceof Boolean) {
             Boolean value = sp.getBoolean(key, (Boolean) defaultValue);
+            t = (T) value;
+        }else if (defaultValue instanceof Float) {
+            Float value = sp.getFloat(key, (Float) defaultValue);
             t = (T) value;
         }
         return t;

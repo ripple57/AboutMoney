@@ -11,12 +11,17 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.adapter.OrderListAdapter;
 import com.ripple.lendmoney.base.BaseLazyFragment;
+import com.ripple.lendmoney.event.OrderEvent;
 import com.ripple.lendmoney.model.OrderListBean;
 import com.ripple.lendmoney.present.OrderFragPresent;
+import com.ripple.lendmoney.utils.LogUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +107,16 @@ public class OrderFragment extends BaseLazyFragment<OrderFragPresent> {
         return new OrderFragPresent();
     }
 
+    @Override
+    public boolean useEventBus() {
+        return true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void event(OrderEvent event) {
+        getNetData();
+        LogUtils.e("收到订单事件,刷新订单列表数据");
+    }
 
     public void setOrderData(List<OrderListBean.DataBean> list) {
         refreshOrder.finishLoadMore();
