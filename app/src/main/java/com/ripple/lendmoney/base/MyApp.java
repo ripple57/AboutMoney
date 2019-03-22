@@ -33,7 +33,7 @@ public class MyApp extends Application {
         super.onCreate();
         mContext = this;
         GlobleParms.debug = true;
-        GlobleParms.familyTest = false;
+        GlobleParms.familyTest = true;
 
 
         AutoSizeConfig.getInstance().getUnitsManager()
@@ -51,6 +51,7 @@ public class MyApp extends Application {
         if (GlobleParms.debug) {
 
         } else {
+
         }
 
     }
