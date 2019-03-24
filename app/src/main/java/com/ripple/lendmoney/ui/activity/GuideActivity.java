@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -26,10 +27,13 @@ import com.ripple.lendmoney.utils.BitmapPhotoUtil;
 import com.ripple.lendmoney.utils.LogUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -77,10 +81,19 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button1:
-                WebActivity.launch(this, "https://www.baidu.com", "用户注册协议");
+                RecordeFaceActivity.launch(this);
                 break;
             case R.id.button2:
-                doTakePhoto();
+                getRxPermissions().request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                        .subscribe(granted -> {
+                            if (granted) {//同意
+                                createFile();
+                            } else {//拒绝
+                                ToastUtil.showToast("亲，同意了权限才能更好的为您服务哦");
+                            }
+                        });
+
                 break;
             case R.id.button3:
                 upLoadPictures(files);
@@ -107,11 +120,65 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 MakeIOUActivity.launch(this);
                 break;
             case R.id.button11:
-                AssessActivity.launch(this,"");
+                AssessActivity.launch(this, "");
                 break;
             case R.id.button12:
                 AuthenticateInfoActivity.launch(this);
                 break;
+        }
+    }
+
+    private void createFile() {//         /storage/emulated/0/FaceRecord/face.mp4
+        String path = Environment.getExternalStorageDirectory().getPath();
+//        String path = getExternalCacheDir().getPath();
+        File file = null;
+        try {
+            File dir = new File(path + "/FaceRecord/");
+            if (!dir.exists()) {
+                boolean mkdirs = dir.mkdirs();
+            Log.e("Ripple", dir.getAbsolutePath() + mkdirs+"======文件夹是否创建?" +mkdirs);
+            }
+            Log.e("Ripple", dir.getAbsolutePath() +"======文件夹是否创建?" + dir.exists());
+            String name = "face.txt";
+            file = new File(dir, name);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("Ripple", e.toString());
+        }
+        Log.e("Ripple", file.getAbsolutePath() + "======文件是否创建?" + file.exists());
+//        print("测试一个扥二分二位",file.getAbsolutePath());
+    }
+    //向已创建的文件中写入数据
+    public void print(String str,String file) {
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        String datetime = "";
+        try {
+            SimpleDateFormat tempDate = new SimpleDateFormat("yyyy-MM-dd" + " "
+                    + "hh:mm:ss");
+            datetime = tempDate.format(new java.util.Date()).toString();
+            fw = new FileWriter(file, true);//
+            // 创建FileWriter对象，用来写入字符流
+            bw = new BufferedWriter(fw); // 将缓冲对文件的输出
+            String myreadline = datetime + "[]" + str;
+
+            bw.write(myreadline + "\n"); // 写入文件
+            bw.newLine();
+            bw.flush(); // 刷新该流的缓冲
+            bw.close();
+            fw.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            try {
+                bw.close();
+                fw.close();
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+            }
         }
     }
 
@@ -294,7 +361,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
             public void onMySuccess(Void bean, MyMessage message) {
                 LogUtils.e("--------------------------------------");
             }
-        },true);
+        }, true);
     }
 
     private void upLoadUserIcon(File file) {

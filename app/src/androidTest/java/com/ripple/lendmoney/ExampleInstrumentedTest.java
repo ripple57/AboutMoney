@@ -1,8 +1,10 @@
 package com.ripple.lendmoney;
 
 import android.content.Context;
+import android.os.Environment;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import com.ripple.lendmoney.http.HttpUtils;
 import com.ripple.lendmoney.http.MyCallBack;
@@ -11,6 +13,8 @@ import com.ripple.lendmoney.http.MyMessage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
@@ -37,5 +41,26 @@ public class ExampleInstrumentedTest {
 
             }
         });
+    }
+    @Test
+    public void createFile() {//         /storage/emulated/0/FaceRecord/face.mp4
+        String path = Environment.getExternalStorageDirectory().getPath();
+        File file = null;
+        try {
+            File dir = new File(path + "/FaceRecord/");
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            Log.e("Ripple", dir.getAbsolutePath() + "======文件夹是否创建?" + dir.exists());
+            String name = "face.mp4";
+            file = new File(dir, name);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("Ripple", e.toString());
+        }
+        Log.e("Ripple", file.getAbsolutePath() + "======文件是否创建?" + file.exists());
     }
 }

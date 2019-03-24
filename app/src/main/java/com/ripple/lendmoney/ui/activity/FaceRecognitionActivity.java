@@ -55,7 +55,7 @@ public class FaceRecognitionActivity extends BaseActivity<FaceRecognitionPresent
         getRxPermissions().request(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO)
                 .subscribe(granted -> {
                     if (granted) {//同意
-                        RecordeVideoActivity.launch(this);
+                        RecordeFaceActivity.launch(this);
                     } else {//拒绝
                         ToastUtil.showToast("亲，同意了权限才能更好的为您服务哦");
                     }
