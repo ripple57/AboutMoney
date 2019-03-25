@@ -79,20 +79,22 @@ public class CreditFragment extends BaseLazyFragment<CreditFragPresent> {
     }
 
 
-    @OnClick({R.id.iv_creditFrag_alipay, R.id.iv_creditFrag_credit, R.id.btn_creditFrag_commit})
+    @OnClick({R.id.iv_creditFrag_alipay, R.id.iv_creditFrag_credit, R.id.iv_creditFrag_alipay_b, R.id.iv_creditFrag_credit_b, R.id.btn_creditFrag_commit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_creditFrag_alipay:
+            case R.id.iv_creditFrag_alipay_b:
                 doPickPhotoFromGallery(CREDIT_INFO_DATA);
                 break;
             case R.id.iv_creditFrag_credit:
+            case R.id.iv_creditFrag_credit_b:
                 doPickPhotoFromGallery(CREDIT_SCORE_DATA);
                 break;
             case R.id.btn_creditFrag_commit:
                 if (filesMap.size() != 2) {
                     ToastUtil.showToast("请上传您的支付宝个人信息和芝麻信用分的页面截图");
                 } else {
-                   getP().uploadCreditInfo(context,filesMap);
+                    getP().uploadCreditInfo(context, filesMap);
                 }
                 break;
         }

@@ -1,7 +1,6 @@
 package us.pinguo.svideo.utils;
 
 import android.os.Environment;
-import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +28,6 @@ public class DateVideoNameGenerator implements IVideoPathGenerator {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.e("Ripple", file.getAbsolutePath()+"======文件是否创建?" + file.exists());
         return file.getAbsolutePath();
     }
 }

@@ -47,26 +47,59 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-
-            <ImageView
-                android:id="@+id/iv_idcardFrag_idcard_front"
+            <LinearLayout
+                android:id="@+id/ll_idcard_front"
                 android:layout_width="150dp"
                 android:layout_height="130dp"
-                android:src="@drawable/shenfenrenzheng_zhengmian"
-                app:layout_constraintEnd_toStartOf="@+id/iv_idcardFrag_idcard_back"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/ll_idcard_back"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv1"/>
+                app:layout_constraintTop_toBottomOf="@+id/tv1">
 
-            <ImageView
-                android:id="@+id/iv_idcardFrag_idcard_back"
+                <ImageView
+                    android:id="@+id/iv_idcardFrag_idcard_front"
+                    android:layout_width="150dp"
+                    android:layout_height="102dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/shenfenrenzheng_zhengmian_top"/>
+
+                <ImageView
+                    android:id="@+id/iv_idcardFrag_idcard_front_b"
+                    android:layout_width="150dp"
+                    android:scaleType="centerCrop"
+                    android:layout_height="28dp"
+                    android:src="@drawable/shenfenrenzheng_zhengmian_bottom"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_idcard_back"
                 android:layout_width="150dp"
                 android:layout_height="130dp"
-                android:src="@drawable/shenfenrenzheng_fanmian"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/iv_idcardFrag_idcard_front"
-                app:layout_constraintTop_toTopOf="@+id/iv_idcardFrag_idcard_front"/>
+                app:layout_constraintStart_toEndOf="@+id/ll_idcard_front"
+                app:layout_constraintTop_toTopOf="@+id/ll_idcard_front">
+
+                <ImageView
+                    android:id="@+id/iv_idcardFrag_idcard_back"
+                    android:layout_width="150dp"
+                    android:layout_height="102dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/shenfenrenzheng_fanmian_t"/>
+
+                <ImageView
+                    android:id="@+id/iv_idcardFrag_idcard_back_b"
+                    android:layout_width="150dp"
+                    android:layout_height="28dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/shenfenrenzheng_fanmian_b"
+                    />
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/textView6"
@@ -79,7 +112,7 @@
                 android:textColor="@color/text_blue"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_idcardFrag_idcard_front"/>
+                app:layout_constraintTop_toBottomOf="@+id/ll_idcard_front"/>
 
 
             <ImageView
@@ -300,6 +333,7 @@
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/ll_wechat"
                 android:layout_width="match_parent"
@@ -337,6 +371,7 @@
 
 
             </LinearLayout>
+
             <Button
                 android:id="@+id/btn_idcardFrag_commit"
                 style="@style/ButtonStyle"

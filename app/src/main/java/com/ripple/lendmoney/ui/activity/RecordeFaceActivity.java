@@ -5,6 +5,7 @@ import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
@@ -26,6 +27,7 @@ import butterknife.BindView;
 import cn.droidlover.xdroidmvp.router.Router;
 import us.pinguo.svideo.bean.VideoInfo;
 import us.pinguo.svideo.interfaces.ICameraProxyForRecord;
+import us.pinguo.svideo.interfaces.IVideoPathGenerator;
 import us.pinguo.svideo.interfaces.OnRecordListener;
 import us.pinguo.svideo.interfaces.PreviewDataCallback;
 import us.pinguo.svideo.interfaces.PreviewSurfaceListener;
@@ -151,7 +153,14 @@ public class RecordeFaceActivity extends BaseActivity<RecordeFacePresent> {
             }
         };
         mRecorder = new SMediaCodecRecorder(this, cameraProxyForRecord);
-//        mRecorder.setVideoPathGenerator();
+        mRecorder.setVideoPathGenerator(new IVideoPathGenerator() {
+            @Override
+            public String generate() {
+                String img_path = getExternalFilesDir(Environment.DIRECTORY_DCIM).getPath() +
+                        File.separator + "face.mp4";
+                return img_path;
+            }
+        });
         recordListener = new OnRecordListener() {
             @Override
             public void onRecordSuccess(VideoInfo videoInfo) {
@@ -269,8 +278,8 @@ public class RecordeFaceActivity extends BaseActivity<RecordeFacePresent> {
     private void adjustPreviewSize() {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mTextureView.getLayoutParams();
-        params.width = displayMetrics.widthPixels;
-        params.height = (int) (mPreviewSize.width / (float) mPreviewSize.height * params.width);
+        params.height = displayMetrics.heightPixels;
+        params.width = (int) (mPreviewSize.height / (float) mPreviewSize.width * params.height);
         mTextureView.setLayoutParams(params);
         //设置镜像
 //        if (mCameraFacing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
@@ -278,14 +287,12 @@ public class RecordeFaceActivity extends BaseActivity<RecordeFacePresent> {
 //        } else {
 //            mTextureView.setScaleX(1);
 //        }
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        if (mCamera != null) {
-//            mCamera.startPreview();
-//        }
         handler.sendEmptyMessageDelayed(START_RECORDE, 2000);
     }
 
@@ -309,6 +316,7 @@ public class RecordeFaceActivity extends BaseActivity<RecordeFacePresent> {
     }
 
     public void uploadVideoSuccess() {
+        ToastUtil.showToast("视频上传成功");
         AuthenticateActivity.launch(RecordeFaceActivity.this);
         finish();
     }

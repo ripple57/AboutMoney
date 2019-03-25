@@ -21,6 +21,7 @@ import com.ripple.lendmoney.utils.BitmapPhotoUtil;
 import com.ripple.lendmoney.utils.LogUtils;
 import com.ripple.lendmoney.utils.SPUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
+import com.ripple.lendmoney.widget.cameralibrary.CameraActivity;
 
 import java.io.File;
 import java.util.HashMap;
@@ -28,6 +29,7 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.event.BusFactory;
+import cn.droidlover.xdroidmvp.kit.Kits;
 
 /*****************************************************
  * 作者: HuangShaobo on 2019/3/4 23:16.
@@ -62,8 +64,9 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
         if (!PHOTO_DIR.exists()) {
             PHOTO_DIR.mkdirs();// 创建照片的存储目录
         }
-        mCurrentPhotoFile = new File(PHOTO_DIR, BitmapPhotoUtil.getPhotoFileName());// 给新照的照片文件命名
-        Intent intent = BitmapPhotoUtil.getTakePickIntent(context, mCurrentPhotoFile);
+//        mCurrentPhotoFile = new File(PHOTO_DIR, BitmapPhotoUtil.getPhotoFileName());// 给新照的照片文件命名
+//        Intent intent = BitmapPhotoUtil.getTakePickIntent(context, mCurrentPhotoFile);
+        Intent intent = new Intent(context, CameraActivity.class);
         startActivityForResult(intent, requestCode);
     }
 
@@ -92,13 +95,17 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
     }
 
 
-    @OnClick({R.id.iv_idcardFrag_idcard_front, R.id.iv_idcardFrag_idcard_back, R.id.btn_idcardFrag_commit})
+    @OnClick({R.id.iv_idcardFrag_idcard_front, R.id.iv_idcardFrag_idcard_front_b, R.id.iv_idcardFrag_idcard_back,
+            R.id.iv_idcardFrag_idcard_back_b, R.id.btn_idcardFrag_commit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_idcardFrag_idcard_front:
+            case R.id.iv_idcardFrag_idcard_front_b:
                 doTakePhoto(IDCARD_FRONT_DATA);
                 break;
             case R.id.iv_idcardFrag_idcard_back:
+            case R.id.iv_idcardFrag_idcard_back_b:
+
                 doTakePhoto(IDCARD_BACK_DATA);
                 break;
             case R.id.btn_idcardFrag_commit:
@@ -116,7 +123,7 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
                 } else if (fileMap.size() != 2) {
                     ToastUtil.showToast("请拍摄身份证的正反面照片");
                 } else {
-                    getP().uploadIdCardInfo(context, realName, idCardNo,wechatNumber, fileMap);
+                    getP().uploadIdCardInfo(context, realName, idCardNo, wechatNumber, fileMap);
                 }
                 break;
         }
@@ -126,13 +133,17 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         LogUtils.e("身份认证页面返回响应++++" + requestCode);
-        Bitmap photo = null;
-        if (mCurrentPhotoFile != null) {
-            photo = BitmapPhotoUtil.getSmallBitmap(mCurrentPhotoFile.getPath());
+        if (data == null) {
+            return;
         }
+        String photoPath = data.getStringExtra(Constant.IntentKeyFilePath);
+        if (photoPath == null) {
+            return;
+        }
+        Bitmap photo = BitmapPhotoUtil.getSmallBitmap(photoPath);
         if (photo != null) {
-            File f = BitmapPhotoUtil.replaceMyBitmap(photo, mCurrentPhotoFile);
-            if (f != null) {
+            File f = new File(photoPath);
+            if (f != null && f.exists()) {
                 switch (requestCode) {
                     case IDCARD_FRONT_DATA:
                         ivIdcardFragIdcardFront.setImageBitmap(photo);
@@ -143,6 +154,7 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
                         fileMap.put(IDCARD_BACK_DATA, f);
                         break;
                 }
+                Kits.FileUtil.deleteFile(photoPath);
             }
 
         }
@@ -153,12 +165,11 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
     public void uploadSuccess() {
         ToastUtil.showToast("上传成功");
         BusFactory.getBus().post(new RefreshMyInfoEvent());
-        SPUtils.getInstance(context).save(Constant.REALNAME,etIdcardFragName.getText().toString().trim());
+        SPUtils.getInstance(context).save(Constant.REALNAME, etIdcardFragName.getText().toString().trim());
         if (GlobleParms.AuthenticateCanNext) {
             ((AuthenticateActivity) context).selectFragment(Constant.TYPE_FAMILYFRAG);
         } else {
             context.finish();
         }
-
     }
 }

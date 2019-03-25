@@ -45,25 +45,54 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <ImageView
-                android:id="@+id/iv_creditFrag_alipay"
+            <LinearLayout
+                android:id="@+id/ll_credit_info"
                 android:layout_width="150dp"
                 android:layout_height="241dp"
-                android:src="@drawable/zhimaxinyong_zhengmian"
-                app:layout_constraintEnd_toStartOf="@+id/iv_creditFrag_credit"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/ll_credit_credit"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv1"/>
+                app:layout_constraintTop_toBottomOf="@id/tv1">
 
-            <ImageView
-                android:id="@+id/iv_creditFrag_credit"
+                <ImageView
+                    android:id="@+id/iv_creditFrag_alipay"
+                    android:layout_width="150dp"
+                    android:layout_height="211dp"
+                    android:src="@drawable/zhimaxinyong_info_t"/>
+
+                <ImageView
+                    android:id="@+id/iv_creditFrag_alipay_b"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/zhimaxinyong_info_b"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_credit_credit"
                 android:layout_width="150dp"
                 android:layout_height="241dp"
-                android:src="@drawable/zhimaxinyong_fanmian"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/iv_creditFrag_alipay"
-                app:layout_constraintTop_toTopOf="@id/iv_creditFrag_alipay"/>
+                app:layout_constraintStart_toEndOf="@+id/ll_credit_info"
+                app:layout_constraintTop_toTopOf="@id/ll_credit_info">
+
+                <ImageView
+                    android:id="@+id/iv_creditFrag_credit"
+                    android:layout_width="150dp"
+                    android:layout_height="211dp"
+                    android:src="@drawable/zhimaxinyong_credit_t"/>
+
+                <ImageView
+                    android:id="@+id/iv_creditFrag_credit_b"
+                    android:layout_width="150dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/zhimaxinyong_credit_b"
+                    />
+            </LinearLayout>
+
 
             <RelativeLayout
                 android:id="@+id/rl_credit"
@@ -71,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="150dp"
                 android:gravity="center"
-                app:layout_constraintTop_toBottomOf="@id/iv_creditFrag_alipay">
+                app:layout_constraintTop_toBottomOf="@id/ll_credit_info">
 
                 <ImageView
                     android:id="@+id/iv"

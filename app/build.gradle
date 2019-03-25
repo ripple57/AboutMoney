@@ -53,6 +53,6 @@ dependencies {
     implementation project(':mvp')
     implementation 'com.alibaba:fastjson:1.2.56'
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-5'
-    implementation project(':WeiXinRecorded')
-    compile project(path: ':library')
+//    implementation project(':WeiXinRecorded')
+    implementation project(path: ':library')
 }
