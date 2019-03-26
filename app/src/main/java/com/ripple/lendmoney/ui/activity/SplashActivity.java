@@ -64,13 +64,6 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
         return null;
     }
 
-    //    @Override
-//    protected void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//        }
-//    }
     @Override
     public void getNetData() {
 
@@ -100,15 +93,13 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
     private void getLoginPermission() {
         getRxPermissions().request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA,
-                Manifest.permission.RECORD_AUDIO,
                 Manifest.permission.READ_PHONE_STATE)
                 .subscribe(granted -> {
                     if (granted) {// 用户已经同意该权限
                         hadLogin();
                     } else {// 用户拒绝了该权限，并且选中『不再询问』
                         ToastUtil.showToast("为了更好地为您服务,请自行前往权限管理打开相应权限");
-                        getLoginPermission();
+                        SplashActivity.this.finish();
                     }
                 });
     }
@@ -145,9 +136,6 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
         }
     }
 
-    private void ToActivity(Class clazz) {
-        Router.newIntent(context).to(clazz).launch();
-    }
 
     @Override
     protected boolean topBarIsShow() {

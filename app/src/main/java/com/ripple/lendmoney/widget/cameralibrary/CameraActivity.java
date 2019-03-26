@@ -14,21 +14,19 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.ripple.lendmoney.R;
+import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.widget.cameralibrary.utils.BitmapUtils;
 import com.ripple.lendmoney.widget.cameralibrary.utils.CameraUtil;
@@ -40,7 +38,7 @@ import java.io.File;
 /**
  * 自定义相机
  */
-public class CameraActivity extends AppCompatActivity implements SurfaceHolder.Callback, View.OnClickListener {
+public class CameraActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "Ripple";
     private ImageView btn_take_picture;
@@ -76,39 +74,32 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
     private final static int REQUEST_PERMISSION_SETTING = 101;
     private AlertDialog alertDialog;
     private boolean lightOn;
+    private String fileName;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //取消标题栏
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //取消状态栏
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_camera);
-        context = this;
+    protected String topBarTitle() {
+        return "拍照";
+    }
 
-        initViews();
+    @Override
+    protected boolean topBarIsShow() {
+        return false;
+    }
 
-        initData();
-
-        checkPermission();
+    @Override
+    public void getNetData() {
 
     }
 
-    /**
-     * 初始化预览
-     */
-    private void initCameraPreview() {
-        mHolder = surfaceView.getHolder();
-        mHolder.addCallback(this);
-    }
 
     //判断是否有权限开启相机
     public boolean isCameraUseable() {
+        if (mCamera != null) {
+            return true;
+        }
         boolean canUse = true;
-        Camera mCamera = null;
+//        Camera mCamera = null;
         try {
             mCamera = Camera.open();
             // setParameters 是针对魅族MX5。MX5通过Camera.open()拿到的Camera对象不为null
@@ -118,9 +109,9 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
             canUse = false;
         }
 
-        if (mCamera != null) {
-            mCamera.release();
-        }
+//        if (mCamera != null) {
+//            mCamera.release();
+//        }
         return canUse;
 
     }
@@ -129,7 +120,6 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
         //6.0以下的系统检测权限
         if (this.isCameraUseable()) {
             //有权限
-            initCameraPreview();
         } else {
             if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
                 //拒绝授权
@@ -183,7 +173,7 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (REUQEST_CODE_PERMISSION_CAMERA == requestCode) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                initCameraPreview();
+                checkPermission();
             } else {
                 Toast.makeText(context, "拍照权限被拒绝,请允许拍照", Toast.LENGTH_SHORT).show();
                 this.finish();
@@ -231,21 +221,12 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
     protected void onResume() {
         super.onResume();
         checkPermission();
-        if (mCamera == null) {
-            mCamera = getCamera(mCameraId);
-            if (mHolder != null) {
-                if (mCamera != null) {
-                    startPreview(mCamera, mHolder);
-                }
-            }
-        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        releaseCamera();
-        finish();
+//        releaseCamera();
     }
 
     /**
@@ -311,7 +292,7 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
                 saveBitmap = Bitmap.createBitmap(saveBitmap, (int) imageX, (int) imageY, (int) imageW, (int) imageH);
 
                 String img_path = getExternalFilesDir(Environment.DIRECTORY_DCIM).getPath() +
-                        File.separator + System.currentTimeMillis() + ".jpeg";
+                        File.separator + fileName + ".jpeg";
                 BitmapUtils.saveJPGE_After(context, saveBitmap, img_path, 50);
 
                 Log.i(TAG, "img_path:" + img_path);
@@ -375,21 +356,6 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
         }
     }
 
-    @Override
-    public void surfaceCreated(SurfaceHolder holder) {
-        startPreview(mCamera, holder);
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        mCamera.stopPreview();
-        startPreview(mCamera, holder);
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        releaseCamera();
-    }
 
     @Override
     public void onClick(View view) {
@@ -411,5 +377,50 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
 
         }
 
+    }
+
+    @Override
+    public void initData(Bundle savedInstanceState) {
+        int type = getIntent().getIntExtra("type", 0);
+        switch (type) {
+            case Constant.IDCARD_FRONT_DATA:
+                fileName = "idCard_front";
+                break;
+            case Constant.IDCARD_BACK_DATA:
+                fileName = "idCard_back";
+                break;
+        }
+        context = this;
+        initViews();
+        initData();
+        initListener();
+    }
+
+    private void initListener() {
+        surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(SurfaceHolder holder) {
+                startPreview(mCamera, holder);
+            }
+
+            @Override
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+            }
+
+            @Override
+            public void surfaceDestroyed(SurfaceHolder holder) {
+                releaseCamera();
+            }
+        });
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_camera;
+    }
+
+    @Override
+    public Object newP() {
+        return null;
     }
 }

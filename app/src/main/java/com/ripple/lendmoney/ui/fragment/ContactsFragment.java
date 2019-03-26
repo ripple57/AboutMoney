@@ -83,8 +83,7 @@ public class ContactsFragment extends BaseLazyFragment<ContactsFragPresent> {
 
     //去获取通讯录列表
     private void toGetContacts() {
-        getRxPermissions()
-                .request(Manifest.permission.READ_CONTACTS)
+        getRxPermissions().request(Manifest.permission.READ_CONTACTS,Manifest.permission.READ_CALL_LOG)
                 .subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean aBoolean) throws Exception {

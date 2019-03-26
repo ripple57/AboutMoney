@@ -33,4 +33,6 @@ public final class Constant {
     public final static int IntentResultCode = 1001;
     //传递的参数保存的图片的地址
     public final static String IntentKeyFilePath = "IntentKeyFilePath";
+    public static final int IDCARD_FRONT_DATA = 350;
+    public static final int IDCARD_BACK_DATA = 351;
 }

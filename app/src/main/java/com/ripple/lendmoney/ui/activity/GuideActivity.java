@@ -136,9 +136,9 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
             File dir = new File(path + "/FaceRecord/");
             if (!dir.exists()) {
                 boolean mkdirs = dir.mkdirs();
-            Log.e("Ripple", dir.getAbsolutePath() + mkdirs+"======文件夹是否创建?" +mkdirs);
+                Log.e("Ripple", dir.getAbsolutePath() + mkdirs + "======文件夹是否创建?" + mkdirs);
             }
-            Log.e("Ripple", dir.getAbsolutePath() +"======文件夹是否创建?" + dir.exists());
+            Log.e("Ripple", dir.getAbsolutePath() + "======文件夹是否创建?" + dir.exists());
             String name = "face.txt";
             file = new File(dir, name);
             if (!file.exists()) {
@@ -151,8 +151,9 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
         Log.e("Ripple", file.getAbsolutePath() + "======文件是否创建?" + file.exists());
 //        print("测试一个扥二分二位",file.getAbsolutePath());
     }
+
     //向已创建的文件中写入数据
-    public void print(String str,String file) {
+    public void print(String str, String file) {
         FileWriter fw = null;
         BufferedWriter bw = null;
         String datetime = "";
@@ -252,8 +253,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
 
     //去拍照上传图片
     private void getCameraPermission() {
-        getRxPermissions()
-                .request(Manifest.permission.CAMERA)
+        getRxPermissions().request(Manifest.permission.CAMERA)
                 .subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean aBoolean) throws Exception {

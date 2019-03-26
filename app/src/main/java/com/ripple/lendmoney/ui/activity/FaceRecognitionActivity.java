@@ -60,7 +60,5 @@ public class FaceRecognitionActivity extends BaseActivity<FaceRecognitionPresent
                         ToastUtil.showToast("亲，同意了权限才能更好的为您服务哦");
                     }
                 });
-//        ToastUtil.showToast("人脸视频录制未完成,直接跳");
-//        AuthenticateActivity.launch(this);
     }
 }

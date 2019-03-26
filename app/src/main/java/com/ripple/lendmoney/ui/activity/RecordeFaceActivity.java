@@ -10,7 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
 import android.view.TextureView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.ripple.lendmoney.R;
@@ -75,6 +75,7 @@ public class RecordeFaceActivity extends BaseActivity<RecordeFacePresent> {
             }
         }
     };
+    private String img_path;
 
     @Override
     protected String topBarTitle() {
@@ -156,7 +157,7 @@ public class RecordeFaceActivity extends BaseActivity<RecordeFacePresent> {
         mRecorder.setVideoPathGenerator(new IVideoPathGenerator() {
             @Override
             public String generate() {
-                String img_path = getExternalFilesDir(Environment.DIRECTORY_DCIM).getPath() +
+                img_path = getExternalFilesDir(Environment.DIRECTORY_DCIM).getPath() +
                         File.separator + "face.mp4";
                 return img_path;
             }
@@ -168,7 +169,7 @@ public class RecordeFaceActivity extends BaseActivity<RecordeFacePresent> {
                 File file = new File(videoInfo.getVideoPath());
                 if (!file.exists()) {
                     ToastUtil.showToast("视频录制失败,请重新录制");
-                    handler.sendEmptyMessageDelayed(START_RECORDE,2000);
+                    handler.sendEmptyMessageDelayed(START_RECORDE, 2000);
                     return;
                 }
                 getP().upLoadVideo(RecordeFaceActivity.this, file);
@@ -277,7 +278,7 @@ public class RecordeFaceActivity extends BaseActivity<RecordeFacePresent> {
 
     private void adjustPreviewSize() {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mTextureView.getLayoutParams();
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mTextureView.getLayoutParams();
         params.height = displayMetrics.heightPixels;
         params.width = (int) (mPreviewSize.height / (float) mPreviewSize.width * params.height);
         mTextureView.setLayoutParams(params);

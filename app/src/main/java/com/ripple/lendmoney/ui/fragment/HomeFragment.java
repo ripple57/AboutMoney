@@ -45,7 +45,6 @@ public class HomeFragment extends BaseLazyFragment<HomeFragPresent> {
     @OnClick({R.id.btn_homefrag_lend})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-
             case R.id.btn_homefrag_lend:
                 FaceRecognitionActivity.launch(context);
                 break;

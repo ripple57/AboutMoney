@@ -36,7 +36,6 @@ public class AuthenticateActivity extends BaseActivity {
     private List<Fragment> fragmentList = new ArrayList<>();
     private int fragmentType;
     private FragmentManager fragmentManager;
-    private IdCardFragment idCardFragment;
 
     @Override
     protected String topBarTitle() {
@@ -89,10 +88,9 @@ public class AuthenticateActivity extends BaseActivity {
     }
 
     private void initAuthenticateViewPager() {
-        authenticateViewPager.setOffscreenPageLimit(5);
         if (GlobleParms.AuthenticateCanNext) {
-            idCardFragment = new IdCardFragment();
-            fragmentList.add(idCardFragment);//身份证
+            authenticateViewPager.setOffscreenPageLimit(5);
+            fragmentList.add(new IdCardFragment());//身份证
             fragmentList.add(new FamilyFragment());//紧急联系人
             fragmentList.add(new BankCardFragment());//银行卡
             fragmentList.add(new CreditFragment());//芝麻信用
@@ -101,18 +99,23 @@ public class AuthenticateActivity extends BaseActivity {
             switch (fragmentType) {
                 case Constant.TYPE_IDCARDFRAG:
                     fragmentList.add(new IdCardFragment());
+                    ivAuthenInfoActHead.setImageResource(R.drawable.shenfenrenzheng_banner);
                     break;
                 case Constant.TYPE_FAMILYFRAG:
                     fragmentList.add(new FamilyFragment());
+                    ivAuthenInfoActHead.setImageResource(R.drawable.lianxiren_banner);
                     break;
                 case Constant.TYPE_BANKCARDFRAG:
                     fragmentList.add(new BankCardFragment());
+                    ivAuthenInfoActHead.setImageResource(R.drawable.bangding_banner);
                     break;
                 case Constant.TYPE_CREDITFRAG:
                     fragmentList.add(new CreditFragment());
+                    ivAuthenInfoActHead.setImageResource(R.drawable.zhimaxinyong_banner);
                     break;
                 case Constant.TYPE_CONTACTSFRAG:
                     fragmentList.add(new ContactsFragment());
+                    ivAuthenInfoActHead.setImageResource(R.drawable.tongxunlu_banner);
                     break;
             }
         }

@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -126,20 +127,19 @@ public class CreditFragment extends BaseLazyFragment<CreditFragPresent> {
         Bitmap photo = null;
         if (mCurrentPhotoFile != null) {
             photo = BitmapPhotoUtil.getSmallBitmap(mCurrentPhotoFile.getPath());
-        }
-        if (photo != null) {
-            File f = BitmapPhotoUtil.replaceMyBitmap(photo, mCurrentPhotoFile);
-            if (f != null) {
-                switch (requestCode) {
-                    case CREDIT_INFO_DATA:
-                        ivCreditFragAlipay.setImageBitmap(photo);
-                        filesMap.put(CREDIT_INFO_DATA, f);
-                        break;
-                    case CREDIT_SCORE_DATA:
-                        ivCreditFragCredit.setImageBitmap(photo);
-                        filesMap.put(CREDIT_SCORE_DATA, f);
-                        break;
-                }
+            switch (requestCode) {
+                case CREDIT_INFO_DATA:
+                    ivCreditFragAlipay.setImageBitmap(photo);
+                    filesMap.put(CREDIT_INFO_DATA, mCurrentPhotoFile);
+                    BitmapPhotoUtil.saveToFile(photo, context.getExternalFilesDir(Environment.DIRECTORY_DCIM).getPath() +
+                            File.separator + "credit_front.jpeg");
+                    break;
+                case CREDIT_SCORE_DATA:
+                    ivCreditFragCredit.setImageBitmap(photo);
+                    filesMap.put(CREDIT_SCORE_DATA, mCurrentPhotoFile);
+                    BitmapPhotoUtil.saveToFile(photo, context.getExternalFilesDir(Environment.DIRECTORY_DCIM).getPath() +
+                            File.separator + "credit_back.jpeg");
+                    break;
             }
 
         }

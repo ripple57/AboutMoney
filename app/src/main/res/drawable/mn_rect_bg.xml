@@ -4,7 +4,7 @@
     <solid android:color="#00000000" />
     <!-- 边缘线条颜色 -->
     <stroke
-        android:width="2dp"
+        android:width="1dp"
         android:color="@color/white" />
     <!-- 圆角的幅度 -->
     <corners

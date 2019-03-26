@@ -69,19 +69,10 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
                 et_login_phone.setText(null);
                 break;
             case R.id.btn_login_getcode:
-                getRxPermissions()
-                        .request(Manifest.permission.INTERNET)
-                        .subscribe(granted -> {
-                            if (granted) {//同意
-                                getCode();
-                            } else {//拒绝
-                                ToastUtil.showToast("亲，同意了权限才能更好的为您服务哦");
-                            }
-                        });
+                getCode();
                 break;
             case R.id.btn_login_login:
-                getRxPermissions()
-                        .request(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_WIFI_STATE)
+                getRxPermissions().request(Manifest.permission.READ_PHONE_STATE)
                         .subscribe(granted -> {
                             if (granted) {//同意
                                 login();
@@ -107,9 +98,6 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
         phoneNum = et_login_phone.getText().toString().trim();
         if (TextUtils.isEmpty(phoneNum)) {
             ToastUtil.showToast("请输入手机号码");
-            if (GlobleParms.debug) {
-                getP().login(this, "18000000000", "123456", lat, lon);
-            }
         } else if (!phoneNum.matches(Constant.REG_PHONE)) {
             ToastUtil.showToast("请输入正确的手机号");
         } else if (TextUtils.isEmpty(code) || code.length() != 6) {
@@ -164,8 +152,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
     @Override
     public void initData(Bundle savedInstanceState) {
         need_back = getIntent().getBooleanExtra("need_back", false);
-        getRxPermissions()
-                .request(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
+        getRxPermissions().request(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
                 .subscribe(granted -> {
                     if (granted) {//同意
                         GPSUtils.getInstance(this).getLngAndLat(new GPSUtils.OnLocationResultListener() {

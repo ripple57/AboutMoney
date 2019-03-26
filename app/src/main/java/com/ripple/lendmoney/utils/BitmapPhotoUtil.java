@@ -144,7 +144,33 @@ public class BitmapPhotoUtil {
 
         return f;
     }
+    /**
+     * 将图片资源转换成文件file
+     * @param mBitmap
+     * @param path
+     * @return
+     */
+    public static File saveToFile(Bitmap mBitmap, String  path) {
+        File f = new File(path);
 
+        try {
+            f.createNewFile();
+            FileOutputStream fOut = null;
+
+            fOut = new FileOutputStream(f);
+
+            mBitmap.compress(Bitmap.CompressFormat.JPEG, 50, fOut);
+
+            fOut.flush();
+
+            fOut.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return f;
+    }
     public static String getPhotoFileName() {
         Date date = new Date(System.currentTimeMillis());
         SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyy-MM-dd HH-mm-ss");

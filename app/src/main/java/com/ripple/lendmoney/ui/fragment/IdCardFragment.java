@@ -1,9 +1,9 @@
 package com.ripple.lendmoney.ui.fragment;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +29,6 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.event.BusFactory;
-import cn.droidlover.xdroidmvp.kit.Kits;
 
 /*****************************************************
  * 作者: HuangShaobo on 2019/3/4 23:16.
@@ -54,19 +53,11 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
     EditText etIdcardFragWeChat;
     @BindView(R.id.btn_idcardFrag_commit)
     Button btnIdcardFragCommit;
-    private File mCurrentPhotoFile;// 照相机拍照得到的图片
-    private static final int IDCARD_FRONT_DATA = 350;
-    private static final int IDCARD_BACK_DATA = 351;
     private HashMap<Object, File> fileMap = new HashMap<>();
 
     protected void doTakePhoto(int requestCode) {
-        File PHOTO_DIR = new File(Environment.getExternalStorageDirectory() + "/DCIM/Camera");
-        if (!PHOTO_DIR.exists()) {
-            PHOTO_DIR.mkdirs();// 创建照片的存储目录
-        }
-//        mCurrentPhotoFile = new File(PHOTO_DIR, BitmapPhotoUtil.getPhotoFileName());// 给新照的照片文件命名
-//        Intent intent = BitmapPhotoUtil.getTakePickIntent(context, mCurrentPhotoFile);
         Intent intent = new Intent(context, CameraActivity.class);
+        intent.putExtra("type", requestCode);
         startActivityForResult(intent, requestCode);
     }
 
@@ -101,12 +92,25 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
         switch (view.getId()) {
             case R.id.iv_idcardFrag_idcard_front:
             case R.id.iv_idcardFrag_idcard_front_b:
-                doTakePhoto(IDCARD_FRONT_DATA);
+                getRxPermissions().request(Manifest.permission.CAMERA)
+                        .subscribe(granted -> {
+                            if (granted) {//同意
+                                doTakePhoto(Constant.IDCARD_FRONT_DATA);
+                            } else {//拒绝
+                                ToastUtil.showToast("亲，同意了权限才能更好的为您服务哦");
+                            }
+                        });
                 break;
             case R.id.iv_idcardFrag_idcard_back:
             case R.id.iv_idcardFrag_idcard_back_b:
-
-                doTakePhoto(IDCARD_BACK_DATA);
+                getRxPermissions().request(Manifest.permission.CAMERA)
+                        .subscribe(granted -> {
+                            if (granted) {//同意
+                                doTakePhoto(Constant.IDCARD_BACK_DATA);
+                            } else {//拒绝
+                                ToastUtil.showToast("亲，同意了权限才能更好的为您服务哦");
+                            }
+                        });
                 break;
             case R.id.btn_idcardFrag_commit:
                 String idCardNo = etIdcardFragIdcard.getText().toString().trim();
@@ -145,16 +149,15 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
             File f = new File(photoPath);
             if (f != null && f.exists()) {
                 switch (requestCode) {
-                    case IDCARD_FRONT_DATA:
+                    case Constant.IDCARD_FRONT_DATA:
                         ivIdcardFragIdcardFront.setImageBitmap(photo);
-                        fileMap.put(IDCARD_FRONT_DATA, f);
+                        fileMap.put(Constant.IDCARD_FRONT_DATA, f);
                         break;
-                    case IDCARD_BACK_DATA:
+                    case Constant.IDCARD_BACK_DATA:
                         ivIdcardFragIdcardBack.setImageBitmap(photo);
-                        fileMap.put(IDCARD_BACK_DATA, f);
+                        fileMap.put(Constant.IDCARD_BACK_DATA, f);
                         break;
                 }
-                Kits.FileUtil.deleteFile(photoPath);
             }
 
         }
