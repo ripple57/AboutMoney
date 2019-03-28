@@ -19,21 +19,14 @@ import java.util.Map;
  * 作用: 
  *****************************************************/
 public class MakeIOUPresent extends BasePresent<MakeIOUActivity> {
-    public void makeIou(Activity activity, String borrower, String lender, String loanAmount, String loanRate, String repaymentMethod, String loanDate) {
-//        borrower 借款人
-//    lender 出借人
-//    loanAmount 借款金额
-//    loanRate 借款利率
-//    repaymentMethod 还款方式
-//    loanDate 借款天数
+    public void makeIou(Activity activity, String borrower, String loanAmount, String loanRate, String repaymentMethod, String loanDate) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("borrower", borrower);
-        map.put("lender", lender);
         map.put("loanAmount", loanAmount);
         map.put("loanRate", loanRate);
         map.put("repaymentMethod", repaymentMethod);
         map.put("loanDate", loanDate);
-        HttpUtils.post(activity, URLConfig.addIOUInfo, map, new MyCallBack<Map<String,String>>() {
+        HttpUtils.post(activity, URLConfig.addIOUInfo, map, new MyCallBack<Map<String, String>>() {
             @Override
             public void onMySuccess(Map<String, String> bean, MyMessage message) {
                 String iouid = bean.get("IOUID");

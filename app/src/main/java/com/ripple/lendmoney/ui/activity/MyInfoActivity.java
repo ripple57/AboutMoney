@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.base.Constant;
-import com.ripple.lendmoney.event.RefreshMyInfoEvent;
+import com.ripple.lendmoney.event.RefreshUserInfoEvent;
 import com.ripple.lendmoney.model.AuthenticateInfoBean;
 import com.ripple.lendmoney.present.MyInfoPresent;
 
@@ -46,7 +46,6 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
     LinearLayout llMyinfoactContacts;
     @BindView(R.id.tv_myinfoact_comple)
     TextView tvMyinfoactComple;
-    private int infoDegree;
 
     @BindColor(R.color.text_red)
     int text_red;
@@ -67,7 +66,6 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        infoDegree = 0;
         getNetData();
     }
 
@@ -111,7 +109,6 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
         if (hasAuthen) {
             tv.setText("已认证");
             tv.setTextColor(text_hint);
-            infoDegree++;
         } else {
             tv.setText("未认证");
             tv.setTextColor(text_red);
@@ -131,7 +128,7 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
         setItemAuthenState(tvMyinfoactBankcardState, bean.getBankState());
         setItemAuthenState(tvMyinfoactCreditState, bean.getCreditState());
         setItemAuthenState(tvMyinfoactContactsState, bean.getContactsState());
-        tvMyinfoactComple.setText(infoDegree * 20 + "%");
+        tvMyinfoactComple.setText(bean.getInfoDegree() * 20 + "%");
     }
 
     @Override
@@ -140,7 +137,7 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
     }
 
     @Subscribe
-    public void refreshView(RefreshMyInfoEvent event) {
+    public void refreshView(RefreshUserInfoEvent event) {
         getNetData();
     }
 }

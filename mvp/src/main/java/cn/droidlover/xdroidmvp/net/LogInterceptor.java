@@ -46,7 +46,6 @@ public class LogInterceptor implements Interceptor {
                 if (mediaType != null) {
                     if (isText(mediaType)) {
                         String bodyToString = bodyToString(request);
-                        XLog.d(TAG, "网络请求:   " +url+"?"+ bodyToString);
                     } else {
                         XLog.d(TAG, "params : " + " maybe [file part] , too large too print , ignored!");
                     }

@@ -11,13 +11,16 @@ import com.qmuiteam.qmui.widget.dialog.QMUIBottomSheet;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.base.Constant;
+import com.ripple.lendmoney.event.MonitorOrderEvent;
 import com.ripple.lendmoney.http.URLConfig;
 import com.ripple.lendmoney.present.AssessPresent;
+import com.ripple.lendmoney.utils.LogUtils;
 import com.ripple.lendmoney.utils.SPUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.droidlover.xdroidmvp.event.BusFactory;
 import cn.droidlover.xdroidmvp.router.Router;
 
 public class AssessActivity extends BaseActivity<AssessPresent> {
@@ -34,6 +37,7 @@ public class AssessActivity extends BaseActivity<AssessPresent> {
     @BindView(R.id.btn_assessAct_applyLend)
     Button btnAssessActApplyLend;
     private String iouID;
+    private float price;
 
     public static void launch(Activity activity, String iouId) {
         Router.newIntent(activity).putString(IOUID, iouId).to(AssessActivity.class).launch();
@@ -57,7 +61,8 @@ public class AssessActivity extends BaseActivity<AssessPresent> {
     @Override
     public void initData(Bundle savedInstanceState) {
         iouID = getIntent().getStringExtra(IOUID);
-        tvAssessActNowPrice.setText(SPUtils.getInstance(this).getValue(Constant.PRICE, 79f)+"");
+        price = SPUtils.getInstance(this).getValue(Constant.PRICE, 79f);
+        tvAssessActNowPrice.setText(price + "");
     }
 
     @Override
@@ -99,12 +104,18 @@ public class AssessActivity extends BaseActivity<AssessPresent> {
                         switch (tag) {
                             case TAG_WECHAT:
                                 ToastUtil.showToast("选择了微信支付");
+                                WebActivity.launch(AssessActivity.this, URLConfig.CREATEORDER + "?IOUID=402881ef6975e0890169765b710f0005" + "" + "&price=" + price + "&payType=" + 3, "微信支付");
+                                LogUtils.e(URLConfig.CREATEORDER + "?IOUID=" + iouID + "&price=" + price + "&payType=" + 3);
                                 break;
                             case TAG_ALIPAY:
                                 ToastUtil.showToast("选择了支付宝支付");
+                                WebActivity.launch(AssessActivity.this, URLConfig.CREATEORDER + "?IOUID=402881ef6975e0890169765b710f0005" + "" + "&price=" + price + "&payType=" + 1, "支付宝支付");
+                                LogUtils.e(URLConfig.CREATEORDER + "?IOUID=" + iouID + "&price=" + price + "&payType=" + 1);
                                 break;
 
                         }
+                        ToastUtil.showToast("付款成功后,请前往订单列表页查看付款状态");
+                        BusFactory.getBus().post(new MonitorOrderEvent(iouID, 10000));
                     }
                 }).build().show();
 

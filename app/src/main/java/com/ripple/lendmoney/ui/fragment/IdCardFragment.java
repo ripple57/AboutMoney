@@ -14,7 +14,7 @@ import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseLazyFragment;
 import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.base.GlobleParms;
-import com.ripple.lendmoney.event.RefreshMyInfoEvent;
+import com.ripple.lendmoney.event.RefreshUserInfoEvent;
 import com.ripple.lendmoney.present.IdCardFragPresent;
 import com.ripple.lendmoney.ui.activity.AuthenticateActivity;
 import com.ripple.lendmoney.utils.BitmapPhotoUtil;
@@ -167,7 +167,7 @@ public class IdCardFragment extends BaseLazyFragment<IdCardFragPresent> {
 
     public void uploadSuccess() {
         ToastUtil.showToast("上传成功");
-        BusFactory.getBus().post(new RefreshMyInfoEvent());
+        BusFactory.getBus().post(new RefreshUserInfoEvent());
         SPUtils.getInstance(context).save(Constant.REALNAME, etIdcardFragName.getText().toString().trim());
         if (GlobleParms.AuthenticateCanNext) {
             ((AuthenticateActivity) context).selectFragment(Constant.TYPE_FAMILYFRAG);

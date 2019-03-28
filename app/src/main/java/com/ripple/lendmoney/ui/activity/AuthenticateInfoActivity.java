@@ -9,10 +9,18 @@ import android.widget.TextView;
 
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
+import com.ripple.lendmoney.base.Constant;
+import com.ripple.lendmoney.event.RefreshUserInfoEvent;
+import com.ripple.lendmoney.http.URLConfig;
+import com.ripple.lendmoney.model.AuthenticateInfoBean;
 import com.ripple.lendmoney.present.AuthenticateInfoPresent;
+import com.ripple.lendmoney.utils.ToastUtil;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.droidlover.xdroidmvp.imageloader.ILFactory;
 import cn.droidlover.xdroidmvp.router.Router;
 
 public class AuthenticateInfoActivity extends BaseActivity<AuthenticateInfoPresent> {
@@ -69,13 +77,14 @@ public class AuthenticateInfoActivity extends BaseActivity<AuthenticateInfoPrese
 
     @Override
     public void getNetData() {
-
+        getP().getUserInfo(this);
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
-
+        getNetData();
     }
+
 
     @Override
     public int getLayoutId() {
@@ -88,34 +97,65 @@ public class AuthenticateInfoActivity extends BaseActivity<AuthenticateInfoPrese
     }
 
 
-    @OnClick({R.id.tv_authenInfoAct_idEdit, R.id.iv_authenInfoAct_idFront, R.id.iv_authenInfoAct_idBack, R.id.tv_authenInfoAct_familyEdit, R.id.tv_authenInfoAct_bankEdit, R.id.tv_authenInfoAct_creditEdit, R.id.iv_authenInfoAct_creditFront, R.id.iv_authenInfoAct_creditBack, R.id.tv_authenInfoAct_contactEdit, R.id.btn_authenInfoAct_commit})
+    @OnClick({R.id.tv_authenInfoAct_idEdit, R.id.tv_authenInfoAct_familyEdit, R.id.tv_authenInfoAct_bankEdit, R.id.tv_authenInfoAct_creditEdit, R.id.tv_authenInfoAct_contactEdit, R.id.btn_authenInfoAct_commit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_authenInfoAct_idEdit:
+                AuthenticateActivity.launch(this, Constant.TYPE_IDCARDFRAG);
                 break;
             case R.id.tv_authenInfoAct_familyEdit:
+                AuthenticateActivity.launch(this, Constant.TYPE_FAMILYFRAG);
                 break;
             case R.id.tv_authenInfoAct_bankEdit:
+                AuthenticateActivity.launch(this, Constant.TYPE_BANKCARDFRAG);
                 break;
             case R.id.tv_authenInfoAct_creditEdit:
+                AuthenticateActivity.launch(this, Constant.TYPE_CREDITFRAG);
                 break;
             case R.id.tv_authenInfoAct_contactEdit:
+                AuthenticateActivity.launch(this, Constant.TYPE_CONTACTSFRAG);
                 break;
-            case R.id.iv_authenInfoAct_idFront:
-                break;
-            case R.id.iv_authenInfoAct_idBack:
-                break;
-            case R.id.iv_authenInfoAct_creditFront:
-                break;
-            case R.id.iv_authenInfoAct_creditBack:
-                break;
-
             case R.id.btn_authenInfoAct_commit:
+
                 break;
         }
     }
 
     public static void launch(Activity activity) {
         Router.newIntent(activity).to(AuthenticateInfoActivity.class).launch();
+    }
+
+    @Override
+    public boolean useEventBus() {
+        return true;
+    }
+
+    @Subscribe
+    public void refreshView(RefreshUserInfoEvent event) {
+        getNetData();
+    }
+
+    public void setAuthenticateInfoDate(AuthenticateInfoBean.DataBean bean) {
+        if (bean == null) {
+            ToastUtil.showToast("数据为空!");
+            return;
+        }
+        tvAuthenInfoActIdName.setText(bean.getRealName());
+        tvAuthenInfoActIdNo.setText(bean.getIdNumber());
+        tvAuthenInfoActFamilyDirectRelation.setText(bean.getDirectKinship());
+        tvAuthenInfoActFamilyDirectName.setText(bean.getKinshipName());
+        tvAuthenInfoActFamilyDirectPhone.setText(bean.getKinshipPhone());
+        tvAuthenInfoActFamilyContactRelation.setText(bean.getUrgentContact());
+        tvAuthenInfoActFamilyContactName.setText(bean.getContactName());
+        tvAuthenInfoActFamilyContactPhone.setText(bean.getContactPhone());
+        tvAuthenInfoActBankNo.setText(bean.getBankCardNumber());
+        tvAuthenInfoActBankAddress.setText(bean.getOpeningBank());
+        tvAuthenInfoActBankPhone.setText(bean.getReservePhone());
+        tvAuthenInfoActContactState.setText(bean.getContactsState() ? "已获取" : "未获取");
+        ILFactory.getLoader().loadNet(ivAuthenInfoActIdFront, URLConfig.BASE_URL + bean.getFrontIDCard());
+        ILFactory.getLoader().loadNet(ivAuthenInfoActIdBack, URLConfig.BASE_URL + bean.getBackIDCard());
+        ILFactory.getLoader().loadNet(ivAuthenInfoActCreditFront, URLConfig.BASE_URL + bean.getAlipayCreditImg1());
+        ILFactory.getLoader().loadNet(ivAuthenInfoActCreditBack, URLConfig.BASE_URL + bean.getAlipayCreditImg2());
+
     }
 }

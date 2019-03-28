@@ -156,6 +156,10 @@ public abstract class BaseActivity<P extends IPresent> extends XActivity<P> {
 
     }
 
+    public void removeRightText() {
+        topBar.removeAllRightViews();
+    }
+
     public void clickRightText() {
     }
 

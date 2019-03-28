@@ -17,7 +17,6 @@ import com.ripple.lendmoney.present.MinePresent;
 import com.ripple.lendmoney.ui.activity.LoginActivity;
 import com.ripple.lendmoney.ui.activity.MyInfoActivity;
 import com.ripple.lendmoney.ui.activity.SuggestActivity;
-import com.ripple.lendmoney.utils.AppManager;
 import com.ripple.lendmoney.utils.SPUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
 
@@ -161,7 +160,7 @@ public class MineFragment extends XLazyFragment<MinePresent> {
         GlobleParms.userId = "";
         GlobleParms.userName = "";
         ToastUtil.showToast("用户已经退出了!");
-        LoginActivity.launch(context,false);
-        AppManager.getAppManager().finishAllActivity();
+        LoginActivity.launch(context);
+
     }
 }

@@ -15,6 +15,8 @@ public interface ILoader {
 
     void init(Context context);
 
+    void loadNet(ImageView target, String url);
+
     void loadNet(ImageView target, String url, Options options);
 
     void loadNet(Context context, String url, Options options, LoadCallback callback);

@@ -34,8 +34,6 @@ public class MakeIOUActivity extends BaseActivity<MakeIOUPresent> {
     TextView tvMakeIouMax;
     @BindView(R.id.tv_makeIou_borrower)
     TextView tvMakeIouBorrower;
-    @BindView(R.id.et_makeIou_lender)
-    EditText etMakeIouLender;
     @BindView(R.id.et_makeIou_lendNum)
     EditText etMakeIouLendNum;
     @BindView(R.id.tv_makeIou_repayMethod)
@@ -87,6 +85,7 @@ public class MakeIOUActivity extends BaseActivity<MakeIOUPresent> {
         borrower = SPUtils.getInstance(this).getValue(Constant.REALNAME, "");
         if (TextUtils.isEmpty(borrower)) {
             ToastUtil.showToast("请先前往我的资料进行身份认证");
+            FaceRecognitionActivity.launch(this);
         } else {
             tvMakeIouBorrower.setText(borrower);
         }
@@ -182,15 +181,12 @@ public class MakeIOUActivity extends BaseActivity<MakeIOUPresent> {
                 break;
             case R.id.btn_makeIou_makeIou:
 
-                String lender = etMakeIouLender.getText().toString().trim();//lender 出借人
                 String loanAmount = etMakeIouLendNum.getText().toString().trim();//loanAmount 借款金额
                 String repaymentMethod = tvMakeIouRepayMethod.getText().toString().trim();//repaymentMethod 还款方式
                 String loanRate = lendInterest + "";//loanRate 借款利率
                 String loanDate = lendDay + "";//loanDate 借款天数
                 if (TextUtils.isEmpty(borrower)) {
                     ToastUtil.showToast("请先前往我的资料进行身份认证");
-                } else if (TextUtils.isEmpty(lender)) {
-                    ToastUtil.showToast("请填写出借人姓名!");
                 } else if (TextUtils.isEmpty(loanAmount)) {
                     ToastUtil.showToast("请填写借款金额!");
                 } else if (lendDay == 0) {
@@ -198,7 +194,7 @@ public class MakeIOUActivity extends BaseActivity<MakeIOUPresent> {
                 } else if (lendInterest == 0) {
                     ToastUtil.showToast("请选择年化利率!");
                 } else {
-                    getP().makeIou(this, borrower, lender, loanAmount, loanRate, repaymentMethod, loanDate);
+                    getP().makeIou(this, borrower, loanAmount, loanRate, repaymentMethod, loanDate);
                 }
                 break;
         }
@@ -213,6 +209,6 @@ public class MakeIOUActivity extends BaseActivity<MakeIOUPresent> {
     public void makeIouSuccess(String iouid) {
         AssessActivity.launch(this, iouid);
         BusFactory.getBus().post(new OrderEvent());
-
+        SPUtils.getInstance(this).save(Constant.IOUID, iouid);
     }
 }

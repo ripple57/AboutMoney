@@ -3,6 +3,7 @@ package com.ripple.lendmoney.present;
 import android.app.Activity;
 
 import com.ripple.lendmoney.base.BasePresent;
+import com.ripple.lendmoney.base.GlobleParms;
 import com.ripple.lendmoney.http.HttpUtils;
 import com.ripple.lendmoney.http.MyCallBack;
 import com.ripple.lendmoney.http.MyMessage;
@@ -15,7 +16,10 @@ public class MyInfoPresent extends BasePresent<MyInfoActivity> {
         HttpUtils.post(activity, URLConfig.getCustomerInfo, null, new MyCallBack<AuthenticateInfoBean>() {
             @Override
             public void onMySuccess(AuthenticateInfoBean bean, MyMessage message) {
-                getV().setAuthenState(bean.getData());
+                if (bean != null) {
+                    GlobleParms.userInfo = bean.getData();
+                    getV().setAuthenState(bean.getData());
+                }
 
             }
         });

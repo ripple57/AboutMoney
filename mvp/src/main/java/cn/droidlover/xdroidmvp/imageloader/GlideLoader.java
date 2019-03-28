@@ -30,6 +30,10 @@ public class GlideLoader implements ILoader {
     public void loadNet(ImageView target, String url, Options options) {
         load(getRequestManager(target.getContext()).load(url), target, options);
     }
+    @Override
+    public void loadNet(ImageView target, String url) {
+        load(getRequestManager(target.getContext()).load(url), target);
+    }
 
     @Override
     public void loadNet(Context context, String url, Options options, final LoadCallback callback) {
@@ -122,13 +126,19 @@ public class GlideLoader implements ILoader {
 
         wrapScaleType(request, options)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .crossFade()
+                .dontAnimate()
+                .into(target);
+    }
+    private void load(DrawableTypeRequest request, ImageView target) {
+
+        wrapScaleType(request, null)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .dontAnimate()
                 .into(target);
     }
 
     private DrawableTypeRequest wrapScaleType(DrawableTypeRequest request, Options options) {
-        if (options != null
-                && options.scaleType != null) {
+        if (options != null && options.scaleType != null) {
             switch (options.scaleType) {
                 case MATRIX:
                     break;

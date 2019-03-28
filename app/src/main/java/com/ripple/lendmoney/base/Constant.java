@@ -29,6 +29,7 @@ public final class Constant {
     public static final String USERID = "userId";
     public static final String PRICE = "price";
     public static final String REALNAME = "realName";
+    public static final String IOUID = "iouid";
     //返回码
     public final static int IntentResultCode = 1001;
     //传递的参数保存的图片的地址

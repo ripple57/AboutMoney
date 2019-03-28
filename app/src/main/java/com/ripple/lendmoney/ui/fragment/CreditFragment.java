@@ -1,5 +1,6 @@
 package com.ripple.lendmoney.ui.fragment;
 
+import android.Manifest;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -15,7 +16,7 @@ import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseLazyFragment;
 import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.base.GlobleParms;
-import com.ripple.lendmoney.event.RefreshMyInfoEvent;
+import com.ripple.lendmoney.event.RefreshUserInfoEvent;
 import com.ripple.lendmoney.present.CreditFragPresent;
 import com.ripple.lendmoney.ui.activity.AuthenticateActivity;
 import com.ripple.lendmoney.utils.BitmapPhotoUtil;
@@ -55,8 +56,18 @@ public class CreditFragment extends BaseLazyFragment<CreditFragPresent> {
     }
 
     private void doPickPhotoFromGallery(int requestCode) {
-        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        this.startActivityForResult(intent, requestCode);
+        getRxPermissions().request(Manifest.permission.READ_EXTERNAL_STORAGE)
+                .subscribe(granted -> {
+                            if (granted) {//同意
+                                Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                this.startActivityForResult(intent, requestCode);
+                            } else {//拒绝
+                                ToastUtil.showToast("亲，同意了权限才能更好的为您服务哦");
+                            }
+                        }
+
+                );
+
 
     }
 
@@ -80,15 +91,13 @@ public class CreditFragment extends BaseLazyFragment<CreditFragPresent> {
     }
 
 
-    @OnClick({R.id.iv_creditFrag_alipay, R.id.iv_creditFrag_credit, R.id.iv_creditFrag_alipay_b, R.id.iv_creditFrag_credit_b, R.id.btn_creditFrag_commit})
+    @OnClick({R.id.rl_credit_info, R.id.rl_credit_credit, R.id.btn_creditFrag_commit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_creditFrag_alipay:
-            case R.id.iv_creditFrag_alipay_b:
+            case R.id.rl_credit_info:
                 doPickPhotoFromGallery(CREDIT_INFO_DATA);
                 break;
-            case R.id.iv_creditFrag_credit:
-            case R.id.iv_creditFrag_credit_b:
+            case R.id.rl_credit_credit:
                 doPickPhotoFromGallery(CREDIT_SCORE_DATA);
                 break;
             case R.id.btn_creditFrag_commit:
@@ -127,18 +136,22 @@ public class CreditFragment extends BaseLazyFragment<CreditFragPresent> {
         Bitmap photo = null;
         if (mCurrentPhotoFile != null) {
             photo = BitmapPhotoUtil.getSmallBitmap(mCurrentPhotoFile.getPath());
+            if (photo == null) {
+                ToastUtil.showToast("请检查您的手机读写权限");
+                return;
+            }
             switch (requestCode) {
                 case CREDIT_INFO_DATA:
                     ivCreditFragAlipay.setImageBitmap(photo);
-                    filesMap.put(CREDIT_INFO_DATA, mCurrentPhotoFile);
-                    BitmapPhotoUtil.saveToFile(photo, context.getExternalFilesDir(Environment.DIRECTORY_DCIM).getPath() +
-                            File.separator + "credit_front.jpeg");
+                    File front_f = BitmapPhotoUtil.saveToFile(photo, context.getExternalFilesDir(Environment.DIRECTORY_DCIM).getPath() +
+                            File.separator + "credit_front.jpg");
+                    filesMap.put(CREDIT_INFO_DATA, front_f);
                     break;
                 case CREDIT_SCORE_DATA:
                     ivCreditFragCredit.setImageBitmap(photo);
-                    filesMap.put(CREDIT_SCORE_DATA, mCurrentPhotoFile);
-                    BitmapPhotoUtil.saveToFile(photo, context.getExternalFilesDir(Environment.DIRECTORY_DCIM).getPath() +
-                            File.separator + "credit_back.jpeg");
+                    File back_f = BitmapPhotoUtil.saveToFile(photo, context.getExternalFilesDir(Environment.DIRECTORY_DCIM).getPath() +
+                            File.separator + "credit_back.jpg");
+                    filesMap.put(CREDIT_SCORE_DATA, back_f);
                     break;
             }
 
@@ -147,7 +160,7 @@ public class CreditFragment extends BaseLazyFragment<CreditFragPresent> {
     }
 
     public void uploadSuccess() {
-        BusFactory.getBus().post(new RefreshMyInfoEvent());
+        BusFactory.getBus().post(new RefreshUserInfoEvent());
         ToastUtil.showToast("上传成功");
         if (GlobleParms.AuthenticateCanNext) {
             ((AuthenticateActivity) context).selectFragment(Constant.TYPE_CONTACTSFRAG);

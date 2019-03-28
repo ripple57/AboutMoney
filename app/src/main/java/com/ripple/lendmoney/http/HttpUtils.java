@@ -207,7 +207,7 @@ public class HttpUtils {
                         MyMessage message = new MyMessage(string);//封装json数据为实例对象
                         if (message.getState() == Constant.REQUEST_NEED_LOGIN) {//网络请求成功
                             if (context instanceof Activity) {
-                                LoginActivity.launch((Activity) context, true);
+                                LoginActivity.launch((Activity) context);
                             }
                         } else {
                             callBack.onSuccess(message);
@@ -284,7 +284,7 @@ public class HttpUtils {
                         MyMessage message = new MyMessage(string);//封装json数据为实例对象
                         if (message.getState() == Constant.REQUEST_NEED_LOGIN) {//网络请求成功
                             if (context instanceof Activity) {
-                                LoginActivity.launch((Activity) context, true);
+                                LoginActivity.launch((Activity) context);
                             }
                         } else {
                             callBack.onSuccess(message);
@@ -372,7 +372,7 @@ public class HttpUtils {
                         MyMessage message = new MyMessage(string);//封装json数据为实例对象
                         if (message.getState() == Constant.REQUEST_NEED_LOGIN) {//网络请求成功
                             if (context instanceof Activity) {
-                                LoginActivity.launch((Activity) context, true);
+                                LoginActivity.launch((Activity) context);
                             }
                         } else {
                             callBack.onSuccess(message);

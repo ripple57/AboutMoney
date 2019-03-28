@@ -75,8 +75,8 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="已认证"
-                android:textColor="@color/text_hint"
+                android:text="未认证"
+                android:textColor="@color/text_red"
                 android:textSize="15sp"/>
 
             <ImageView
@@ -119,8 +119,8 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="已认证"
-                android:textColor="@color/text_hint"
+                android:text="未认证"
+                android:textColor="@color/text_red"
                 android:textSize="15sp"/>
 
             <ImageView
@@ -163,8 +163,8 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="已认证"
-                android:textColor="@color/text_hint"
+                android:text="未认证"
+                android:textColor="@color/text_red"
                 android:textSize="15sp"/>
 
             <ImageView
@@ -207,8 +207,8 @@
                 android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="已认证"
-                android:textColor="@color/text_hint"
+                android:text="未认证"
+                android:textColor="@color/text_red"
                 android:textSize="15sp"/>
 
             <ImageView

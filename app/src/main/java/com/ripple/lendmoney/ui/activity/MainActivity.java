@@ -7,6 +7,7 @@ import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -15,6 +16,8 @@ import android.view.View;
 import com.qmuiteam.qmui.widget.QMUIViewPager;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
+import com.ripple.lendmoney.base.Constant;
+import com.ripple.lendmoney.event.MonitorOrderEvent;
 import com.ripple.lendmoney.event.OrderEvent;
 import com.ripple.lendmoney.present.MainPresent;
 import com.ripple.lendmoney.ui.fragment.HomeFragment;
@@ -23,6 +26,7 @@ import com.ripple.lendmoney.ui.fragment.OrderFragment;
 import com.ripple.lendmoney.utils.AppManager;
 import com.ripple.lendmoney.utils.BottomNavigationViewHelper;
 import com.ripple.lendmoney.utils.LogUtils;
+import com.ripple.lendmoney.utils.SPUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -32,6 +36,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import cn.droidlover.xdroidmvp.base.XFragmentAdapter;
+import cn.droidlover.xdroidmvp.event.BusFactory;
 import cn.droidlover.xdroidmvp.router.Router;
 
 public class MainActivity extends BaseActivity<MainPresent> {
@@ -56,6 +61,10 @@ public class MainActivity extends BaseActivity<MainPresent> {
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        String iouID = SPUtils.getInstance(this).getValue(Constant.IOUID, "");
+        if (!TextUtils.isEmpty(iouID)) {
+            BusFactory.getBus().post(new MonitorOrderEvent(iouID,0));
+        }
         initView();
         setHomeVpAdapter();
     }
@@ -91,7 +100,7 @@ public class MainActivity extends BaseActivity<MainPresent> {
                         setTopBarIsShow(true);
                         setTopBarIsShowBack(false);
                         setTopBarTitle("订单列表");
-                        addRightText("测试");
+                        removeRightText();
                         break;
 
                     case R.id.bottom_mine:
@@ -100,6 +109,7 @@ public class MainActivity extends BaseActivity<MainPresent> {
                         setTopBarIsShowBack(false);
                         setTopBarTransparent(true);
                         setTopBarTitle("我的");
+                        addRightText("测试");
                         break;
 
                 }
@@ -137,7 +147,7 @@ public class MainActivity extends BaseActivity<MainPresent> {
 
     @Override
     public MainPresent newP() {
-        return null;
+        return new MainPresent();
     }
 
 
@@ -174,6 +184,16 @@ public class MainActivity extends BaseActivity<MainPresent> {
         point.setVisibility(View.VISIBLE);
         LogUtils.e("收到订单事件");
 
+    }
+
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void event(MonitorOrderEvent event) {
+        try {
+            Thread.sleep(event.getDelayMillis());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        getP().monitorOrder(this, event.getIouID());
     }
 
 

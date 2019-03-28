@@ -73,6 +73,7 @@ public class HomeFragment extends BaseLazyFragment<HomeFragPresent> {
     @Override
     public void getNetData() {
         getP().getHomeData(context);
+        getP().getUserInfo(context);
     }
 
 
@@ -85,4 +86,5 @@ public class HomeFragment extends BaseLazyFragment<HomeFragPresent> {
         aUtil.setDuration(5000)// 设置上下滚动事件间隔
                 .start();
     }
+
 }

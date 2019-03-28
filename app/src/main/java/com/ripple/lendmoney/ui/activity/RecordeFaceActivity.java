@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
+import com.ripple.lendmoney.base.GlobleParms;
 import com.ripple.lendmoney.present.RecordeFacePresent;
 import com.ripple.lendmoney.utils.LogUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
@@ -219,6 +220,7 @@ public class RecordeFaceActivity extends BaseActivity<RecordeFacePresent> {
         Camera.Parameters parameters = mCamera.getParameters();
         mPreviewSize = getPreviewSize();
         parameters.setPreviewSize(mPreviewSize.width, mPreviewSize.height);
+        LogUtils.e("预览的width=" + mPreviewSize.width + "    heigh = " + mPreviewSize.height);
         parameters.setPreviewFormat(ImageFormat.NV21);
         List<String> focusModes = parameters.getSupportedFocusModes();
         for (String s : focusModes) {
@@ -252,7 +254,7 @@ public class RecordeFaceActivity extends BaseActivity<RecordeFacePresent> {
         List<Camera.Size> sizeList = mCamera.getParameters().getSupportedPreviewSizes();
         for (int i = 0; i < sizeList.size(); i++) {
             Camera.Size size = sizeList.get(i);
-            if (size.width == 640 || size.width == 960 || size.width == 1280) {
+            if (size.width == 640 && size.height == 480) {
                 return size;
             }
         }
@@ -278,10 +280,12 @@ public class RecordeFaceActivity extends BaseActivity<RecordeFacePresent> {
 
     private void adjustPreviewSize() {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        LogUtils.e("设备的width=" + displayMetrics.widthPixels + "    heigh = " + displayMetrics.heightPixels);
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mTextureView.getLayoutParams();
         params.height = displayMetrics.heightPixels;
         params.width = (int) (mPreviewSize.height / (float) mPreviewSize.width * params.height);
         mTextureView.setLayoutParams(params);
+        LogUtils.e("布局的width=" + params.width + "    heigh = " + params.height);
         //设置镜像
 //        if (mCameraFacing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
 //            mTextureView.setScaleX(-1);
@@ -318,7 +322,11 @@ public class RecordeFaceActivity extends BaseActivity<RecordeFacePresent> {
 
     public void uploadVideoSuccess() {
         ToastUtil.showToast("视频上传成功");
-        AuthenticateActivity.launch(RecordeFaceActivity.this);
+        if (GlobleParms.userInfo.getInfoDegree() > 0) {
+            AuthenticateInfoActivity.launch(RecordeFaceActivity.this);
+        } else {
+            AuthenticateActivity.launch(RecordeFaceActivity.this);
+        }
         finish();
     }
 

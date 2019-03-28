@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -21,7 +22,7 @@
     <com.qmuiteam.qmui.widget.QMUIObservableScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/bg_gray"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -45,62 +46,68 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <LinearLayout
-                android:id="@+id/ll_credit_info"
+            <RelativeLayout
+                android:id="@+id/rl_credit_info"
                 android:layout_width="150dp"
                 android:layout_height="241dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@+id/ll_credit_credit"
+                app:layout_constraintEnd_toStartOf="@+id/rl_credit_credit"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv1">
 
-                <ImageView
+                <com.qmuiteam.qmui.widget.QMUIRadiusImageView
                     android:id="@+id/iv_creditFrag_alipay"
-                    android:layout_width="150dp"
-                    android:layout_height="211dp"
-                    android:src="@drawable/zhimaxinyong_info_t"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/zhimaxinyong_zhengmian"
+                    app:qmui_border_width="0dp"
+                    app:qmui_corner_radius="5dp"/>
 
                 <ImageView
                     android:id="@+id/iv_creditFrag_alipay_b"
-                    android:layout_width="150dp"
+                    android:layout_width="match_parent"
                     android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
                     android:src="@drawable/zhimaxinyong_info_b"
                     />
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_credit_credit"
+            <RelativeLayout
+                android:id="@+id/rl_credit_credit"
                 android:layout_width="150dp"
                 android:layout_height="241dp"
-                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/ll_credit_info"
-                app:layout_constraintTop_toTopOf="@id/ll_credit_info">
+                app:layout_constraintStart_toEndOf="@+id/rl_credit_info"
+                app:layout_constraintTop_toTopOf="@id/rl_credit_info">
 
-                <ImageView
+                <com.qmuiteam.qmui.widget.QMUIRadiusImageView
                     android:id="@+id/iv_creditFrag_credit"
-                    android:layout_width="150dp"
-                    android:layout_height="211dp"
-                    android:src="@drawable/zhimaxinyong_credit_t"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/zhimaxinyong_fanmian"
+                    app:qmui_border_width="0dp"
+                    app:qmui_corner_radius="5dp"/>
 
                 <ImageView
                     android:id="@+id/iv_creditFrag_credit_b"
-                    android:layout_width="150dp"
+                    android:layout_width="match_parent"
                     android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
                     android:src="@drawable/zhimaxinyong_credit_b"
                     />
-            </LinearLayout>
+            </RelativeLayout>
 
 
             <RelativeLayout
                 android:id="@+id/rl_credit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="150dp"
+                android:layout_marginTop="100dp"
                 android:gravity="center"
-                app:layout_constraintTop_toBottomOf="@id/ll_credit_info">
+                app:layout_constraintTop_toBottomOf="@id/rl_credit_info">
 
                 <ImageView
                     android:id="@+id/iv"

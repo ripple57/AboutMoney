@@ -18,6 +18,7 @@ import com.ripple.lendmoney.base.GlobleParms;
 import com.ripple.lendmoney.http.URLConfig;
 import com.ripple.lendmoney.model.UserBean;
 import com.ripple.lendmoney.present.LoginPresent;
+import com.ripple.lendmoney.utils.AppManager;
 import com.ripple.lendmoney.utils.GPSUtils;
 import com.ripple.lendmoney.utils.SPUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
@@ -48,7 +49,6 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
     TextView tv_login_agreement;
     private String phoneNum;
     private Disposable mdDisposable;
-    private boolean need_back;
     private String lat = "";
     private String lon = "";
 
@@ -151,7 +151,7 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        need_back = getIntent().getBooleanExtra("need_back", false);
+        AppManager.getAppManager().finishAllActivity();
         getRxPermissions().request(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
                 .subscribe(granted -> {
                     if (granted) {//同意
@@ -193,9 +193,8 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
         GPSUtils.getInstance(this).removeListener();
     }
 
-    public static void launch(Activity activity, boolean needBack) {
+    public static void launch(Activity activity) {
         Router.newIntent(activity)
-                .putBoolean("need_back", needBack)
                 .to(LoginActivity.class)
                 .launch();
     }
@@ -208,12 +207,8 @@ public class LoginActivity extends BaseActivity<LoginPresent> {
         SPUtils.getInstance(this).save(Constant.SESSIONID, GlobleParms.sessionId);
         SPUtils.getInstance(this).save(Constant.USERNAME, GlobleParms.userName);
         SPUtils.getInstance(this).save(Constant.USERID, GlobleParms.userId);
-        if (need_back) {
-            finish();
-        } else {
-            MainActivity.launch(this);
-            finish();
-        }
+        MainActivity.launch(this);
+        finish();
     }
 
     public void sendCodeFailed() {

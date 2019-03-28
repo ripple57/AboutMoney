@@ -8,12 +8,15 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.adapter.OrderListAdapter;
 import com.ripple.lendmoney.base.BaseLazyFragment;
 import com.ripple.lendmoney.event.OrderEvent;
 import com.ripple.lendmoney.model.OrderListBean;
 import com.ripple.lendmoney.present.OrderFragPresent;
+import com.ripple.lendmoney.ui.activity.AssessActivity;
 import com.ripple.lendmoney.utils.LogUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -77,12 +80,27 @@ public class OrderFragment extends BaseLazyFragment<OrderFragPresent> {
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()) {
                     case R.id.tv_order_cancel:
-                        orderlist.remove(position);
-                        orderListAdapter.notifyDataSetChanged();
-                        ToastUtil.showToast("订单已删除");
+                        new QMUIDialog.MessageDialogBuilder(context).setMessage("您确定要删除该笔订单吗?")
+                                .addAction("取消", new QMUIDialogAction.ActionListener() {
+                                    @Override
+                                    public void onClick(QMUIDialog dialog, int index) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .addAction("确定", new QMUIDialogAction.ActionListener() {
+                                    @Override
+                                    public void onClick(QMUIDialog dialog, int index) {
+                                        dialog.dismiss();
+                                        orderlist.remove(position);
+                                        orderListAdapter.notifyDataSetChanged();
+                                        ToastUtil.showToast("订单已删除");
+                                    }
+                                }).show();
+
 
                         break;
                     case R.id.btn_order_authenticate:
+                        AssessActivity.launch(context, orderlist.get(position).getAppIOUInfoid());
                         ToastUtil.showToast("点击了第" + position + "个位置的去认证按钮;");
                         break;
                 }

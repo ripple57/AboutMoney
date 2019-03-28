@@ -15,7 +15,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseLazyFragment;
 import com.ripple.lendmoney.base.GlobleParms;
-import com.ripple.lendmoney.event.RefreshMyInfoEvent;
+import com.ripple.lendmoney.event.RefreshUserInfoEvent;
 import com.ripple.lendmoney.model.ContactsBean;
 import com.ripple.lendmoney.present.ContactsFragPresent;
 import com.ripple.lendmoney.ui.activity.MyInfoActivity;
@@ -83,7 +83,7 @@ public class ContactsFragment extends BaseLazyFragment<ContactsFragPresent> {
 
     //去获取通讯录列表
     private void toGetContacts() {
-        getRxPermissions().request(Manifest.permission.READ_CONTACTS,Manifest.permission.READ_CALL_LOG)
+        getRxPermissions().request(Manifest.permission.READ_CONTACTS)
                 .subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean aBoolean) throws Exception {
@@ -137,7 +137,7 @@ public class ContactsFragment extends BaseLazyFragment<ContactsFragPresent> {
     }
 
     public void uploadSuccess() {
-        BusFactory.getBus().post(new RefreshMyInfoEvent());
+        BusFactory.getBus().post(new RefreshUserInfoEvent());
         ToastUtil.showToast("上传成功");
         if (GlobleParms.AuthenticateCanNext) {
             MyInfoActivity.launch(context);

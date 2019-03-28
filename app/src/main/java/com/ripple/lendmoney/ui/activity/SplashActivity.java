@@ -95,7 +95,7 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.READ_PHONE_STATE)
                 .subscribe(granted -> {
-                    if (granted) {// 用户已经同意该权限
+                    if (granted) {// 用户已经同意该权限-
                         hadLogin();
                     } else {// 用户拒绝了该权限，并且选中『不再询问』
                         ToastUtil.showToast("为了更好地为您服务,请自行前往权限管理打开相应权限");
@@ -113,7 +113,7 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
         GlobleParms.userName = SPUtils.getInstance(this).getValue(Constant.USERNAME, "");
 
         if (TextUtils.isEmpty(GlobleParms.sessionId)) {
-            LoginActivity.launch(this, false);
+            LoginActivity.launch(this);
         } else if (!TextUtils.isEmpty(GlobleParms.userName)) {
             GlobleParms.anonymity = GlobleParms.userName.substring(0, 3) + "****" + GlobleParms.userName.substring(7);
             GlobleParms.userId = SPUtils.getInstance(this).getValue(Constant.USERID, "");
@@ -129,7 +129,7 @@ public class SplashActivity extends BaseActivity<SplashPresent> {
             rl_splash.setVisibility(View.GONE);
             rl_guide.setVisibility(View.VISIBLE);
             initViewPager();
-            SPUtils.getInstance(this).save("isFirstEnter", false);
+//            SPUtils.getInstance(this).save("isFirstEnter", false);
         } else {
             MainActivity.launch(this);
             finish();

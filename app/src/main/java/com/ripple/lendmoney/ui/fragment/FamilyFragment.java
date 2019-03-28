@@ -14,7 +14,7 @@ import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseLazyFragment;
 import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.base.GlobleParms;
-import com.ripple.lendmoney.event.RefreshMyInfoEvent;
+import com.ripple.lendmoney.event.RefreshUserInfoEvent;
 import com.ripple.lendmoney.present.FamilyFragPresent;
 import com.ripple.lendmoney.ui.activity.AuthenticateActivity;
 import com.ripple.lendmoney.utils.ToastUtil;
@@ -133,7 +133,7 @@ public class FamilyFragment extends BaseLazyFragment<FamilyFragPresent> {
     }
 
     public void uploadSuccess() {
-        BusFactory.getBus().post(new RefreshMyInfoEvent());
+        BusFactory.getBus().post(new RefreshUserInfoEvent());
         ToastUtil.showToast("上传成功");
         if (GlobleParms.AuthenticateCanNext) {
             ((AuthenticateActivity) context).selectFragment(Constant.TYPE_BANKCARDFRAG);

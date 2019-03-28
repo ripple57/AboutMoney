@@ -3,7 +3,6 @@ package com.ripple.lendmoney.ui.activity;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.KeyEvent;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
@@ -17,7 +16,6 @@ import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.present.WebPresent;
-import com.ripple.lendmoney.utils.LogUtils;
 
 import butterknife.BindView;
 import cn.droidlover.xdroidmvp.router.Router;
@@ -30,8 +28,8 @@ public class WebActivity extends BaseActivity<WebPresent> {
 
     @BindView(R.id.webView)
     WebView webView;
-    @BindView(R.id.swipeRefreshLayout)
-    SwipeRefreshLayout swipeRefreshLayout;
+//    @BindView(R.id.swipeRefreshLayout)
+//    SwipeRefreshLayout swipeRefreshLayout;
 
     String title;
     String url;
@@ -42,24 +40,24 @@ public class WebActivity extends BaseActivity<WebPresent> {
         url = getIntent().getStringExtra(Constant.PARAM_URL);
         title = getIntent().getStringExtra(Constant.PARAM_TITLE);
         setTopBarTitle(title);
-        initRefreshLayout();
+//        initRefreshLayout();
         initWebView();
     }
 
 
     private void initRefreshLayout() {
-        swipeRefreshLayout.setColorSchemeResources(
-                android.R.color.holo_blue_light,
-                android.R.color.holo_red_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_green_light);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                webView.loadUrl(url);
-                LogUtils.e("加载的网页地址:  "+url);
-            }
-        });
+//        swipeRefreshLayout.setColorSchemeResources(
+//                android.R.color.holo_blue_light,
+//                android.R.color.holo_red_light,
+//                android.R.color.holo_orange_light,
+//                android.R.color.holo_green_light);
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                webView.loadUrl(url);
+//                LogUtils.e("加载的网页地址:  " + url);
+//            }
+//        });
 
     }
 
@@ -73,9 +71,9 @@ public class WebActivity extends BaseActivity<WebPresent> {
             @Override
             public void onPageFinished(WebView view, String url1) {
                 super.onPageFinished(view, url);
-                swipeRefreshLayout.setRefreshing(false);
+//                swipeRefreshLayout.setRefreshing(false);
                 setTopBarTitle(view.getTitle());
-                if (webView != null)
+                if (webView != null && url != webView.getUrl())
                     url = webView.getUrl();
             }
 

@@ -87,6 +87,26 @@ public class AuthenticateInfoBean implements Serializable {
             return openingBank;
         }
 
+        public int getInfoDegree() {
+            int infoDegree = 0;
+            if (getIdCardState()) {
+                infoDegree++;
+            }
+            if (getFamilyState()) {
+                infoDegree++;
+            }
+            if (getBankState()) {
+                infoDegree++;
+            }
+            if (getCreditState()) {
+                infoDegree++;
+            }
+            if (getContactsState()) {
+                infoDegree++;
+            }
+            return infoDegree;
+        }
+
         public void setOpeningBank(String openingBank) {
             this.openingBank = openingBank;
         }
