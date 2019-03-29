@@ -15,7 +15,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.base.Constant;
-import com.ripple.lendmoney.event.OrderEvent;
+import com.ripple.lendmoney.event.NewOrderEvent;
 import com.ripple.lendmoney.present.MakeIOUPresent;
 import com.ripple.lendmoney.utils.SPUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
@@ -208,7 +208,7 @@ public class MakeIOUActivity extends BaseActivity<MakeIOUPresent> {
 
     public void makeIouSuccess(String iouid) {
         AssessActivity.launch(this, iouid);
-        BusFactory.getBus().post(new OrderEvent());
+        BusFactory.getBus().post(new NewOrderEvent());
         SPUtils.getInstance(this).save(Constant.IOUID, iouid);
     }
 }

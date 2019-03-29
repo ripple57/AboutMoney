@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONArray;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseLazyFragment;
 import com.ripple.lendmoney.base.GlobleParms;
@@ -19,6 +20,7 @@ import com.ripple.lendmoney.event.RefreshUserInfoEvent;
 import com.ripple.lendmoney.model.ContactsBean;
 import com.ripple.lendmoney.present.ContactsFragPresent;
 import com.ripple.lendmoney.ui.activity.MyInfoActivity;
+import com.ripple.lendmoney.utils.DialogUtil;
 import com.ripple.lendmoney.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -27,7 +29,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.event.BusFactory;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /*****************************************************
  * 作者: HuangShaobo on 2019/3/4 23:21.
@@ -43,6 +50,7 @@ public class ContactsFragment extends BaseLazyFragment<ContactsFragPresent> {
     @BindView(R.id.btn_contactsFrag_commit)
     Button btnContactsFragCommit;
     private String contactsJson;
+    private boolean contactState = false;
 
     @Override
     public void getNetData() {
@@ -52,13 +60,28 @@ public class ContactsFragment extends BaseLazyFragment<ContactsFragPresent> {
     @Override
     public void initData(Bundle savedInstanceState) {
         initView();
-        new QMUIDialog.MessageDialogBuilder(context).setMessage("为了更好的为您服务,我们需要获取您的通讯录权限").addAction("好的,知道了", new QMUIDialogAction.ActionListener() {
-            @Override
-            public void onClick(QMUIDialog dialog, int index) {
-                dialog.dismiss();
-                toGetContacts();
-            }
-        }).setCancelable(false).show();
+        showTips();
+    }
+
+    private void showTips() {
+        new QMUIDialog.MessageDialogBuilder(context)
+                .setMessage("为了更好的为您服务,请允许我们读取您的通讯录")
+                .addAction("拒绝", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                        contactState = false;
+                    }
+                })
+                .addAction("允许", new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                        toGetContacts();
+
+                    }
+                })
+                .setCancelable(false).setCanceledOnTouchOutside(false).show();
     }
 
     private void initView() {
@@ -78,7 +101,11 @@ public class ContactsFragment extends BaseLazyFragment<ContactsFragPresent> {
 
     @OnClick(R.id.btn_contactsFrag_commit)
     public void onViewClicked() {
-        getP().uploadContacts(context, contactsJson);
+        if (contactState) {
+            getP().uploadContacts(context, contactsJson);
+        } else {
+            showTips();
+        }
     }
 
     //去获取通讯录列表
@@ -88,14 +115,40 @@ public class ContactsFragment extends BaseLazyFragment<ContactsFragPresent> {
                     @Override
                     public void accept(Boolean aBoolean) throws Exception {
                         if (aBoolean) {
+                            QMUITipDialog tipDialog = DialogUtil.showDialog(context, "加载中...");
                             List<ContactsBean> contacts = getContacts();
                             contactsJson = JSONArray.toJSONString(contacts);
+                            tipDialog.dismiss();
+                            contactState = true;
 
+
+//                            getContactsWithDialog();
                         } else {
                             getvDelegate().toastShort("亲，同意了权限才能更好的使用软件哦");
                         }
                     }
                 });
+    }
+
+    private void getContactsWithDialog() {
+        QMUITipDialog tipDialog = DialogUtil.showDialog(context, "加载中...");
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> e) throws Exception {
+                e.onNext("This msg from work thread :" + Thread.currentThread().getName());
+
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+
+                    }
+                });
+
+
     }
 
     //获取通讯录列表

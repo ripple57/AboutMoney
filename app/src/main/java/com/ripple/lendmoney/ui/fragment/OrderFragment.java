@@ -13,7 +13,7 @@ import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.adapter.OrderListAdapter;
 import com.ripple.lendmoney.base.BaseLazyFragment;
-import com.ripple.lendmoney.event.OrderEvent;
+import com.ripple.lendmoney.event.RefreshOrderEvent;
 import com.ripple.lendmoney.model.OrderListBean;
 import com.ripple.lendmoney.present.OrderFragPresent;
 import com.ripple.lendmoney.ui.activity.AssessActivity;
@@ -53,22 +53,19 @@ public class OrderFragment extends BaseLazyFragment<OrderFragPresent> {
     public void initData(Bundle savedInstanceState) {
         initView();
         initListener();
-        getNetData();
     }
 
     private void initListener() {
         refreshOrder.setEnableLoadMore(false);
-        refreshOrder.setEnableRefresh(false);
+        refreshOrder.setEnableRefresh(true);
         refreshOrder.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-                ToastUtil.showToast("加载更多");
                 getP().getOrderList(context, pageNum++);
             }
 
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-                ToastUtil.showToast("刷新");
                 pageNum = 1;
                 getNetData();
 
@@ -131,9 +128,8 @@ public class OrderFragment extends BaseLazyFragment<OrderFragPresent> {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void event(OrderEvent event) {
+    public void event(RefreshOrderEvent event) {
         getNetData();
-        LogUtils.e("收到订单事件,刷新订单列表数据");
     }
 
     public void setOrderData(List<OrderListBean.DataBean> list) {
@@ -146,12 +142,26 @@ public class OrderFragment extends BaseLazyFragment<OrderFragPresent> {
         orderListAdapter.notifyDataSetChanged();
     }
 
+
+    @Override
+    protected void onResumeLazy() {
+        super.onResumeLazy();
+        LogUtils.e("onResumeLazy====");
+        getNetData();
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtils.e("onresume====");
+    }
+
     @Override
     public void getNetData() {
+        LogUtils.e("订单页求情网络一次");
         getP().getOrderList(context, pageNum);
     }
 
-    public void setNoDateView(boolean nodate) {
+    public void setNoDataView(boolean nodate) {
         no_data_layout.setVisibility(nodate ? View.VISIBLE : View.GONE);
     }
 }

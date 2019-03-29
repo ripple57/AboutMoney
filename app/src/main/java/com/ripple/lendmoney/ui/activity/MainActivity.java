@@ -7,7 +7,6 @@ import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -16,9 +15,9 @@ import android.view.View;
 import com.qmuiteam.qmui.widget.QMUIViewPager;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
-import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.event.MonitorOrderEvent;
-import com.ripple.lendmoney.event.OrderEvent;
+import com.ripple.lendmoney.event.NewOrderEvent;
+import com.ripple.lendmoney.event.RefreshOrderEvent;
 import com.ripple.lendmoney.present.MainPresent;
 import com.ripple.lendmoney.ui.fragment.HomeFragment;
 import com.ripple.lendmoney.ui.fragment.MineFragment;
@@ -26,7 +25,6 @@ import com.ripple.lendmoney.ui.fragment.OrderFragment;
 import com.ripple.lendmoney.utils.AppManager;
 import com.ripple.lendmoney.utils.BottomNavigationViewHelper;
 import com.ripple.lendmoney.utils.LogUtils;
-import com.ripple.lendmoney.utils.SPUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -61,10 +59,10 @@ public class MainActivity extends BaseActivity<MainPresent> {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        String iouID = SPUtils.getInstance(this).getValue(Constant.IOUID, "");
-        if (!TextUtils.isEmpty(iouID)) {
-            BusFactory.getBus().post(new MonitorOrderEvent(iouID,0));
-        }
+//        String iouID = SPUtils.getInstance(this).getValue(Constant.IOUID, "");
+//        if (!TextUtils.isEmpty(iouID)) {
+//            BusFactory.getBus().post(new MonitorOrderEvent(iouID,0));
+//        }
         initView();
         setHomeVpAdapter();
     }
@@ -100,6 +98,7 @@ public class MainActivity extends BaseActivity<MainPresent> {
                         setTopBarIsShow(true);
                         setTopBarIsShowBack(false);
                         setTopBarTitle("订单列表");
+                        BusFactory.getBus().post(new RefreshOrderEvent());
                         removeRightText();
                         break;
 
@@ -180,9 +179,9 @@ public class MainActivity extends BaseActivity<MainPresent> {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void event(OrderEvent event) {
+    public void event(NewOrderEvent event) {
         point.setVisibility(View.VISIBLE);
-        LogUtils.e("收到订单事件");
+        LogUtils.e("收到新订单事件");
 
     }
 

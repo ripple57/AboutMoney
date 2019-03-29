@@ -31,7 +31,7 @@ public class OrderFragPresent extends BasePresent<OrderFragment> {
             public void onMySuccess(OrderListBean bean, MyMessage message) {
                 getV().hideLoading();
 
-                getV().setNoDateView(bean.getData().size()==0);
+                getV().setNoDataView(bean.getData().size()==0);
                 getV().setOrderData(bean.getData());
             }
 

@@ -9,15 +9,16 @@
     <include layout="@layout/empty_loading_layout"/>
 
     <include layout="@layout/no_data_layout"/>
+
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refresh_order"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:srlAccentColor="#00000000"
-        app:srlPrimaryColor="#00000000"
+        app:srlAccentColor="@color/blue"
+        app:srlPrimaryColor="@color/white"
         app:srlEnablePreviewInEditMode="true"
         android:visibility="visible">
-        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+        <com.scwang.smartrefresh.layout.header.BezierRadarHeader
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

@@ -5,7 +5,7 @@ import android.app.Activity;
 import com.ripple.lendmoney.base.BasePresent;
 import com.ripple.lendmoney.base.Constant;
 import com.ripple.lendmoney.event.MonitorOrderEvent;
-import com.ripple.lendmoney.event.OrderEvent;
+import com.ripple.lendmoney.event.NewOrderEvent;
 import com.ripple.lendmoney.http.HttpUtils;
 import com.ripple.lendmoney.http.MyCallBack;
 import com.ripple.lendmoney.http.MyMessage;
@@ -36,7 +36,7 @@ public class MainPresent extends BasePresent<MainActivity> {
                     BusFactory.getBus().post(new MonitorOrderEvent(iouID,5000));
                 } else if ("true".equals(payState)) {
                     SPUtils.getInstance(activity).remove(Constant.IOUID);
-                    BusFactory.getBus().post(new OrderEvent());
+                    BusFactory.getBus().post(new NewOrderEvent());
                 }
             }
 

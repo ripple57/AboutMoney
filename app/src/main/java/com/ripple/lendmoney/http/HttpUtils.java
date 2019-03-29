@@ -153,6 +153,11 @@ public class HttpUtils {
     }
 
     private void uploadFiles(Context context, String url, HashMap<String, Object> map, List<File> list, NetCallBack callBack, boolean withDialog) {
+        if (!Kits.NetWork.hasNetwork(context)) {
+            ToastUtil.showToast(Constant.NONETWORK);
+            callBack.onError(new NetError(Constant.NONETWORK));
+            return;
+        }
         final QMUITipDialog tipDialog = new QMUITipDialog.Builder(context)
                 .setTipWord("上传中")
                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
@@ -250,7 +255,11 @@ public class HttpUtils {
      */
     private void netMethod(final Context context, final String url, final Map<String, Object> map,
                            final NetCallBack callBack, int netType) {
-
+        if (!Kits.NetWork.hasNetwork(context)) {
+            ToastUtil.showToast(Constant.NONETWORK);
+            callBack.onError(new NetError(Constant.NONETWORK));
+            return;
+        }
         //生成网络观察者
         Flowable<ResponseBody> flowable = null;
         switch (netType) {
@@ -327,7 +336,11 @@ public class HttpUtils {
      */
     private void netMethodDialog(final Context context, final String url, final Map<String, Object> map,
                                  final NetCallBack callBack, int netType) {
-
+        if (!Kits.NetWork.hasNetwork(context)) {
+            ToastUtil.showToast(Constant.NONETWORK);
+            callBack.onError(new NetError(Constant.NONETWORK));
+            return;
+        }
         final QMUITipDialog tipDialog = new QMUITipDialog.Builder(context)
                 .setTipWord("加载中")
                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)

@@ -32,7 +32,7 @@ public class AuthenticateInfoBean implements Serializable {
          * alipayCreditImg1 : /IOU/customerinfo/18000000000/0700a054363b4f2bb32ff9fdf0326ef7_18000000000.jpg
          * directKinship : 父母
          * urgentContact : 父母
-         * id : 402881ef6975e089016975f3bf5e0001
+         * customerInfoId : 402881ef6975e089016975f3bf5e0001
          * frontIDCard : /IOU/customerinfo/18000000000/bed3f9361d1c4ea693210d0e18292192_18000000000.jpg
          * contactName : 哦可以了
          * userId : 402881ef6975e089016975f3bf270000
@@ -53,7 +53,7 @@ public class AuthenticateInfoBean implements Serializable {
         private String alipayCreditImg1;
         private String directKinship;
         private String urgentContact;
-        private String id;
+        private String customerInfoId;
         private String frontIDCard;
         private String contactName;
         private String userId;
@@ -183,13 +183,6 @@ public class AuthenticateInfoBean implements Serializable {
             this.urgentContact = urgentContact;
         }
 
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
 
         public String getFrontIDCard() {
             return frontIDCard;
@@ -202,6 +195,7 @@ public class AuthenticateInfoBean implements Serializable {
         public String getContactName() {
             return contactName;
         }
+
 
         public void setContactName(String contactName) {
             this.contactName = contactName;
@@ -254,5 +248,13 @@ public class AuthenticateInfoBean implements Serializable {
         public void setIdNumber(String idNumber) {
             this.idNumber = idNumber;
         }
+        public String getCustomerInfoId() {
+            return customerInfoId;
+        }
+
+        public void setCustomerInfoId(String customerInfoId) {
+            this.customerInfoId = customerInfoId;
+        }
+
     }
 }

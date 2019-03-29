@@ -20,13 +20,13 @@ public class DialogUtil {
      * @param context
      * @return
      */
-    public static QMUITipDialog showDialog(Context context) {
+    public static QMUITipDialog showDialog(Context context,String tipWords) {
         QMUITipDialog tipDialog = new QMUITipDialog.Builder(context)
-                .setTipWord("加载中")
+                .setTipWord(tipWords)
                 .setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
                 .create();
         tipDialog.show();
-        tipDialog.setCancelable(true);
+        tipDialog.setCancelable(false);
         return tipDialog;
     }
 

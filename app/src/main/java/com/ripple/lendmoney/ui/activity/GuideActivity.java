@@ -17,16 +17,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.alibaba.fastjson.JSONArray;
+import com.qmuiteam.qmui.widget.QMUILoadingView;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.base.Constant;
-import com.ripple.lendmoney.event.OrderEvent;
+import com.ripple.lendmoney.event.NewOrderEvent;
 import com.ripple.lendmoney.http.HttpUtils;
 import com.ripple.lendmoney.http.MyCallBack;
 import com.ripple.lendmoney.http.MyMessage;
 import com.ripple.lendmoney.http.URLConfig;
+import com.ripple.lendmoney.model.ContactsBean;
 import com.ripple.lendmoney.present.GuidePresent;
 import com.ripple.lendmoney.utils.BitmapPhotoUtil;
+import com.ripple.lendmoney.utils.DialogUtil;
 import com.ripple.lendmoney.utils.LogUtils;
 import com.ripple.lendmoney.utils.ToastUtil;
 
@@ -46,7 +51,12 @@ import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.event.BusFactory;
 import cn.droidlover.xdroidmvp.event.BusProvider;
 import cn.droidlover.xdroidmvp.router.Router;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class GuideActivity extends BaseActivity<GuidePresent> {
 
@@ -77,6 +87,8 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
     Button button12;
     private Uri videoUri;
     private int TAKE_VIDEO;
+    private QMUILoadingView loadingView;
+    private QMUITipDialog qmuiTipDialog;
 
 
     @OnClick({R.id.button1, R.id.button2, R.id.button3, R.id.button4, R.id.button5, R.id.button6
@@ -84,24 +96,13 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button1:
-                boolean b = lacksPermissions(this, permissionsREAD);
-                LogUtils.e("权限有没有:"+b);
-//                RecordeFaceActivity.launch(this);
+                qmuiTipDialog = DialogUtil.showDialog(this, "加载中...");
                 break;
             case R.id.button2:
-                getRxPermissions().request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE)
-                        .subscribe(granted -> {
-                            if (granted) {//同意
-                                createFile();
-                            } else {//拒绝
-                                ToastUtil.showToast("亲，同意了权限才能更好的为您服务哦");
-                            }
-                        });
-
+                qmuiTipDialog.dismiss();
                 break;
             case R.id.button3:
-                upLoadPictures(files);
+                testContacts();
                 break;
             case R.id.button4:
                 WebActivity.launch(this, URLConfig.REGIST_AGREEMENT, "用户注册协议");
@@ -116,10 +117,10 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 AuthenticateActivity.launch(this, Constant.TYPE_FAMILYFRAG);
                 break;
             case R.id.button8:
-                BusProvider.getBus().post(new OrderEvent());
+                BusProvider.getBus().post(new NewOrderEvent());
                 break;
             case R.id.button9:
-                BusFactory.getBus().post(new OrderEvent());
+                BusFactory.getBus().post(new NewOrderEvent());
                 break;
             case R.id.button10:
                 MakeIOUActivity.launch(this);
@@ -131,6 +132,38 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
                 AuthenticateInfoActivity.launch(this);
                 break;
         }
+    }
+
+    private void testContacts() {
+        QMUITipDialog qmuiTipDialog = DialogUtil.showDialog(this, "");
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> e) throws Exception {
+//                e.onNext("This msg from work thread :" + Thread.currentThread().getName());
+                ArrayList<ContactsBean> contacts = new ArrayList<>();
+                LogUtils.e(Thread.currentThread().getName() + "开始时间" + System.currentTimeMillis() + Thread.currentThread().getName());
+                for (int i = 0; i < 1000; i++) {
+                    ArrayList<String> nums = new ArrayList<String>();
+                    nums.add((10000000000l + i) + "");
+                    Thread.sleep(10);
+                    contacts.add(new ContactsBean("测试通讯录", nums));
+                }
+                String contactsJson = JSONArray.toJSONString(contacts);
+                e.onNext(contactsJson);
+            }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) throws Exception {
+                        LogUtils.e(Thread.currentThread().getName() + "结束时间" + System.currentTimeMillis());
+                        LogUtils.e(s);
+                        qmuiTipDialog.dismiss();
+                    }
+                });
+
+//        new ContactsFragPresent().uploadContacts(this,contactsJson);
     }
 
     private void createFile() {//         /storage/emulated/0/FaceRecord/face.mp4

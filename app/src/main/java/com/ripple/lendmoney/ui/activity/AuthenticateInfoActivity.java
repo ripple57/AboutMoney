@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.base.Constant;
+import com.ripple.lendmoney.base.GlobleParms;
 import com.ripple.lendmoney.event.RefreshUserInfoEvent;
 import com.ripple.lendmoney.http.URLConfig;
 import com.ripple.lendmoney.model.AuthenticateInfoBean;
@@ -21,6 +22,7 @@ import org.greenrobot.eventbus.Subscribe;
 import butterknife.BindView;
 import butterknife.OnClick;
 import cn.droidlover.xdroidmvp.imageloader.ILFactory;
+import cn.droidlover.xdroidmvp.imageloader.ILoader;
 import cn.droidlover.xdroidmvp.router.Router;
 
 public class AuthenticateInfoActivity extends BaseActivity<AuthenticateInfoPresent> {
@@ -116,8 +118,16 @@ public class AuthenticateInfoActivity extends BaseActivity<AuthenticateInfoPrese
                 AuthenticateActivity.launch(this, Constant.TYPE_CONTACTSFRAG);
                 break;
             case R.id.btn_authenInfoAct_commit:
-
+                commit();
                 break;
+        }
+    }
+
+    private void commit() {
+        if (GlobleParms.userInfo.getInfoDegree() != 5) {
+            ToastUtil.showToast("请完善您的认证信息");
+        } else {
+            MakeIOUActivity.launch(this);
         }
     }
 
@@ -136,10 +146,6 @@ public class AuthenticateInfoActivity extends BaseActivity<AuthenticateInfoPrese
     }
 
     public void setAuthenticateInfoDate(AuthenticateInfoBean.DataBean bean) {
-        if (bean == null) {
-            ToastUtil.showToast("数据为空!");
-            return;
-        }
         tvAuthenInfoActIdName.setText(bean.getRealName());
         tvAuthenInfoActIdNo.setText(bean.getIdNumber());
         tvAuthenInfoActFamilyDirectRelation.setText(bean.getDirectKinship());
@@ -152,10 +158,18 @@ public class AuthenticateInfoActivity extends BaseActivity<AuthenticateInfoPrese
         tvAuthenInfoActBankAddress.setText(bean.getOpeningBank());
         tvAuthenInfoActBankPhone.setText(bean.getReservePhone());
         tvAuthenInfoActContactState.setText(bean.getContactsState() ? "已获取" : "未获取");
-        ILFactory.getLoader().loadNet(ivAuthenInfoActIdFront, URLConfig.BASE_URL + bean.getFrontIDCard());
-        ILFactory.getLoader().loadNet(ivAuthenInfoActIdBack, URLConfig.BASE_URL + bean.getBackIDCard());
-        ILFactory.getLoader().loadNet(ivAuthenInfoActCreditFront, URLConfig.BASE_URL + bean.getAlipayCreditImg1());
-        ILFactory.getLoader().loadNet(ivAuthenInfoActCreditBack, URLConfig.BASE_URL + bean.getAlipayCreditImg2());
+
+        ILoader.Options options = new ILoader.Options(R.drawable.renzhengxinxi_icon_zhengmian, R.drawable.renzhengxinxi_icon_zhengmian);
+        ILFactory.getLoader().loadNet(ivAuthenInfoActIdFront, URLConfig.BASE_URL + bean.getFrontIDCard(), options);
+
+        options = new ILoader.Options(R.drawable.renzhengxinxi_icon_fanmian, R.drawable.renzhengxinxi_icon_fanmian);
+        ILFactory.getLoader().loadNet(ivAuthenInfoActIdBack, URLConfig.BASE_URL + bean.getBackIDCard(), options);
+
+        options = new ILoader.Options(R.drawable.renzhengxinxi_icon_gerenxinxi, R.drawable.renzhengxinxi_icon_gerenxinxi);
+        ILFactory.getLoader().loadNet(ivAuthenInfoActCreditFront, URLConfig.BASE_URL + bean.getAlipayCreditImg1(), options);
+
+        options = new ILoader.Options(R.drawable.renzhengxinxi_icon_zhimaxinyong, R.drawable.renzhengxinxi_icon_zhimaxinyong);
+        ILFactory.getLoader().loadNet(ivAuthenInfoActCreditBack, URLConfig.BASE_URL + bean.getAlipayCreditImg2(), options);
 
     }
 }

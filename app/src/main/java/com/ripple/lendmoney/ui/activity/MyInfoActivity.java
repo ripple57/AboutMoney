@@ -10,9 +10,11 @@ import android.widget.TextView;
 import com.ripple.lendmoney.R;
 import com.ripple.lendmoney.base.BaseActivity;
 import com.ripple.lendmoney.base.Constant;
+import com.ripple.lendmoney.base.GlobleParms;
 import com.ripple.lendmoney.event.RefreshUserInfoEvent;
 import com.ripple.lendmoney.model.AuthenticateInfoBean;
 import com.ripple.lendmoney.present.MyInfoPresent;
+import com.ripple.lendmoney.utils.ToastUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -100,8 +102,16 @@ public class MyInfoActivity extends BaseActivity<MyInfoPresent> {
                 AuthenticateActivity.launch(this, Constant.TYPE_CONTACTSFRAG);
                 break;
             case R.id.btn_myinfoact_commit:
-                MakeIOUActivity.launch(this);
+                commit();
                 break;
+        }
+    }
+
+    private void commit() {
+        if (GlobleParms.userInfo.getInfoDegree() != 5) {
+            ToastUtil.showToast("请完善您的认证信息");
+        } else {
+            MakeIOUActivity.launch(this);
         }
     }
 
