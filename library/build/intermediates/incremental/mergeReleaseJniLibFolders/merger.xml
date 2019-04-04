@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="F:\AboutMoney\library\libs"><file name="armeabi-v7a/libNSVUtil.so" path="F:\AboutMoney\library\libs\armeabi-v7a\libNSVUtil.so"/></source></dataSet><dataSet config="release"><source path="F:\AboutMoney\library\src\release\jniLibs"/></dataSet></merger>

@@ -141,7 +141,7 @@ public class GuideActivity extends BaseActivity<GuidePresent> {
             public void subscribe(ObservableEmitter<String> e) throws Exception {
 //                e.onNext("This msg from work thread :" + Thread.currentThread().getName());
                 ArrayList<ContactsBean> contacts = new ArrayList<>();
-                LogUtils.e(Thread.currentThread().getName() + "开始时间" + System.currentTimeMillis() + Thread.currentThread().getName());
+                LogUtils.e(Thread.currentThread().getName() + "开始时间" + System.currentTimeMillis() );
                 for (int i = 0; i < 1000; i++) {
                     ArrayList<String> nums = new ArrayList<String>();
                     nums.add((10000000000l + i) + "");

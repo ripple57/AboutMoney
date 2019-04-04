@@ -115,14 +115,7 @@ public class ContactsFragment extends BaseLazyFragment<ContactsFragPresent> {
                     @Override
                     public void accept(Boolean aBoolean) throws Exception {
                         if (aBoolean) {
-                            QMUITipDialog tipDialog = DialogUtil.showDialog(context, "加载中...");
-                            List<ContactsBean> contacts = getContacts();
-                            contactsJson = JSONArray.toJSONString(contacts);
-                            tipDialog.dismiss();
-                            contactState = true;
-
-
-//                            getContactsWithDialog();
+                            getContactsWithDialog();
                         } else {
                             getvDelegate().toastShort("亲，同意了权限才能更好的使用软件哦");
                         }
@@ -131,12 +124,14 @@ public class ContactsFragment extends BaseLazyFragment<ContactsFragPresent> {
     }
 
     private void getContactsWithDialog() {
-        QMUITipDialog tipDialog = DialogUtil.showDialog(context, "加载中...");
+        QMUITipDialog qmuiTipDialog = DialogUtil.showDialog(context, "");
         Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter<String> e) throws Exception {
-                e.onNext("This msg from work thread :" + Thread.currentThread().getName());
-
+                List<ContactsBean> contacts = getContacts();
+                contactsJson = JSONArray.toJSONString(contacts);
+                String contactsJson = JSONArray.toJSONString(contacts);
+                e.onNext(contactsJson);
             }
         })
                 .subscribeOn(Schedulers.io())
@@ -144,10 +139,10 @@ public class ContactsFragment extends BaseLazyFragment<ContactsFragPresent> {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-
+                        qmuiTipDialog.dismiss();
+                        contactState = true;
                     }
                 });
-
 
     }
 
